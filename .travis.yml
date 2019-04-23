@@ -1,24 +1,23 @@
-sudo: required
 dist: trusty
+sudo: false
+
 language: node_js
 node_js:
-  - "7"
+  - '8'
 
-apt:
-  sources:
-    - google-chrome
-  packages:
-    - google-chrome-stable
-    - google-chrome-beta
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+cache:
+  directories:
+    - ./node_modules
 
-before_script:
-  - npm install -g cordova ionic
+install:
+  - npm install
 
 script:
-  - npm run test-ci
-  - npm run lint
+  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
