@@ -8,7 +8,8 @@
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "test": "karma start ./test-config/karma.conf.js",
+
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "test-ci": "karma start ./test-config/karma.conf.js --single-run",
     "test-coverage": "karma start ./test-config/karma.conf.js --coverage",
     "e2e": "npm run e2e-update && npm run e2e-test",
