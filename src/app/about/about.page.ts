@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HelloService} from '../services/hello.service';
+
 
 @Component({
   selector: 'app-about',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements OnInit {
+  public items: any;
 
-  constructor() { }
+  constructor(public helloService: HelloService) { }
 
   ngOnInit() {
+    this.helloService.getRemoteData();
   }
+
+
+  getAllHellos() {
+    this.helloService.getRemoteData();
+  }
+
+
+
 
 }
