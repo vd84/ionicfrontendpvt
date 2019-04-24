@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   onClick() {
-
+    console.log('Activity clicked');
   }
 }
