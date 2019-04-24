@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HelloService} from '../services/hello.service';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AboutPage implements OnInit {
 
 
   getAllHellos() {
-    this.helloService.getRemoteData();
+
   }
 
 

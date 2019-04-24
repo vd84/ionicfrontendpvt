@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import {NavPageModule} from '../nav/nav.module';
 
 @NgModule({
     imports: [
@@ -18,7 +17,6 @@ import {NavPageModule} from '../nav/nav.module';
                 component: HomePage
             }
         ]),
-        NavPageModule
     ],
   declarations: [HomePage]
 })
