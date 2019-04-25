@@ -9,8 +9,8 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-    username: string;
-    password: string;
+    private username: string;
+    private password: string;
 
     constructor(private router: Router) {
     }
@@ -20,6 +20,10 @@ export class LoginPage implements OnInit {
 
     login() {
         this.router.navigate(['/tabs']);
+    }
+
+    createProfile() {
+        this.router.navigate(['/register']);
     }
 
 }
