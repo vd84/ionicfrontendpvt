@@ -11,10 +11,9 @@ import {Observable} from 'rxjs';
 export class AboutPage implements OnInit {
   public items: any;
 
-  constructor(public helloService: HelloService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.helloService.getRemoteData();
   }
 
 
