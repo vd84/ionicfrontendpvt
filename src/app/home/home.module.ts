@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import {SharedDirectivesModule} from '../directives/shared-directives.module';
 import { GoogleMapsComponent} from '../component/google-maps/google-maps.component';
 
 @NgModule({
@@ -12,12 +13,13 @@ import { GoogleMapsComponent} from '../component/google-maps/google-maps.compone
         CommonModule,
         FormsModule,
         IonicModule,
+        SharedDirectivesModule,
         RouterModule.forChild([
             {
                 path: '',
                 component: HomePage
             }
-        ])
+        ]),
     ],
   declarations: [HomePage, GoogleMapsComponent]
 })
