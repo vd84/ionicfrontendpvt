@@ -1,10 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-
-export interface User {
-    name: string;
-    roles: string[];
-}
+import {User} from '../Interfaces/user';
 
 
 @Injectable({

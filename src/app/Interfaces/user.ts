@@ -1,5 +1,4 @@
-export interface IUser {
-    id: number;
+export interface User {
     name: string;
-
+    roles: string[];
 }
