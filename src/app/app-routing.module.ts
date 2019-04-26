@@ -8,9 +8,9 @@ const routes: Routes = [
     {path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule'},
     {path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule'},
     {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
-  {path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
-  { path: 'event', loadChildren: './pages/event/event.module#EventPageModule' },
-  { path: 'specific-event', loadChildren: './pages/specific-event/specific-event.module#SpecificEventPageModule' },
+    {path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule'},
+    {path: 'event', loadChildren: './pages/event/event.module#EventPageModule'},
+    {path: 'specific-event', loadChildren: './pages/specific-event/specific-event.module#SpecificEventPageModule'},
 
 ];
 

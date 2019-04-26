@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../Interfaces/user';
+import {IUser} from '../Interfaces/user';
 
 
 @Injectable({
@@ -8,7 +8,7 @@ import {User} from '../Interfaces/user';
 })
 export class AuthService {
 
-    currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
+    currentUser: BehaviorSubject<IUser> = new BehaviorSubject(null);
 
     constructor() {
     }
