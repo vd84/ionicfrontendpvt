@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import {SharedDirectivesModule} from '../directives/shared-directives.module';
-import { GoogleMapsComponent} from '../component/google-maps/google-maps.component';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import { GoogleMapsComponent} from '../../component/google-maps/google-maps.component';
 
 @NgModule({
     imports: [

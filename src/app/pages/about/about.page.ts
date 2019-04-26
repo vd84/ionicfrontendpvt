@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HelloService} from '../services/hello.service';
+import {HelloService} from '../../services/hello.service';
 import {Observable} from 'rxjs';
 
 

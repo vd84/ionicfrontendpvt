@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TabsPage} from '../tabs/tabs.page';
+import {TabsPage} from '../../tabs/tabs.page';
 import {Router} from '@angular/router';
 
 @Component({
