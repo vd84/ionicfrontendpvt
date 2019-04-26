@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>movies</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <ion-button (click)="searchChanged()">CLICK ME FOR HELLOS</ion-button>
+
+
+    <ion-list *ngFor="let user of hellos">
+
+        <ion-item>
+            {{user.message}}
+
+        </ion-item>
+    </ion-list>
+
+
+    <ion-label>
+        Sending a POST Request Example
+    </ion-label>
+    <ion-button (click)="postData()">Post Data</ion-button>
+
+
+
+
+
+</ion-content>

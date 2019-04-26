@@ -7,14 +7,14 @@
 <ion-content padding>
 
 
-    <ion-button (click)="helloService.getRemoteData()">
 
+    <ion-item *ngFor="let item of items">
 
-    </ion-button>
+        {{item}}
 
-
-
-
+    </ion-item>
 
 
 </ion-content>
+
+

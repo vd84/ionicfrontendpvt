@@ -1,6 +1,17 @@
 import {Injectable} from '@angular/core';
-import {url} from '@angular-devkit/schematics';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {IHello} from '../Interfaces/hello';
+import {IUser} from '../Interfaces/user';
+
+
+export enum SearchType {
+    all = '',
+    movie = 'movie',
+    series = 'series',
+    episode = 'episode'
+
+}
 
 
 @Injectable({
@@ -8,17 +19,19 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 })
 export class HelloService {
 
+    url = '//webbapppvt15grupp2.herokuapp.com/api/hello';
 
     constructor(private http: HttpClient) {
-        console.log('hello provider');
     }
 
-    getRemoteData() {
-        return this.http.get('https://webbapppvt15grupp2.herokuapp.com/api/hello').subscribe(data => {
-            console.log(data);
-        });
+
+    getAllHellos(): Observable<IHello[]> {
+        return this.http.get<IHello[]>(this.url);
+
+
     }
+
+
+
 
 }
-
-
