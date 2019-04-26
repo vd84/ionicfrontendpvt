@@ -5,19 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { GoogleMapsComponent} from '../component/google-maps/google-maps.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
-  ],
-  declarations: [HomePage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: HomePage
+            }
+        ])
+    ],
+  declarations: [HomePage, GoogleMapsComponent]
 })
 export class HomePageModule {}
