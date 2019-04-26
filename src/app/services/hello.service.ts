@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IHello} from '../Interfaces/hello';
-import {IUser} from '../Interfaces/user';
-
 
 export enum SearchType {
     all = '',
