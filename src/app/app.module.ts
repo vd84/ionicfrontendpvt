@@ -12,7 +12,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
-  declarations: [AppComponent, HasRoleDirective],
+  declarations: [AppComponent],
   entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [

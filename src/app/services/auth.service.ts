@@ -1,10 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-
-export interface User {
-    name: string;
-    roles: string[];
-}
+import {IUser} from '../Interfaces/user';
 
 
 @Injectable({
@@ -12,7 +8,7 @@ export interface User {
 })
 export class AuthService {
 
-    currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
+    currentUser: BehaviorSubject<IUser> = new BehaviorSubject(null);
 
     constructor() {
     }
