@@ -5,4 +5,4 @@ import { GoogleMapsComponent } from './google-maps/google-maps.component';
     declarations: [GoogleMapsComponent],
     exports: [GoogleMapsComponent]
 })
-export class ComponentsModule{}
+export class ComponentsModule {}

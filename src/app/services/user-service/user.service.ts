@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
+import {User} from '../../Models/User';
 
 export enum SearchType {
     all = '',
@@ -17,7 +18,7 @@ export enum SearchType {
 })
 export class UserService {
 
-    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user';
+    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user/';
 
     constructor(private http: HttpClient) {
     }
@@ -27,7 +28,9 @@ export class UserService {
 
 
     }
-
+    getOneUser(id): Observable<IUser> {
+        return this.http.get<IUser>(`${this.url}${id}`);
+    }
 
 
 

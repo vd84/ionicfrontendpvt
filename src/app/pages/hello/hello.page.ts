@@ -8,9 +8,10 @@ import {UserService} from '../../services/user-service/user.service';
     styleUrls: ['./hello.page.scss'],
 })
 export class HelloPage implements OnInit {
-
+    id: number;
 
     public hellos = [];
+    public specificUser;
 
 
     constructor(private userService: UserService, private helloService: HelloService) {
@@ -25,6 +26,10 @@ export class HelloPage implements OnInit {
         console.log(this.hellos);
 
 
+    }
+    oneUser() {
+        this.userService.getOneUser(1).subscribe(data => this.specificUser = data);
+        console.log(this.specificUser);
     }
 
 
