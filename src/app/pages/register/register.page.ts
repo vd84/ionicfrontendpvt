@@ -13,7 +13,7 @@ export class RegisterPage implements OnInit {
     private username: string;
     private password: string;
     private email: string;
-    private users = [];
+    private users: any;
 
     constructor(private router: Router, public toastController: ToastController, private userService: UserService) {
     }
@@ -22,8 +22,12 @@ export class RegisterPage implements OnInit {
     }
 
     createProfile() {
+        this.users = this.userService.getAllUsers();
         let taken = false;
+        console.log('outside');
+        console.log(this.users);
         for (const user of this.users) {
+            console.log('Here');
             console.log(user.name);
             if (user.name === this.username) {
                 taken = true;
