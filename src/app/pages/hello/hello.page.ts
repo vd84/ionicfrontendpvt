@@ -28,6 +28,7 @@ export class HelloPage implements OnInit {
     }
 
 
-
-
+    saveAHello() {
+        this.helloService.saveHello();
+    }
 }
