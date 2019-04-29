@@ -16,12 +16,12 @@ export class AuthService {
     login(name) {
         if (name === 'user') {
             this.currentUser.next({
-                name: name,
+                userName: name,
                 roles: ['user']
             });
         } else if (name === 'admin') {
             this.currentUser.next({
-                name: name,
+                userName: name,
                 roles: ['admin']
             });
         }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IHello} from '../Interfaces/hello';
+import {RequestOptions} from '@angular/http';
 
 export enum SearchType {
     all = '',
@@ -30,6 +31,7 @@ export class HelloService {
     }
 
 
-
-
+    submitUser(id: number, username: string) {
+        this.http.post(this.url, {'id': id, 'message' : username});
+    }
 }

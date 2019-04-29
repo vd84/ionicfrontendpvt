@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
+import {UserService} from '../../services/user-service/user.service';
+import {HelloService} from '../../services/hello.service';
 
 @Component({
     selector: 'app-register',
@@ -10,22 +12,36 @@ import {ToastController} from '@ionic/angular';
 export class RegisterPage implements OnInit {
 
     private username: string;
+    private id = 2;
     private password: string;
     private email: string;
+    private users = [];
 
-    constructor(private router: Router, public toastController: ToastController) {
+    constructor(private router: Router, public toastController: ToastController, private userService: UserService, private helloService: HelloService) {
     }
 
     ngOnInit() {
     }
 
     createProfile() {
-        if (this.username === 'avail' && this.password === 'avail' && this.email === 'avail') {
+        this.helloService.getAllHellos().subscribe(data => this.users = data);
+        let taken = false;
+        for (const user of this.users) {
+            if (user.message === this.username) {
+                taken = true;
+            }
+        }
+        if (taken) {
+            this.presentToast('Profile already exists');
+        } else {
+            this.createUserAndPost();
             this.presentToast('Profile created');
             this.router.navigate(['/tabs/home']);
-        } else if (this.username === 'taken' && this.password === 'taken' && this.email === 'taken') {
-            this.presentToast('Profile already exists');
         }
+    }
+
+    createUserAndPost() {
+        this.helloService.submitUser(this.id, this.username);
     }
 
     async presentToast(toastMessage: string) {
@@ -35,6 +51,10 @@ export class RegisterPage implements OnInit {
             position: 'middle'
         });
         toast.present();
+    }
+
+    getUsers() {
+        this.userService.getAllUsers().subscribe(data => this.users = data);
     }
 
 }

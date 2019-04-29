@@ -17,16 +17,20 @@ export enum SearchType {
 })
 export class UserService {
 
-    url = '//webbapppvt15grupp2.herokuapp.com/api/user';
+    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user';
 
     constructor(private http: HttpClient) {
     }
 
-
-    getAllHellos(): Observable<IUser[]> {
+    getAllUsers(): Observable<IUser[]> {
         return this.http.get<IUser[]>(this.url);
 
 
     }
+
+
+
+
+
 }
 
