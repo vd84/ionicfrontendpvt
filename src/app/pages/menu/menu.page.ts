@@ -1,30 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import {Tab2Page} from '../tab2/tab2.page';
-import {Tab1Page} from '../tab1/tab1.page';
-import {TabsPage} from '../tabs/tabs.page';
-import { IonicPage, NavController, Nav} from '@ionic/angular';
-
-
-export interface PageInterface {
-  title: string;
-  pageName: string;
-  tabComponent?: any;
-  index?: number;
-  icon: string;
-}
-
-
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.page.html',
-  styleUrls: ['./menu.page.scss'],
+    selector: 'app-menu',
+    templateUrl: './menu.page.html',
+    styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
 
-  constructor() { }
+    constructor(private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
+
+    createActivity() {
+        this.router.navigate(['create-event']);
+
+    }
+
+
+    map() {
+        this.router.navigate(['map']);
+
+    }
+
+    badges() {
+        this.router.navigate(['badges']);
+
+    }
+
+    settings() {
+        this.router.navigate(['settings']);
+
+    }
 }

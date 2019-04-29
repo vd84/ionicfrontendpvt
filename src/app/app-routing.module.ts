@@ -16,6 +16,10 @@ const routes: Routes = [
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
   { path: 'tab1', loadChildren: './pages/tab1/tab1.module#Tab1PageModule' },
   { path: 'tab2', loadChildren: './pages/tab2/tab2.module#Tab2PageModule' },
+  { path: 'create-event', loadChildren: './pages/create-event/create-event.module#CreateEventPageModule' },
+  { path: 'map', loadChildren: './pages/map/map.module#MapPageModule' },
+  { path: 'badges', loadChildren: './pages/badges/badges.module#BadgesPageModule' },
+  { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
 
 
 
