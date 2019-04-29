@@ -12,6 +12,10 @@ const routes: Routes = [
     {path: 'event', loadChildren: './pages/event/event.module#EventPageModule'},
     {path: 'specific-event', loadChildren: './pages/specific-event/specific-event.module#SpecificEventPageModule'},
     {path: 'hello', loadChildren: './pages/hello/hello.module#HelloPageModule'},
+  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
+  { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  { path: 'tab1', loadChildren: './pages/tab1/tab1.module#Tab1PageModule' },
+  { path: 'tab2', loadChildren: './pages/tab2/tab2.module#Tab2PageModule' },
 
 
 
