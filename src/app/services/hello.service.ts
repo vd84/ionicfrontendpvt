@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IHello} from '../Interfaces/hello';
 import {RequestOptions} from '@angular/http';
+import {IUser} from '../Interfaces/user';
 
 export enum SearchType {
     all = '',
@@ -18,7 +19,7 @@ export enum SearchType {
 })
 export class HelloService {
 
-    url = '//webbapppvt15grupp2.herokuapp.com/api/hello';
+    url = '//webbapppvt15grupp2.herokuapp.com/api/hello/';
 
     constructor(private http: HttpClient) {
     }
@@ -32,6 +33,10 @@ export class HelloService {
 
 
     submitUser(id: number, username: string) {
-        this.http.post(this.url, {'id': id, 'message' : username});
+        this.http.post(this.url, {'id': id, 'message': username});
+    }
+
+    getHelloById(id): Observable<IHello> {
+        return this.http.get<IHello>(`${this.url}${id}`);
     }
 }

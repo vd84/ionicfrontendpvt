@@ -17,7 +17,7 @@ export enum SearchType {
 })
 export class UserService {
 
-    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user';
+    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user/';
 
     constructor(private http: HttpClient) {
     }
@@ -27,7 +27,6 @@ export class UserService {
 
 
     }
-
 
 
 
