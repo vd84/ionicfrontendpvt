@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {HelloService} from '../../services/hello.service';
+import {UserService} from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-menu',
@@ -8,10 +10,14 @@ import {Router} from '@angular/router';
 })
 export class MenuPage implements OnInit {
 
-    constructor(private router: Router) {
+    currentUser;
+
+
+    constructor(private router: Router, private helloService: HelloService, private userService: UserService) {
     }
 
     ngOnInit() {
+
     }
 
 
@@ -35,4 +41,19 @@ export class MenuPage implements OnInit {
         this.router.navigate(['settings']);
 
     }
+
+    events() {
+        this.router.navigate(['event']);
+
+    }
+
+    getCurrentUser() {
+
+        this.userService.getAllUsers().subscribe(data => this.currentUser = data);
+
+        console.log(this.currentUser);
+
+    }
+
+
 }
