@@ -29,7 +29,12 @@ export class HelloService {
 
     }
 
+    saveAHelloObject(hello) {
 
+
+
+        this.http.post(this.url, hello);
+    }
 
 
 }
