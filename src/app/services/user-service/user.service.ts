@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
 import {User} from '../../Models/User';
@@ -11,7 +11,7 @@ import {User} from '../../Models/User';
 export class UserService {
 
     url = 'https://webbapppvt15grupp2.herokuapp.com/api/user/';
-    postUrl = '//webbapppvt15grupp2.herokuapp.com/addUser';
+    postUrl = 'https://webbapppvt15grupp2.herokuapp.com/adduser';
 
 
     constructor(private http: HttpClient) {
@@ -32,22 +32,26 @@ export class UserService {
     }
 
 
-    submitUser(username: string, password: string, current_youthcentre: number) {
+    submitUser(username: string, password: string, currentyouthcentre: number) {
 
-        // const headers = new Headers();
-        // headers.append('Accept', 'application/json');
-        // headers.append('Content-Type', 'application/json');
 
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
 
         const body = JSON.stringify({
 
             username: username,
             password: password,
-            currentyouthcentre: current_youthcentre
+            currentyouthcentre: currentyouthcentre
 
         });
 
-        this.http.post(this.postUrl, body).subscribe(data => {
+        this.http.post(this.postUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
             },
             error => {

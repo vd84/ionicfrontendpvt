@@ -3,7 +3,7 @@ export class User {
     private _id: number;
     private _name: String;
     private _role: number;
-    private _currentYouthCentre: number;
+    private _currentyouthcentre: number;
 
     constructor(id: number, name: String, role: number) {
         this._id = id;
@@ -11,12 +11,15 @@ export class User {
         this._role = role;
 
     }
+
     toString() {
-        return ' ID: ' + this._id + ' Name: ' + this._name + ' Role: ' + this._role; }
+        return ' ID: ' + this._id + ' Name: ' + this._name + ' Role: ' + this._role;
+    }
 
     get role(): number {
         return this._role;
     }
+
     set role(value: number) {
         this._role = value;
     }
@@ -38,10 +41,10 @@ export class User {
     }
 
     get currentYouthCentre(): number {
-        return this._currentYouthCentre;
+        return this._currentyouthcentre;
     }
 
     set currentYouthCentre(value: number) {
-        this._currentYouthCentre = value;
+        this._currentyouthcentre = value;
     }
 }
