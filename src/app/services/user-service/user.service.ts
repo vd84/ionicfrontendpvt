@@ -2,14 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
+import {User} from '../../Models/User';
 
-export enum SearchType {
-    all = '',
-    movie = 'movie',
-    series = 'series',
-    episode = 'episode'
-
-}
 
 
 @Injectable({
@@ -27,9 +21,12 @@ export class UserService {
 
 
     }
+    getOneUser(id): Observable<IUser[]> {
+        return this.http.get<IUser[]>(`${this.url}${id}`);
+    }
 
-    getUserById(): Observable<IUser> {
-        return this.http.get<IUser>(this.url);
+    getUserById(): Observable<IUser[]> {
+        return this.http.get<IUser[]>(this.url);
     }
 
 
