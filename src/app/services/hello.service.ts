@@ -19,6 +19,7 @@ export enum SearchType {
 export class HelloService {
     allUsers: Observable<IHello[]>;
     url = '//webbapppvt15grupp2.herokuapp.com/api/hello/';
+    postUrl = '//webbapppvt15grupp2.herokuapp.com/addUser';
 
     constructor(private http: HttpClient) {
     }
@@ -31,12 +32,11 @@ export class HelloService {
     }
 
 
-    submitUser(id: number, username: string) {
-         this.http.post(this.url, {'id': id, 'message': username});
-    }
+
+
 
     getOneHello(id): Observable<IHello> {
         return this.http.get<IHello>(`${this.url}${id}`);
     }
-    }
+}
 
