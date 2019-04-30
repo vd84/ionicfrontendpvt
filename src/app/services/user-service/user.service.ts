@@ -34,10 +34,9 @@ export class UserService {
 
     submitUser(username: string, password: string, current_youthcentre: number) {
 
-        // const headers = new Headers();
-        // headers.append('Accept', 'application/json');
-        // headers.append('Content-Type', 'application/json');
-
+         const headers = new Headers();
+         headers.append('Accept', 'application/json');
+         headers.append('Content-Type', 'application/json');
 
         const body = JSON.stringify({
 
