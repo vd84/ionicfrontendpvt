@@ -18,24 +18,16 @@
         </ion-item>
     </ion-list>
 
-    Specific user
+    Specific user>
 
 
    <ion-item>
        <ion-input placeholder="idForUser" [(ngModel)]="id"></ion-input>
    </ion-item>
 
-    <ion-button (click)="searchChanged()">Click me for one user with id</ion-button>
+    <ion-button (click)="oneUser(id)">Click me for one user with id</ion-button>
 
-    <ion-list *ngFor="let user of users">
-
-        <ion-item>
-            {{user.username}}
-
-        </ion-item>
-    </ion-list>
-
-
+    {{specificUser}}
 
 
     <!--ion-label>

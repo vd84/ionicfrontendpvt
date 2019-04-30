@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HelloService, SearchType} from '../../services/hello.service';
 import {UserService} from '../../services/user-service/user.service';
+import {IUser} from '../../Interfaces/user';
+import {User} from '../../Models/User';
 
 @Component({
     selector: 'app-hello',
@@ -9,10 +11,9 @@ import {UserService} from '../../services/user-service/user.service';
 })
 export class HelloPage implements OnInit {
     id: number;
+    specificUser;
 
     public hellos = [];
-    public specificUser;
-    public users = [];
 
 
     constructor(private userService: UserService, private helloService: HelloService) {
@@ -23,18 +24,29 @@ export class HelloPage implements OnInit {
 
     searchChanged() {
         this.userService.getAllUsers()
-            .subscribe(data => this.users = data);
-        console.log(this.users);
+            .subscribe(data => this.hellos = data);
+       // console.log(this.hellos);
 
 
     }
-    // oneUser() {
-    //     this.userService.getOneUser(1).subscribe(data => this.users = data);
-    //     console.log(this.users);
-    // }
-
-
-    saveAHello() {
-        this.helloService.saveHello();
+    oneUser(id) {
+        this.userService.getAllUsers().subscribe(data => this.hellos = data);
+        for (const entry of this.hellos) {
+            if (entry.id.toString() === id) {
+                const user1 = new User(entry.id.toString(), entry.username.toString(), entry.role.toString());
+                console.log(user1.toString());
+            } else {
+                console.log('Finns inte' + ' ' + entry.id + ' ' + id + ' ' + ( id === entry.id.toString()));
+            }
+        }
     }
+
+   /* oneHello(id: number) {
+        this.helloService.getOneHello(id).subscribe(data => this.specificUser = data);
+        console.log(this.specificUser);
+    }*/
+
+
+
+
 }
