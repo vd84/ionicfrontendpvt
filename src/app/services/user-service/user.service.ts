@@ -10,7 +10,7 @@ import {User} from '../../Models/User';
 })
 export class UserService {
 
-    url = 'https://webbapppvt15grupp2.herokuapp.com/api/user/';
+    url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
     postUrl = 'https://webbapppvt15grupp2.herokuapp.com/adduser';
 
 
