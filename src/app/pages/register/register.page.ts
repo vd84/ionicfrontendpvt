@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 import {HelloService} from '../../services/hello.service';
+import {Form, NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -57,4 +58,9 @@ export class RegisterPage implements OnInit {
         this.userService.getAllUsers().subscribe(data => this.users = data);
     }
 
+    register(form: NgForm) {
+    }
+    goBackToMenu() {
+        this.router.navigate(['/tabs/home']);
+    }
 }
