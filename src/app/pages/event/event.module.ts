@@ -20,7 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-      ComponentsModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [EventPage]
