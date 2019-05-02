@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IHello} from '../Interfaces/hello';
-import {RequestOptions} from '@angular/http';
+import {IUser} from '../Interfaces/user';
 
 export enum SearchType {
     all = '',
@@ -17,8 +17,9 @@ export enum SearchType {
     providedIn: 'root'
 })
 export class HelloService {
-
-    url = '//webbapppvt15grupp2.herokuapp.com/api/hello';
+    allUsers: Observable<IHello[]>;
+    url = '//webbapppvt15grupp2.herokuapp.com/api/hello/';
+    postUrl = '//webbapppvt15grupp2.herokuapp.com/addUser';
 
     constructor(private http: HttpClient) {
     }
@@ -31,7 +32,8 @@ export class HelloService {
     }
 
 
-    submitUser(id: number, username: string) {
-        this.http.post(this.url, {'id': id, 'message' : username});
+    getOneHello(id): Observable<IHello> {
+        return this.http.get<IHello>(`${this.url}${id}`);
     }
 }
+

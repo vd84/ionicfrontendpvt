@@ -8,16 +8,17 @@ declare var google;
 })
 export class GoogleMapsComponent implements OnInit, AfterContentInit {
   map;
+  marker;
   @ViewChild('mapElement') mapElement;
   constructor() { }
 
   ngOnInit(): void {}
   ngAfterContentInit(): void {
-    this.map = new google.maps.Map(
+        this.map = new google.maps.Map(
         this.mapElement.nativeElement, {
           center: {lat: 59.334591, lng: 18.063240},
-          zoom: 8
-        });
+          zoom: 8,
+            });
   }
 
 }

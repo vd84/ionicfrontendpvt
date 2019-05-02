@@ -6,16 +6,18 @@
 <!--CARD LIST FOR ALL EVENTS-->
 <ion-content class="card-background-page" padding>
 
-  <a href="/home"><ion-card>
-    <img src="https://cdn.pixabay.com/photo/2018/06/12/20/17/football-3471402_960_720.jpg"/>
+  <ion-card >
+    <img (click)="loadEvent()" src="https://cdn.pixabay.com/photo/2018/06/12/20/17/football-3471402_960_720.jpg"/>
     <div class="card-title">Fotbollsmatch mellan Grimsta och Bagis</div>
-  </ion-card></a>
+  </ion-card>
   <a href="/specific-event"><ion-card>
     <img src="https://cdn.pixabay.com/photo/2015/08/10/12/31/curling-882649__340.jpg"/>
     <div class="card-title">Kom och testa curling med Skarpnäck och Vällingby</div>
   </ion-card></a>
 
-  <app-google-maps></app-google-maps>
+  <ion-button (click)="goBackToMenu()">Back</ion-button>
+
+
 
 </ion-content>
 

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 import {HelloService} from '../../services/hello.service';
+import {Form, NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -12,8 +13,8 @@ import {HelloService} from '../../services/hello.service';
 export class RegisterPage implements OnInit {
 
     private username: string;
-    private id = 2;
     private password: string;
+    private currentyouthcentre: number;
     private email: string;
     private users = [];
 
@@ -24,10 +25,10 @@ export class RegisterPage implements OnInit {
     }
 
     createProfile() {
-        this.helloService.getAllHellos().subscribe(data => this.users = data);
+        this.userService.getAllUsers().subscribe(data => this.users = data);
         let taken = false;
         for (const user of this.users) {
-            if (user.message === this.username) {
+            if (user.username.toString() === this.username) {
                 taken = true;
             }
         }
@@ -36,12 +37,15 @@ export class RegisterPage implements OnInit {
         } else {
             this.createUserAndPost();
             this.presentToast('Profile created');
-            this.router.navigate(['/tabs/home']);
+            this.router.navigate(['home']);
         }
     }
 
     createUserAndPost() {
-        this.helloService.submitUser(this.id, this.username);
+
+        this.userService.submitUser(this.username, this.password, this.currentyouthcentre);
+
+
     }
 
     async presentToast(toastMessage: string) {
@@ -57,4 +61,10 @@ export class RegisterPage implements OnInit {
         this.userService.getAllUsers().subscribe(data => this.users = data);
     }
 
+    register(form: NgForm) {
+    }
+
+    goBackToMenu() {
+        this.router.navigate(['../tabs/home']);
+    }
 }
