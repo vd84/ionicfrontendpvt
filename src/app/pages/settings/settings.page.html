@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header color="primary">
   <ion-toolbar>
     <ion-title>settings</ion-title>
   </ion-toolbar>
@@ -6,10 +6,26 @@
 
 <ion-content>
 
+  <ion-list>
+    <ion-list-header>User</ion-list-header>
+    <ion-item>
+      <ion-label>Username: {{authService.currentUser.value.userName}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Permissions: {{authService.currentUser.value.roles.includes('admin') ? 'admin' : 'user'}}</ion-label>
+    </ion-item>
+  </ion-list>
+
   <ion-button (click)="logout()">Logout</ion-button>
-  <ion-button (click)="goBackToMenu()">Back</ion-button>
-  <p *ngIf="authenticated">AUTHENTICATED</p>
-  <p *appHasRole="['user']">This is a user</p>
-  <p *appHasRole="['admin']">this is an admin</p>
+
+  <ion-list>
+    <ion-list-header>Account and Security</ion-list-header>
+    <ion-item>
+      <ion-label>Password: <ion-button>Change password</ion-button></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-button color="danger">Delete account</ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
