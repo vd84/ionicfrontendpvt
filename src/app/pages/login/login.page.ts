@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     }
 
     login() {
-        this.router.navigate(['menu']);
+        this.router.navigate(['../tabs/home']);
     }
 
     createProfile() {

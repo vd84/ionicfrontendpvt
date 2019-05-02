@@ -65,6 +65,6 @@ export class RegisterPage implements OnInit {
     }
 
     goBackToMenu() {
-        this.router.navigate(['/tabs/home']);
+        this.router.navigate(['../tabs/home']);
     }
 }
