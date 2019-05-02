@@ -32,9 +32,6 @@ export class HelloService {
     }
 
 
-
-
-
     getOneHello(id): Observable<IHello> {
         return this.http.get<IHello>(`${this.url}${id}`);
     }
