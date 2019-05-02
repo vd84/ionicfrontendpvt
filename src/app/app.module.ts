@@ -13,17 +13,17 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+    declarations: [AppComponent],
+    entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-      Geolocation,
-      NativeGeocoder,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        Geolocation,
+        NativeGeocoder,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
     exports: [],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

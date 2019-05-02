@@ -6,6 +6,10 @@
 
 <ion-content>
 
+  <ion-button (click)="logout()">Logout</ion-button>
   <ion-button (click)="goBackToMenu()">Back</ion-button>
+  <p *ngIf="authenticated">AUTHENTICATED</p>
+  <p *appHasRole="['user']">This is a user</p>
+  <p *appHasRole="['admin']">this is an admin</p>
 
 </ion-content>
