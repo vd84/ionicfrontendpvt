@@ -2,7 +2,13 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {IUser} from '../Interfaces/user';
 
+/*This class is used to authenticate a person logging in and holds a reference to the current
+user. Import in constructor in order to use in a view where you want to differentiate what is
+shown to the user. Use *appHasRole="" as an element tag in order to specify which role sees
+it, for example <p appHasRole="['user']">This is only seen by a user</p>.
 
+
+ */
 @Injectable({
     providedIn: 'root'
 })
