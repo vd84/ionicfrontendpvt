@@ -25,5 +25,8 @@ export class LoginPage implements OnInit {
     createProfile() {
         this.router.navigate(['register']);
     }
+    forgotPassword() {
+        this.router.navigate(['reset-password']);
+    }
 
 }

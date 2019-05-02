@@ -5,6 +5,7 @@ import {UserService} from '../../services/user-service/user.service';
 import {HelloService} from '../../services/hello.service';
 import {Form, NgForm} from '@angular/forms';
 
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',

@@ -8,6 +8,9 @@ import {Router} from '@angular/router';
 })
 export class EventPage implements OnInit {
   event: any;
+  startTime: Date;
+  location: String;
+  private activities = [];
 
   constructor(private router: Router) { }
 
