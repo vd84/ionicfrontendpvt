@@ -10,7 +10,7 @@ import {UserService} from '../../services/user-service/user.service';
 })
 export class MenuPage implements OnInit {
 
-    currentUser;
+    public currentUser;
 
 
     constructor(private router: Router, private helloService: HelloService, private userService: UserService) {
