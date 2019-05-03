@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { EventPage } from './event.page';
 import { ComponentsModule} from '../../component/components.module';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ComponentsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedDirectivesModule
   ],
   declarations: [EventPage]
 })

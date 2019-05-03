@@ -8,15 +8,20 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input  name="Event_name" type="text" placeholder="Namnet på ditt event" ngModel required></ion-input>
+              <ion-input  name="Event_name" type="text" placeholder="Namnet på ditt event" ngModel required
+              [(ngModel)]="name"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="location" type="text" placeholder="Vart ska du hålla ditt event?" ngModel required></ion-input>
+              <ion-input name="location" type="text" placeholder="Vart ska du hålla ditt event?" ngModel required
+              [(ngModel)]="location"></ion-input>
             </ion-item>
-          </div> 
+            <ion-list>
+              <ion-card> {{events.toString()}}</ion-card>
+            </ion-list>
+          </div>
           <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
-            <ion-button size="large" type="submit" (click)="goBackToMenu()" expand="block">Back to menu</ion-button>
+            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block" (click) = 'submitEvent()'>Register</ion-button>
+            <ion-button size="large" type="submit" (click)="goBackToEvent()" expand="block">Back</ion-button>
           </div>
         </ion-col>
       </ion-row>
