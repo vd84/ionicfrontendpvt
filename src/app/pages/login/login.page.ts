@@ -35,7 +35,6 @@ export class LoginPage implements OnInit {
                 if (this.password === user.password.toString()) {
                     this.authService.login(this.username, this.password);
                     this.router.navigate(['../tabs/home']);
-                    console.log(user);
                 } else {
                     this.presentToast('Wrong password');
                 }

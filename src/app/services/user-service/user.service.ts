@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
 import {User} from '../../Models/User';
+import {AuthService} from '../auth.service';
 
 
 @Injectable({
@@ -13,7 +14,16 @@ export class UserService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private http: HttpClient) {
+    constructor(private _currentUser: User, private http: HttpClient, private authService: AuthService) {
+    }
+
+
+    getcurrentUser(): User {
+        return this._currentUser;
+    }
+
+    setcurrentUser(value: User) {
+        this._currentUser = value;
     }
 
     /**
@@ -24,6 +34,10 @@ export class UserService {
         return this.http.get<IUser[]>(this.url);
 
 
+    }
+
+    getAUser(name): Observable<IUser> {
+        return this.http.get<IUser>(this.url + name);
     }
 
 
@@ -100,6 +114,21 @@ export class UserService {
             error => {
                 console.log('Error');
             });
+
+    }
+
+    deleteUser(username: string, password: string) {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        this.http.delete(this.url + this.authService.currentUser.value.userName, httpOptions);
+
 
     }
 

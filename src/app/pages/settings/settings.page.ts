@@ -31,4 +31,10 @@ export class SettingsPage implements OnInit {
 
 
     }
+
+    deleteAccount() {
+        this.router.navigate(['delete-account']);
+
+
+    }
 }

@@ -3,4 +3,8 @@ export interface IUser {
     password: string;
     roles: string[];
 
+
+
+
+
 }
