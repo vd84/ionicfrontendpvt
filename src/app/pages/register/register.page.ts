@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
-import {HelloService} from '../../services/hello.service';
 import {Form, NgForm} from '@angular/forms';
 
 
@@ -19,7 +18,7 @@ export class RegisterPage implements OnInit {
     private email: string;
     private users = [];
 
-    constructor(private router: Router, public toastController: ToastController, private userService: UserService, private helloService: HelloService) {
+    constructor(private router: Router, public toastController: ToastController, private userService: UserService) {
     }
 
     ngOnInit() {
@@ -63,9 +62,5 @@ export class RegisterPage implements OnInit {
     }
 
     register(form: NgForm) {
-    }
-
-    goBackToMenu() {
-        this.router.navigate(['../tabs/home']);
     }
 }
