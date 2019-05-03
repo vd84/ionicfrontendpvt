@@ -49,6 +49,9 @@ export class LoginPage implements OnInit {
     createProfile() {
         this.router.navigate(['register']);
     }
+    forgotPassword() {
+        this.router.navigate(['reset-password']);
+    }
 
     async presentToast(toastMessage: string) {
         const toast = await this.toastController.create({

@@ -11,9 +11,4 @@ export class MapPage implements OnInit {
 
     ngOnInit() {
     }
-
-
-    goBackToMenu() {
-        this.router.navigate(['menu']);
-    }
 }

@@ -14,12 +14,4 @@ export class SpecificEventPage implements OnInit {
     ngOnInit() {
     }
 
-    goBackToEvent() {
-        this.router.navigate(['event']);
-
-    }
-    goBackToMenu() {
-        this.router.navigate(['menu']);
-
-    }
 }

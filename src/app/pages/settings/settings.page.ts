@@ -20,11 +20,6 @@ export class SettingsPage implements OnInit {
         });
     }
 
-    goBackToMenu() {
-        this.router.navigate(['menu']);
-
-    }
-
     logout() {
         this.authService.logout();
         this.router.navigate(['login']);

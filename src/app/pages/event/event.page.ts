@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {IEvent} from '../../Interfaces/event';
+import {Events} from '@ionic/angular';
 
 @Component({
   selector: 'app-event',
@@ -8,17 +11,17 @@ import {Router} from '@angular/router';
 })
 export class EventPage implements OnInit {
   event: any;
+  constructor(private router: Router, private authService: AuthService) {
+  }
 
-  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  goBackToMenu() {
-    this.router.navigate(['menu']);
-  }
-
   loadEvent() {
     this.router.navigate(['specific-event']);
+  }
+  goToCreateEvent()  {
+    this.router.navigate(['create-event']);
   }
 }
