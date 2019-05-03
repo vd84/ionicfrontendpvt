@@ -10,6 +10,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 export class GoogleMapsComponent implements OnInit, AfterContentInit {
   map;
   mark;
+  // SET LOCATION TO STOCKHOLM
   location = {lat: 59.334591, lng: 18.063240};
   markerOptions: any = {position: null, map: null, title: null};
   infoWindow;
@@ -18,6 +19,7 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
   constructor() { }
 
   ngOnInit(): void {}
+  // ADDS MAP TO PAGE
   ngAfterContentInit(): void {
         this.map = new google.maps.Map(
         this.mapElement.nativeElement, {
@@ -27,12 +29,14 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
         this.getMarker();
         this.getLocation();
   }
+  // SET MARKER TO MAP
   getMarker (): void {
     this.markerOptions.position = this.location;
     this.markerOptions.map = this.map;
     this.markerOptions.title = 'My Location';
     this.mark = new google.maps.Marker(this.markerOptions);
   }
+  // GET GEOLOCATION
   getLocation (): void {
     if (navigator.geolocation) {
       console.log('Det finns en location, wiiie!');
