@@ -50,7 +50,7 @@ export class UserService {
 
         });
 
-        this.http.post(this.postUrl, body, httpOptions).subscribe(data => {
+        this.http.post(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
             },
             error => {

@@ -9,10 +9,11 @@ import { Geolocation } from '@ionic-native/geolocation';
 })
 export class GoogleMapsComponent implements OnInit, AfterContentInit {
   map;
-  marker;
+  mark;
   location = {lat: 59.334591, lng: 18.063240};
   markerOptions: any = {position: null, map: null, title: null};
   infoWindow;
+  pos;
   @ViewChild('mapElement') mapElement;
   constructor() { }
 
@@ -24,26 +25,15 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
           zoom: 8,
             });
         this.getMarker();
+        this.getLocation();
   }
   getMarker (): void {
     this.markerOptions.position = this.location;
     this.markerOptions.map = this.map;
     this.markerOptions.title = 'My Location';
-    this.marker = new google.maps.Marker(this.markerOptions);
-    this.getLocation();
+    this.mark = new google.maps.Marker(this.markerOptions);
   }
   getLocation (): void {
-  //  this.infoWindow = new google.maps.InfoWindow({
-  //    content: 'hej'
-  //  });
- /*   if (this.infoWindow === null) {
-      console.log('Är null');
-    }
-    if (this.infoWindow != null) {
-      console.log('Not null');
-    }*/
-
-    // Try HTML5 geolocation.
     if (navigator.geolocation) {
       console.log('Det finns en location, wiiie!');
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -51,40 +41,24 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         }; console.log(pos);
-       // changeLocationOfMarker(pos);
-        const pin = new google.maps.Marker();
-        console.log('ny pin');
-        console.log(pin === true);
-        pin.setPosition(pos);
-});
-    }
-      /*  if (this.infoWindow === null) {
-          console.log(' är null 222');
-        } if (this.infoWindow != null) {
-          console.log(' Är inte null');
-        }*/
-        // console.log('Tjenis');
-       /* if (this.infoWindow) {
-        this.infoWindow.setPosition(pos);
-        this.infoWindow.setContent('Location found.');
-        this.infoWindow.open(this.map);*/
-       /* this.map.setCenter(pos); }
-        }, function() {
-        this.handleLocationError(true, this.infoWindow, this.map.getCenter());
-      });
-    } else {
-      // Browser doesn't support Geolocation
-      this.handleLocationError(false, this.infoWindow, this.map.getCenter());
-    }
-  }  handleLocationError(browserHasGeolocation, infoWindow, pos): void {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(this.map);
-  }
-*/
-}
+        });
+    }}
+/*    addAllSoccerFields(): void {
+    const url = 'http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes/a05cd75b-c974-4890-9a7d-abc790997cf1/ServiceUnits?apikey=56010af30b114502bfbf8db404ef41a4';
+    const request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.setRequestHeader('Content-Type', 'text/xml');
+        request.onreadystatechange = function() {
+          console.log('wooow!');
+          if (request.readyState === 4 && request.status === 200) {
+            console.log('hejeee');
+              console.log(request.responseXML);
+          }
+        };
+        request.send();
+    }*/
+
+
 
 
 }
