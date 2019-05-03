@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {IEvent} from '../../Interfaces/event';
-
+import {Events} from '@ionic/angular';
 
 @Component({
   selector: 'app-event',
@@ -10,9 +10,10 @@ import {IEvent} from '../../Interfaces/event';
   styleUrls: ['./event.page.scss'],
 })
 export class EventPage implements OnInit {
-  event: any;
+  activity: any;
+  constructor(private router: Router, private authService: AuthService) {
+  }
 
-  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
   }
@@ -22,5 +23,8 @@ export class EventPage implements OnInit {
   }
   goToCreateEvent()  {
     this.router.navigate(['create-event']);
+  }
+  segmentChanged(event) {
+    this.activity = event.target.value;
   }
 }

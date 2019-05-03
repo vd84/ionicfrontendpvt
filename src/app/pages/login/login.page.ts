@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user-service/user.service';
-import {IUser} from '../../Interfaces/user';
 import {ToastController} from '@ionic/angular';
 
 @Component({
@@ -22,6 +21,7 @@ export class LoginPage implements OnInit {
     ngOnInit() {
     }
 
+
     login() {
         let userFound = false;
         if (this.username === 'dev') {
@@ -30,9 +30,9 @@ export class LoginPage implements OnInit {
         }
         this.userService.getAllUsers().subscribe(data => this.users = data);
         for (const user of this.users) {
-            if (user.userName === this.username) {
+            if (user.username.toString() === this.username) {
                 userFound = true;
-                if (user.password === user.password) {
+                if (this.password === user.password.toString()) {
                     this.authService.login(this.username, this.password);
                     this.router.navigate(['../tabs/home']);
                 } else {

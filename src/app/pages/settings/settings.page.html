@@ -1,5 +1,5 @@
-<ion-header color="primary">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-title>settings</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,6 +14,10 @@
     <ion-item>
       <ion-label>Permissions: {{authService.currentUser.value.roles.includes('admin') ? 'admin' : 'user'}}</ion-label>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Permissions: {{authService.currentUser.value.password}}</ion-label>
+    </ion-item>
   </ion-list>
 
   <ion-button (click)="logout()">Logout</ion-button>
@@ -21,10 +25,10 @@
   <ion-list>
     <ion-list-header>Account and Security</ion-list-header>
     <ion-item>
-      <ion-label>Password: <ion-button>Change password</ion-button></ion-label>
+      <ion-label>Password: <ion-button (click)="changePassword()">Change password</ion-button></ion-label>
     </ion-item>
     <ion-item>
-      <ion-button color="danger">Delete account</ion-button>
+      <ion-button color="danger" (click)="deleteAccount()">Delete account</ion-button>
     </ion-item>
   </ion-list>
 

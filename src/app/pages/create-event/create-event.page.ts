@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {IEvent} from '../../Interfaces/event';
+import {IEvent} from '../../Interfaces/event'
+import {Events} from '@ionic/angular';
 
 @Component({
     selector: 'app-create-event',
@@ -13,7 +14,7 @@ export class CreateEventPage implements OnInit {
     private location: String;
     private events = [];
 
-    constructor(private router: Router) {}
+    constructor(private router: Router, private createdEvents: Events) {}
 
 
     ngOnInit() {
@@ -21,14 +22,7 @@ export class CreateEventPage implements OnInit {
     submitEvent() {
         this.events.push(this.name);
         this.events.push(this.location);
-    }
-
-    goBackToEvent() {
-        this.router.navigate(['event']);
-
-    }
-    getEvents() {
-        return this.events.toString();
+        this.createdEvents.publish('publishedEvents', this.events);
     }
 
     register(form: NgForm) {

@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {IUser} from '../Interfaces/user';
+import {UserService} from './user-service/user.service';
+import {User} from '../Models/User';
 
 /*This class is used to authenticate a person logging in and holds a reference to the current
 user. Import in constructor in order to use in a view where you want to differentiate what is
@@ -17,7 +19,7 @@ export class AuthService {
 
     currentUser: BehaviorSubject<IUser> = new BehaviorSubject(null);
 
-    constructor() {
+    constructor(private userService: UserService) {
     }
 
     login(name, password) {
@@ -39,7 +41,17 @@ export class AuthService {
                 password: password,
                 roles: ['admin', 'user']
             });
+        } else {
+            this.currentUser.next({
+                userName: name,
+                password: password,
+                roles: ['admin', 'user']
+
+            });
+            this.userService.setcurrentUser(new User(name, password, 1));
         }
+
+
     }
 
     getUserSubject() {
