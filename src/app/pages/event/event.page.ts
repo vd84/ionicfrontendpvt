@@ -10,7 +10,7 @@ import {Events} from '@ionic/angular';
   styleUrls: ['./event.page.scss'],
 })
 export class EventPage implements OnInit {
-  event: any;
+  activity: any;
   constructor(private router: Router, private authService: AuthService) {
   }
 
@@ -23,5 +23,8 @@ export class EventPage implements OnInit {
   }
   goToCreateEvent()  {
     this.router.navigate(['create-event']);
+  }
+  segmentChanged(event) {
+    this.activity = event.target.value;
   }
 }
