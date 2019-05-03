@@ -14,7 +14,7 @@
     <div class="card-title">Kom och testa curling med Skarpnäck och Vällingby</div>
   </ion-card></a>
 
-  <ion-button (click)="goBackToMenu()">Back</ion-button>
+  <ion-button *appHasRole="['admin']" (click)="goToCreateEvent()">Create Event</ion-button>
 
 
 
