@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>movies</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <ion-button (click)="searchChanged()">CLICK ME FOR HELLOS</ion-button>
+
+    List of Users if active?
+    <ion-list *ngFor="let user of hellos">
+
+        <ion-item>
+            {{user.active}}
+
+        </ion-item>
+    </ion-list>
+
+    Specific user>
+
+
+   <ion-item>
+       <ion-input placeholder="idForUser" [(ngModel)]="id"></ion-input>
+   </ion-item>
+
+    <ion-button (click)="oneUser(id)">Click me for one user with id</ion-button>
+
+    {{specificUser}}
+
+
+    <!--ion-label>
+        Sending a POST Request Example
+    </ion-label>
+    <ion-button (click)="">Save a hello object!</ion-button-->
+
+
+
+
+
+</ion-content>

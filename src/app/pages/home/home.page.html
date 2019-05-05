@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
+</ion-header>
+<!--SEARCH-BAR-->
+<ion-content class="search-bar" padding>
+    <ion-searchbar placeholder="Search activity"></ion-searchbar>
+</ion-content>
+
+<!--CARD LIST -->
+<ion-content class="card-background-page" padding>
+
+    <a routerLink="/event"><ion-card>
+        <img src="https://cdn.pixabay.com/photo/2018/12/25/13/23/chess-3894257_960_720.jpg"/>
+        <div class="card-title">Event</div>
+        <div class="card-subtitle">Kommande event </div>
+    </ion-card></a>
+    <a href="#"><ion-card>
+        <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/antique-maps-old-cartographic-maps-antique-map-of-the-region-of-tartaria-studio-grafiikka.jpg"/>
+        <div class="card-title">Karta</div>
+        <div class="card-subtitle">Se var du kan ta fler poäng</div>
+    </ion-card></a>
+    <a href="#"><ion-card>
+        <img src="https://cdn.pixabay.com/photo/2015/10/23/20/45/live-1003646_960_720.jpg"/>
+        <div class="card-title">Profil</div>
+        <div class="card-subtitle">Se din profil och achievments</div>
+    </ion-card></a>
+
+<!--GOOGLE MAPS COMPONENT-->
+<app-google-maps></app-google-maps>
+</ion-content>
+

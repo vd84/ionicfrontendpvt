@@ -1,6 +1,8 @@
 {
   "name": "frontendpvtgrupp2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "0061ffc9"
 }
