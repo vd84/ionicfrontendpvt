@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {IEvent} from '../../Interfaces/event';
-import {Events} from '@ionic/angular';
+import {Event} from '../../Models/event';
 
 @Component({
   selector: 'app-event',
@@ -11,7 +11,9 @@ import {Events} from '@ionic/angular';
 })
 export class EventPage implements OnInit {
   activity: any;
+  events = [];
   constructor(private router: Router, private authService: AuthService) {
+    this.events.push(new Event('Test', 123, 'Kista', 'Det här är ett event'));
   }
 
 
