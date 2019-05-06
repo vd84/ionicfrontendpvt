@@ -19,6 +19,8 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
+        this.userService.getAllUsers().subscribe(data => this.users = data);
+
     }
 
 
@@ -28,7 +30,6 @@ export class LoginPage implements OnInit {
             this.authService.login('dev', 'masterpass');
             this.router.navigate(['../tabs/home']);
         }
-        this.userService.getAllUsers().subscribe(data => this.users = data);
         for (const user of this.users) {
             if (user.username.toString() === this.username) {
                 userFound = true;
@@ -48,6 +49,7 @@ export class LoginPage implements OnInit {
     createProfile() {
         this.router.navigate(['register']);
     }
+
     forgotPassword() {
         this.router.navigate(['reset-password']);
     }

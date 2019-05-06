@@ -1,81 +1,102 @@
-import { Component, OnInit, ViewChild, AfterContentInit } from '@angular/core';
+import {AfterContentInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import {YouthcenterService} from '../../services/youthcenter.service';
+
 declare var google;
-import { Geolocation } from '@ionic-native/geolocation';
-import { YouthcenterService } from '../../services/youthcenter.service';
 
 @Component({
-  selector: 'app-google-maps',
-  templateUrl: './google-maps.component.html',
-  styleUrls: ['./google-maps.component.scss'],
+    selector: 'app-google-maps',
+    templateUrl: './google-maps.component.html',
+    styleUrls: ['./google-maps.component.scss'],
 })
-export class GoogleMapsComponent implements OnInit, AfterContentInit {
-  map;
-  mark;
-  // SET LOCATION TO STOCKHOLM
-  location = {lat: 59.334591, lng: 18.063240};
-  markerOptions: any = {position: null, map: null, title: null};
-  infoWindow;
-  pos;
-  private allLocations = [];
-  @ViewChild('mapElement') mapElement;
-  constructor(private ycService: YouthcenterService) { }
+export class GoogleMapsComponent implements OnInit {
 
-  ngOnInit(): void {}
-  // ADDS MAP TO PAGE
-  ngAfterContentInit(): void {
-        this.map = new google.maps.Map(
-        this.mapElement.nativeElement, {
-          center: {lat: 59.334591, lng: 18.063240},
-          zoom: 8,
-            });
-        this.getMarker();
-        this.getLocation();
-        this.getAllLocationsToMap();
-  }
-  // SET MARKER TO MAP
-  getMarker (): void {
-    this.markerOptions.position = this.location;
-    this.markerOptions.map = this.map;
-    this.markerOptions.title = 'My Location';
-    this.mark = new google.maps.Marker(this.markerOptions);
-  }
-  // GET GEOLOCATION
-  getLocation (): void {
-    if (navigator.geolocation) {
-      console.log('Det finns en location, wiiie!');
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }; console.log(pos);
+
+
+    @ViewChild('mapElement') mapElement;
+    map: any;
+    mapOptions: any;
+    location = {lat: null, lng: null};
+    markerOptions: any = {position: null, map: null, title: null};
+    marker: any;
+    apiKey: any = 'AIzaSyC6sG4u5OXLUxNg_9RwFqsmE6wJfSScilo'; /*Your API Key*/
+    alllocations = [];
+
+    ngOnInit(): void {
+        this.youthcenterService.getAllLocations().subscribe(data => {
+            this.alllocations = data;
         });
-    }}
-/*    addAllSoccerFields(): void {
-    const url = 'http://api.stockholm.se/ServiceGuideService/ServiceUnitTypes/a05cd75b-c974-4890-9a7d-abc790997cf1/ServiceUnits?apikey=56010af30b114502bfbf8db404ef41a4';
-    const request = new XMLHttpRequest();
-        request.open('GET', url);
-        request.setRequestHeader('Content-Type', 'text/xml');
-        request.onreadystatechange = function() {
-          console.log('wooow!');
-          if (request.readyState === 4 && request.status === 200) {
-            console.log('hejeee');
-              console.log(request.responseXML);
-          }
-        };
-        request.send();
-    }*/
 
-    getAllLocationsToMap() {
-      this.ycService.getAllLocations().subscribe(data => this.allLocations = data );
-      for (const place of this.allLocations) {
-        const posi = {
-          lat: place.lat,
-          lng: place.lng
-        };
-        const marker = new google.maps.Marker({
-          position: posi,
-          map: this.map
-      });
+
+        this.addAllMarkers();
     }
-}
+
+
+
+
+    constructor(public zone: NgZone, public geolocation: Geolocation, private youthcenterService: YouthcenterService) {
+        /*load google map script dynamically */
+        this.youthcenterService.getAllLocations().subscribe(data => {
+            this.alllocations = data;
+        });
+
+
+        const script = document.createElement('script');
+        script.id = 'googleMap';
+        if (this.apiKey) {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
+        } else {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=';
+        }
+        document.head.appendChild(script);
+        /*Get Current location*/
+        this.geolocation.getCurrentPosition().then((position) => {
+            this.location.lat = position.coords.latitude;
+            this.location.lng = position.coords.longitude;
+        });
+        /*Map options*/
+        this.mapOptions = {
+            center: this.location,
+            zoom: 11,
+            mapTypeControl: false
+        };
+
+
+        setTimeout(() => {
+            this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+            /*Marker Options*/
+            this.markerOptions.position = this.location;
+            this.markerOptions.map = this.map;
+            this.markerOptions.title = 'My Location';
+            this.marker = new google.maps.Marker(this.markerOptions);
+        }, 1);
+    }
+
+
+    /**
+     * Läser in alla youth centres varje 3 sekund
+     */
+
+    addAllMarkers() {
+        setInterval(() => {
+
+            this.youthcenterService.getAllLocations().subscribe(data => {
+                this.alllocations = data;
+            });
+
+            console.log(this.alllocations);
+
+            let marker;
+
+            for (const place of this.alllocations) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(place.lat, place.lng),
+                    map: this.map
+                });
+            }
+
+
+        }, 60000);
+    }
+
 }

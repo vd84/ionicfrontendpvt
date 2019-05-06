@@ -53,7 +53,7 @@ export class UserService {
         };
 
         const body = JSON.stringify({
-
+            'id': 1,
             'username': username,
             'password': password,
             'points': 0,
@@ -105,7 +105,6 @@ export class UserService {
             error => {
                 console.log('Error');
             });
-
     }
 
     deleteUser(username: string, password: string) {
