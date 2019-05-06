@@ -53,7 +53,7 @@ export class UserService {
         };
 
         const body = JSON.stringify({
-
+            'id': 1,
             'username': username,
             'password': password,
             'points': 0,
