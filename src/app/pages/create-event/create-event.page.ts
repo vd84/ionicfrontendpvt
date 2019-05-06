@@ -18,6 +18,7 @@ export class CreateEventPage implements OnInit {
 
 
     ngOnInit() {
+        // Lägg in databasladdning här
     }
     submitEvent() {
         this.events.push(this.name);

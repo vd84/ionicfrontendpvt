@@ -105,7 +105,6 @@ export class UserService {
             error => {
                 console.log('Error');
             });
-
     }
 
     deleteUser(username: string, password: string) {
