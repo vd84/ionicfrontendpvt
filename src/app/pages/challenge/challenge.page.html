@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Challenge</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-list-header>Choose Opponents</ion-list-header>
+  <ion-item>
+    <ion-label>Youth Center:</ion-label>
+    <ion-select placeholder="Select" multiple="true">
+      <ion-select-option value="Kista">Kista</ion-select-option>
+      <ion-select-option value="Tensta">Tensta</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+  <div padding>
+    <ion-button  size="large" type="submit" expand="block" (click) = 'sendChallenge()'>Send Challenge</ion-button>
+  </div>
+
+
+</ion-content>

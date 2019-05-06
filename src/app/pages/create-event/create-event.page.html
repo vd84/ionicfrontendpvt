@@ -28,7 +28,10 @@
             </ion-list>
           </div>
           <div padding>
-            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block" (click) = 'submitEvent()'>Register</ion-button>
+            <ion-button  size="large" type="submit"  expand="block" (click) = 'challenge()'>Challenge</ion-button>
+          </div>
+          <div padding>
+            <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block" (click) = 'submitEvent()'>Add open event</ion-button>
           </div>
         </ion-col>
       </ion-row>
