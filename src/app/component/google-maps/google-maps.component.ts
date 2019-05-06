@@ -12,7 +12,6 @@ declare var google;
 export class GoogleMapsComponent implements OnInit {
 
 
-
     @ViewChild('mapElement') mapElement;
     map: any;
     mapOptions: any;
@@ -32,8 +31,6 @@ export class GoogleMapsComponent implements OnInit {
     }
 
 
-
-
     constructor(public zone: NgZone, public geolocation: Geolocation, private youthcenterService: YouthcenterService) {
         /*load google map script dynamically */
         this.youthcenterService.getAllLocations().subscribe(data => {
@@ -41,14 +38,6 @@ export class GoogleMapsComponent implements OnInit {
         });
 
 
-        const script = document.createElement('script');
-        script.id = 'googleMap';
-        if (this.apiKey) {
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
-        } else {
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=';
-        }
-        document.head.appendChild(script);
         /*Get Current location*/
         this.geolocation.getCurrentPosition().then((position) => {
             this.location.lat = position.coords.latitude;
