@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
-import {User} from '../../Models/User';
 import {AuthService} from '../auth.service';
 
 
@@ -14,17 +13,9 @@ export class UserService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private _currentUser: User, private http: HttpClient, private authService: AuthService) {
+    constructor(private http: HttpClient, private authService: AuthService) {
     }
 
-
-    getcurrentUser(): User {
-        return this._currentUser;
-    }
-
-    setcurrentUser(value: User) {
-        this._currentUser = value;
-    }
 
     /**
      * Returnerar alla users frpn webbservern
