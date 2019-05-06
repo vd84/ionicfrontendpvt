@@ -13,12 +13,12 @@ export class EventPage implements OnInit {
   activity: any;
   events = [];
   constructor(private router: Router, private authService: AuthService) {
-    this.events.push(new Event('Test', 123, 'Kista', 'Det här är ett event'));
-    this.activity = 'all-activities';
   }
 
 
   ngOnInit() {
+    this.events.push(new Event('Test', 123, 'Kista', 'Det här är ett event'));
+    this.activity = 'all-activities';
   }
 
   loadEvent() {
