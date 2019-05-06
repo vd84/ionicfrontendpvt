@@ -18,18 +18,8 @@
   <div [ngSwitch]="activity">
     <ion-list *ngSwitchCase="'all-activities'">
       <ion-item *ngFor="let activity of events">
-        <ion-card (click)="loadEvent()">
+        <ion-card (click)="loadEvent(activity)">
           <ion-card-title>{{activity.name}}</ion-card-title>
-        </ion-card>
-      </ion-item>
-      <ion-item>
-        <ion-card (click)="loadEvent()">
-          <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
-        </ion-card>
-      </ion-item>
-      <ion-item>
-        <ion-card (click)="loadEvent()">
-          <ion-card-title>Kom och testa curling med Skarpnäck och Vällingby</ion-card-title>
         </ion-card>
       </ion-item>
     </ion-list>

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-specific-event',
@@ -8,10 +8,16 @@ import {Router} from '@angular/router';
 })
 export class SpecificEventPage implements OnInit {
 
-    constructor(private router: Router) {
+    activity: any;
+
+    constructor(private router: Router, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
+        if (this.route.snapshot.data['activity']) {
+            this.activity = this.route.snapshot.data['activity'];
+        }
+        console.log(this.activity.name);
     }
 
 }

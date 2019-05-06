@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IUser} from '../../Interfaces/user';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../authentication-service/auth.service';
 
 
 @Injectable({

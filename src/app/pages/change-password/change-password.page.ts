@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/authentication-service/auth.service';
 
 @Component({
     selector: 'app-change-password',

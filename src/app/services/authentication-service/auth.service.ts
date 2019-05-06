@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {IUser} from '../Interfaces/user';
+import {IUser} from '../../Interfaces/user';
 
 /*This class is used to authenticate a person logging in and holds a reference to the current
 user. Import in constructor in order to use in a view where you want to differentiate what is
