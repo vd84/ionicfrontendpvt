@@ -15,7 +15,6 @@ const routes: Routes = [
         resolve: {activity: DataResolverService},
         loadChildren: './pages/specific-event/specific-event.module#SpecificEventPageModule'
     },
-    {path: 'hello', loadChildren: './pages/hello/hello.module#HelloPageModule'},
     {path: 'create-event', loadChildren: './pages/create-event/create-event.module#CreateEventPageModule'},
     {path: 'map', loadChildren: './pages/map/map.module#MapPageModule'},
     {path: 'badges', loadChildren: './pages/badges/badges.module#BadgesPageModule'},
