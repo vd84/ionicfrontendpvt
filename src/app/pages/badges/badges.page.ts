@@ -7,9 +7,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./badges.page.scss'],
 })
 export class BadgesPage implements OnInit {
-
-  constructor(private router: Router) { }
+  badgeList: any;
+  constructor(private router: Router) {
+    this.badgeList = 'all-badges';
+  }
 
   ngOnInit() {
+  }
+  segmentChanged(event) {
+    this.badgeList = event.target.value;
   }
 }
