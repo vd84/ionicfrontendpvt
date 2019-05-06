@@ -9,13 +9,7 @@ declare var google: any;
     styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements OnInit {
-    constructor(private router: Router) {
-    }
-
-    ngOnInit() {
-    }
-}
-   /* map: any = null;
+    map: any = null;
     positionMarker: any;
     @ViewChild('map') mapElement: ElementRef;
     styles = {
@@ -72,4 +66,3 @@ export class MapPage implements OnInit {
     }
 
 }
-*/
