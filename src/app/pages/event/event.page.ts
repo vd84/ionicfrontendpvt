@@ -14,6 +14,7 @@ export class EventPage implements OnInit {
   events = [];
   constructor(private router: Router, private authService: AuthService) {
     this.events.push(new Event('Test', 123, 'Kista', 'Det här är ett event'));
+    this.activity = 'all-activities';
   }
 
 

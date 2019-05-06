@@ -1,13 +1,33 @@
 <ion-header>
-  <ion-toolbar color = "primary">
-    <ion-title>badges</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-title>Badges</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-
-  <ion-avatar color="danger">Badge of Honor</ion-avatar>
-
+<ion-content padding>
+    <!--PROGRESS BAR-->
+    <ion-list>
+        <ion-list-header>My Progress</ion-list-header>
+        <ion-progress-bar value="0.8"></ion-progress-bar>
+    </ion-list>
+    <!--SEGMENT OPTIONS-->
+    <div padding>
+        <ion-segment (ionChange)="segmentChanged($event)" value="all-badges">
+            <ion-segment-button value="all-badges">All</ion-segment-button>
+            <ion-segment-button value="taken-badges">Taken</ion-segment-button>
+            <ion-segment-button value="avail-badges">Available</ion-segment-button>
+        </ion-segment>
+    </div>
+    <div [ngSwitch]="badgeList">
+        <ion-list *ngSwitchCase="'all-badges'">
+            <ion-label>All Badges</ion-label>
+        </ion-list>
+        <ion-list *ngSwitchCase="'taken-badges'">
+            <ion-label>Taken Badges</ion-label>
+        </ion-list>
+        <ion-list *ngSwitchCase="'avail-badges'">
+            <ion-label>Available Badges</ion-label>
+        </ion-list>
+    </div>
 
 </ion-content>

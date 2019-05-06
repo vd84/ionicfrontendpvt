@@ -1,12 +1,17 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>map</ion-title>
-  </ion-toolbar>
+  <ion-navbar>
+    <ion-title>
+      Nearby Me Restaurants
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button><ion-icon name="list"></ion-icon>Restaurants</button>
+    </ion-buttons>
+
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-
-  <app-google-maps></app-google-maps>
+  <div #map id="map"></div>
 
 </ion-content>
