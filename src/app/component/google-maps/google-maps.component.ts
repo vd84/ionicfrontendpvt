@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterContentInit } from '@angular/core';
 declare var google;
 import { Geolocation } from '@ionic-native/geolocation';
+import { YouthcenterService } from '../../services/youthcenter.service';
 
 @Component({
   selector: 'app-google-maps',
@@ -15,8 +16,9 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
   markerOptions: any = {position: null, map: null, title: null};
   infoWindow;
   pos;
+  private allLocations = [];
   @ViewChild('mapElement') mapElement;
-  constructor() { }
+  constructor(private ycService: YouthcenterService) { }
 
   ngOnInit(): void {}
   // ADDS MAP TO PAGE
@@ -28,6 +30,7 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
             });
         this.getMarker();
         this.getLocation();
+        this.getAllLocationsToMap();
   }
   // SET MARKER TO MAP
   getMarker (): void {
@@ -61,4 +64,18 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
         };
         request.send();
     }*/
+
+    getAllLocationsToMap() {
+      this.ycService.getAllLocations().subscribe(data => this.allLocations = data );
+      for (const place of this.allLocations) {
+        const posi = {
+          lat: place.lat,
+          lng: place.lng
+        };
+        const marker = new google.maps.Marker({
+          position: posi,
+          map: this.map
+      });
+    }
+}
 }
