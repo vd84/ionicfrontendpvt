@@ -1,17 +1,14 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-title>
-      Nearby Me Restaurants
+      Google Map
     </ion-title>
-    <ion-buttons end>
-      <button ion-button><ion-icon name="list"></ion-icon>Restaurants</button>
-    </ion-buttons>
-
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-button (click)="addAllMarkers()">Add markers</ion-button>
+  <!--create a element for map. #Map - identifier -->
 
-  <div #map id="map"></div>
-
+  <app-google-maps></app-google-maps>
 </ion-content>
