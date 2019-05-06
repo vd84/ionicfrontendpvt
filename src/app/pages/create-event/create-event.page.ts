@@ -25,6 +25,9 @@ export class CreateEventPage implements OnInit {
         this.events.push(this.location);
         this.createdEvents.publish('publishedEvents', this.events);
     }
+    challenge() {
+        this.router.navigate(['challenge']);
+    }
 
     register(form: NgForm) {
     }
