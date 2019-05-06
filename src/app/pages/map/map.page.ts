@@ -1,7 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NavController, NavParams, Platform} from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation} from '@ionic-native/geolocation/ngx';
 declare var google: any;
 @Component({
     selector: 'app-map',
@@ -9,11 +9,60 @@ declare var google: any;
     styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements OnInit {
-    constructor(private router: Router) {
+    @ViewChild('Map') mapElement: ElementRef;
+    map: any;
+    mapOptions: any;
+    location = {lat: null, lng: null};
+    markerOptions: any = {position: null, map: null, title: null};
+    marker: any;
+    apiKey: any = 'AIzaSyC6sG4u5OXLUxNg_9RwFqsmE6wJfSScilo'; /*Your API Key*/
+    myVar;
+    constructor(public zone: NgZone, public geolocation: Geolocation) {
+        /*load google map script dynamically */
+        const script = document.createElement('script');
+        script.id = 'googleMap';
+        if (this.apiKey) {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
+        } else {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=';
+        }
+        document.head.appendChild(script);
+        /*Get Current location*/
+        this.geolocation.getCurrentPosition().then((position) =>  {
+            this.location.lat = position.coords.latitude;
+            this.location.lng = position.coords.longitude;
+        });
+        /*Map options*/
+        this.mapOptions = {
+            center: this.location,
+            zoom: 21,
+            mapTypeControl: false
+        };
+        setTimeout(() => {
+            this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+            /*Marker Options*/
+            this.markerOptions.position = this.location;
+            this.markerOptions.map = this.map;
+            this.markerOptions.title = 'My Location';
+            this.marker = new google.maps.Marker(this.markerOptions);
+        }, 3000);
+        this.addMarker();
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.myFunction();
     }
+     myFunction() {
+        this.myVar = setInterval(this.alertFunc, 3000);
+    }
+
+    alertFunc() {
+        console.log('Hello!');
+    }
+    addMarker() {
+        this.marker = new google.maps.Marker(59.3574318, 18.4683418);
+    }
+
 }
    /* map: any = null;
     positionMarker: any;
