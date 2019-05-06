@@ -1,47 +1,41 @@
-<ion-header >
-  <ion-toolbar color="primary">
-    <ion-title>Event</ion-title>
-  </ion-toolbar>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Event</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <!--SEARCH-BAR-->
-  <ion-searchbar placeholder="Search activity"></ion-searchbar>
-  <!--CARD LIST FOR ALL EVENTS-->
-  <div padding>
-    <ion-segment (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="all-activities">All</ion-segment-button>
-      <ion-segment-button value="my-activities">My</ion-segment-button>
-    </ion-segment>
-  </div>
-  <div [ngSwitch]="activity">
-    <ion-list *ngSwitchCase="'all-activities'">
-      <ion-item *ngFor="let activity of events">
-        <ion-card (click)="loadEvent()">
-          <ion-card-title>{{activity.name}}</ion-card-title>
-        </ion-card>
-      </ion-item>
-      <ion-item>
-        <ion-card (click)="loadEvent()">
-          <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
-        </ion-card>
-      </ion-item>
-      <ion-item>
-        <ion-card (click)="loadEvent()">
-          <ion-card-title>Kom och testa curling med Skarpnäck och Vällingby</ion-card-title>
-        </ion-card>
-      </ion-item>
-    </ion-list>
-    <ion-list *ngSwitchCase="'my-activities'">
-      <ion-card (click)="loadEvent()">
-        <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
-      </ion-card>
-    </ion-list>
-  </div>
+    <!--SEARCH-BAR-->
+    <ion-searchbar placeholder="Search activity"></ion-searchbar>
+    <!--CARD LIST FOR ALL EVENTS-->
+    <div padding>
+        <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
+            <ion-segment-button value="all-activities">All</ion-segment-button>
+            <ion-segment-button value="my-activities">My</ion-segment-button>
+            <ion-segment-button *appHasRole="['admin']" value="my-challenges">Challenges</ion-segment-button>
+        </ion-segment>
+    </div>
+    <div [ngSwitch]="activity">
+        <ion-list *ngSwitchCase="'all-activities'">
+            <ion-item *ngFor="let activity of allEvents">
+                <ion-card (click)="loadEvent(activity)">
+                    <ion-card-title>{{activity.name}}</ion-card-title>
+                </ion-card>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'my-activities'">
+            <ion-item *ngFor="let activity of authService.currentUser.value.getBookedActivities">
+                <ion-card (click)="loadEvent(activity)">
+                    <ion-card-title>{{activity.name}}</ion-card-title>
+                </ion-card>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'my-challenges'">
+        </ion-list>
+    </div>
 
 
-  <ion-button *appHasRole="['admin']" (click)="goToCreateEvent()">Create Event</ion-button>
-
+    <ion-button *appHasRole="['admin']" (click)="goToCreateEvent()">Create Event</ion-button>
 
 
 </ion-content>

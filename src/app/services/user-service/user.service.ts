@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../Interfaces/user';
-import {AuthService} from '../auth.service';
+import {User} from '../../Interfaces/user';
+import {AuthService} from '../authentication-service/auth.service';
 
 
 @Injectable({
@@ -21,14 +21,14 @@ export class UserService {
      * Returnerar alla users frpn webbservern
      *
      */
-    getAllUsers(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(this.url);
+    getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.url);
 
 
     }
 
-    getAUser(name): Observable<IUser> {
-        return this.http.get<IUser>(this.url + name);
+    getAUser(name): Observable<User> {
+        return this.http.get<User>(this.url + name);
     }
 
 
@@ -53,7 +53,7 @@ export class UserService {
         };
 
         const body = JSON.stringify({
-
+            'id': 1,
             'username': username,
             'password': password,
             'points': 0,
@@ -105,7 +105,6 @@ export class UserService {
             error => {
                 console.log('Error');
             });
-
     }
 
     deleteUser(username: string, password: string) {
