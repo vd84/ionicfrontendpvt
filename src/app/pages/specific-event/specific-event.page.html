@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color = "primary">
-        <ion-title>Specific Event</ion-title>
+        <ion-title>{{activity.name}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
@@ -11,22 +11,24 @@
     <!--LISTA FÖR: NAMN DATUM PLATS BESKRIVNING -->
     <ion-list>
         <ion-item>
-            <h4>Name:</h4>
+            <h4>Name: {{activity.name}}</h4>
         </ion-item>
         <ion-item>
-            <h4>Date:</h4>
+            <h4>Date: {{activity.startdate}}</h4>
         </ion-item>
         <ion-item>
-            <h4>Location:</h4>
+            <h4>Location: </h4>
         </ion-item>
         <ion-item>
-            <h4>Description:</h4>
+            <h4>Description: {{activity.description}}</h4>
             <ion-textarea></ion-textarea>
         </ion-item>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
-    <ion-button>Add Activity</ion-button>
-    <ion-button>Remove Activity</ion-button>
+    <ion-button (click)="bookActivity()" *ngIf="!booked();
+" >Add Activity</ion-button>
+    <ion-button (click)="removeActivity()" *ngIf="booked();
+">Remove Activity</ion-button>
     <ion-button>Accept Challenge</ion-button>
 
 </ion-content>
