@@ -61,8 +61,4 @@ export class GoogleMapsComponent implements OnInit, AfterContentInit {
         };
         request.send();
     }*/
-
-
-
-
 }
