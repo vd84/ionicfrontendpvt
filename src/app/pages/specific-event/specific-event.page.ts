@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../../services/authentication-service/auth.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -8,10 +9,25 @@ import {Router} from '@angular/router';
 })
 export class SpecificEventPage implements OnInit {
 
-    constructor(private router: Router) {
+    activity: any;
+
+    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     }
 
     ngOnInit() {
+        if (this.route.snapshot.data['activity']) {
+            this.activity = this.route.snapshot.data['activity'];
+        }
+    }
+    booked(): boolean {
+        return this.authService.currentUser.value.isBooked(this.activity);
+    }
+
+    bookActivity() {
+        this.authService.currentUser.value.bookActivity(this.activity);
+    }
+    removeActivity() {
+        this.authService.currentUser.value.removeBookedActivity(this.activity);
     }
 
 }

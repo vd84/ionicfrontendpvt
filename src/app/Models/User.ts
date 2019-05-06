@@ -1,27 +1,52 @@
 export class User {
-
+    private _password: string;
     private _id: number;
-    private _name: String;
-    private _role: number;
+    private _name: string;
+    private _roles = [];
     private _currentyouthcentre: number;
+    private bookedActivities = [];
 
-    constructor(id: number, name: String, role: number) {
-        this._id = id;
+
+    constructor(name: string, password: string, roles: string[]) {
         this._name = name;
-        this._role = role;
+        this._password = password;
+        this._roles = roles;
 
     }
+
+    get getBookedActivities() {
+        return this.bookedActivities;
+    }
+
+    bookActivity(activity) {
+        if (!this.bookedActivities.includes(activity)) {
+            this.bookedActivities.push(activity);
+        }
+    }
+
 
     toString() {
-        return ' ID: ' + this._id + ' Name: ' + this._name + ' Role: ' + this._role;
+        return ' ID: ' + this._id + ' Name: ' + this._name;
     }
 
-    get role(): number {
-        return this._role;
+    isBooked(activity): boolean {
+        if (this.bookedActivities.includes(activity)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    set role(value: number) {
-        this._role = value;
+    removeBookedActivity(activity) {
+        this.bookedActivities.splice(this.bookedActivities.indexOf(activity), 1);
+    }
+
+    get password(): string {
+        return this._password;
+    }
+
+    get roles(): string[] {
+        return this._roles;
     }
 
     get id(): number {
@@ -32,11 +57,15 @@ export class User {
         this._id = value;
     }
 
-    get name(): String {
+    get name(): string {
         return this._name;
     }
 
-    set name(value: String) {
+    set setBookedActivities(value: []) {
+        this.bookedActivities = value;
+    }
+
+    set name(value: string) {
         this._name = value;
     }
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {IUser} from '../Interfaces/user';
+import {User} from '../../Models/User';
 
 /*This class is used to authenticate a person logging in and holds a reference to the current
 user. Import in constructor in order to use in a view where you want to differentiate what is
@@ -15,37 +15,16 @@ roles to be checked.
 })
 export class AuthService {
 
-    currentUser: BehaviorSubject<IUser> = new BehaviorSubject(null);
+    currentUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
     constructor() {
     }
 
     login(name, password) {
-        if (name === 'user') {
-            this.currentUser.next({
-                userName: name,
-                password: password,
-                roles: ['user']
-            });
-        } else if (name === 'admin') {
-            this.currentUser.next({
-                userName: name,
-                password: password,
-                roles: ['admin']
-            });
-        } else if (name === 'dev') {
-            this.currentUser.next({
-                userName: name,
-                password: password,
-                roles: ['admin', 'user']
-            });
+        if (name === 'dev') {
+            this.currentUser.next(new User(name, 'masterpass', ['admin', 'user']));
         } else {
-            this.currentUser.next({
-                userName: name,
-                password: password,
-                roles: ['admin', 'user']
-
-            });
+            this.currentUser.next(new User(name, password, ['admin', 'user']));
         }
 
 

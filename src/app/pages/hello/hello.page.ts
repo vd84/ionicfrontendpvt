@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HelloService, SearchType} from '../../services/hello.service';
 import {UserService} from '../../services/user-service/user.service';
-import {IUser} from '../../Interfaces/user';
+import {User} from '../../Interfaces/user';
 import {User} from '../../Models/User';
 
 @Component({
