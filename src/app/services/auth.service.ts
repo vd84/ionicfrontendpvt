@@ -42,7 +42,8 @@ export class AuthService {
         } else {
             this.currentUser.next({
                 userName: name,
-                password
+                password: password,
+                roles: ['admin', 'user']
 
             });
         }
