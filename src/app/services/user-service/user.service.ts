@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../../Interfaces/user';
+import {User} from '../../Models/user';
 import {AuthService} from '../authentication-service/auth.service';
 
 
@@ -117,7 +117,7 @@ export class UserService {
 
         };
 
-        this.http.delete(this.url + this.authService.currentUser.value.userName, httpOptions);
+        this.http.delete(this.url + this.authService.currentUser.value.name, httpOptions);
 
 
     }

@@ -26,7 +26,7 @@ export class SettingsPage implements OnInit {
 
     changePassword() {
         this.router.navigate(['change-password']);
-        this.authService.currentUser.value.userName.toString();
+        this.authService.currentUser.value.name.toString();
 
 
     }

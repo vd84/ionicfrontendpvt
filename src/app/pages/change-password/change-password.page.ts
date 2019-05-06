@@ -28,7 +28,7 @@ export class ChangePasswordPage implements OnInit {
         if (this.currentPassword === this.authService.currentUser.value.password.toString()) {
             if ((this.currentPassword === this.repeatedPassword)) {
 
-                this.userService.modifyUser(this.authService.currentUser.value.userName.toString(), this.newPassword);
+                this.userService.modifyUser(this.authService.currentUser.value.name.toString(), this.newPassword);
             } else {
 
                 this.presentToast('Passwords do not match');
