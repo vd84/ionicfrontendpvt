@@ -9,9 +9,10 @@
   <ion-searchbar placeholder="Search activity"></ion-searchbar>
   <!--CARD LIST FOR ALL EVENTS-->
   <div padding>
-    <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
       <ion-segment-button value="all-activities">All</ion-segment-button>
       <ion-segment-button value="my-activities">My</ion-segment-button>
+      <ion-segment-button *appHasRole="['admin']" value="my-challenges">Challenges</ion-segment-button>
     </ion-segment>
   </div>
   <div [ngSwitch]="activity">
@@ -35,6 +36,11 @@
     <ion-list *ngSwitchCase="'my-activities'">
       <ion-card (click)="loadEvent()">
         <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngSwitchCase="'my-challenges'">
+      <ion-card (click)="loadEvent()">
+        <ion-card-title>Pingis Tensta</ion-card-title>
       </ion-card>
     </ion-list>
   </div>
