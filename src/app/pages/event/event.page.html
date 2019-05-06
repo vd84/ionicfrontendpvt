@@ -16,6 +16,11 @@
   </div>
   <div [ngSwitch]="activity">
     <ion-list *ngSwitchCase="'all-activities'">
+      <ion-item *ngFor="let activity of events">
+        <ion-card (click)="loadEvent()">
+          <ion-card-title>{{activity.name}}</ion-card-title>
+        </ion-card>
+      </ion-item>
       <ion-item>
         <ion-card (click)="loadEvent()">
           <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>

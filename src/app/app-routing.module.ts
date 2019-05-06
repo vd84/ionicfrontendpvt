@@ -16,7 +16,8 @@ const routes: Routes = [
     {path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule'},
     {path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule'},
   { path: 'change-password', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule' },
-  { path: 'delete-account', loadChildren: './pages/delete-account/delete-account.module#DeleteAccountPageModule' }
+  { path: 'delete-account', loadChildren: './pages/delete-account/delete-account.module#DeleteAccountPageModule' },  { path: 'challenge', loadChildren: './pages/challenge/challenge.module#ChallengePageModule' }
+
 
 
 ];
