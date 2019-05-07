@@ -35,11 +35,11 @@ export class UserService {
     /**
 
      Denna metod ändrar ett user objekt i databasen
-     @param headers: Detta skickas med för att requesten ska veta att det är en json fil som kommer
-     @param body: detta är värdena som skickas med till webbservern, således, allt som är skiljt från hur det objektet som finns
      i databasen ser ut, ändras.
      Subscribe betyder att vi lyssnar efter det svar som webbservern ska returnera vid lyckad ändring/error/annat fel
 
+     * @param username
+     * @param password
      **/
     modifyUser(username: String, password: String) {
 
