@@ -25,7 +25,6 @@ export class EventPage implements OnInit {
     }
 
     loadEvent(activity) {
-        console.log(activity.id);
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
     }

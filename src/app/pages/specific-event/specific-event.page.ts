@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/authentication-service/auth.service';
+import {ParticipationService} from '../../services/participation-service/participation.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -10,24 +11,29 @@ import {AuthService} from '../../services/authentication-service/auth.service';
 export class SpecificEventPage implements OnInit {
 
     activity: any;
+    user: any;
 
-    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private participationService: ParticipationService) {
     }
 
     ngOnInit() {
         if (this.route.snapshot.data['activity']) {
             this.activity = this.route.snapshot.data['activity'];
         }
+        this.user = this.authService.currentUser.value;
     }
+
     booked(): boolean {
         return this.authService.currentUser.value.isBooked(this.activity);
     }
 
     bookActivity() {
-        this.authService.currentUser.value.bookActivity(this.activity);
+        this.user.bookActivity(this.activity);
+        this.participationService.submitParticipation(this.user.id, this.activity.id);
     }
+
     removeActivity() {
-        this.authService.currentUser.value.removeBookedActivity(this.activity);
+        this.user.removeBookedActivity(this.activity);
     }
 
 }

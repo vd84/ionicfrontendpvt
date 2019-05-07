@@ -20,11 +20,11 @@ export class AuthService {
     constructor() {
     }
 
-    login(name, password) {
+    login(id, name, password) {
         if (name === 'dev') {
-            this.currentUser.next(new User(name, 'masterpass', ['admin', 'user']));
+            this.currentUser.next(new User(id, name, 'masterpass', ['admin', 'user']));
         } else {
-            this.currentUser.next(new User(name, password, ['admin', 'user']));
+            this.currentUser.next(new User(id, name, password, ['admin', 'user']));
         }
 
 
