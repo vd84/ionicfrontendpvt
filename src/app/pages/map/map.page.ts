@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Observable} from 'rxjs';
@@ -14,5 +14,6 @@ declare var google: any;
 export class MapPage implements OnInit {
     ngOnInit(): void {
     }
+
 
 }

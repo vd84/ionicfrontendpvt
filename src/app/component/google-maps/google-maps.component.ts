@@ -1,6 +1,7 @@
-import {AfterContentInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
+import {Router} from '@angular/router';
 
 declare var google;
 
@@ -11,15 +12,16 @@ declare var google;
 })
 export class GoogleMapsComponent implements OnInit {
 
-
+    @Input()
+    stop;
     @ViewChild('mapElement') mapElement;
     map: any;
     mapOptions: any;
     location = {lat: null, lng: null};
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
-    apiKey: any = 'AIzaSyC6sG4u5OXLUxNg_9RwFqsmE6wJfSScilo'; /*Your API Key*/
     alllocations = [];
+    timeToStop;
 
     ngOnInit(): void {
         this.youthcenterService.getAllLocations().subscribe(data => {
@@ -28,10 +30,13 @@ export class GoogleMapsComponent implements OnInit {
 
 
         this.addAllMarkers();
+        /*window.addEventListener('beforeunload', () => {
+            console.log('je');
+           this.stop();});*/
     }
 
 
-    constructor(public zone: NgZone, public geolocation: Geolocation, private youthcenterService: YouthcenterService) {
+    constructor( public geolocation: Geolocation, private youthcenterService: YouthcenterService, private router: Router) {
         /*load google map script dynamically */
         this.youthcenterService.getAllLocations().subscribe(data => {
             this.alllocations = data;
@@ -59,6 +64,7 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
         }, 1);
+        console.log(this.stop);
     }
 
 
@@ -67,12 +73,11 @@ export class GoogleMapsComponent implements OnInit {
      */
 
     addAllMarkers() {
-        setInterval(() => {
+       this.timeToStop = setInterval(() => {
 
             this.youthcenterService.getAllLocations().subscribe(data => {
                 this.alllocations = data;
             });
-
             console.log(this.alllocations);
 
             let marker;
@@ -80,12 +85,23 @@ export class GoogleMapsComponent implements OnInit {
             for (const place of this.alllocations) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lng),
-                    map: this.map
+                    map: this.map,
+                    icon : {
+                        url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    }
+                });
+                marker.addListener('click', () => {
+                    this.router.navigate(['location']);
                 });
             }
 
-
-        }, 60000);
+            if (window.onhashchange) {
+                clearInterval(this.timeToStop);
+            }
+        }, 6000);
+    }
+   changeToOther() {
+        clearInterval(this.timeToStop);
     }
 
 }
