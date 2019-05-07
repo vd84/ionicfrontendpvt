@@ -18,7 +18,6 @@ export class GoogleMapsComponent implements OnInit {
     location = {lat: null, lng: null};
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
-    apiKey: any = 'AIzaSyC6sG4u5OXLUxNg_9RwFqsmE6wJfSScilo'; /*Your API Key*/
     alllocations = [];
 
     ngOnInit(): void {
