@@ -20,7 +20,11 @@
     </div>
     <div [ngSwitch]="badgeList">
         <ion-list *ngSwitchCase="'all-badges'">
-            <ion-label>All Badges</ion-label>
+            <ion-item *ngFor="let badge of badges">
+                <ion-card>
+                    <ion-card-title>{{badge.name}}</ion-card-title>
+                </ion-card>
+            </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'taken-badges'">
             <ion-label>Taken Badges</ion-label>

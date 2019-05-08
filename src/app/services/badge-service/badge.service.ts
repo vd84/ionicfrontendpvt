@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Badge} from '../../Models/badge';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BadgeService {
 
-  url = 'https://webbapppvt15grupp2.herokuapp.com/userbadge/';
+  // Använd denna URL för userbadge tabellen
+  urlUserBadge = 'https://webbapppvt15grupp2.herokuapp.com/userbadge/';
+  // Använd denna URL för badge tabellen
+  urlBadge = 'https://webbapppvt15grupp2.herokuapp.com/badge/';
 
   constructor(private http: HttpClient) {
   }
@@ -24,12 +29,17 @@ export class BadgeService {
       badge: badge
     });
 
-    this.http.post(this.url, body, httpOptions).subscribe(data => {
+    this.http.post(this.urlUserBadge, body, httpOptions).subscribe(data => {
           console.log(data);
         },
         error => {
           console.log('Error');
         });
+
+
+  }
+  getAllBadges(): Observable<Badge[]> {
+    return this.http.get<Badge[]>(this.urlBadge);
 
 
   }
