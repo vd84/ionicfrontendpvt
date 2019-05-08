@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BadgeService} from '../../services/badge-service/badge.service';
+import {AuthService} from '../../services/authentication-service/auth.service';
 
 @Component({
   selector: 'app-location',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationPage implements OnInit {
 
-  constructor() { }
+  constructor(private badgeService: BadgeService, private authService: AuthService) { }
 
   ngOnInit() {
+  }
+  checkIn() {
+    console.log(this.authService.currentUser.value.id);
+    this.badgeService.submitBadge(this.authService.currentUser.value.id, 1);
   }
 
 }
