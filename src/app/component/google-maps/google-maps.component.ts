@@ -3,10 +3,12 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
 import {Events} from '@ionic/angular';
-import {interval} from 'rxjs';
 
 declare var google;
 
+/**
+ * Component för Google Maps
+ */
 @Component({
     selector: 'app-google-maps',
     templateUrl: './google-maps.component.html',
@@ -29,7 +31,6 @@ export class GoogleMapsComponent implements OnInit {
         this.youthcenterService.getAllLocations().subscribe(data => {
             this.alllocations = data;
         });
-
         this.addAllMarkers();
     }
 
@@ -67,6 +68,7 @@ export class GoogleMapsComponent implements OnInit {
         }, 2000);
     }
     createRefreshButton(b, map) {
+        let that = this;
         // Set CSS for the control border.
         let controlUI = document.createElement('div');
         controlUI.style.backgroundColor = '#fff';
@@ -91,8 +93,7 @@ export class GoogleMapsComponent implements OnInit {
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
-        controlUI.addEventListener('click', function () {
-            console.log('mh');
+        controlUI.addEventListener('click', function ()  {
         });
     }
 
