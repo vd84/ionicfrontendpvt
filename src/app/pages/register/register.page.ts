@@ -22,10 +22,10 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit() {
+        this.userService.getAllUsers().subscribe(data => this.users = data);
     }
 
     createProfile() {
-        this.userService.getAllUsers().subscribe(data => this.users = data);
         let taken = false;
         for (const user of this.users) {
             if (user.username.toString() === this.username) {

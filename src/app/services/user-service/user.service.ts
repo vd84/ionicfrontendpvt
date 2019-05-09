@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IUser} from '../../Interfaces/user';
-import {User} from '../../Models/User';
-import {AuthService} from '../auth.service';
+import {User} from '../../Models/user';
+import {AuthService} from '../authentication-service/auth.service';
 
 
 @Injectable({
@@ -14,30 +13,22 @@ export class UserService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private _currentUser: User, private http: HttpClient, private authService: AuthService) {
+    constructor(private http: HttpClient, private authService: AuthService) {
     }
 
-
-    getcurrentUser(): User {
-        return this._currentUser;
-    }
-
-    setcurrentUser(value: User) {
-        this._currentUser = value;
-    }
 
     /**
      * Returnerar alla users frpn webbservern
      *
      */
-    getAllUsers(): Observable<IUser[]> {
-        return this.http.get<IUser[]>(this.url);
+    getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.url);
 
 
     }
 
-    getAUser(name): Observable<IUser> {
-        return this.http.get<IUser>(this.url + name);
+    getAUser(name): Observable<User> {
+        return this.http.get<User>(this.url + name);
     }
 
 
@@ -62,7 +53,7 @@ export class UserService {
         };
 
         const body = JSON.stringify({
-
+            'id': 1,
             'username': username,
             'password': password,
             'points': 0,
@@ -114,7 +105,6 @@ export class UserService {
             error => {
                 console.log('Error');
             });
-
     }
 
     deleteUser(username: string, password: string) {
@@ -127,7 +117,7 @@ export class UserService {
 
         };
 
-        this.http.delete(this.url + this.authService.currentUser.value.userName, httpOptions);
+        this.http.delete(this.url + this.authService.currentUser.value.name, httpOptions);
 
 
     }

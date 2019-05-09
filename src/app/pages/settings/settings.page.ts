@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {AppComponent} from '../../app.component';
+import {AuthService} from '../../services/authentication-service/auth.service';
 
 @Component({
     selector: 'app-settings',
@@ -27,7 +26,7 @@ export class SettingsPage implements OnInit {
 
     changePassword() {
         this.router.navigate(['change-password']);
-        this.authService.currentUser.value.userName.toString();
+        this.authService.currentUser.value.name.toString();
 
 
     }

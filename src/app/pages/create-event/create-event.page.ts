@@ -18,11 +18,15 @@ export class CreateEventPage implements OnInit {
 
 
     ngOnInit() {
+        // Lägg in databasladdning här
     }
     submitEvent() {
         this.events.push(this.name);
         this.events.push(this.location);
         this.createdEvents.publish('publishedEvents', this.events);
+    }
+    challenge() {
+        this.router.navigate(['challenge']);
     }
 
     register(form: NgForm) {
