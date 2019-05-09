@@ -7,7 +7,8 @@ export class User {
     private bookedActivities = [];
 
 
-    constructor(name: string, password: string, roles: string[]) {
+    constructor(id: number, name: string, password: string, roles: string[]) {
+        this._id = id;
         this._name = name;
         this._password = password;
         this._roles = roles;
