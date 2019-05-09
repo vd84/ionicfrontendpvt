@@ -7,15 +7,15 @@
 <ion-content padding>
     <!--SEARCH-BAR-->
     <ion-searchbar placeholder="Search activity"></ion-searchbar>
-    <!--CARD LIST FOR ALL EVENTS-->
+    <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">All</ion-segment-button>
             <ion-segment-button value="my-activities">My</ion-segment-button>
             <ion-segment-button *appHasRole="['admin']" value="my-challenges">Challenges</ion-segment-button>
         </ion-segment>
-    </div>
-    <div [ngSwitch]="activity">
+    </div><div [ngSwitch]="activity">
+    <!--CARD LIST FOR ALL EVENTS-->
         <ion-list *ngSwitchCase="'all-activities'">
             <ion-item *ngFor="let activity of allEvents">
                 <ion-card (click)="loadEvent(activity)">
@@ -23,6 +23,8 @@
                 </ion-card>
             </ion-item>
         </ion-list>
+
+    <!--MY ACTIVITY LIST-->
         <ion-list *ngSwitchCase="'my-activities'">
             <ion-item *ngFor="let activity of authService.currentUser.value.getBookedActivities">
                 <ion-card (click)="loadEvent(activity)">
