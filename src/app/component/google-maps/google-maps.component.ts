@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {Events} from '@ionic/angular';
 import {interval} from 'rxjs';
 
-declare var google;
+declare var google: any;
 
 @Component({
     selector: 'app-google-maps',
@@ -21,8 +21,17 @@ export class GoogleMapsComponent implements OnInit {
     location = {lat: null, lng: null};
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
+    apiKey: any = 'AIzaSyC6sG4u5OXLUxNg_9RwFqsmE6wJfSScilo';
 
     constructor(public zone: NgZone, public geolocation: Geolocation) {
+        const script = document.createElement('script');
+        script.id = 'googleMap';
+        if (this.apiKey) {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.apiKey;
+        } else {
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=';
+        }
+        document.head.appendChild(script);
         this.geolocation.getCurrentPosition().then((position) => {
             this.location.lat = position.coords.latitude;
             this.location.lng = position.coords.longitude;
