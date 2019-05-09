@@ -8,14 +8,17 @@ import {Badge} from '../../Models/Badge';
 })
 export class BadgeService {
 
-  url = 'https://webbapppvt15grupp2.herokuapp.com/badge';
+  url = 'https://webbapppvt15grupp2.herokuapp.com/badge/';
 
-  constructor(private httpC: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Returnerar alla badges från apiet.
    */
     getAllBadges(): Observable<Badge[]> {
-    return this.httpC.get<Badge[]>(this.url);
+    return this.http.get<Badge[]>(this.url);
+    }
+    getAllMyBadges(id): Observable<Badge[]> {
+      return this.http.get<Badge[]>(this.url + id);
     }
 }
