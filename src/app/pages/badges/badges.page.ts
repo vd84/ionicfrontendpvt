@@ -4,6 +4,7 @@ import {BadgeService} from '../../services/badge-service/badge.service';
 import {DataService} from '../../services/data.service';
 import {AuthService} from '../../services/authentication-service/auth.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
+import {UserService} from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-badges',
@@ -15,7 +16,7 @@ export class BadgesPage implements OnInit {
     allBadges = [];
     allOfUsersBadges = [];
 
-    constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private authService: AuthService, private activeService: ActivityService) {
+    constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService, private activeService: ActivityService) {
         this.badgeList = 'all-badges';
     }
 

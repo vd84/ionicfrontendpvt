@@ -30,8 +30,11 @@
         </ion-list>
         <!--LIST OF ALL USERS TAKEN BADGES-->
         <ion-list *ngSwitchCase="'taken-badges'">
-            <ion-label>Taken Badges</ion-label>
-
+            <ion-item *ngFor="let badge of userService">
+                <ion-card (click)="loadEvent(activity)">
+                    <ion-card-title>{{activity.name}}</ion-card-title>
+                </ion-card>
+            </ion-item>
         </ion-list>
         <!-- LIST OF ALL AVAILABLE BADGES-->
         <ion-list *ngSwitchCase="'avail-badges'">
