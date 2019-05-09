@@ -13,38 +13,22 @@ export class LoginPage implements OnInit {
 
     private username: string;
     private password: string;
-    private users = [];
 
     constructor(private router: Router, private authService: AuthService, private userService: UserService, public toastController: ToastController) {
     }
 
     ngOnInit() {
-        this.userService.getAllUsers().subscribe(data => this.users = data);
 
 
     }
 
 
-    login() {
-        let userFound = false;
-        if (this.username === 'dev') {
-            this.authService.login(3, 'dev', 'masterpass');
-            this.router.navigate(['../tabs/home']);
-        }
-        for (const user of this.users) {
-            if (user.username.toString() === this.username) {
-                userFound = true;
-                if (true) {
-                    this.authService.login(user.id, this.username, this.password);
-                    this.router.navigate(['../tabs/home']);
-                } else {
-                    this.presentToast('Wrong password');
-                }
-            }
-        }
-        if (!userFound) {
-            this.presentToast('No such user');
-        }
+
+
+    newLogin() {
+        this.userService.login(this.username, this.password);
+
+
     }
 
     createProfile() {

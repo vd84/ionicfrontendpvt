@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../../Models/User';
+import {User} from '../../Models/user';
 
 /*This class is used to authenticate a person logging in and holds a reference to the current
 user. Import in constructor in order to use in a view where you want to differentiate what is
@@ -20,32 +20,12 @@ export class AuthService {
     constructor() {
     }
 
-    login(id, name, password) {
-        if (name === 'dev') {
-            this.currentUser.next(new User(id, name, 'masterpass', ['admin', 'user']));
-        } else {
-            this.currentUser.next(new User(id, name, password, ['admin', 'user']));
-        }
 
 
-    }
 
-    getUserSubject() {
-        return this.currentUser.asObservable();
-    }
 
-    logout() {
-        this.currentUser.next(null);
-    }
 
-    hasRoles(roles: string[]): boolean {
-        for (const oneRole of roles) {
-            if (!this.currentUser || !this.currentUser.value.roles.includes(oneRole)) {
-                return false;
-            }
-        }
 
-        return true;
-    }
+
 
 }

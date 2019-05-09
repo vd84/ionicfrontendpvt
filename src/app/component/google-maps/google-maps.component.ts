@@ -57,7 +57,7 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.map = this.map;
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
-        }, 1);
+        }, 9);
     }
 
 

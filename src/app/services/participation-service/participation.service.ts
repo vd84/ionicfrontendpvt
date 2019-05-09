@@ -12,7 +12,7 @@ export class ParticipationService {
     constructor(private http: HttpClient) {
     }
 
-    submitParticipation(user: number, activity: number) {
+    submitParticipation(userID: number, activityID: number) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -22,8 +22,8 @@ export class ParticipationService {
         };
 
         const body = JSON.stringify({
-            user: user,
-            activity: activity
+            user: userID,
+            activity: activityID
         });
 
         this.http.post(this.url, body, httpOptions).subscribe(data => {
