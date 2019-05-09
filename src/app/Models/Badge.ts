@@ -1,19 +1,14 @@
 export class Badge {
-
     private _id: number;
-    private _name: String;
-    private _description: String;
-    private _image: String;
+    private _name: string;
+    private _description: string;
+    private _imageUrl: string;
 
-
-
-    constructor(id: number, name: String, description: String, image: String) {
+    constructor(id: number , name: string, description: string, image: string) {
         this._id = id;
         this._name = name;
         this._description = description;
-        this._image = image;
-
-
+        this._imageUrl = image;
     }
     get id(): number {
         return this._id;
@@ -23,30 +18,27 @@ export class Badge {
         this._id = value;
     }
 
-    get name(): String {
+    get name(): string {
         return this._name;
     }
 
-    set name(value: String) {
+    set name(value: string) {
         this._name = value;
     }
 
-    get description(): String {
+    get description(): string {
         return this._description;
     }
 
-    set description(value: String) {
+    set description(value: string) {
         this._description = value;
     }
 
-    get image(): String {
-        return this._image;
+    get imageUrl(): string {
+        return this._imageUrl;
     }
 
-    set image(value: String) {
-        this._image = value;
+    set imageUrl(value: string) {
+        this._imageUrl = value;
     }
-
-
-
 }

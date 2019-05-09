@@ -18,18 +18,21 @@
             <ion-segment-button value="avail-badges">Available</ion-segment-button>
         </ion-segment>
     </div>
+    <!--LIST OF ALL BADGES-->
     <div [ngSwitch]="badgeList">
         <ion-list *ngSwitchCase="'all-badges'">
             <ion-item *ngFor="let badge of allBadges">
-                <ion-card (click)="goToSpecificBadge()" >
-                    <ion-card-header>{{badge.name}}</ion-card-header>
-                    <ion-img width="80" height="80" src={{badge.image}}></ion-img>
+                <ion-card (click) = loadBadge(badge)>
+                    <img src={{badge.image}}/>
+                    <ion-card-title>{{badge.name}}</ion-card-title>
                 </ion-card>
             </ion-item>
         </ion-list>
+        <!--LIST OF ALL USERS TAKEN BADGES-->
         <ion-list *ngSwitchCase="'taken-badges'">
             <ion-label>Taken Badges</ion-label>
         </ion-list>
+        <!-- LIST OF ALL AVAILABLE BADGES-->
         <ion-list *ngSwitchCase="'avail-badges'">
             <ion-label>Available Badges</ion-label>
         </ion-list>
