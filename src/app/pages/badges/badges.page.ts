@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {BadgeService} from '../../services/badge-service/badge.service';
 import {DataService} from '../../services/data.service';
+import {AuthService} from '../../services/authentication-service/auth.service';
+import {ActivityService} from '../../services/activity-service/activity.service';
+import {UserService} from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-badges',
@@ -11,8 +14,9 @@ import {DataService} from '../../services/data.service';
 export class BadgesPage implements OnInit {
     badgeList: any;
     allBadges = [];
+    allOfUsersBadges = [];
 
-    constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService) {
+    constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService, private activeService: ActivityService) {
         this.badgeList = 'all-badges';
     }
 
@@ -21,7 +25,7 @@ export class BadgesPage implements OnInit {
     }
     loadBadge(badge) {
         this.dataService.setData('badge', badge);
-        this.router.navigateByUrl('/specific-badge/badge'); // Ska denna matcha den ovan eller hur funkar den?
+        this.router.navigateByUrl('/specific-badge/badge');
     }
 
     displayAllBadges() {
@@ -33,5 +37,11 @@ export class BadgesPage implements OnInit {
 
     segmentChanged(event) {
         this.badgeList = event.target.value;
+    }
+
+    displayAllMyBadges(id) {
+         this.badgeService.getAllMyBadges(id).subscribe(data => {
+        this.allOfUsersBadges = data;
+    });
     }
 }
