@@ -4,15 +4,15 @@ export class Badge {
     private _name: String;
     private _description: String;
     private _image: String;
-    private _badges = [];
 
 
-    constructor(id: number, name: String, description: String, image: String, badges: any[]) {
+
+    constructor(id: number, name: String, description: String, image: String) {
         this._id = id;
         this._name = name;
         this._description = description;
         this._image = image;
-        this._badges = badges;
+
 
     }
     get id(): number {
@@ -47,13 +47,6 @@ export class Badge {
         this._image = value;
     }
 
-    get badges(): any[] {
-        return this._badges;
-    }
-
-    set badges(value: any[]) {
-        this._badges = value;
-    }
 
 
 }

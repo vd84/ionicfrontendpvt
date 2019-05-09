@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Badge} from '../../Models/badge';
+import {UserBadge} from '../../Models/UserBadge';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,8 @@ export class BadgeService {
   }
   getAllBadges(): Observable<Badge[]> {
     return this.http.get<Badge[]>(this.urlBadge);
-
-
+  }
+  getAllUserBadges(): Observable<UserBadge[]> {
+    return this.http.get<UserBadge[]>(this.urlUserBadge);
   }
 }

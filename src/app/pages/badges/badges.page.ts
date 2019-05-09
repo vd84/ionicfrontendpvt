@@ -10,7 +10,8 @@ import {BadgeService} from '../../services/badge-service/badge.service';
 })
 export class BadgesPage implements OnInit {
   badgeList: any;
-  private badges = [];
+  private allBadges = [];
+  private userBadges = [];
 
 
   constructor(private router: Router, private authService: AuthService, private badgeService: BadgeService) {
@@ -18,9 +19,11 @@ export class BadgesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.badgeService.getAllBadges().subscribe(data => this.badges = data);
+    this.badgeService.getAllBadges().subscribe(data => this.allBadges = data);
   }
   segmentChanged(event) {
     this.badgeList = event.target.value;
+  }
+  goToSpecificBadge() {
   }
 }
