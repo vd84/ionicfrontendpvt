@@ -122,6 +122,10 @@ export class UserService {
 
     }
 
+    getOneUser(id: number) {
+
+    }
+
 
 }
 

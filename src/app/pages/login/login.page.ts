@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
     ngOnInit() {
         this.userService.getAllUsers().subscribe(data => this.users = data);
 
+
     }
 
 
