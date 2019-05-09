@@ -16,7 +16,7 @@ export class ChangePasswordPage implements OnInit {
     private newPassword: string;
 
 
-    constructor(private router: Router, public toastController: ToastController, private userService: UserService, private authService: AuthService) {
+    constructor(private router: Router, public toastController: ToastController, private userService: UserService) {
     }
 
     ngOnInit() {
@@ -24,18 +24,12 @@ export class ChangePasswordPage implements OnInit {
 
     changePassword() {
 
+        // här måste även gamla lösenordet skickas in, görs inte nu
 
-        if (this.currentPassword === this.authService.currentUser.value.password.toString()) {
-            if ((this.currentPassword === this.repeatedPassword)) {
+        this.userService.modifyUser(this.userService.currentUser.name, this.newPassword, this.userService.currentUser.currentYouthCentre)
 
-                this.userService.modifyUser(this.authService.currentUser.value.name.toString(), this.newPassword);
-            } else {
 
-                this.presentToast('Passwords do not match');
-            }
-        } else {
-            this.presentToast('Wrong password');
-        }
+
     }
 
 
