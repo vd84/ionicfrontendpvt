@@ -7,7 +7,7 @@ import {Events} from '@ionic/angular';
 declare var google;
 
 /**
- * Component för Google Maps
+ * Component för Google Maps. Kör nmp install innna och se till att scriptet finns i index.html
  */
 @Component({
     selector: 'app-google-maps',
@@ -27,6 +27,7 @@ export class GoogleMapsComponent implements OnInit {
     alllocations = [];
     timeToStop;
     needsRefreshing = false;
+
     ngOnInit(): void {
         this.youthcenterService.getAllLocations().subscribe(data => {
             this.alllocations = data;
@@ -62,90 +63,37 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.map = this.map;
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
-            let centerControlDiv = document.createElement('div');
-            let centerControl = new this.createRefreshButton(centerControlDiv, this.map);
-            this.map.controls[google.maps.ControlPosition.RIGHT_TOP].push(centerControlDiv);
         }, 2000);
     }
-    createRefreshButton(b, map) {
-        let that = this;
-        // Set CSS for the control border.
-        let controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginBottom = '22px';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
-        b.appendChild(controlUI);
-
-        // Set CSS for the control interior.
-        let controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Center Map';
-        controlUI.appendChild(controlText);
-
-        // Setup the click event listeners: simply set the map to Chicago.
-        controlUI.addEventListener('click', function ()  {
-        });
-    }
-
-
     /**
      * Läser in alla youth centres varje 3 sekund
      */
 
     addAllMarkers() {
-        let timesRun = 0;
-       let intervalTime = setInterval(() => {
-                timesRun++;
-                console.log(timesRun);
-                if (timesRun === 6) {
-                    this.needsRefreshing = true;
-                    clearInterval(intervalTime);
-                }
+
+
+        setTimeout(() => {
             this.youthcenterService.getAllLocations().subscribe(data => {
                 this.alllocations = data;
             });
+
             console.log(this.alllocations);
 
             let marker;
             // Loops through all places and adds blue marker
-               for (const place of this.alllocations) {
-                   marker = new google.maps.Marker({
-                       position: new google.maps.LatLng(place.lat, place.lng),
-                       map: this.map,
-                       icon: {
-                           url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-                       }
-                   });
-                   // Makes markers clickable and sends them to locationpage
-                   marker.addListener('click', () => {
-                       this.router.navigate(['location']);
-                   });
-               }
-
-               if (window.onhashchange) {
-                   clearInterval(this.timeToStop);
-               }
-           } , 10000);
+            for (const place of this.alllocations) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(place.lat, place.lng),
+                    map: this.map,
+                    icon: {
+                        url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+                    }
+                });
+                // Makes markers clickable and sends them to locationpage
+                marker.addListener('click', () => {
+                    this.router.navigate(['location']);
+                });
+            }
+        }, 5000 );
     }
-    // Method to stop the interval of asking database about places
-/*   changeToOther() {
-        let timeOfOpenWindow = 0;
-     let totalInterval = setInterval(() => {
-             timeOfOpenWindow++;
-             if (timeOfOpenWindow === 10) {
-                 location.reload();
-             }
-     }, 10000);
-    }*/
-
 }
