@@ -18,4 +18,6 @@ export class BadgeService {
     getAllBadges(): Observable<Badge[]> {
     return this.httpC.get<Badge[]>(this.url);
     }
+
+
 }
