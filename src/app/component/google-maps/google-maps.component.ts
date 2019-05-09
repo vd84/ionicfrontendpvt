@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input} from '@angular/core';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
@@ -16,8 +16,6 @@ declare var google;
 })
 export class GoogleMapsComponent implements OnInit {
 
-    @Input()
-    stop;
     @ViewChild('mapElement') mapElement;
     map: any;
     mapOptions: any;
@@ -25,8 +23,6 @@ export class GoogleMapsComponent implements OnInit {
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
     alllocations = [];
-    timeToStop;
-    needsRefreshing = false;
 
     ngOnInit(): void {
         this.youthcenterService.getAllLocations().subscribe(data => {
@@ -63,7 +59,7 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.map = this.map;
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
-        }, 2000);
+        }, 5000);
     }
     /**
      * Läser in alla youth centres varje 3 sekund
