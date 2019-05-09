@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
 import { HomePage } from './home.page';
+
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 import { ComponentsModule} from '../../component/components.module';
+
 
 @NgModule({
     imports: [

@@ -4,6 +4,7 @@ import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 import {Form, NgForm} from '@angular/forms';
 
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',

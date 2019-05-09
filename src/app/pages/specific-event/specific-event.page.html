@@ -1,11 +1,31 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color = "primary">
         <ion-title>specificEvent</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-button (click)="goBackToEvent()">Events</ion-button>
+<ion-content padding>
+    <!--LISTA FÖR: NAMN DATUM PLATS BESKRIVNING -->
+    <ion-list>
+        <ion-item>
+            <h4>Name:</h4>
+        </ion-item>
+        <ion-item>
+            <h4>Date:</h4>
+        </ion-item>
+        <ion-item>
+            <h4>Location:</h4>
+        </ion-item>
+        <ion-item>
+            <h4>Description:</h4>
+            <ion-textarea></ion-textarea>
+        </ion-item>
+    </ion-list>
+    <!--BOKA/AVBOKA KNAPPAR-->
+    <ion-button>Add Activity</ion-button>
+    <ion-button>Remove Activity</ion-button>
 
-    <ion-button (click)="goBackToMenu()">Menu</ion-button>
 </ion-content>

@@ -1,21 +1,41 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar color="primary">
     <ion-title>Event</ion-title>
   </ion-toolbar>
 </ion-header>
-<!--CARD LIST FOR ALL EVENTS-->
-<ion-content class="card-background-page" padding>
 
-  <ion-card >
-    <img (click)="loadEvent()" src="https://cdn.pixabay.com/photo/2018/06/12/20/17/football-3471402_960_720.jpg"/>
-    <div class="card-title">Fotbollsmatch mellan Grimsta och Bagis</div>
-  </ion-card>
-  <a href="/specific-event"><ion-card>
-    <img src="https://cdn.pixabay.com/photo/2015/08/10/12/31/curling-882649__340.jpg"/>
-    <div class="card-title">Kom och testa curling med Skarpnäck och Vällingby</div>
-  </ion-card></a>
+<ion-content padding>
+  <!--SEARCH-BAR-->
+  <ion-searchbar placeholder="Search activity"></ion-searchbar>
+  <!--CARD LIST FOR ALL EVENTS-->
+  <div padding>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="all-activities">All</ion-segment-button>
+      <ion-segment-button value="my-activities">My</ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="activity">
+    <ion-list *ngSwitchCase="'all-activities'">
+      <ion-item>
+        <ion-card (click)="loadEvent()">
+          <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
+        </ion-card>
+      </ion-item>
+      <ion-item>
+        <ion-card (click)="loadEvent()">
+          <ion-card-title>Kom och testa curling med Skarpnäck och Vällingby</ion-card-title>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'my-activities'">
+      <ion-card (click)="loadEvent()">
+        <ion-card-title>Fotbollsmatch mellan Grimsta och Bagis</ion-card-title>
+      </ion-card>
+    </ion-list>
+  </div>
 
-  <ion-button (click)="goBackToMenu()">Back</ion-button>
+
+  <ion-button *appHasRole="['admin']" (click)="goToCreateEvent()">Create Event</ion-button>
 
 
 

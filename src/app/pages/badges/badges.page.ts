@@ -12,8 +12,4 @@ export class BadgesPage implements OnInit {
 
   ngOnInit() {
   }
-
-    goBackToMenu() {
-      this.router.navigate(['menu']);
-    }
 }
