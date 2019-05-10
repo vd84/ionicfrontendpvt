@@ -15,7 +15,6 @@ export class LocationPage implements OnInit {
   }
   checkIn() {
     console.log(this.authService.currentUser.value.id);
-    this.badgeService.submitBadge(this.authService.currentUser.value.id, 1);
   }
 
 }
