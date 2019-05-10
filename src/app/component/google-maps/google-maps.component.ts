@@ -7,7 +7,13 @@ import {Events} from '@ionic/angular';
 declare var google;
 
 /**
- * Component för Google Maps. Kör nmp install innna och se till att scriptet finns i index.html
+ * Steg 1: Component för Google Maps. Kör nmp install innan och se till att scriptet finns i index.html
+ *
+ * Steg 2: Den ligger i components.module och componentModule måste därför importeras där man vill använda
+ * den. För mer information om hur detta görs, se components.module.
+ *
+ * Steg 3: För att sedan specifikt använda google maps componenten skapa en tagg i htmlen med selectorn.
+ * Alltså: <app-google-maps></app-google-maps> för att använda denna component.
  */
 @Component({
     selector: 'app-google-maps',
