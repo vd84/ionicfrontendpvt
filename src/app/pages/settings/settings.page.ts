@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/authentication-service/auth.service';
+import {UserService} from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-settings',
@@ -10,23 +11,20 @@ import {AuthService} from '../../services/authentication-service/auth.service';
 export class SettingsPage implements OnInit {
     authenticated = false;
 
-    constructor(private router: Router, private authService: AuthService) {
+    constructor(private router: Router, private userService: UserService) {
     }
 
     ngOnInit() {
-        this.authService.getUserSubject().subscribe(authState => {
-            this.authenticated = authState ? true : false;
-        });
+
     }
 
     logout() {
-        this.authService.logout();
+        this.userService.logout();
         this.router.navigate(['login']);
     }
 
     changePassword() {
         this.router.navigate(['change-password']);
-        this.authService.currentUser.value.name.toString();
 
 
     }
