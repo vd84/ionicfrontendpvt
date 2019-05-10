@@ -18,28 +18,14 @@ export class RegisterPage implements OnInit {
     private email: string;
     private users = [];
 
+
     constructor(private router: Router, public toastController: ToastController, private userService: UserService) {
     }
 
     ngOnInit() {
-        this.userService.getAllUsers().subscribe(data => this.users = data);
     }
 
-    createProfile() {
-        let taken = false;
-        for (const user of this.users) {
-            if (user.username.toString() === this.username) {
-                taken = true;
-            }
-        }
-        if (taken) {
-            this.presentToast('Profile already exists');
-        } else {
-            this.createUserAndPost();
-            this.presentToast('Profile created');
-            this.router.navigate(['home']);
-        }
-    }
+
 
     createUserAndPost() {
 
@@ -57,10 +43,7 @@ export class RegisterPage implements OnInit {
         toast.present();
     }
 
-    getUsers() {
-        this.userService.getAllUsers().subscribe(data => this.users = data);
-    }
 
-    register(form: NgForm) {
-    }
+
+
 }

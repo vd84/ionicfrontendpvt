@@ -1,17 +1,16 @@
 export class User {
-    private _password: string;
     private _id: number;
     private _name: string;
-    private _roles = [];
+    private _role: string;
     private _currentyouthcentre: number;
     private bookedActivities = [];
 
 
-    constructor(id: number, name: string, password: string, roles: string[]) {
+    constructor(id: number, name: string, role: string, currentyouthcentre: number) {
         this._id = id;
         this._name = name;
-        this._password = password;
-        this._roles = roles;
+        this._role = role;
+        this._currentyouthcentre = currentyouthcentre;
 
     }
 
@@ -42,12 +41,10 @@ export class User {
         this.bookedActivities.splice(this.bookedActivities.indexOf(activity), 1);
     }
 
-    get password(): string {
-        return this._password;
-    }
 
-    get roles(): string[] {
-        return this._roles;
+
+    get role(): string {
+        return this._role;
     }
 
     get id(): number {

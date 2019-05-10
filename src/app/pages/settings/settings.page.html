@@ -9,14 +9,14 @@
   <ion-list>
     <ion-list-header>User</ion-list-header>
     <ion-item>
-      <ion-label>Username: {{authService.currentUser.value.name}}</ion-label>
+      <ion-label>Username: {{userService.currentUser.name}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Permissions: {{authService.currentUser.value.roles.includes('admin') ? 'admin' : 'user'}}</ion-label>
+      <ion-label>Permissions: {{userService.currentUser.role.includes('admin') ? 'admin' : 'user'}}</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label>Password: {{authService.currentUser.value.password}}</ion-label>
+      <ion-label>Password:</ion-label>
     </ion-item>
   </ion-list>
 
