@@ -11,12 +11,16 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
+import {Facebook} from '@ionic-native/facebook/ngx';
+import {NativeStorage} from '@ionic-native/native-storage/ngx';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
     providers: [
+        NativeStorage,
+        Facebook,
         StatusBar,
         SplashScreen,
         Geolocation,

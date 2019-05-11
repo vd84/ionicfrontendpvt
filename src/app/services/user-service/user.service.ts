@@ -118,11 +118,14 @@ export class UserService {
                 this.router.navigate(['../tabs/home']);
             }, error => {
                 this.presentToast('User already exists, choose another username');
+                this.login(username, password);
 
 
             }
         );
     }
+
+
 
 
     deleteUser(username: string, password: string) {
