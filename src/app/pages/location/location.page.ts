@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CheckinService} from '../../services/checkin-service/checkin.service';
+import {UserService} from '../../services/user-service/user.service';
 
 @Component({
   selector: 'app-location',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationPage implements OnInit {
 
-  constructor() { }
+  location: any;
+  constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService) { }
 
   ngOnInit() {
+    if (this.route.snapshot.data['activity']) {
+      this.location = this.route.snapshot.data['activity'];
+    }
   }
 
 }

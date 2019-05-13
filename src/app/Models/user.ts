@@ -4,6 +4,7 @@ export class User {
     private _role: string;
     private _currentyouthcentre: number;
     private bookedActivities = [];
+    private numberOfBadges: number;
 
 
     constructor(id: number, name: string, role: string, currentyouthcentre: number) {
@@ -39,6 +40,10 @@ export class User {
 
     removeBookedActivity(activity) {
         this.bookedActivities.splice(this.bookedActivities.indexOf(activity), 1);
+    }
+
+    getNumberOfBadges() {
+        return this.numberOfBadges;
     }
 
 

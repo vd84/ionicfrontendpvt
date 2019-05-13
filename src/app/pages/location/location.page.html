@@ -27,6 +27,6 @@
     <ion-list-header>Upcoming Activities</ion-list-header>
   </ion-list>
   <!--CHECK IN BUTTON-->
-  <ion-button>check in</ion-button>
-
+  <ion-button (click)="checkinService.checkin(userService.currentUser.id, userService.currentUser.currentYouthCentre)">check in</ion-button>
+ <!---->
 </ion-content>
