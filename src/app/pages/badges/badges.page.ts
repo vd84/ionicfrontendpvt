@@ -16,7 +16,7 @@ export class BadgesPage implements OnInit {
     allBadges = [];
     allOfUsersBadges = [];
     allAvailBadges = [];
-
+    hasShowedAvailBadges = false;
     constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService, private activeService: ActivityService) {
         this.badgeList = 'all-badges';
     }
@@ -49,17 +49,15 @@ export class BadgesPage implements OnInit {
     }
 
     displayAvailBadges() {
-        console.log(this.allBadges.length);
-       // this.allAvailBadges.push()
+        if (this.hasShowedAvailBadges === false) {
+            this.hasShowedAvailBadges = true;
         for (let i = 0; i < this.allBadges.length; i++) {
-            console.log('Badge av alla id: ' + this.allBadges[i].id);
             for (let y = 0; y < this.allOfUsersBadges.length; y++) {
-                console.log('Badge av användare id: ' + this.allOfUsersBadges[y].id);
                 if (this.allOfUsersBadges[y].id !== this.allBadges[i].id) {
-                    console.log('True eller false om att det inte är samma? ' + (this.allOfUsersBadges[y].id !== this.allBadges[y].id));
                     this.allAvailBadges.push(this.allBadges[i]);
                 }
             }
         }
+    } else {} // Borde kanske finnas något för att uppdatera den här?
     }
 }

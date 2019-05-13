@@ -11,7 +11,7 @@
   <!--INFO LIST ABOUT LOCATION-->
   <ion-list>
     <ion-item>
-      <ion-label>Address:</ion-label>
+      <ion-label>Address:{{location.lat}}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Contact:</ion-label>
@@ -27,6 +27,6 @@
     <ion-list-header>Upcoming Activities</ion-list-header>
   </ion-list>
   <!--CHECK IN BUTTON-->
-  <ion-button>check in</ion-button>
-
+  <ion-button (click)="checkinService.checkin(userService.currentUser.id, userService.currentUser.currentYouthCentre)">check in</ion-button>
+ <!---->
 </ion-content>
