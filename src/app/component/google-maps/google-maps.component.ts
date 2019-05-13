@@ -2,7 +2,8 @@ import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
-import {Events} from '@ionic/angular';
+import {AlertController, Events, Platform} from '@ionic/angular';
+import {Subscription} from 'rxjs';
 
 declare var google;
 
@@ -29,21 +30,22 @@ export class GoogleMapsComponent implements OnInit {
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
     alllocations = [];
+    isTracking = false;
+    positionSubscription: Subscription;
 
     ngOnInit(): void {
-        this.youthcenterService.getAllLocations().subscribe(data => {
-            this.alllocations = data;
-        });
+        this.youthcenterService.getAllLocations();
+        this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
     }
 
 
-    constructor( public geolocation: Geolocation, private youthcenterService: YouthcenterService, private router: Router, private ngZone: NgZone, private events: Events) {
+    constructor(public geolocation: Geolocation,
+                private youthcenterService: YouthcenterService,
+                private router: Router, private ngZone: NgZone,
+                private events: Events, private alertctrl: AlertController,
+                private plt: Platform) {
         /*load google map script dynamically */
-        this.youthcenterService.getAllLocations().subscribe(data => {
-            this.alllocations = data;
-        });
-
 
         /*Get Current location*/
         this.geolocation.getCurrentPosition().then((position) => {
@@ -67,35 +69,63 @@ export class GoogleMapsComponent implements OnInit {
             this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
     }
+
     /**
      * Läser in alla youth centres varje 3 sekund
      */
+
+
+    ionViewDidLoad() {
+        this.plt.ready().then(() => {
+
+            let mapOptions = {
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: false,
+                streetViewControl: false,
+                fullscreenControl: false
+            };
+            this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+            this.geolocation.getCurrentPosition().then(pos => {
+                let latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                this.map.setCenter(latLng);
+                this.map.setZoom(16);
+            }).catch((error) => {
+                console.log('Error getting location', error);
+            });
+        });
+    }
+
 
     addAllMarkers() {
 
 
         setTimeout(() => {
-            this.youthcenterService.getAllLocations().subscribe(data => {
-                this.alllocations = data;
-            });
+            this.alllocations = this.youthcenterService.allYouthCentres;
+
 
             console.log(this.alllocations);
 
-            let marker;
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
+                let marker;
                 marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(place.lat, place.lng),
+                    position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
+                    description: place.id,
                     icon: {
                         url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                     }
                 });
                 // Makes markers clickable and sends them to locationpage
                 marker.addListener('click', () => {
-                    this.router.navigate(['location']);
+                    // this.router.navigate(['location']);
+                    console.log(marker.getPosition().lat());
+                    console.log(marker.getPosition().lng());
+                    console.log(marker.description);
                 });
             }
-        }, 5000 );
+        }, 5000);
     }
 }
