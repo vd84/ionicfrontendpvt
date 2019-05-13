@@ -18,7 +18,14 @@ export class BadgeService {
     getAllBadges(): Observable<Badge[]> {
     return this.http.get<Badge[]>(this.url);
     }
-    getAllMyBadges(id): Observable<Badge[]> {
+
+  /**
+   * Retunerar alla badges från en specifik user som identifieras med användarens id.
+   * @param id: användarens id
+   */
+  getAllMyBadges(id): Observable<Badge[]> {
       return this.http.get<Badge[]>(this.url + id);
     }
+
+
 }

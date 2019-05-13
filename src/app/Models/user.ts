@@ -4,6 +4,7 @@ export class User {
     private _role: string;
     private _currentyouthcentre: number;
     private bookedActivities = [];
+    private _picture;
     private numberOfBadges: number;
 
 
@@ -78,5 +79,15 @@ export class User {
 
     set currentYouthCentre(value: number) {
         this._currentyouthcentre = value;
+    }
+
+
+    set picture(value) {
+        this._picture = value;
+    }
+
+
+    get picture() {
+        return this._picture;
     }
 }

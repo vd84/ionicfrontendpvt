@@ -3,6 +3,7 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
 import {Events} from '@ionic/angular';
+import {DataService} from '../../services/data.service';
 
 declare var google;
 
@@ -31,16 +32,16 @@ export class GoogleMapsComponent implements OnInit {
     alllocations = [];
 
     ngOnInit(): void {
-        this.youthcenterService.getAllLocations().subscribe(data => {
+        this.youthcenterService.getAllYouthCentres().subscribe(data => {
             this.alllocations = data;
         });
         this.addAllMarkers();
     }
 
 
-    constructor( public geolocation: Geolocation, private youthcenterService: YouthcenterService, private router: Router, private ngZone: NgZone, private events: Events) {
+    constructor( public geolocation: Geolocation, private youthcenterService: YouthcenterService, private router: Router, private ngZone: NgZone, private events: Events, private dataService: DataService) {
         /*load google map script dynamically */
-        this.youthcenterService.getAllLocations().subscribe(data => {
+        this.youthcenterService.getAllYouthCentres().subscribe(data => {
             this.alllocations = data;
         });
 
@@ -75,7 +76,7 @@ export class GoogleMapsComponent implements OnInit {
 
 
         setTimeout(() => {
-            this.youthcenterService.getAllLocations().subscribe(data => {
+            this.youthcenterService.getAllYouthCentres().subscribe(data => {
                 this.alllocations = data;
             });
 
@@ -87,13 +88,16 @@ export class GoogleMapsComponent implements OnInit {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lng),
                     map: this.map,
+                    description: place.id,
                     icon: {
                         url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                     }
                 });
                 // Makes markers clickable and sends them to locationpage
                 marker.addListener('click', () => {
-                    this.router.navigate(['location']);
+                    console.log(marker.description); // Skriver ut rätt id. Något blir fel när jag skickar den.
+                    this.dataService.setData('id', marker.description);
+                    this.router.navigateByUrl('/location/youthCentre');
                 });
             }
         }, 5000 );

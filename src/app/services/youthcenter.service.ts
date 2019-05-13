@@ -8,11 +8,16 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class YouthcenterService {
-  url = 'https://webbapppvt15grupp2.herokuapp.com/location/';
-  constructor(private http: HttpClient) { }
 
-    getAllLocations(): Observable<Location[]> {
-      return this.http.get<Location[]>(this.url);
-}
+  // Ska ändras så det verkligen är YCservice och inte location
+
+  url = 'https://webbapppvt15grupp2.herokuapp.com/location/';
+
+  constructor(private http: HttpClient) {
+  }
+
+  getAllYouthCentres(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.url);
+  }
 
 }
