@@ -21,4 +21,6 @@ export class BadgeService {
     getAllMyBadges(id): Observable<Badge[]> {
       return this.http.get<Badge[]>(this.url + id);
     }
+
+
 }
