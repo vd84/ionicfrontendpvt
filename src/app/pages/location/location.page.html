@@ -11,10 +11,16 @@
   <!--INFO LIST ABOUT LOCATION-->
   <ion-list>
     <ion-item>
-      <ion-label>Address:</ion-label>
+      <ion-label>Name: {{youthcentre.name}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Contact:</ion-label>
+      <ion-label>Lat: {{youthcentre.lat}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lon: {{youthcentre.lon}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Current number of active activities: {{youthcentre.currentactivactivities}}</ion-label>
     </ion-item>
 
   </ion-list>
@@ -27,6 +33,6 @@
     <ion-list-header>Upcoming Activities</ion-list-header>
   </ion-list>
   <!--CHECK IN BUTTON-->
-  <ion-button>check in</ion-button>
-
+  <ion-button (click)="checkinService.checkin(userService.currentUser.id, youthcentre.id)">check in</ion-button>
+ <!---->
 </ion-content>
