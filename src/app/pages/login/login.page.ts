@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
 
     users: any;
     isLoggedIn: boolean;
-    isfacebookUser: boolean;
+    isfacebookUser: number;
 
 
     constructor(private router: Router,
@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
                             })
                             .then(() => {
 
-                                this.userService.submitUser(user.email, user.name, '', this.currentyouthcentre, true);
+                                this.userService.submitUser(user.email, user.name, '', this.currentyouthcentre, 1);
 
 
                                 loading.dismiss();
@@ -102,7 +102,7 @@ export class LoginPage implements OnInit {
     }
 
     newLogin() {
-        this.userService.login(this.username, this.password, this.isfacebookUser);
+        this.userService.login(this.username, this.password, 0);
 
 
     }
