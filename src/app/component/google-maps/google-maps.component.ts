@@ -4,6 +4,9 @@ import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
 import {AlertController, Events, Platform} from '@ionic/angular';
 import {Subscription} from 'rxjs';
+import {DataService} from '../../services/data.service';
+import {UserService} from '../../services/user-service/user.service';
+import {CheckinService} from '../../services/checkin-service/checkin.service';
 
 declare var google;
 
@@ -44,7 +47,10 @@ export class GoogleMapsComponent implements OnInit {
                 private youthcenterService: YouthcenterService,
                 private router: Router, private ngZone: NgZone,
                 private events: Events, private alertctrl: AlertController,
-                private plt: Platform) {
+                private plt: Platform,
+                private dataService: DataService,
+                private userservice: UserService,
+                private checkinService: CheckinService) {
         /*load google map script dynamically */
 
         /*Get Current location*/
@@ -110,6 +116,10 @@ export class GoogleMapsComponent implements OnInit {
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
                 let marker;
+                let infoWindow = new google.maps.InfoWindow({
+                    content: '<ion-button (click)="checkInOnCentre(1,1)"></ion-button>',
+
+                });
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
@@ -117,15 +127,26 @@ export class GoogleMapsComponent implements OnInit {
                     icon: {
                         url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                     }
+
+
                 });
                 // Makes markers clickable and sends them to locationpage
                 marker.addListener('click', () => {
-                    // this.router.navigate(['location']);
+                    // this.dataService.setData('locationID', marker.description);
+                    // this.router.navigateByUrl('/location/:locationID' );
+
+                    infoWindow.open(this.map, marker);
+
                     console.log(marker.getPosition().lat());
                     console.log(marker.getPosition().lng());
                     console.log(marker.description);
                 });
             }
         }, 5000);
+    }
+
+    checkInOnCentre() {
+        this.checkinService.checkin(11, 1);
+
     }
 }
