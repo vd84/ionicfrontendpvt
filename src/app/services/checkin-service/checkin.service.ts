@@ -9,7 +9,7 @@ export class CheckinService {
   url = 'https://webbapppvt15grupp2.herokuapp.com/checkinyouthcentre/';
   constructor(private http: HttpClient) {
   }
-    checkin(userId, youthCentreId) {
+    checkin(userId: number, youthCentreId: number) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Accept': 'application/json',
@@ -19,7 +19,7 @@ export class CheckinService {
       };
       const body = JSON.stringify({
         'user': userId,
-        'youthCentre': youthCentreId,
+        'youthcentre': youthCentreId,
       });
 
       this.http.post(this.url, body, httpOptions).subscribe(data => {
