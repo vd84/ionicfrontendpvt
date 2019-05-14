@@ -16,10 +16,7 @@ export class LocationPage implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.data['activity']) {
       this.location = this.route.snapshot.data['activity'];
-    }
-    if (this.route.snapshot.data['id']) {
-      console.log('Heeeej');
-      this.location = this.route.snapshot.data['id'];
+      console.log(this.location);
     }
   }
 

@@ -11,7 +11,7 @@ export class YouthcenterService {
 
   // Ska ändras så det verkligen är YCservice och inte location
 
-  url = 'https://webbapppvt15grupp2.herokuapp.com/location/';
+  url = 'https://webbapppvt15grupp2.herokuapp.com/youthcentre/';
 
   constructor(private http: HttpClient) {
   }

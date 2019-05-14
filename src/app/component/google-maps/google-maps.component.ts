@@ -86,7 +86,7 @@ export class GoogleMapsComponent implements OnInit {
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
                 marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(place.lat, place.lng),
+                    position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
                     description: place.id,
                     icon: {
@@ -94,8 +94,7 @@ export class GoogleMapsComponent implements OnInit {
                     }
                 });
                 // Makes markers clickable and sends them to locationpage
-                marker.addListener('click', () => {
-                    console.log(marker.description); // Skriver ut rätt id. Något blir fel när jag skickar den.
+                marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
                     this.dataService.setData('id', marker.description);
                     this.router.navigateByUrl('/location/youthCentre');
                 });
