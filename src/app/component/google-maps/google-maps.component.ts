@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild, Input} from '@angular/core';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
@@ -7,7 +7,13 @@ import {Events} from '@ionic/angular';
 declare var google;
 
 /**
- * Component för Google Maps. Kör nmp install innna och se till att scriptet finns i index.html
+ * Steg 1: Component för Google Maps. Kör nmp install innan och se till att scriptet finns i index.html
+ *
+ * Steg 2: Den ligger i components.module och componentModule måste därför importeras där man vill använda
+ * den. För mer information om hur detta görs, se components.module.
+ *
+ * Steg 3: För att sedan specifikt använda google maps componenten skapa en tagg i htmlen med selectorn.
+ * Alltså: <app-google-maps></app-google-maps> för att använda denna component.
  */
 @Component({
     selector: 'app-google-maps',
@@ -16,8 +22,6 @@ declare var google;
 })
 export class GoogleMapsComponent implements OnInit {
 
-    @Input()
-    stop;
     @ViewChild('mapElement') mapElement;
     map: any;
     mapOptions: any;
@@ -25,8 +29,6 @@ export class GoogleMapsComponent implements OnInit {
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
     alllocations = [];
-    timeToStop;
-    needsRefreshing = false;
 
     ngOnInit(): void {
         this.youthcenterService.getAllLocations().subscribe(data => {
@@ -63,7 +65,7 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.map = this.map;
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
-        }, 9000);
+        }, 5000);
     }
     /**
      * Läser in alla youth centres varje 3 sekund

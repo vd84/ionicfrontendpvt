@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {User} from '../../Models/user';
 import {AuthService} from '../authentication-service/auth.service';
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
+import {ToastController} from '@ionic/angular';
 
 
 @Injectable({
@@ -10,38 +12,38 @@ import {AuthService} from '../authentication-service/auth.service';
 })
 export class UserService {
 
+
+    currentUser: User;
+
+    currentUserJson;
+
+
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private http: HttpClient, private authService: AuthService) {
+    constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastController: ToastController) {
     }
 
 
-    /**
-     * Returnerar alla users frpn webbservern
-     *
-     */
-    getAllUsers(): Observable<User[]> {
-        return this.http.get<User[]>(this.url);
-
-
+    logout() {
+        this.currentUser = null;
     }
 
-    getAUser(name): Observable<User> {
-        return this.http.get<User>(this.url + name);
-    }
+    hasRoles(role: string): boolean {
 
+        return !(!this.currentUser || this.currentUser.role !== role);
+
+    }
 
     /**
 
      Denna metod ändrar ett user objekt i databasen
-     @param headers: Detta skickas med för att requesten ska veta att det är en json fil som kommer
-     @param body: detta är värdena som skickas med till webbservern, således, allt som är skiljt från hur det objektet som finns
      i databasen ser ut, ändras.
      Subscribe betyder att vi lyssnar efter det svar som webbservern ska returnera vid lyckad ändring/error/annat fel
 
+
      **/
-    modifyUser(username: String, password: String) {
+    modifyUser(username: String, password: String, currentyouthcentre: number) {
 
 
         const httpOptions = {
@@ -56,12 +58,13 @@ export class UserService {
             'id': 1,
             'username': username,
             'password': password,
+            'active': 1,
             'points': 0,
             'fairplaypoints': 0,
-            'currentyouthcentre': 1,
-            'role': 1,
-            'facebook_login': 'Face1',
-            'facebook_password': 'pass'
+            'currentyouthcentre': currentyouthcentre,
+            'facebooklogin': 'Face1',
+            'facebookpassword': 'pass',
+            'role': 1
         });
 
         this.http.put(this.url, body, httpOptions).subscribe(data => {
@@ -80,7 +83,7 @@ export class UserService {
      * @param password detta är password som ska in webbservern
      * @param currentyouthcentre detta är ungdomsgården som ska in i databasen
      */
-    submitUser(username: string, password: string, currentyouthcentre: number) {
+    submitUser(username: String, password: String, currentyouthcentre: number) {
 
 
         const httpOptions = {
@@ -93,19 +96,37 @@ export class UserService {
 
         const body = JSON.stringify({
 
+
             username: username,
             password: password,
             currentyouthcentre: currentyouthcentre
 
         });
+        this.http.post<User>(this.url, body, httpOptions).subscribe(data => {
+                this.currentUserJson = data;
+                console.log(this.currentUserJson);
 
-        this.http.post(this.url, body, httpOptions).subscribe(data => {
-                console.log(data);
-            },
-            error => {
-                console.log('Error');
-            });
+                let role;
+                if (this.currentUserJson[0].id === 1) {
+                    role = 'admin';
+                } else {
+                    role = 'user';
+                }
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre);
+                console.log(this.currentUser);
+                this.presentToast('Welcome ' + this.currentUser.name + '!');
+                this.router.navigate(['../tabs/home']);
+            }, error => {
+                this.presentToast('User already exists, choose another username');
+                this.login(username, password);
+
+
+            }
+        );
     }
+
+
+
 
     deleteUser(username: string, password: string) {
 
@@ -120,6 +141,55 @@ export class UserService {
         this.http.delete(this.url + this.authService.currentUser.value.name, httpOptions);
 
 
+    }
+
+
+    login(username: String, password: String) {
+
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        const body = JSON.stringify({
+
+
+            username: username,
+            password: password,
+
+        });
+        this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(data => {
+                this.currentUserJson = data;
+                console.log(this.currentUserJson);
+
+                let role;
+                if (this.currentUserJson[0].id === 1) {
+                    role = 'admin';
+                } else {
+                    role = 'user';
+                }
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre);
+                console.log(this.currentUser);
+                this.presentToast('Welcome ' + this.currentUser.name + '!');
+                this.router.navigate(['../tabs/home']);
+            }, error => {
+                this.presentToast('Invalid credentials');
+            }
+        );
+
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 
 
