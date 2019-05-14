@@ -1,28 +1,30 @@
 export class User {
     private _id: number;
     private _name: string;
+    private _displayname: string;
     private _role: string;
     private _currentyouthcentre: number;
-    private bookedActivities = [];
+    private _bookedActivities = [];
     private _picture;
-    private numberOfBadges: number;
+    private _numberOfBadges: number;
 
 
-    constructor(id: number, name: string, role: string, currentyouthcentre: number) {
+    constructor(id: number, name: string, role: string, currentyouthcentre: number, displayname: string) {
         this._id = id;
         this._name = name;
         this._role = role;
         this._currentyouthcentre = currentyouthcentre;
+        this._displayname = displayname;
 
     }
 
     get getBookedActivities() {
-        return this.bookedActivities;
+        return this._bookedActivities;
     }
 
     bookActivity(activity) {
-        if (!this.bookedActivities.includes(activity)) {
-            this.bookedActivities.push(activity);
+        if (!this._bookedActivities.includes(activity)) {
+            this._bookedActivities.push(activity);
         }
     }
 
@@ -32,7 +34,7 @@ export class User {
     }
 
     isBooked(activity): boolean {
-        if (this.bookedActivities.includes(activity)) {
+        if (this._bookedActivities.includes(activity)) {
             return true;
         } else {
             return false;
@@ -40,11 +42,11 @@ export class User {
     }
 
     removeBookedActivity(activity) {
-        this.bookedActivities.splice(this.bookedActivities.indexOf(activity), 1);
+        this._bookedActivities.splice(this._bookedActivities.indexOf(activity), 1);
     }
 
     getNumberOfBadges() {
-        return this.numberOfBadges;
+        return this._numberOfBadges;
     }
 
 
@@ -66,7 +68,7 @@ export class User {
     }
 
     set setBookedActivities(value: []) {
-        this.bookedActivities = value;
+        this._bookedActivities = value;
     }
 
     set name(value: string) {
@@ -89,5 +91,38 @@ export class User {
 
     get picture() {
         return this._picture;
+    }
+
+
+    get displayname(): string {
+        return this._displayname;
+    }
+
+    set displayname(value: string) {
+        this._displayname = value;
+    }
+
+    get currentyouthcentre(): number {
+        return this._currentyouthcentre;
+    }
+
+    set currentyouthcentre(value: number) {
+        this._currentyouthcentre = value;
+    }
+
+    get bookedActivities(): any[] {
+        return this._bookedActivities;
+    }
+
+    set bookedActivities(value: any[]) {
+        this._bookedActivities = value;
+    }
+
+    get numberOfBadges(): number {
+        return this._numberOfBadges;
+    }
+
+    set numberOfBadges(value: number) {
+        this._numberOfBadges = value;
     }
 }
