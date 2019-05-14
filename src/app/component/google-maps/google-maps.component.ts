@@ -2,11 +2,12 @@ import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
-import {AlertController, Events, Platform} from '@ionic/angular';
+import {AlertController, Events, Platform, ToastController} from '@ionic/angular';
 import {Subscription} from 'rxjs';
 import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
+import {filter} from 'rxjs/operators';
 
 declare var google;
 
@@ -35,6 +36,7 @@ export class GoogleMapsComponent implements OnInit {
     alllocations = [];
     isTracking = false;
     positionSubscription: Subscription;
+    currentPosition = {lat: null, lng: null};
 
     ngOnInit(): void {
         this.youthcenterService.getAllLocations();
@@ -50,7 +52,8 @@ export class GoogleMapsComponent implements OnInit {
                 private plt: Platform,
                 private dataService: DataService,
                 private userservice: UserService,
-                private checkinService: CheckinService) {
+                private checkinService: CheckinService,
+                private toastController: ToastController) {
         /*load google map script dynamically */
 
         /*Get Current location*/
@@ -74,6 +77,8 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.title = 'My Location';
             this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
+        this.startTracking();
+
     }
 
     /**
@@ -151,6 +156,7 @@ export class GoogleMapsComponent implements OnInit {
                 });
             }
         }, 5000);
+
     }
 
     checkInOnCentre() {
@@ -183,8 +189,43 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d <= 100;
+        return d <= 10000000000000000000000000;
 
 
+    }
+
+    startTracking() {
+        this.isTracking = true;
+        this.positionSubscription = this.geolocation.watchPosition()
+            .pipe(filter(p => p.coords !== undefined)
+            )
+            .subscribe(data => {
+
+
+                for (const place of this.alllocations) {
+
+                    if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
+
+                        this.presentToast('nearby event found!');
+                    }
+                }
+                console.log(this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, this.alllocations[0].lat, this.alllocations[0].lon));
+
+
+                this.currentPosition.lat = data.coords.latitude;
+                this.currentPosition.lng = data.coords.longitude;
+                console.log(this.currentPosition);
+
+
+            });
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 }
