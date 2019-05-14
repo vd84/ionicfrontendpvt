@@ -135,12 +135,56 @@ export class GoogleMapsComponent implements OnInit {
                 marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
                     this.dataService.setData('youthcentre', place);
                     this.router.navigateByUrl('/location/youthcentre');
-                    });
-    } }, 5000);
+                    console.log(place.lat);
+                    console.log(this.geolocation.getCurrentPosition().then(pos => {
+                        console.log(place.lat);
+                        console.log(place.lng);
+                        console.log(pos.coords.latitude);
+                        console.log(pos.coords.longitude);
+
+                        console.log(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude));
+
+
+                    }));
+
+
+                });
+            }
+        }, 5000);
     }
 
     checkInOnCentre() {
         this.checkinService.checkin(11, 1);
+
+    }
+
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+
+        function toRad(x) {
+            return x * Math.PI / 180;
+        }
+
+        let lon1 = userlon;
+        let lat1 = userlat;
+
+        let lon2 = targetlon;
+        let lat2 = targetlat;
+
+        let R = 6371; // km
+
+        let x1 = lat2 - lat1;
+        let dLat = toRad(x1);
+        let x2 = lon2 - lon1;
+        let dLon = toRad(x2);
+        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        let d = R * c;
+        d = d * 1000;
+
+        return d <= 100;
+
 
     }
 }
