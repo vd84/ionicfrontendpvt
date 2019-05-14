@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/authentication-service/auth.service';
-import {IEvent} from '../../Interfaces/event';
-import {Event} from '../../Models/event';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 

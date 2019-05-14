@@ -5,7 +5,6 @@ import {UserService} from '../../services/user-service/user.service';
 import {AlertController, LoadingController, NavController, Platform, ToastController} from '@ionic/angular';
 import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
-import {User} from '../../Models/user';
 
 @Component({
     selector: 'app-login',
@@ -16,11 +15,11 @@ export class LoginPage implements OnInit {
 
     private username: string;
     private password: string;
+    currentyouthcentre: number;
+
     users: any;
     isLoggedIn: boolean;
-    FB_APP_ID = 333689117336019;
-    facebookUser;
-    private userExists;
+    isfacebookUser: boolean;
 
 
     constructor(private router: Router,
@@ -69,9 +68,7 @@ export class LoginPage implements OnInit {
                             })
                             .then(() => {
 
-                                this.userExists = this.userService.submitUser(user.name, 'fbpass', 1);
-
-                                this.userService.currentUser.picture = user.picture[0].data;
+                                this.userService.submitUser(user.email, user.name, '', this.currentyouthcentre, true);
 
 
                                 loading.dismiss();
@@ -105,7 +102,7 @@ export class LoginPage implements OnInit {
     }
 
     newLogin() {
-        this.userService.login(this.username, this.password);
+        this.userService.login(this.username, this.password, this.isfacebookUser);
 
 
     }
