@@ -26,7 +26,7 @@ const routes: Routes = [
     {path: 'location', loadChildren: './pages/location/location.module#LocationPageModule'},
     {
         path: 'location/:id',
-        resolve: {location: DataResolverService},
+        resolve: {youthcentre: DataResolverService},
         loadChildren: './pages/location/location.module#LocationPageModule'
     },
   { path: 'specific-badge', loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule' },
