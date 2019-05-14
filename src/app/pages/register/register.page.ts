@@ -16,6 +16,7 @@ export class RegisterPage implements OnInit {
     private password: string;
     private currentyouthcentre: number;
     private email: string;
+    private displayname;
     private users = [];
 
 
@@ -29,7 +30,7 @@ export class RegisterPage implements OnInit {
 
     createUserAndPost() {
 
-        this.userService.submitUser(this.username, this.password, this.currentyouthcentre);
+        this.userService.submitUser(this.username, this.displayname, this.password, this.currentyouthcentre, false);
 
 
     }

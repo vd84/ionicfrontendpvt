@@ -83,7 +83,7 @@ export class UserService {
      * @param password detta är password som ska in webbservern
      * @param currentyouthcentre detta är ungdomsgården som ska in i databasen
      */
-    submitUser(username: String, password: String, currentyouthcentre: number) {
+    submitUser(username: String, displayname: String, password: String, currentyouthcentre: number, loggedInWithFaceBook: boolean) {
 
 
         const httpOptions = {
@@ -99,7 +99,8 @@ export class UserService {
 
             username: username,
             password: password,
-            currentyouthcentre: currentyouthcentre
+            currentyouthcentre: currentyouthcentre,
+            isfacebookuser: loggedInWithFaceBook
 
         });
         this.http.post<User>(this.url, body, httpOptions).subscribe(data => {
@@ -117,15 +118,17 @@ export class UserService {
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
-                this.presentToast('User already exists, choose another username');
-                this.login(username, password);
+                if (loggedInWithFaceBook) {
+                    this.login(username, password, loggedInWithFaceBook);
+
+                } else {
+                    this.presentToast('User taken');
+                }
 
 
             }
         );
     }
-
-
 
 
     deleteUser(username: string, password: string) {
@@ -144,7 +147,7 @@ export class UserService {
     }
 
 
-    login(username: String, password: String) {
+    login(username: String, password: String, isfacebookuser: boolean) {
 
 
         const httpOptions = {
@@ -160,6 +163,7 @@ export class UserService {
 
             username: username,
             password: password,
+            isfacebookuser: isfacebookuser
 
         });
         this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(data => {

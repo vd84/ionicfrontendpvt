@@ -13,8 +13,12 @@
     <!--ion-button full (click)="newLogin()">Log in</ion-button-->
     <a routerLink="/tabs/home"> <ion-button > Login</ion-button></a>
     <ion-button (click)="createProfile()">Create profile</ion-button>
-    <ion-button full  color="light" (click)="doFbLogin()">Log in with Facebook</ion-button>
+    <ion-button full color="light" (click)="doFbLogin()">Log in with Facebook</ion-button>
 
+    <ion-item>
+        <ion-input name="currentyouthcentre" placeholder="Youth centre" type="number" ngModel required
+                   [(ngModel)]="currentyouthcentre"></ion-input>
+    </ion-item>
 
 
 </ion-content>
