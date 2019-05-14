@@ -144,8 +144,4 @@ export class GoogleMapsComponent implements OnInit {
     } }, 5000);
     }
 
-    checkInOnCentre() {
-        this.checkinService.checkin(11, 1);
-
-    }
 }

@@ -9,7 +9,7 @@ export class CheckinService {
   url = 'https://webbapppvt15grupp2.herokuapp.com/checkinyouthcentre/';
   constructor(private http: HttpClient) {
   }
-    checkin(userId: number, youthCentreId:number) {
+    checkin(userId: number, youthCentreId: number) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Accept': 'application/json',
