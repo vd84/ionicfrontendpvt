@@ -35,12 +35,8 @@ export class GoogleMapsComponent implements OnInit {
     alllocations = [];
     isTracking = false;
     positionSubscription: Subscription;
+    user: any;
 
-    ngOnInit(): void {
-        this.youthcenterService.getAllLocations();
-        this.alllocations = this.youthcenterService.allYouthCentres;
-        this.addAllMarkers();
-    }
 
 
     constructor(public geolocation: Geolocation,
@@ -75,6 +71,15 @@ export class GoogleMapsComponent implements OnInit {
             this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
     }
+
+    ngOnInit(): void {
+        this.user = this.userservice.currentUser;
+        console.log(this.user);
+        this.youthcenterService.getAllLocations();
+        this.alllocations = this.youthcenterService.allYouthCentres;
+        this.addAllMarkers();
+    }
+
 
     /**
      * Läser in alla youth centres varje 3 sekund
