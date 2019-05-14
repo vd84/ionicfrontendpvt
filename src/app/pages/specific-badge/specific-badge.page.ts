@@ -14,6 +14,7 @@ export class SpecificBadgePage implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.data['badge']) {
       this.badge = this.route.snapshot.data['badge'];
+      console.log(this.badge);
     }
   }
 

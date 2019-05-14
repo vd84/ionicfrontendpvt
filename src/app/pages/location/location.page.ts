@@ -10,15 +10,17 @@ import {UserService} from '../../services/user-service/user.service';
 })
 export class LocationPage implements OnInit {
 
-    location: any;
+    youthcentre: any;
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService) {
     }
 
     ngOnInit() {
-        if (this.route.snapshot.data['locationID']) {
-            this.location = this.route.snapshot.data['locationID'];
-            console.log(this.location);
+        if (this.route.snapshot.data['youthcentre']) {
+            this.youthcentre = this.route.snapshot.data['youthcentre'];
+            console.log(this.youthcentre);
+        } else {
+            console.log('Inte rätt');
         }
 
     }

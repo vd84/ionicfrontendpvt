@@ -131,18 +131,12 @@ export class GoogleMapsComponent implements OnInit {
 
                 });
                 // Makes markers clickable and sends them to locationpage
-                marker.addListener('click', () => {
-                    // this.dataService.setData('locationID', marker.description);
-                    // this.router.navigateByUrl('/location/:locationID' );
 
-                    infoWindow.open(this.map, marker);
-
-                    console.log(marker.getPosition().lat());
-                    console.log(marker.getPosition().lng());
-                    console.log(marker.description);
-                });
-            }
-        }, 5000);
+                marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
+                    this.dataService.setData('youthcentre', place);
+                    this.router.navigateByUrl('/location/youthcentre');
+                    });
+    } }, 5000);
     }
 
     checkInOnCentre() {
