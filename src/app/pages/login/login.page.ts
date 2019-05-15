@@ -9,7 +9,6 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
-    styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
 
@@ -29,7 +28,6 @@ export class LoginPage implements OnInit {
                 private fb: Facebook,
                 private nativeStorage: NativeStorage,
                 public loadingController: LoadingController,
-                public navCtrl: NavController,
                 private platform: Platform,
                 public alertController: AlertController
     ) {

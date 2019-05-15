@@ -21,8 +21,7 @@ declare var google;
  */
 @Component({
     selector: 'app-google-maps',
-    templateUrl: './google-maps.component.html',
-    styleUrls: ['./google-maps.component.scss'],
+    templateUrl: './google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
 
@@ -135,8 +134,9 @@ export class GoogleMapsComponent implements OnInit {
                 marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
                     this.dataService.setData('youthcentre', place);
                     this.router.navigateByUrl('/location/youthcentre');
-                    });
-    } }, 5000);
+                });
+            }
+        }, 5000);
     }
 
     checkInOnCentre() {
