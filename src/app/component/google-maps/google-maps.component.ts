@@ -79,7 +79,8 @@ export class GoogleMapsComponent implements OnInit {
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
     }
-    addStartMarker () {
+
+    addStartMarker() {
         setTimeout(() => {
             /*Marker Options*/
             this.markerOptions.position = this.location;
@@ -95,31 +96,10 @@ export class GoogleMapsComponent implements OnInit {
      */
 
 
-    ionViewDidLoad() {
-        this.plt.ready().then(() => {
 
-            let mapOptions = {
-                zoom: 13,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: false
-            };
-            this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-            this.geolocation.getCurrentPosition().then(pos => {
-                let latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                this.map.setCenter(latLng);
-                this.map.setZoom(16);
-            }).catch((error) => {
-                console.log('Error getting location', error);
-            });
-        });
-    }
 
 
     addAllMarkers() {
-
 
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
@@ -130,10 +110,7 @@ export class GoogleMapsComponent implements OnInit {
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
                 let marker;
-                let infoWindow = new google.maps.InfoWindow({
-                    content: '<ion-button (click)="checkInOnCentre(1,1)"></ion-button>',
 
-                });
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
@@ -172,7 +149,7 @@ export class GoogleMapsComponent implements OnInit {
 
     }
 
-    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon) {
 
         function toRad(x) {
             return x * Math.PI / 180;
@@ -197,16 +174,22 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d <= 10000000000000000000000000;
+        return d < 100;
 
 
     }
 
+
+
     startTracking() {
         this.isTracking = true;
-        this.positionSubscription = this.geolocation.watchPosition()
-            .pipe(filter(p => p.coords !== undefined)
-            )
+
+        let options = {
+            frequency: 3000,
+            enableHighAccuracy: true
+        };
+
+        this.positionSubscription = this.geolocation.watchPosition(options)
             .subscribe(data => {
 
 

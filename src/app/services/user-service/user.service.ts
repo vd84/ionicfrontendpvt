@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../Models/user';
 import {AuthService} from '../authentication-service/auth.service';
-import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 
@@ -22,6 +21,8 @@ export class UserService {
 
 
     constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastController: ToastController) {
+
+
     }
 
 
@@ -167,19 +168,20 @@ export class UserService {
             isfacebookuser: isfacebookuser
 
         });
+
         this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(data => {
                 this.currentUserJson = data;
                 console.log(this.currentUserJson);
 
                 let role;
-                if (this.currentUserJson[0].id === 1) {
+                if (this.currentUserJson[0].role === 1) {
                     role = 'admin';
                 } else {
                     role = 'user';
                 }
                 this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre);
                 console.log(this.currentUser);
-                this.presentToast('Welcome ' + this.currentUser.name + '!');
+                this.presentToast('Welcome ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
                 this.presentToast('Invalid credentials');
