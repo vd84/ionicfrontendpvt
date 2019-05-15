@@ -73,11 +73,11 @@ export class GoogleMapsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.addStartMarker();
         this.user = this.userservice.currentUser;
         console.log(this.user);
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
-        this.addStartMarker();
         this.addAllMarkers();
     }
     addStartMarker () {
@@ -223,10 +223,6 @@ export class GoogleMapsComponent implements OnInit {
                 this.currentPosition.lat = data.coords.latitude;
                 this.currentPosition.lng = data.coords.longitude;
                 console.log(this.currentPosition);
-               /* let testPosition = {
-                    lat:  59.334415,
-                    lng: 18.110103
-                };*/
                 this.marker.setPosition(this.currentPosition);
 
             });
