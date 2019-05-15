@@ -29,7 +29,7 @@ export class RegisterPage implements OnInit {
 
     createUserAndPost() {
 
-        this.userService.submitUser(this.username, this.displayname, this.password, this.currentyouthcentre, false);
+        this.userService.submitUser(this.username, this.displayname, this.password, this.currentyouthcentre, 0);
 
 
     }

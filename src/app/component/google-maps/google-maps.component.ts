@@ -2,11 +2,12 @@ import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {Router} from '@angular/router';
-import {AlertController, Events, Platform} from '@ionic/angular';
+import {AlertController, Events, Platform, ToastController} from '@ionic/angular';
 import {Subscription} from 'rxjs';
 import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
+import {filter} from 'rxjs/operators';
 
 declare var google;
 
@@ -34,12 +35,8 @@ export class GoogleMapsComponent implements OnInit {
     alllocations = [];
     isTracking = false;
     positionSubscription: Subscription;
-
-    ngOnInit(): void {
-        this.youthcenterService.getAllLocations();
-        this.alllocations = this.youthcenterService.allYouthCentres;
-        this.addAllMarkers();
-    }
+    currentPosition = {lat: null, lng: null};
+    user: any;
 
 
     constructor(public geolocation: Geolocation,
@@ -49,7 +46,8 @@ export class GoogleMapsComponent implements OnInit {
                 private plt: Platform,
                 private dataService: DataService,
                 private userservice: UserService,
-                private checkinService: CheckinService) {
+                private checkinService: CheckinService,
+                private toastController: ToastController) {
         /*load google map script dynamically */
 
         /*Get Current location*/
@@ -57,6 +55,7 @@ export class GoogleMapsComponent implements OnInit {
             this.location.lat = position.coords.latitude;
             this.location.lng = position.coords.longitude;
         });
+        this.currentPosition = this.location;
         /*Map options*/
         this.mapOptions = {
             center: this.location,
@@ -67,6 +66,21 @@ export class GoogleMapsComponent implements OnInit {
         // Adds map with marker att currentLocation
         setTimeout(() => {
             this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
+        }, 5000);
+        this.startTracking();
+
+    }
+
+    ngOnInit(): void {
+        this.addStartMarker();
+        this.user = this.userservice.currentUser;
+        console.log(this.user);
+        this.youthcenterService.getAllLocations();
+        this.alllocations = this.youthcenterService.allYouthCentres;
+        this.addAllMarkers();
+    }
+    addStartMarker () {
+        setTimeout(() => {
             /*Marker Options*/
             this.markerOptions.position = this.location;
             this.markerOptions.map = this.map;
@@ -74,6 +88,7 @@ export class GoogleMapsComponent implements OnInit {
             this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
     }
+
 
     /**
      * Läser in alla youth centres varje 3 sekund
@@ -134,6 +149,19 @@ export class GoogleMapsComponent implements OnInit {
                 marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
                     this.dataService.setData('youthcentre', place);
                     this.router.navigateByUrl('/location/youthcentre');
+                    console.log(place.lat);
+                    console.log(this.geolocation.getCurrentPosition().then(pos => {
+                        console.log(place.lat);
+                        console.log(place.lng);
+                        console.log(pos.coords.latitude);
+                        console.log(pos.coords.longitude);
+
+                        console.log(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude));
+
+
+                    }));
+
+
                 });
             }
         }, 5000);
@@ -142,5 +170,69 @@ export class GoogleMapsComponent implements OnInit {
     checkInOnCentre() {
         this.checkinService.checkin(11, 1);
 
+    }
+
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+
+        function toRad(x) {
+            return x * Math.PI / 180;
+        }
+
+        let lon1 = userlon;
+        let lat1 = userlat;
+
+        let lon2 = targetlon;
+        let lat2 = targetlat;
+
+        let R = 6371; // km
+
+        let x1 = lat2 - lat1;
+        let dLat = toRad(x1);
+        let x2 = lon2 - lon1;
+        let dLon = toRad(x2);
+        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        let d = R * c;
+        d = d * 1000;
+
+        return d <= 10000000000000000000000000;
+
+
+    }
+
+    startTracking() {
+        this.isTracking = true;
+        this.positionSubscription = this.geolocation.watchPosition()
+            .pipe(filter(p => p.coords !== undefined)
+            )
+            .subscribe(data => {
+
+
+                for (const place of this.alllocations) {
+
+                    if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
+                        this.presentToast('nearby event found!');
+                    }
+                }
+                console.log(this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, this.alllocations[0].lat, this.alllocations[0].lon));
+
+
+                this.currentPosition.lat = data.coords.latitude;
+                this.currentPosition.lng = data.coords.longitude;
+                console.log(this.currentPosition);
+                this.marker.setPosition(this.currentPosition);
+
+            });
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 }

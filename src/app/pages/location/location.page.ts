@@ -11,6 +11,7 @@ import {Youthcentre} from '../../Models/youthcentre';
 export class LocationPage implements OnInit {
 
     youthcentre: any;
+    user: any;
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService) {
     }
@@ -23,7 +24,14 @@ export class LocationPage implements OnInit {
             this.youthcentre = new Youthcentre(9000, null, null, null, null, 'CENTERNOTDEFINED', null);
             console.log('Inte rätt');
         }
+        this.user = this.userService.currentUser;
 
+    }
+    checkin () {
+
+        console.log('youthcentreid ' + this.youthcentre.id);
+        console.log('userid ' + this.user.id);
+        this.checkinService.checkin(this.user.id,  this.youthcentre.id);
     }
 
 

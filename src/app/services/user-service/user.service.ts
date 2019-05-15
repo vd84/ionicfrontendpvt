@@ -83,7 +83,7 @@ export class UserService {
      * @param password detta är password som ska in webbservern
      * @param currentyouthcentre detta är ungdomsgården som ska in i databasen
      */
-    submitUser(username: String, displayname: String, password: String, currentyouthcentre: number, loggedInWithFaceBook: boolean) {
+    submitUser(username: String, displayname: String, password: String, currentyouthcentre: number, loggedInWithFaceBook: number) {
 
 
         const httpOptions = {
@@ -97,10 +97,11 @@ export class UserService {
         const body = JSON.stringify({
 
 
-            username: username,
-            password: password,
-            currentyouthcentre: currentyouthcentre,
-            isfacebookuser: loggedInWithFaceBook
+            'username': username,
+            'displayname': displayname,
+            'password': password,
+            'currentyouthcentre': currentyouthcentre,
+            'isfacebookuser': loggedInWithFaceBook
 
         });
         this.http.post<User>(this.url, body, httpOptions).subscribe(data => {
@@ -113,7 +114,7 @@ export class UserService {
                 } else {
                     role = 'user';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
@@ -147,7 +148,7 @@ export class UserService {
     }
 
 
-    login(username: String, password: String, isfacebookuser: boolean) {
+    login(username: String, password: String, isfacebookuser: number) {
 
 
         const httpOptions = {
@@ -176,7 +177,7 @@ export class UserService {
                 } else {
                     role = 'user';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
