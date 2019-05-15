@@ -141,7 +141,7 @@ export class BadgeServiceMock {
 export class UserServiceMock {
 
     currentUser: User = new User(1, 'MockUser', 'Admin',
-        1);
+        1, 'MockUser');
 
     currentUserJson;
 
