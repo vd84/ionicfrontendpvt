@@ -2,13 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
-
-import {AuthService} from '../../services/authentication-service/auth.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-change-password',
     templateUrl: './change-password.page.html',
-    styleUrls: ['./change-password.page.scss'],
 })
 export class ChangePasswordPage implements OnInit {
     private currentPassword: string;

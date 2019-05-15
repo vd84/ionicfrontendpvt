@@ -22,8 +22,7 @@ declare var google;
  */
 @Component({
     selector: 'app-google-maps',
-    templateUrl: './google-maps.component.html',
-    styleUrls: ['./google-maps.component.scss'],
+    templateUrl: './google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
 
