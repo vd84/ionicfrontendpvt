@@ -80,7 +80,8 @@ export class GoogleMapsComponent implements OnInit {
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
     }
-    addStartMarker () {
+
+    addStartMarker() {
         setTimeout(() => {
             /*Marker Options*/
             this.markerOptions.position = this.location;
@@ -110,10 +111,7 @@ export class GoogleMapsComponent implements OnInit {
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
                 let marker;
-                let infoWindow = new google.maps.InfoWindow({
-                    content: '<ion-button (click)="checkInOnCentre(1,1)"></ion-button>',
 
-                });
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
@@ -177,16 +175,20 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d;
+        return d < 100;
 
 
     }
 
     startTracking() {
         this.isTracking = true;
-        this.positionSubscription = this.geolocation.watchPosition()
-            .pipe(filter(p => p.coords !== undefined)
-            )
+
+        let options = {
+            frequency: 3000, // <--- possible to add this parameter or similar?
+            enableHighAccuracy: true
+        };
+
+        this.positionSubscription = this.geolocation.watchPosition(options)
             .subscribe(data => {
 
 
