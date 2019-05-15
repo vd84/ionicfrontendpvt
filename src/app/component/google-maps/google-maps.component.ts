@@ -86,31 +86,10 @@ export class GoogleMapsComponent implements OnInit {
      */
 
 
-    ionViewDidLoad() {
-        this.plt.ready().then(() => {
 
-            let mapOptions = {
-                zoom: 13,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: false
-            };
-            this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-            this.geolocation.getCurrentPosition().then(pos => {
-                let latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                this.map.setCenter(latLng);
-                this.map.setZoom(16);
-            }).catch((error) => {
-                console.log('Error getting location', error);
-            });
-        });
-    }
 
 
     addAllMarkers() {
-
 
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
@@ -164,7 +143,7 @@ export class GoogleMapsComponent implements OnInit {
 
     }
 
-    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon) {
 
         function toRad(x) {
             return x * Math.PI / 180;
@@ -189,7 +168,7 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d <= 10000000000000000000000000;
+        return d;
 
 
     }
