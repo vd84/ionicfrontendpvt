@@ -179,11 +179,13 @@ export class GoogleMapsComponent implements OnInit {
 
     }
 
+
+
     startTracking() {
         this.isTracking = true;
 
         let options = {
-            frequency: 3000, // <--- possible to add this parameter or similar?
+            frequency: 3000,
             enableHighAccuracy: true
         };
 
