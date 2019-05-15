@@ -190,8 +190,9 @@ export class GoogleMapsComponent implements OnInit {
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         let d = R * c;
-        d = d * 1000;
+        d = d * 10;
 
+        console.log('d:' + d);
         return d <= 10000000000000000000000000;
 
 
@@ -208,7 +209,6 @@ export class GoogleMapsComponent implements OnInit {
                 for (const place of this.alllocations) {
 
                     if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
-
                         this.presentToast('nearby event found!');
                     }
                 }

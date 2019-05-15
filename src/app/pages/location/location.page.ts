@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {UserService} from '../../services/user-service/user.service';
 
+
 @Component({
     selector: 'app-location',
     templateUrl: './location.page.html',
@@ -24,6 +25,7 @@ export class LocationPage implements OnInit {
             console.log('Inte rätt');
         }
         this.user = this.userService.currentUser;
+        console.log(this.youthcentre);
 
     }
     checkin () {
