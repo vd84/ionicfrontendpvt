@@ -11,6 +11,9 @@ export class CreateEventPage implements OnInit {
     private name: String;
     private location: String;
     private events = [];
+    private description: String;
+    private alt_location: String;
+    private category: number;
 
     constructor(private router: Router, private createdEvents: Events) {}
 
