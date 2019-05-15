@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-specific-badge',
   templateUrl: './specific-badge.page.html',
-  styleUrls: ['./specific-badge.page.scss'],
 })
 export class SpecificBadgePage implements OnInit {
 
@@ -15,6 +14,8 @@ export class SpecificBadgePage implements OnInit {
     if (this.route.snapshot.data['badge']) {
       this.badge = this.route.snapshot.data['badge'];
       console.log(this.badge);
+    } else {
+      this.badge = {'name': 'BADGENOTDEFINED', 'description': 'THIS BADGE HAS NOT BEEN DEFINED', 'image': null};
     }
   }
 

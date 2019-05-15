@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-challenge',
-  templateUrl: './challenge.page.html',
-  styleUrls: ['./challenge.page.scss'],
+    selector: 'app-challenge',
+    templateUrl: './challenge.page.html',
 })
 export class ChallengePage implements OnInit {
 
-  constructor(private router: Router) { }
+    constructor(private router: Router) {
+    }
 
-  ngOnInit() {
-  }
-  sendChallenge() {
-    this.router.navigate(['event']);
-  }
+    sendChallenge() {
+        this.router.navigate(['event']);
+    }
+
+    ngOnInit(): void {
+    }
+
 }

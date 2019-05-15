@@ -3,11 +3,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/authentication-service/auth.service';
 import {ParticipationService} from '../../services/participation-service/participation.service';
 import {UserService} from '../../services/user-service/user.service';
+import {Youthcentre} from '../../Models/youthcentre';
 
 @Component({
     selector: 'app-specific-event',
     templateUrl: './specific-event.page.html',
-    styleUrls: ['./specific-event.page.scss'],
 })
 export class SpecificEventPage implements OnInit {
 
@@ -20,6 +20,9 @@ export class SpecificEventPage implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.data['activity']) {
             this.activity = this.route.snapshot.data['activity'];
+        } else {
+            this.activity = {'id': 9000, 'name': 'ACTIVITYNOTDEFINED', 'startdate': null, 'description': 'this activity has not been defined'};
+
         }
         this.user = this.userService.currentUser;
     }
