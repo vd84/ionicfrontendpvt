@@ -34,7 +34,8 @@ const routes: Routes = [
         path: 'specific-badge/:id',
         resolve: {badge: DataResolverService},
         loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'
-    }
+    },
+  { path: 'create-challenge', loadChildren: './pages/create-challenge/create-challenge.module#CreateChallengePageModule' }
 
 
 

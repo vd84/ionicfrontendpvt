@@ -26,7 +26,9 @@ export class YouthcenterService {
             }
         );
     }
-
+    getAllLocations2(): Observable<Location[]> {
+       return this.http.get<Location[]>(this.url);
+    }
 
 
 }
