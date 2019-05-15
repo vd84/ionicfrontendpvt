@@ -56,6 +56,7 @@ export class GoogleMapsComponent implements OnInit {
             this.location.lat = position.coords.latitude;
             this.location.lng = position.coords.longitude;
         });
+        this.currentPosition = this.location;
         /*Map options*/
         this.mapOptions = {
             center: this.location,
@@ -66,22 +67,27 @@ export class GoogleMapsComponent implements OnInit {
         // Adds map with marker att currentLocation
         setTimeout(() => {
             this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-            /*Marker Options*/
-            this.markerOptions.position = this.location;
-            this.markerOptions.map = this.map;
-            this.markerOptions.title = 'My Location';
-            this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
         this.startTracking();
 
     }
 
     ngOnInit(): void {
+        this.addStartMarker();
         this.user = this.userservice.currentUser;
         console.log(this.user);
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
+    }
+    addStartMarker () {
+        setTimeout(() => {
+            /*Marker Options*/
+            this.markerOptions.position = this.location;
+            this.markerOptions.map = this.map;
+            this.markerOptions.title = 'My Location';
+            this.marker = new google.maps.Marker(this.markerOptions);
+        }, 5000);
     }
 
 
@@ -208,7 +214,6 @@ export class GoogleMapsComponent implements OnInit {
                 for (const place of this.alllocations) {
 
                     if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
-
                         this.presentToast('nearby event found!');
                     }
                 }
@@ -218,7 +223,7 @@ export class GoogleMapsComponent implements OnInit {
                 this.currentPosition.lat = data.coords.latitude;
                 this.currentPosition.lng = data.coords.longitude;
                 console.log(this.currentPosition);
-
+                this.marker.setPosition(this.currentPosition);
 
             });
     }
