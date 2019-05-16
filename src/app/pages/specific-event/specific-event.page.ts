@@ -47,4 +47,11 @@ export class SpecificEventPage implements OnInit {
         this.activityService.removeParticipation(this.user.id, this.activity.id);
     }
 
+    acceptChallenge() {
+        // TODO
+    }
+
+    isChallenge(): boolean {
+        return this.activityService.isChallenge(this.activity.id);
+    }
 }

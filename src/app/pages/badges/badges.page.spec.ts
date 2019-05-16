@@ -59,12 +59,21 @@ describe('BadgesPage', () => {
 
     });
 
-    it('should have an empty array called allAvailBadges', () => {
+    it('should have non empty array called allAvailBadges', () => {
 
         let allAvailBadges = component.allAvailBadges;
 
         expect(Array.isArray(allAvailBadges)).toBeTruthy();
-        expect(component.allAvailBadges.length).toBe(0);
+        expect(component.allAvailBadges.length).toBeGreaterThan(0);
 
     });
+
+    it('should have 50% progress', () => {
+        {
+            let progressValue = component.getProgressValue();
+
+            expect(progressValue).toBe(.5);
+        }
+    });
+
 });
