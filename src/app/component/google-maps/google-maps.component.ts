@@ -8,6 +8,7 @@ import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {filter} from 'rxjs/operators';
+import {passBoolean} from 'protractor/built/util';
 
 declare var google;
 
@@ -26,6 +27,7 @@ declare var google;
 })
 export class GoogleMapsComponent implements OnInit {
 
+
     @ViewChild('mapElement') mapElement;
     map: any;
     mapOptions: any;
@@ -37,8 +39,6 @@ export class GoogleMapsComponent implements OnInit {
     positionSubscription: Subscription;
     currentPosition = {lat: null, lng: null};
     user: any;
-
-    isClose = false;
 
 
     constructor(public geolocation: Geolocation,

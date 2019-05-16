@@ -60,4 +60,5 @@ export class BadgesPage implements OnInit {
         } else {
         } // Borde kanske finnas något för att uppdatera den här?
     }
+
 }

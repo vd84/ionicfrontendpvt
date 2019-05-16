@@ -5,7 +5,6 @@ import {UserService} from '../../services/user-service/user.service';
 import {Youthcentre} from '../../Models/youthcentre';
 import {Events} from '@ionic/angular';
 
-
 @Component({
     selector: 'app-location',
     templateUrl: './location.page.html',
@@ -14,6 +13,7 @@ export class LocationPage implements OnInit {
 
     youthcentre: any;
     user: any;
+    close: boolean;
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private events: Events) {
     }
@@ -36,6 +36,5 @@ export class LocationPage implements OnInit {
         console.log('userid ' + this.user.id);
         this.checkinService.checkin(this.user.id,  this.youthcentre.id);
     }
-
 
 }
