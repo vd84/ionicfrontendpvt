@@ -13,6 +13,7 @@ export class ActivityService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
+    youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     allMyActivities = [];
 
 
@@ -42,6 +43,10 @@ export class ActivityService {
 
     getAllMyPendingActivities() {
         return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.id);
+    }
+
+    getYouthCenterActivities (id: number) {
+    return this.http.get<Event[]>(this.youthCentreUrl + id);
     }
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number) {
