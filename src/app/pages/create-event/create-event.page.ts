@@ -20,7 +20,7 @@ export class CreateEventPage implements OnInit {
     private challenged;
     private youthcenters = [];
 
-    constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityservice: ActivityService, private userService: UserService) {
+    constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityService: ActivityService, private userService: UserService) {
     }
 
 
@@ -45,11 +45,19 @@ export class CreateEventPage implements OnInit {
     }
 
     createSuggestion() {
-        this.activityservice.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        setTimeout(() => {
+            this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
+        }, 25);
+        this.router.navigate(['tabs/event/']);
     }
 
     createActivity() {
-        this.activityservice.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = false
+        setTimeout(() => {
+            this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
+        }, 25);
+        this.router.navigate(['tabs/event/']);
     }
 
 }
