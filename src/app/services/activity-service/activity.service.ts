@@ -14,6 +14,7 @@ export class ActivityService {
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     allMyActivities = [];
+    allMyPendingActivities = [];
 
 
     constructor(private http: HttpClient, private userservice: UserService) {
@@ -33,6 +34,15 @@ export class ActivityService {
 
     isMyActivity(id: number): boolean {
         for (let activity of this.allMyActivities) {
+            if (activity.id === id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isChallenge(id: number): boolean {
+        for (let activity of this.allMyPendingActivities) {
             if (activity.id === id) {
                 return true;
             }
@@ -103,8 +113,28 @@ export class ActivityService {
 
     }
 
-    removeParticipation(id: any, id2: number) {
-        // TODO
+    removeParticipation(userId: any, activityId: number) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        };
+
+        const body = JSON.stringify({
+            'user': userId,
+            'activity': activityId
+        });
+
+        this.http.post(this.participationUrl + '/delete/', body, httpOptions).subscribe(data => {
+                let activity = data[0];
+                this.allMyActivities.splice(this.allMyActivities.indexOf(activity), 1);
+                console.log(data);
+            },
+            error => {
+                console.log('Error');
+            });
+
     }
 
 

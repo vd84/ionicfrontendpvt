@@ -14,6 +14,7 @@ export class BadgesPage implements OnInit {
     allOfUsersBadges = [];
     allAvailBadges = [];
     hasShowedAvailBadges = false;
+    progressValue: any;
 
     constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService) {
         this.badgeList = 'all-badges';
@@ -23,6 +24,7 @@ export class BadgesPage implements OnInit {
         this.displayAllBadges();
         this.displayAllMyBadges();
         this.displayAvailBadges();
+        this.progressValue = this.getProgressValue();
     }
 
     loadBadge(badge) {
@@ -34,6 +36,10 @@ export class BadgesPage implements OnInit {
         this.badgeService.getAllBadges().subscribe(data => {
             this.allBadges = data;
         });
+    }
+
+    getProgressValue() {
+        return this.allOfUsersBadges.length / this.allBadges.length;
     }
 
 
