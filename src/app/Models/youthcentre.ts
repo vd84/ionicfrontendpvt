@@ -6,7 +6,7 @@ export class Youthcentre {
     private _lon: number;
     private _name: string;
     private _score: number;
-    private _isClose: boolean;
+    private _isClose = false;
 
     constructor(id: number, currentactivactivities: number, lat: number, lon: number, location: number, name: string, score: number ) {
         this._id = id;

@@ -13,11 +13,13 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
+import {SharedDirectivesModule} from './directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
     providers: [
         NativeStorage,
         Facebook,
@@ -25,6 +27,7 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
         SplashScreen,
         Geolocation,
         NativeGeocoder,
+        SharedDirectivesModule,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     exports: [],

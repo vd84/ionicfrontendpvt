@@ -23,7 +23,7 @@
                 </ion-card>
             </ion-item>
         </ion-list>
-
+        <a routerLink="//create-event"> <ion-button >Add activity</ion-button></a>
     <!--MY ACTIVITY LIST-->
         <ion-list *ngSwitchCase="'my-activities'">
             <ion-item *ngFor="let activity of authService.currentUser.value.getBookedActivities">

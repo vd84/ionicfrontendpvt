@@ -22,8 +22,7 @@ declare var google;
  */
 @Component({
     selector: 'app-google-maps',
-    templateUrl: './google-maps.component.html',
-    styleUrls: ['./google-maps.component.scss'],
+    templateUrl: './google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
 
@@ -38,6 +37,8 @@ export class GoogleMapsComponent implements OnInit {
     positionSubscription: Subscription;
     currentPosition = {lat: null, lng: null};
     user: any;
+
+    isClose = false;
 
 
     constructor(public geolocation: Geolocation,
@@ -56,6 +57,7 @@ export class GoogleMapsComponent implements OnInit {
             this.location.lat = position.coords.latitude;
             this.location.lng = position.coords.longitude;
         });
+        this.currentPosition = this.location;
         /*Map options*/
         this.mapOptions = {
             center: this.location,
@@ -66,22 +68,28 @@ export class GoogleMapsComponent implements OnInit {
         // Adds map with marker att currentLocation
         setTimeout(() => {
             this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-            /*Marker Options*/
-            this.markerOptions.position = this.location;
-            this.markerOptions.map = this.map;
-            this.markerOptions.title = 'My Location';
-            this.marker = new google.maps.Marker(this.markerOptions);
         }, 5000);
         this.startTracking();
 
     }
 
     ngOnInit(): void {
+        this.addStartMarker();
         this.user = this.userservice.currentUser;
         console.log(this.user);
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
+    }
+
+    addStartMarker() {
+        setTimeout(() => {
+            /*Marker Options*/
+            this.markerOptions.position = this.location;
+            this.markerOptions.map = this.map;
+            this.markerOptions.title = 'My Location';
+            this.marker = new google.maps.Marker(this.markerOptions);
+        }, 5000);
     }
 
 
@@ -90,31 +98,10 @@ export class GoogleMapsComponent implements OnInit {
      */
 
 
-    ionViewDidLoad() {
-        this.plt.ready().then(() => {
 
-            let mapOptions = {
-                zoom: 13,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: false
-            };
-            this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-            this.geolocation.getCurrentPosition().then(pos => {
-                let latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                this.map.setCenter(latLng);
-                this.map.setZoom(16);
-            }).catch((error) => {
-                console.log('Error getting location', error);
-            });
-        });
-    }
 
 
     addAllMarkers() {
-
 
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
@@ -125,10 +112,7 @@ export class GoogleMapsComponent implements OnInit {
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
                 let marker;
-                let infoWindow = new google.maps.InfoWindow({
-                    content: '<ion-button (click)="checkInOnCentre(1,1)"></ion-button>',
 
-                });
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(place.lat, place.lon),
                     map: this.map,
@@ -167,7 +151,7 @@ export class GoogleMapsComponent implements OnInit {
 
     }
 
-    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon) {
 
         function toRad(x) {
             return x * Math.PI / 180;
@@ -190,19 +174,24 @@ export class GoogleMapsComponent implements OnInit {
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         let d = R * c;
-        d = d * 10;
+        d = d * 1000;
 
-        console.log('d:' + d);
-        return d <= 10000000000000000000000000;
+        return d < 100;
 
 
     }
 
+
+
     startTracking() {
         this.isTracking = true;
-        this.positionSubscription = this.geolocation.watchPosition()
-            .pipe(filter(p => p.coords !== undefined)
-            )
+
+        let options = {
+            frequency: 3000,
+            enableHighAccuracy: true
+        };
+
+        this.positionSubscription = this.geolocation.watchPosition(options)
             .subscribe(data => {
 
 
@@ -218,8 +207,7 @@ export class GoogleMapsComponent implements OnInit {
                 this.currentPosition.lat = data.coords.latitude;
                 this.currentPosition.lng = data.coords.longitude;
                 console.log(this.currentPosition);
-
-
+                this.marker.setPosition(this.currentPosition);
             });
     }
 

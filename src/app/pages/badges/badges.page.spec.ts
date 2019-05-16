@@ -1,27 +1,70 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BadgesPage } from './badges.page';
+import {BadgesPage} from './badges.page';
+import {Router} from '@angular/router';
+import {BadgeService} from '../../services/badge-service/badge.service';
+import {DataService} from '../../services/data.service';
+import {UserService} from '../../services/user-service/user.service';
+import {BadgeServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {HttpClient} from '@angular/common/http';
 
 describe('BadgesPage', () => {
-  let component: BadgesPage;
-  let fixture: ComponentFixture<BadgesPage>;
+    let component: BadgesPage;
+    let fixture: ComponentFixture<BadgesPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BadgesPage ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [BadgesPage],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            providers: [
+                {provide: Router, useValue: null},
+                {provide: DataService, useValue: null},
+                {provide: BadgeService, useValue: new BadgeServiceMock()},
+                {provide: UserService, useValue: new UserServiceMock()},
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BadgesPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(BadgesPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('should set default badgeList to All', () => {
+        expect(component.badgeList).toBe('all-badges');
+    });
+
+    it('should have a non empty array called allBadges', () => {
+
+        let allBadges = component.allBadges;
+
+        expect(Array.isArray(allBadges)).toBeTruthy();
+        expect(component.allBadges.length).toBeGreaterThan(0);
+
+    });
+
+    it('should have a non empty array called allOfusersBadges', () => {
+
+        let allOfUsersBadges = component.allOfUsersBadges;
+
+        expect(Array.isArray(allOfUsersBadges)).toBeTruthy();
+        expect(component.allOfUsersBadges.length).toBeGreaterThan(0);
+
+    });
+
+    it('should have an empty array called allAvailBadges', () => {
+
+        let allAvailBadges = component.allAvailBadges;
+
+        expect(Array.isArray(allAvailBadges)).toBeTruthy();
+        expect(component.allAvailBadges.length).toBe(0);
+
+    });
 });
