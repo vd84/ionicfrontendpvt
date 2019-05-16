@@ -49,7 +49,7 @@ let activityId;
                 'resource': 1
 
             });
-            this.http.post<IActivity>(this.url2, body, httpOptions).subscribe(data => {
+            this.http.post<IActivity>(this.url, body, httpOptions).subscribe(data => {
 
 activityId = data[0].id;
 
