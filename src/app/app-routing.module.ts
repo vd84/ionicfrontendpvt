@@ -22,21 +22,18 @@ const routes: Routes = [
     {path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule'},
     {path: 'change-password', loadChildren: './pages/change-password/change-password.module#ChangePasswordPageModule'},
     {path: 'delete-account', loadChildren: './pages/delete-account/delete-account.module#DeleteAccountPageModule'},
-    {path: 'challenge', loadChildren: './pages/challenge/challenge.module#ChallengePageModule'},
     {path: 'location', loadChildren: './pages/location/location.module#LocationPageModule'},
     {
         path: 'location/:id',
         resolve: {youthcentre: DataResolverService},
         loadChildren: './pages/location/location.module#LocationPageModule'
     },
-  { path: 'specific-badge', loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule' },
+    {path: 'specific-badge', loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'},
     {
         path: 'specific-badge/:id',
         resolve: {badge: DataResolverService},
         loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'
-    },
-  { path: 'create-challenge', loadChildren: './pages/create-challenge/create-challenge.module#CreateChallengePageModule' }
-
+    }
 
 
 ];
