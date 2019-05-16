@@ -38,18 +38,16 @@ let activityId;
             };
 
             const body = JSON.stringify({
-
-                'createdbyid': this.userservice.currentUser.id,
-                'name': name,
-                'location': location,
-                'responsibleuser' : this.userservice.currentUser.id,
-                'description': description,
-                'altlocation': altlocation,
-                'category': category,
+                'createdby': 1,
+                'name': 'aktivitetsnamn',
+                'description': 'beskrivning',
+                'responsibleuser': 1,
+                'alternativelocation': 'alt location',
+                'category': 1,
                 'resource': 1
 
             });
-            this.http.post<IActivity>(this.url2, body, httpOptions).subscribe(data => {
+            this.http.post<IActivity>(this.url, body, httpOptions).subscribe(data => {
 
 activityId = data[0].id;
 
