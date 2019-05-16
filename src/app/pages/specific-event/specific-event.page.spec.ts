@@ -5,8 +5,9 @@ import {SpecificEventPage} from './specific-event.page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {ParticipationService} from '../../services/participation-service/participation.service';
-import {UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {ActivityServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {Youthcentre} from '../../Models/youthcentre';
+import {ActivityService} from '../../services/activity-service/activity.service';
 
 describe('SpecificEventPage', () => {
     let component: SpecificEventPage;
@@ -22,7 +23,8 @@ describe('SpecificEventPage', () => {
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            }, {provide: ParticipationService, useValue: null}]
+            }, {provide: ParticipationService, useValue: null},
+                {provide: ActivityService, useValue: ActivityServiceMock}]
         })
             .compileComponents();
     }));
