@@ -116,10 +116,7 @@ export class BadgeServiceMock {
         return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null)]);
     }
 
-    /**
-     * Retunerar alla badges från en specifik user som identifieras med användarens id.
-     * @param id: användarens id
-     */
+
     getAllMyBadges(id): Observable<Badge[]> {
         return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null)]);
     }

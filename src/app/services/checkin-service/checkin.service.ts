@@ -22,7 +22,7 @@ export class CheckinService {
         'youthcentre': youthCentreId,
       });
 
-      this.http.post(this.url, body, httpOptions).subscribe(data => {
+      this.http.post(this.url, body, httpOptions).subscribe(data => { // Saknar vad vi tar emot?
             console.log(data);
           },
           error => {
