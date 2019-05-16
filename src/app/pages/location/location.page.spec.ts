@@ -9,6 +9,8 @@ import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {Observable, of} from 'rxjs';
 import 'rxjs-compat/add/observable/from';
 import {Youthcentre} from '../../Models/youthcentre';
+import {ActivityService} from '../../services/activity-service/activity.service';
+import {DataService} from '../../services/data.service';
 
 describe('LocationPage', () => {
     let component: LocationPage;
@@ -27,7 +29,8 @@ describe('LocationPage', () => {
             }, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            }]
+            }, {provide: ActivityService, useValue: null},
+            ,{provide: DataService, useValue:null}]
         })
             .compileComponents();
     }));
