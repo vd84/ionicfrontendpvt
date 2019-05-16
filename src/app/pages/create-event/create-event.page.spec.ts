@@ -5,6 +5,10 @@ import {CreateEventPage} from './create-event.page';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Events} from '@ionic/angular';
+import {YouthcenterService} from '../../services/youthcenter.service';
+import {ActivityService} from '../../services/activity-service/activity.service';
+import {UserService} from '../../services/user-service/user.service';
+import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 
 describe('CreateEventPage', () => {
     let component: CreateEventPage;
@@ -15,7 +19,7 @@ describe('CreateEventPage', () => {
             imports: [FormsModule],
             declarations: [CreateEventPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [{provide: Router, useValue: null}, {provide: Events, useValue: null}]
+            providers: [{provide: Router, useValue: null}, {provide: Events, useValue: null}, {provide: YouthcenterService, useValue: null}, {provide: ActivityService, useValue: null}, {provide: UserService, useValue: new UserServiceMock()} ]
         })
             .compileComponents();
     }));

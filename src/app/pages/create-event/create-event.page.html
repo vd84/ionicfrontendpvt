@@ -50,13 +50,12 @@
               <ion-card> {{events.toString()}}</ion-card>
             </ion-list>
           </div>
-          <div padding>
-            <ion-button  size="large" type="submit"  expand="block" (click) = 'challenge()'>Challenge</ion-button>
+          <div *appHasRole="'user'" padding>
+            <ion-button  size="large" type="submit"  expand="block" (click) = 'createSuggestion()'>Suggest Activity</ion-button>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" expand="block" (click) = 'submitEvent()'>Add open event</ion-button>
+            <ion-button *appHasRole="'admin'" size="large" type="submit" expand="block" (click) = 'createActivity()'>Create Activity</ion-button>
           </div>
-          <ion-button (click)="addactivityandchallenge()">Skapa activity & challenge</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

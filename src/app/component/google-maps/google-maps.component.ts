@@ -208,8 +208,8 @@ export class GoogleMapsComponent implements OnInit {
                 this.marker.setPosition(this.currentPosition);
 
             });
-    }
 
+    }
     async presentToast(toastMessage: string) {
         const toast = await this.toastController.create({
             message: toastMessage,

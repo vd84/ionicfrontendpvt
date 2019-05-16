@@ -1,10 +1,8 @@
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
-import {BadgeService} from '../src/app/services/badge-service/badge.service';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Badge} from '../src/app/Models/Badge';
+import {Event} from '../src/app/Models/event';
 import {User} from '../src/app/Models/user';
+import 'rxjs-compat/add/observable/of';
 
 export class PlatformMock {
     public ready(): Promise<string> {
@@ -114,27 +112,13 @@ export class BadgeServiceMock {
     constructor() {
     }
 
-    /**
-     * Returnerar alla badges från apiet.
-     */
-    getAllBadges(): Observable<Badge> {
-        return Observable.create([{
-            'id': 1,
-            'name': 'first time visitor',
-            'description': 'Congratulations! You have successfully checkd in to your first youth center.'
-        }]);
+    getAllBadges(): Observable<Badge[]> {
+        return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null)]);
     }
 
-    /**
-     * Retunerar alla badges från en specifik user som identifieras med användarens id.
-     * @param id: användarens id
-     */
+
     getAllMyBadges(id): Observable<Badge[]> {
-        return Observable.create([{
-            'id': 1,
-            'name': 'first time visitor',
-            'description': 'Congratulations! You have successfully checkd in to your first youth center.'
-        }]);
+        return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null)]);
     }
 }
 
@@ -188,20 +172,6 @@ export class ActivityServiceMock {
     }
 
     getAllActivities(): Observable<Event[]> {
-        return Observable.create([{
-            'id': 1,
-            'registrationdate': null,
-            'createdby': 1,
-            'startdate': null,
-            'enddate': null,
-            'name': 'aktivitetsnamn',
-            'description': 'beskrivning',
-            'responsibleuser': 1,
-            'alternativelocation': 'alt location',
-            'issuggestion': true,
-            'isactive': true,
-            'category': 1,
-            'resource': 1
-        }]);
+        return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
     }
 }
