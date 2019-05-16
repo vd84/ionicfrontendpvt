@@ -21,7 +21,6 @@ export class SettingsPage implements OnInit {
     }
 
 
-
     changePassword() {
         this.router.navigate(['change-password']);
 
@@ -32,6 +31,11 @@ export class SettingsPage implements OnInit {
         this.router.navigate(['delete-account']);
 
 
+    }
+
+    logout() {
+        this.userService.logout();
+        this.router.navigate(['login']);
     }
 
     ngOnInit(): void {
