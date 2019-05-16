@@ -41,18 +41,30 @@ describe('BadgesPage', () => {
         expect(component.badgeList).toBe('all-badges');
     });
 
-    it('should have one badge in All', () => {
-        component.displayAllBadges();
-        expect(component.allBadges.length).toBe(1);
+    it('should have a non empty array called allBadges', () => {
+
+        let allBadges = component.allBadges;
+
+        expect(Array.isArray(allBadges)).toBeTruthy();
+        expect(component.allBadges.length).toBeGreaterThan(0);
+
     });
 
-    it('should have one badge in myBadges', () => {
-        component.displayAllMyBadges();
-        expect(component.allOfUsersBadges.length).toBe(1);
+    it('should have a non empty array called allOfusersBadges', () => {
+
+        let allOfUsersBadges = component.allOfUsersBadges;
+
+        expect(Array.isArray(allOfUsersBadges)).toBeTruthy();
+        expect(component.allOfUsersBadges.length).toBeGreaterThan(0);
+
     });
 
-    it('should have no available badges', () => {
-        component.displayAvailBadges();
+    it('should have an empty array called allAvailBadges', () => {
+
+        let allAvailBadges = component.allAvailBadges;
+
+        expect(Array.isArray(allAvailBadges)).toBeTruthy();
         expect(component.allAvailBadges.length).toBe(0);
+
     });
 });

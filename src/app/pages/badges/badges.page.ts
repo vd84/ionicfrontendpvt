@@ -2,8 +2,6 @@ import {Component, Host, OnInit, Optional} from '@angular/core';
 import {Router} from '@angular/router';
 import {BadgeService} from '../../services/badge-service/badge.service';
 import {DataService} from '../../services/data.service';
-import {AuthService} from '../../services/authentication-service/auth.service';
-import {ActivityService} from '../../services/activity-service/activity.service';
 import {UserService} from '../../services/user-service/user.service';
 
 @Component({
