@@ -52,7 +52,7 @@ export class ActivityService {
     }
 
     getAllMyPendingActivities() {
-        return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.id);
+        return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
     }
 
     getYouthCenterActivities(id: number) {

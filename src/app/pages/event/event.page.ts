@@ -22,6 +22,19 @@ export class EventPage implements OnInit {
         this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
         this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
         this.activity = 'all-activities';
+
+
+        // Byt ut till isChallenged
+        for (const activity of this.allActivities) {
+            if (activity.isactive === 0) {
+                this.allActivities.splice(this.allActivities.indexOf(activity), 1);
+                console.log('did not add' + activity);
+                console.log('full list' + this.allActivities);
+
+
+            }
+        }
+
     }
 
     loadEvent(activity) {
