@@ -29,6 +29,9 @@ export class LocationPage implements OnInit {
         }
         this.user = this.userService.currentUser;
         this.getActivitiesForYouthCenter();
+        console.log(this.allActivitiesForCenter);
+        console.log(this.allActivitiesForCenter.length);
+
 
     }
     checkin () {

@@ -53,11 +53,19 @@ export class CreateEventPage implements OnInit {
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 21); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
         }, 25);
         this.router.navigate(['tabs/event/']);
     }
+
+    testPrint() {
+        setTimeout(() => {
+            console.log(this.challenged);
+
+        }, 50);
+    }
+
 
 }

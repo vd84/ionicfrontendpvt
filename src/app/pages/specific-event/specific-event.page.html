@@ -23,10 +23,20 @@
             <h4>Description: {{activity.description}}</h4>
             <ion-textarea></ion-textarea>
         </ion-item>
+
+        <!--Ska kunna välja i dropdown av de två som tävlar*-->
+
+        <ion-item >
+            <ion-input type="number" [(ngModel)]="winner" >WHO WON?</ion-input>
+        </ion-item>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
     <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
     <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
     <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
+    <ion-button (click)="specifyWinner()" >Specify Winner</ion-button>
+
+
+
 
 </ion-content>

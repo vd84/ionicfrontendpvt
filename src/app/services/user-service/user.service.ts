@@ -120,7 +120,7 @@ export class UserService {
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
-                if (loggedInWithFaceBook) {
+                if (loggedInWithFaceBook === 1) {
                     this.login(username, password, loggedInWithFaceBook);
 
                 } else {
