@@ -14,6 +14,7 @@ export class SpecificEventPage implements OnInit {
 
     activity: any;
     user: any;
+    winner: String;
 
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService) {
     }
@@ -30,6 +31,7 @@ export class SpecificEventPage implements OnInit {
             };
         }
         this.user = this.userService.currentUser;
+        console.log(this.activity);
     }
 
     booked(): boolean {
@@ -53,5 +55,14 @@ export class SpecificEventPage implements OnInit {
 
     isChallenge(): boolean {
         return this.activityService.isChallenge(this.activity.id);
+    }
+
+
+    specifyWinner() {
+
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.winner);
+
+
+        console.log(this.winner);
     }
 }

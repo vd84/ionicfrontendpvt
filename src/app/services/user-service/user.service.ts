@@ -120,7 +120,7 @@ export class UserService {
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
-                if (loggedInWithFaceBook) {
+                if (loggedInWithFaceBook === 1) {
                     this.login(username, password, loggedInWithFaceBook);
 
                 } else {
@@ -175,10 +175,9 @@ export class UserService {
 
                 let role;
                 if (this.currentUserJson[0].role === 1) {
-                    console.log('admin');
-                    role = 'admin';
-                } else {
                     role = 'user';
+                } else {
+                    role = 'admin';
                 }
                 this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname);
                 console.log(this.currentUser);
