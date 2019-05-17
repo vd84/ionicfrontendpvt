@@ -17,43 +17,47 @@ export class CreateEventPage implements OnInit {
     private description: String;
     private alt_location: String;
     private category: number;
-    private challenged ;
+    private challenged;
     private youthcenters = [];
-    constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityservice: ActivityService, private userService: UserService) {}
+
+    constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityService: ActivityService, private userService: UserService) {
+    }
 
 
     ngOnInit() {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
         console.log(this.youthcenters);
-       setTimeout( () => {
-           this.youthcenterService.getAllLocations();
-           this.youthcenters = this.youthcenterService.allYouthCentres;
-           console.log(this.youthcenters);
-           this.loadallyouthcenters();
-       } , 8000);
+        setTimeout(() => {
+            this.youthcenterService.getAllLocations();
+            this.youthcenters = this.youthcenterService.allYouthCentres;
+            console.log(this.youthcenters);
+            this.loadallyouthcenters();
+        }, 8000);
 
 
     }
-    submitEvent() {
-        this.events.push(this.name);
-        this.events.push(this.location);
-        this.createdEvents.publish('publishedEvents', this.events);
-    }
-    challenge() {
-        this.router.navigate(['challenge']);
-    }
 
-    register(form: NgForm) {
-    }
-loadallyouthcenters() {
+    loadallyouthcenters() {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
-console.log(this.youthcenters);
-}
+        console.log(this.youthcenters);
+    }
 
-addactivityandchallenge() {
-        this.activityservice.addActivityAndChallenge(this.name, this.location, this.description, this.alt_location, this.category, this.userService.currentUser.currentyouthcentre, 1, this.userService.currentUser.id  );
-}
+    createSuggestion() {
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        setTimeout(() => {
+            this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
+        }, 25);
+        this.router.navigate(['tabs/event/']);
+    }
+
+    createActivity() {
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, 41); // skickar med suggestion = false
+        setTimeout(() => {
+            this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
+        }, 25);
+        this.router.navigate(['tabs/event/']);
+    }
 
 }

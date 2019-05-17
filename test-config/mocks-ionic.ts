@@ -113,7 +113,7 @@ export class BadgeServiceMock {
     }
 
     getAllBadges(): Observable<Badge[]> {
-        return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null)]);
+        return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null), new Badge(2, 'MockResponseBadge2', 'MockResponseDescription', null)]);
     }
 
 

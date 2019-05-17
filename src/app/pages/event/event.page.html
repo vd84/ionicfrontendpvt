@@ -12,32 +12,38 @@
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">All</ion-segment-button>
             <ion-segment-button value="my-activities">My</ion-segment-button>
-            <ion-segment-button *appHasRole="['admin']" value="my-challenges">Challenges</ion-segment-button>
+            <ion-segment-button *appHasRole="'admin'" value="pending-activities">Pending</ion-segment-button>
         </ion-segment>
-    </div><div [ngSwitch]="activity">
-    <!--CARD LIST FOR ALL EVENTS-->
+    </div>
+    <div [ngSwitch]="activity">
+        <!--CARD LIST FOR ALL EVENTS-->
         <ion-list *ngSwitchCase="'all-activities'">
-            <ion-item *ngFor="let activity of allEvents">
+            <ion-item *ngFor="let activity of allActivities">
                 <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                 </ion-card>
             </ion-item>
         </ion-list>
-        <a routerLink="//create-event"> <ion-button >Add activity</ion-button></a>
-    <!--MY ACTIVITY LIST-->
+        <!--MY ACTIVITY LIST-->
         <ion-list *ngSwitchCase="'my-activities'">
-            <ion-item *ngFor="let activity of authService.currentUser.value.getBookedActivities">
+            <ion-item *ngFor="let activity of activityService.allMyActivities">
                 <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                 </ion-card>
             </ion-item>
         </ion-list>
-        <ion-list *ngSwitchCase="'my-challenges'">
+        <!--MY PENDING ACTIVITIES-->
+        <ion-list *ngSwitchCase="'pending-activities'">
+            <ion-item *ngFor="let activity of activityService.allMyPendingActivities">
+                <ion-card (click)="loadEvent(activity)">
+                    <ion-card-title>{{activity.name}}</ion-card-title>
+                </ion-card>
+            </ion-item>
         </ion-list>
     </div>
 
-
-    <ion-button *appHasRole="['admin']" (click)="goToCreateEvent()">Create Event</ion-button>
+    <ion-button *appHasRole="'admin'" (click)="goToCreateEvent()">Create Activity</ion-button>
+    <ion-button *appHasRole="'user'" (click)="goToCreateEvent()">Suggest Activity</ion-button>
 
 
 </ion-content>

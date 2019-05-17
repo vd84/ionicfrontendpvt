@@ -10,14 +10,17 @@ import {DataService} from '../../services/data.service';
 })
 export class EventPage implements OnInit {
     activity: any;
-    allEvents = [];
+    allActivities = [];
+
 
     constructor(private router: Router, private authService: AuthService, private activityService: ActivityService, private dataService: DataService) {
     }
 
 
     ngOnInit() {
-        this.activityService.getAllActivities().subscribe(data => this.allEvents = data);
+        this.activityService.getAllActivities().subscribe(data => this.allActivities = data);
+        this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
+        this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
         this.activity = 'all-activities';
     }
 

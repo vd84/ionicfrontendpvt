@@ -31,6 +31,9 @@
   <!--UPCOMING EVENTS-->
   <ion-list>
     <ion-list-header>Upcoming Activities</ion-list-header>
+    <ion-item *ngFor="let activity of allActivitiesForCenter">
+        <ion-card-title>{{activity.name}}</ion-card-title>
+    </ion-item>
   </ion-list>
   <!--CHECK IN BUTTON-->
   <ion-button (click)="checkin()">check in</ion-button>

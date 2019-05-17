@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color = "primary">
+    <ion-toolbar color="primary">
         <ion-title>{{activity.name}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
@@ -25,10 +25,8 @@
         </ion-item>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
-    <ion-button (click)="bookActivity()" *ngIf="!booked();
-" >Add Activity</ion-button>
-    <ion-button (click)="removeActivity()" *ngIf="booked();
-">Remove Activity</ion-button>
-    <ion-button>Accept Challenge</ion-button>
+    <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
+    <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
+    <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
 
 </ion-content>

@@ -75,15 +75,6 @@ export class User {
         this._name = value;
     }
 
-    get currentYouthCentre(): number {
-        return this._currentyouthcentre;
-    }
-
-    set currentYouthCentre(value: number) {
-        this._currentyouthcentre = value;
-    }
-
-
     set picture(value) {
         this._picture = value;
     }

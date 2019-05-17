@@ -28,14 +28,12 @@ const routes: Routes = [
         resolve: {youthcentre: DataResolverService},
         loadChildren: './pages/location/location.module#LocationPageModule'
     },
-  { path: 'specific-badge', loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule' },
+    {path: 'specific-badge', loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'},
     {
         path: 'specific-badge/:id',
         resolve: {badge: DataResolverService},
         loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'
-    },
-  { path: 'create-challenge', loadChildren: './pages/create-challenge/create-challenge.module#CreateChallengePageModule' }
-
+    }
 
 
 ];

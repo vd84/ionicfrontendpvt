@@ -175,11 +175,11 @@ export class UserService {
 
                 let role;
                 if (this.currentUserJson[0].role === 1) {
-                    role = 'admin';
-                } else {
                     role = 'user';
+                } else {
+                    role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);
