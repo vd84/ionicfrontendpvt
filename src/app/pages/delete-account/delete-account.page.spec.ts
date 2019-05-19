@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {FormsModule} from '@angular/forms';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 describe('DeleteAccountPage', () => {
     let component: DeleteAccountPage;
@@ -14,7 +15,7 @@ describe('DeleteAccountPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [DeleteAccountPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: AlertController, useValue: null}, {provide: Router, useValue: null}, {

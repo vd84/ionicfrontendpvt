@@ -1,27 +1,27 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Routes, RouterModule} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { SettingsPage } from './settings.page';
-import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {SettingsPage} from './settings.page';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: SettingsPage
-  }
+    {
+        path: '',
+        component: SettingsPage
+    }
 ];
 
 @NgModule({
     imports: [
         CommonModule,
         IonicModule,
+        FormsModule,
         RouterModule.forChild(routes),
-        SharedDirectivesModule
     ],
-  declarations: [SettingsPage]
+    declarations: [SettingsPage]
 })
-export class SettingsPageModule {}
+export class SettingsPageModule {
+}

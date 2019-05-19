@@ -174,4 +174,31 @@ export class ActivityServiceMock {
     getAllActivities(): Observable<Event[]> {
         return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
     }
+
+    getAllMyActivities() {
+        return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
+    }
+
+    getAllMyPendingActivities() {
+        return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
+    }
+
+    isMyActivity(id: number) {
+        return true;
+    }
+
+    isChallenge(id: number) {
+        return true;
+    }
+
+    getYouthCenterActivities(id: number) {
+        return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
+    }
+}
+
+export class YouthCenterServiceMock {
+
+    getAllLocations() {
+        return null;
+    }
 }

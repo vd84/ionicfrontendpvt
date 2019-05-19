@@ -8,7 +8,8 @@ import {Events} from '@ionic/angular';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {UserService} from '../../services/user-service/user.service';
-import {UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {ActivityServiceMock, UserServiceMock, YouthCenterServiceMock} from '../../../../test-config/mocks-ionic';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 describe('CreateEventPage', () => {
     let component: CreateEventPage;
@@ -16,10 +17,13 @@ describe('CreateEventPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [CreateEventPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [{provide: Router, useValue: null}, {provide: Events, useValue: null}, {provide: YouthcenterService, useValue: null}, {provide: ActivityService, useValue: null}, {provide: UserService, useValue: new UserServiceMock()} ]
+            providers: [{provide: Router, useValue: null}, {provide: Events, useValue: null}, {
+                provide: YouthcenterService,
+                useValue: new YouthCenterServiceMock()
+            }, {provide: ActivityService, useValue: new ActivityServiceMock()}, {provide: UserService, useValue: new UserServiceMock()}]
         })
             .compileComponents();
     }));
@@ -33,4 +37,6 @@ describe('CreateEventPage', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+
 });

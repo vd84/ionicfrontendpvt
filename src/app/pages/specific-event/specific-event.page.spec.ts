@@ -6,8 +6,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {ParticipationService} from '../../services/participation-service/participation.service';
 import {ActivityServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
-import {Youthcentre} from '../../Models/youthcentre';
 import {ActivityService} from '../../services/activity-service/activity.service';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 describe('SpecificEventPage', () => {
     let component: SpecificEventPage;
@@ -18,13 +19,14 @@ describe('SpecificEventPage', () => {
     beforeEach(async(() => {
         routeStub = {snapshot: {data: {activity: 'activity'}}};
         TestBed.configureTestingModule({
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [SpecificEventPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
             }, {provide: ParticipationService, useValue: null},
-                {provide: ActivityService, useValue: ActivityServiceMock}]
+                {provide: ActivityService, useValue: new ActivityServiceMock()}]
         })
             .compileComponents();
     }));

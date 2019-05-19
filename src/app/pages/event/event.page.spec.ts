@@ -7,8 +7,6 @@ import {AuthService} from '../../services/authentication-service/auth.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
-import {HasRoleDirective} from '../../directives/has-role.directive';
-import {CommonModule} from '@angular/common';
 import {UserService} from '../../services/user-service/user.service';
 import {ActivityServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {FormsModule} from '@angular/forms';
@@ -43,4 +41,5 @@ describe('EventPage', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
 });
