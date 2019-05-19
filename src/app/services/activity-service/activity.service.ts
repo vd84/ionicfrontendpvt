@@ -10,7 +10,7 @@ import {UserService} from '../user-service/user.service';
 })
 export class ActivityService {
 
-    url = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
@@ -26,11 +26,11 @@ export class ActivityService {
      *
      */
     getAllActivities(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.url);
+        return this.http.get<Event[]>(this.activityUrl);
     }
 
     getAllMyActivities(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.url + this.userservice.currentUser.id);
+        return this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id);
     }
 
     isMyActivity(id: number): boolean {
@@ -52,11 +52,11 @@ export class ActivityService {
     }
 
     getAllMyPendingActivities() {
-        return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.id);
+        return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
     }
 
-    getYouthCenterActivities (id: number) {
-    return this.http.get<Event[]>(this.youthCentreUrl + id);
+    getYouthCenterActivities(id: number) {
+        return this.http.get<Event[]>(this.youthCentreUrl + id);
     }
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number) {
@@ -84,7 +84,7 @@ export class ActivityService {
 
         });
 
-        this.http.post<IActivity>(this.url, body, httpOptions).subscribe(data => {
+        this.http.post<IActivity>(this.activityUrl, body, httpOptions).subscribe(data => {
 
                 console.log(data);
 
@@ -139,6 +139,62 @@ export class ActivityService {
             error => {
                 console.log('Error');
             });
+
+    }
+
+
+
+    modifyActivity(id,
+                   name,
+                   description,
+                   responsibleuser,
+                   alternativelocation,
+                   issuggestion,
+                   isactive,
+                   category,
+                   resource,
+                   challenger,
+                   challenged,
+                   completed,
+                   challengeaccepted,
+                   challengedrejected,
+                   winner ) {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+        };
+
+        const body = JSON.stringify({
+            'id': id,
+            'responsibleuser': responsibleuser,
+            'name': name,
+            'description': description,
+            'alternativelocation': alternativelocation,
+            'issuggestion': issuggestion,
+            'isactive': isactive,
+            'category': category,
+            'resource': resource,
+            'challenger': challenger,
+            'challenged': challenged,
+            'completed': completed,
+            'winner': winner,
+
+
+
+        });
+
+        this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
+                console.log(data);
+            },
+            error => {
+                console.log('Error');
+            });
+
+
+
 
     }
 

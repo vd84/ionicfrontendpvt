@@ -7,7 +7,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content  color="primary">
-  <form>
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -40,8 +39,8 @@
             </ion-item>
           <ion-item>
                 <ion-label>Youth Center:</ion-label>
-                <ion-select placeholder="Select"  multiple="false" >
-                  <ion-select-option name="motståndare" *ngFor="let youthcenter of youthcenters" ngModel required [(ngModel)]="challenged">{{youthcenter.name}}</ion-select-option>
+                <ion-select [(ngModel)]="challenged">
+                  <ion-select-option *ngFor="let challenged of youthcenters" [value]="challenged.id">{{challenged.name}} </ion-select-option>
 
                 </ion-select>
             </ion-item>
@@ -59,6 +58,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </form>
 </ion-content>
 
