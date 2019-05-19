@@ -68,7 +68,7 @@ describe('BadgesPage', () => {
 
     });
 
-    it('should have 50% progress', () => {
+    it('should have a field progressValue initialized to 50%', () => {
         {
             let progressValue = component.getProgressValue();
 
