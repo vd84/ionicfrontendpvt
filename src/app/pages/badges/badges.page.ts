@@ -54,7 +54,6 @@ export class BadgesPage implements OnInit {
     }
 
     displayAvailBadges() {
-        if (this.hasShowedAvailBadges === false) {
             this.hasShowedAvailBadges = true;
             for (let i = 0; i < this.allBadges.length; i++) {
                 for (let y = 0; y < this.allOfUsersBadges.length; y++) {
@@ -63,8 +62,6 @@ export class BadgesPage implements OnInit {
                     }
                 }
             }
-        } else {
-        } // Borde kanske finnas något för att uppdatera den här?
     }
 
 }
