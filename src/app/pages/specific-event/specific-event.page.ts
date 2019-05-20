@@ -66,4 +66,8 @@ export class SpecificEventPage implements OnInit {
     isActivityOwner(): boolean {
         return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && !this.isChallenge();
     }
+
+    radioChangeHandler(event) {
+        this.winner = event.target.value;
+    }
 }
