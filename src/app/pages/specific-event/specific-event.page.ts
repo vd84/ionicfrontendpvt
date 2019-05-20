@@ -4,7 +4,6 @@ import {UserService} from '../../services/user-service/user.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {ToastController} from '@ionic/angular';
-import {ParticipationService} from '../../services/participation-service/participation.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -15,11 +14,11 @@ export class SpecificEventPage implements OnInit {
     activity: any;
     user: any;
     winner: String;
-    participants: any = [];
     competitors: any = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
     }
+
     ngOnInit() {
         if (this.route.snapshot.data['activity']) {
             this.activity = this.route.snapshot.data['activity'];
@@ -32,9 +31,8 @@ export class SpecificEventPage implements OnInit {
             };
         }
         this.user = this.userService.currentUser;
-        this.participants = [{displayname: 'Test1'}, {displayname: 'Test2'}];
+        this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
-        // this.participants = this.activityService.getAllActivityParticipants(this.activity.id);
     }
 
     booked(): boolean {
@@ -66,7 +64,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     isActivityOwner(): boolean {
-        return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && !this.isChallenge();
+        return ((this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && (!this.activityService.activityIsPending(this.activity) && !this.activityService.activityIsSuggestion(this.activity))); //  && !this.isChallenge()
     }
 
     checkInActivity() {
@@ -103,5 +101,17 @@ export class SpecificEventPage implements OnInit {
             position: 'middle'
         });
         toast.present();
+    }
+
+    radioChangeHandler(event) {
+        this.winner = event.target.value;
+    }
+
+    isSuggestion(): boolean {
+        return this.activityService.activityIsSuggestion(this.activity);
+    }
+
+    createChallenge() {
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.userService.currentUser.id, this.activity.alternativelocation, 0, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner);
     }
 }

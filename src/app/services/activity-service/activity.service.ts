@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IActivity} from '../../Interfaces/activity';
 import {UserService} from '../user-service/user.service';
+import {User} from '../../Models/user';
+import {ParticipationUser} from '../../Models/ParticipationUser';
 
 
 @Injectable({
@@ -14,20 +16,13 @@ export class ActivityService {
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
-    userAllActivities = [];
+    participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
     adminPendingActivities = [];
-
     adminAllActivities = [];
     allActivitiesFromDatabase = [];
-
-    allRelevantActivities = [];
-    allDeclinedActivities = [];
-
-
     allMyActivities = [];
     allMyPendingActivities = [];
-    allMySuggstion = [];
-    allYouthCentreActivites = [];
+    allActivityParticipants = [];
 
 
     constructor(private http: HttpClient, private userservice: UserService) {
@@ -42,8 +37,6 @@ export class ActivityService {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
-            console.log(this.allMyPendingActivities);
-
 
 
         }, error => {
@@ -57,7 +50,7 @@ export class ActivityService {
     generateAllActvitiesPage() {
 
         for (const activity of this.allActivitiesFromDatabase) {
-            if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityDeclined(activity) && this.activityIsAccepted(activity)) {
+            if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
                 this.adminAllActivities.push(activity);
 
             }
@@ -92,7 +85,7 @@ export class ActivityService {
 
     }
 
-    activityDeclined(activity) {
+    activityIsDeclined(activity) {
 
 
         return activity.challengerejected === 1;
@@ -125,17 +118,19 @@ export class ActivityService {
     }
 
     isChallenge(id: number): boolean {
-        for (let activity of this.allMyPendingActivities) {
-            if (activity.id === id) {
+        for (let activity of this.adminPendingActivities) {
+
+            if (!this.activityIsSuggestion(activity) && !this.activityIsAccepted(activity) && !this.activityIsDeclined(activity) && activity.id === id && this.isChallenged(activity)) {
                 return true;
             }
         }
         return false;
     }
 
-    // getAllMyPendingActivities() {
-    //     return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
-    // }
+    isChallenged(activity) {
+        return activity.challenged === this.userservice.currentUser.currentyouthcentre;
+    }
+
 
     getYouthCenterActivities(id: number) {
         return this.http.get<Event[]>(this.youthCentreUrl + id);
@@ -278,7 +273,12 @@ export class ActivityService {
     }
 
     getAllActivityParticipants(id: number) {
-        // TODO
+        this.http.get<ParticipationUser[]>(this.participationByActivityUrl + id).subscribe(data => {
+            this.allActivityParticipants = data;
+            console.log(data);
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
 

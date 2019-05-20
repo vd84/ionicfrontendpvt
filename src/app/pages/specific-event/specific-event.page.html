@@ -34,7 +34,7 @@
                 <ion-list *ngFor="let competitor of competitors">
                     <ion-item>
                         <ion-label>{{competitor.id}}</ion-label>
-                        <ion-radio></ion-radio>
+                        <ion-radio value="{{competitor.id}}" (ionSelect)="radioChangeHandler($event)"></ion-radio>
                     </ion-item>
                 </ion-list>
             </ion-radio-group>
@@ -43,18 +43,20 @@
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
         <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
-        <ion-button (click)="checkInActivity()"  [disabled]="!userIsCloseEnough()" >Check in</ion-button>
+        <ion-button (click)="checkInActivity()" [disabled]="!userIsCloseEnough()">Check in</ion-button>
         <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
     </div>
     <div *appHasRole="'admin'">
         <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
         <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Specify Winner</ion-button>
+        <ion-button (click)="createChallenge()" *ngIf="isSuggestion()">Create Challenge</ion-button>
+
         <ion-list *ngIf="isActivityOwner()">
             <ion-list-header>
                 <ion-label>Participation List</ion-label>
-                <ion-badge>{{participants.length}}</ion-badge>
+                <ion-badge>{{activityService.allActivityParticipants.length}}</ion-badge>
             </ion-list-header>
-            <ion-item *ngFor="let participant of participants">
+            <ion-item *ngFor="let participant of activityService.allActivityParticipants">
                 <h1>{{participant.displayname}}</h1>
             </ion-item>
         </ion-list>
