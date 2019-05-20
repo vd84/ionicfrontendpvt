@@ -26,17 +26,28 @@
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
 
-        <ion-item >
-            <ion-input type="number" [(ngModel)]="winner" ngDefaultControl >WHO WON?</ion-input>
+        <ion-item *ngIf="isActivityOwner()">
+            <ion-input type="number" [(ngModel)]="winner" ngDefaultControl>WHO WON?</ion-input>
         </ion-item>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
-    <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
-    <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
-    <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
-    <ion-button (click)="specifyWinner()" >Specify Winner</ion-button>
-
-
+    <div *appHasRole="'user'">
+        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
+        <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
+    </div>
+    <div *appHasRole="'admin'">
+        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
+        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Specify Winner</ion-button>
+        <ion-list *ngIf="isActivityOwner()">
+            <ion-list-header>
+                <ion-label>Participation List</ion-label>
+                <ion-badge>{{participants.length}}</ion-badge>
+            </ion-list-header>
+            <ion-item *ngFor="let participant of participants">
+                <h1>{{participant.displayname}}</h1>
+            </ion-item>
+        </ion-list>
+    </div>
 
 
 </ion-content>

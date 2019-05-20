@@ -25,7 +25,7 @@ describe('SpecificEventPage', () => {
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            }, {provide: ParticipationService, useValue: null},
+            },
                 {provide: ActivityService, useValue: new ActivityServiceMock()}]
         })
             .compileComponents();

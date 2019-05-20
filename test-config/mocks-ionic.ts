@@ -194,6 +194,10 @@ export class ActivityServiceMock {
     getYouthCenterActivities(id: number) {
         return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
     }
+
+    getAllActivityParticipants(id: number) {
+        return Observable.of([new User(1, 'MockResponseUser1', 'user', 1, 'MockResponseUser1')]);
+    }
 }
 
 export class YouthCenterServiceMock {

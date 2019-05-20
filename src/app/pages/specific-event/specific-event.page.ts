@@ -15,8 +15,9 @@ export class SpecificEventPage implements OnInit {
     activity: any;
     user: any;
     winner: String;
+    participants: any = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService) {
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService) {
     }
 
     ngOnInit() {
@@ -31,7 +32,8 @@ export class SpecificEventPage implements OnInit {
             };
         }
         this.user = this.userService.currentUser;
-        console.log(this.activity);
+        this.participants = [{displayname: 'Test1'}, {displayname: 'Test2'}];
+        // this.participants = this.activityService.getAllActivityParticipants(this.activity.id);
     }
 
     booked(): boolean {
@@ -64,5 +66,9 @@ export class SpecificEventPage implements OnInit {
 
 
         console.log(this.winner);
+    }
+
+    isActivityOwner(): boolean {
+        return this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre;
     }
 }

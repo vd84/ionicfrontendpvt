@@ -143,7 +143,6 @@ export class ActivityService {
     }
 
 
-
     modifyActivity(id,
                    name,
                    description,
@@ -158,7 +157,7 @@ export class ActivityService {
                    completed,
                    challengeaccepted,
                    challengedrejected,
-                   winner ) {
+                   winner) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -183,7 +182,6 @@ export class ActivityService {
             'winner': winner,
 
 
-
         });
 
         this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
@@ -194,8 +192,10 @@ export class ActivityService {
             });
 
 
+    }
 
-
+    getAllActivityParticipants(id: number) {
+        // TODO
     }
 
 
