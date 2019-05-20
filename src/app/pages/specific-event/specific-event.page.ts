@@ -4,7 +4,6 @@ import {UserService} from '../../services/user-service/user.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {ToastController} from '@ionic/angular';
-import {ParticipationService} from '../../services/participation-service/participation.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -18,8 +17,9 @@ export class SpecificEventPage implements OnInit {
     participants: any = [];
     competitors: any = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
     }
+
     ngOnInit() {
         if (this.route.snapshot.data['activity']) {
             this.activity = this.route.snapshot.data['activity'];
@@ -103,5 +103,9 @@ export class SpecificEventPage implements OnInit {
             position: 'middle'
         });
         toast.present();
+    }
+
+    radioChangeHandler(event) {
+        this.winner = event.target.value;
     }
 }

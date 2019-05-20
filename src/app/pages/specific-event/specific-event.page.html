@@ -34,7 +34,7 @@
                 <ion-list *ngFor="let competitor of competitors">
                     <ion-item>
                         <ion-label>{{competitor.id}}</ion-label>
-                        <ion-radio></ion-radio>
+                        <ion-radio value="{{competitor.id}}" (ionSelect)="radioChangeHandler($event)"></ion-radio>
                     </ion-item>
                 </ion-list>
             </ion-radio-group>
