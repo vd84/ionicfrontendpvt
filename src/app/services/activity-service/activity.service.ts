@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IActivity} from '../../Interfaces/activity';
 import {UserService} from '../user-service/user.service';
+import {User} from '../../Models/user';
+import {ParticipationUser} from '../../Models/ParticipationUser';
 
 
 @Injectable({
@@ -14,9 +16,11 @@ export class ActivityService {
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
+    participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
     allActivities = [];
     allMyActivities = [];
     allMyPendingActivities = [];
+    allActivityParticipants = [];
 
 
     constructor(private http: HttpClient, private userservice: UserService) {
@@ -234,7 +238,12 @@ export class ActivityService {
     }
 
     getAllActivityParticipants(id: number) {
-        // TODO
+        this.http.get<ParticipationUser[]>(this.participationByActivityUrl + id).subscribe(data => {
+            this.allActivityParticipants = data;
+            console.log(data);
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
 
