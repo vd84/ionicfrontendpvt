@@ -16,30 +16,30 @@
           <div padding>
             <ion-item>
               <ion-input  name="Event_name" type="text" placeholder="Namnet på ditt event" ngModel required
-              [(ngModel)]="name"></ion-input>
+              [(ngModel)]="name" ngDefaultControl></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="location" type="text" placeholder="Vart ska du hålla ditt event?" ngModel required
-              [(ngModel)]="location"></ion-input>
+              [(ngModel)]="location" ngDefaultControl></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-input name="description" type="text" placeholder="Beskriv ditt event?" ngModel required
-                         [(ngModel)]="description"></ion-input>
+                         [(ngModel)]="description" ngDefaultControl></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-input name="alternativ_plats" type="text" placeholder="Alternativ plats?" ngModel required
-                         [(ngModel)]="alt_location"></ion-input>
+                         [(ngModel)]="alt_location" ngDefaultControl></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-input name="category" type="number" placeholder="Kategori?" ngModel required
-                         [(ngModel)]="category"></ion-input>
+                         [(ngModel)]="category" ngDefaultControl></ion-input>
             </ion-item>
           <ion-item>
                 <ion-label>Youth Center:</ion-label>
-                <ion-select [(ngModel)]="challenged">
+                <ion-select [(ngModel)]="challenged" ngDefaultControl>
                   <ion-select-option *ngFor="let challenged of youthcenters" [value]="challenged.id">{{challenged.name}} </ion-select-option>
 
                 </ion-select>
@@ -49,8 +49,8 @@
               <ion-card> {{events.toString()}}</ion-card>
             </ion-list>
           </div>
-          <div *appHasRole="'user'" padding>
-            <ion-button  size="large" type="submit"  expand="block" (click) = 'createSuggestion()'>Suggest Activity</ion-button>
+          <div padding>
+            <ion-button  *appHasRole="'user'" size="large" type="submit"  expand="block" (click) = 'createSuggestion()'>Suggest Activity</ion-button>
           </div>
           <div padding>
             <ion-button *appHasRole="'admin'" size="large" type="submit" expand="block" (click) = 'createActivity()'>Create Activity</ion-button>

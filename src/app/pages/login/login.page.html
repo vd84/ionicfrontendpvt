@@ -3,10 +3,10 @@
     <ion-title>United Youth Centers</ion-title>
     <ion-list>
         <ion-item>
-            <ion-input placeholder="Username" [(ngModel)]="username"></ion-input>
+            <ion-input placeholder="Username" [(ngModel)]="username" ngDefaultControl></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Password" type="password" [(ngModel)]="password"></ion-input>
+            <ion-input placeholder="Password" type="password" [(ngModel)]="password" ngDefaultControl></ion-input>
         </ion-item>
     </ion-list>
 
@@ -16,7 +16,7 @@
 
     <ion-item>
         <ion-input name="currentyouthcentre" placeholder="Youth centre" type="number" ngModel required
-                   [(ngModel)]="currentyouthcentre"></ion-input>
+                   [(ngModel)]="currentyouthcentre" ngDefaultControl></ion-input>
     </ion-item>
 
 

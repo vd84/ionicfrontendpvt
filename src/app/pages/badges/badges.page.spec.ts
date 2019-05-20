@@ -8,6 +8,8 @@ import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {BadgeServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {HttpClient} from '@angular/common/http';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 describe('BadgesPage', () => {
     let component: BadgesPage;
@@ -15,6 +17,7 @@ describe('BadgesPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [BadgesPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
@@ -68,12 +71,21 @@ describe('BadgesPage', () => {
 
     });
 
-    it('should have 50% progress', () => {
+    it('should have a field progressValue initialized to 50%', () => {
         {
             let progressValue = component.getProgressValue();
 
             expect(progressValue).toBe(.5);
         }
+    });
+
+    it('should have a variable for current tab and be able to set it through method call', () => {
+        let tab = 'testTab';
+        let event = {target: {value: tab}};
+        expect(component.badgeList).toBeTruthy();
+        component.segmentChanged(event);
+        expect(component.badgeList).toEqual('testTab');
+
     });
 
 });

@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 
-import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 import { ComponentsModule} from '../../component/components.module';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         IonicModule,
-        SharedDirectivesModule,
         ComponentsModule,
+        FormsModule,
         RouterModule.forChild([
             {
                 path: '',

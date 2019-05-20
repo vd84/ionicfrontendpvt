@@ -9,6 +9,8 @@ import {AlertController, LoadingController, Platform, ToastController} from '@io
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 describe('LoginPage', () => {
     let component: LoginPage;
@@ -16,6 +18,7 @@ describe('LoginPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [LoginPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: AuthService, useValue: null}, {

@@ -7,6 +7,8 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {LoadingController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 describe('SettingsPage', () => {
     let component: SettingsPage;
@@ -14,6 +16,7 @@ describe('SettingsPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [SettingsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: NativeStorage, useValue: null}, {

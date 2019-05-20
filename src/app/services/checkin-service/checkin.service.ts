@@ -18,8 +18,8 @@ export class CheckinService {
 
       };
       const body = JSON.stringify({
-        'user': userId,
-        'youthcentre': youthCentreId,
+        'userid': userId,
+        'youthcentreid': youthCentreId,
       });
 
       this.http.post(this.url, body, httpOptions).subscribe(data => { // Saknar vad vi tar emot?
