@@ -14,7 +14,6 @@ export class SpecificEventPage implements OnInit {
     activity: any;
     user: any;
     winner: String;
-    participants: any = [];
     competitors: any = [];
 
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
@@ -32,9 +31,8 @@ export class SpecificEventPage implements OnInit {
             };
         }
         this.user = this.userService.currentUser;
-        this.participants = [{displayname: 'Test1'}, {displayname: 'Test2'}];
+        this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
-        // this.participants = this.activityService.getAllActivityParticipants(this.activity.id);
     }
 
     booked(): boolean {
@@ -66,7 +64,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     isActivityOwner(): boolean {
-        return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && !this.isChallenge();
+        return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre); //  && !this.isChallenge()
     }
 
     checkInActivity() {
