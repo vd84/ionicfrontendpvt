@@ -26,7 +26,6 @@ export class BadgesPage implements OnInit {
         this.displayAvailBadges();
         setTimeout(() => {
             this.progressValue = this.getProgressValue();
-            console.log('progress' + this.progressValue);
         }, 1000);
 
     }
