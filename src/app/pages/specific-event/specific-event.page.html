@@ -34,6 +34,8 @@
     <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
     <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
     <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
+    <ion-button (click)="checkInActivity()"  [disabled]="!userIsCloseEnough()" >Check in</ion-button>
+
     <ion-button (click)="specifyWinner()" >Specify Winner</ion-button>
 
 

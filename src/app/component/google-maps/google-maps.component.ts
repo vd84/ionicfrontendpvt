@@ -147,7 +147,7 @@ export class GoogleMapsComponent implements OnInit {
     }
 
     checkInOnCentre() {
-        this.checkinService.checkin(11, 1);
+        this.checkinService.youthcentreCheckin(11, 1);
 
     }
 

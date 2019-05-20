@@ -10,7 +10,6 @@ import {DataService} from '../../services/data.service';
 })
 export class EventPage implements OnInit {
     activity: any;
-    allActivities = [];
 
 
     constructor(private router: Router, private authService: AuthService, private activityService: ActivityService, private dataService: DataService) {
@@ -18,22 +17,13 @@ export class EventPage implements OnInit {
 
 
     ngOnInit() {
-        this.activityService.getAllActivities().subscribe(data => this.allActivities = data);
-        this.activityService.getAllMyActivities().subscribe(data => this.activityService.allMyActivities = data);
-        this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
+        this.activityService.getAllActivities();
+        this.activityService.getAllMyActivities();
+        // this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
         this.activity = 'all-activities';
 
 
-        // Byt ut till isChallenged
-        for (const activity of this.allActivities) {
-            if (activity.isactive === 0) {
-                this.allActivities.splice(this.allActivities.indexOf(activity), 1);
-                console.log('did not add' + activity);
-                console.log('full list' + this.allActivities);
 
-
-            }
-        }
 
     }
 

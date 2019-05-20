@@ -5,6 +5,8 @@ import {ParticipationService} from '../../services/participation-service/partici
 import {UserService} from '../../services/user-service/user.service';
 import {Youthcentre} from '../../Models/youthcentre';
 import {ActivityService} from '../../services/activity-service/activity.service';
+import {CheckinService} from '../../services/checkin-service/checkin.service';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-specific-event',
@@ -16,7 +18,7 @@ export class SpecificEventPage implements OnInit {
     user: any;
     winner: String;
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService) {
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private participationService: ParticipationService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
     }
 
     ngOnInit() {
@@ -64,5 +66,41 @@ export class SpecificEventPage implements OnInit {
 
 
         console.log(this.winner);
+    }
+
+    checkInActivity() {
+
+        if (this.activity.isactive === 0) {
+            this.presentToast('Inte aktivt längre');
+            return;
+        }
+        if (!this.userIsCloseEnough()) {
+            this.presentToast('För långt ifrån');
+            return;
+        }
+
+
+        this.checkInService.activityCheckin(this.userService.currentUser.id, this.activity.id);
+
+    }
+
+    userIsCloseEnough(): boolean {
+
+        if (localStorage.getItem('isCloseEnough') === 'true') {
+            return true;
+        } else if (localStorage.getItem('isCloseEnough') === 'false') {
+            return false;
+        }
+        return false
+
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 }
