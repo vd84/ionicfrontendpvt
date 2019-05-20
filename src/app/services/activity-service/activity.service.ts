@@ -14,6 +14,7 @@ export class ActivityService {
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
+    allActivities = [];
     allMyActivities = [];
     allMyPendingActivities = [];
 
@@ -25,12 +26,47 @@ export class ActivityService {
      * Returnerar alla aktiviteter från webbservern
      *
      */
-    getAllActivities(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.activityUrl);
+    getAllActivities() {
+        this.http.get<Event[]>(this.activityUrl).subscribe(data => {
+            this.allActivities = data;
+
+            this.filterPendingActivities();
+
+
+        }, error => {
+            console.log(error);
+        });
+
+
     }
 
-    getAllMyActivities(): Observable<Event[]> {
-        return this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id);
+    filterPendingActivities() {
+        console.log(this.allActivities);
+
+
+        for (const activity of this.allActivities) {
+            console.log(this.userservice.currentUser.currentyouthcentre);
+            console.log(activity);
+            console.log(activity.challenged !== this.userservice.currentUser.currentyouthcentre);
+            console.log(activity.challenger !== this.userservice.currentUser.currentyouthcentre);
+
+            if (activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre) {
+                console.log(activity + 'tas bort');
+                this.allMyPendingActivities.push(activity);
+
+            }
+            console.log(this.allMyPendingActivities);
+
+        }
+    }
+
+
+    getAllMyActivities() {
+        this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
+            this.allMyActivities = data;
+        }, error1 => {
+            console.log(error1);
+        });
     }
 
     isMyActivity(id: number): boolean {
@@ -51,13 +87,14 @@ export class ActivityService {
         return false;
     }
 
-    getAllMyPendingActivities() {
-        return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
-    }
+    // getAllMyPendingActivities() {
+    //     return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
+    // }
 
     getYouthCenterActivities(id: number) {
         return this.http.get<Event[]>(this.youthCentreUrl + id);
     }
+
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number) {
 

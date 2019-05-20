@@ -9,6 +9,8 @@ import {ActivityServiceMock, UserServiceMock} from '../../../../test-config/mock
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 import {FormsModule} from '@angular/forms';
+import {CheckinService} from '../../services/checkin-service/checkin.service';
+import {ToastController} from '@ionic/angular';
 
 describe('SpecificEventPage', () => {
     let component: SpecificEventPage;
@@ -25,8 +27,17 @@ describe('SpecificEventPage', () => {
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            },
-                {provide: ActivityService, useValue: new ActivityServiceMock()}]
+            }, {provide: ParticipationService, useValue: null},
+                {provide: ActivityService, useValue: new ActivityServiceMock()},
+                {
+                    provide: CheckinService,
+                    useValue: null
+                }, {
+                    provide: ToastController,
+                    useValue: null
+                }]
+
+
         })
             .compileComponents();
     }));

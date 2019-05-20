@@ -38,7 +38,7 @@ export class LocationPage implements OnInit {
 
         console.log('youthcentreid ' + this.youthcentre.id);
         console.log('userid ' + this.user.id);
-        this.checkinService.checkin(this.user.id,  this.youthcentre.id);
+        this.checkinService.youthcentreCheckin(this.user.id,  this.youthcentre.id);
     }
 /*    loadEvent(activity) {
         this.dataService.setData('activity', activity);

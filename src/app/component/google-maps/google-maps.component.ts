@@ -125,6 +125,7 @@ export class GoogleMapsComponent implements OnInit {
 
                 marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
                     this.dataService.setData('youthcentre', place);
+
                     this.router.navigateByUrl('/location/youthcentre');
                     console.log(place.lat);
                     console.log(this.geolocation.getCurrentPosition().then(pos => {
@@ -132,8 +133,9 @@ export class GoogleMapsComponent implements OnInit {
                         console.log(place.lng);
                         console.log(pos.coords.latitude);
                         console.log(pos.coords.longitude);
-
                         console.log(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude));
+                        localStorage.setItem('isCloseEnough', String(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude)));
+                        console.log(localStorage.getItem('isCloseEnough'));
 
 
                     }));
@@ -145,11 +147,11 @@ export class GoogleMapsComponent implements OnInit {
     }
 
     checkInOnCentre() {
-        this.checkinService.checkin(11, 1);
+        this.checkinService.youthcentreCheckin(11, 1);
 
     }
 
-    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon) {
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
 
         function toRad(x) {
             return x * Math.PI / 180;
@@ -178,7 +180,6 @@ export class GoogleMapsComponent implements OnInit {
 
 
     }
-
 
 
     startTracking() {
@@ -210,6 +211,7 @@ export class GoogleMapsComponent implements OnInit {
             });
 
     }
+
     async presentToast(toastMessage: string) {
         const toast = await this.toastController.create({
             message: toastMessage,
