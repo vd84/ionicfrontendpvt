@@ -36,6 +36,8 @@ describe('SpecificEventPage', () => {
                     provide: ToastController,
                     useValue: null
                 }]
+
+
         })
             .compileComponents();
     }));

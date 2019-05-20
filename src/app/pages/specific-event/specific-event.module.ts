@@ -6,6 +6,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {SpecificEventPage} from './specific-event.page';
 import {FormsModule} from '@angular/forms';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 const routes: Routes = [
     {
@@ -16,6 +17,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        SharedDirectivesModule,
         CommonModule,
         IonicModule,
         FormsModule,

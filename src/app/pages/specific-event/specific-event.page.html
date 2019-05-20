@@ -25,20 +25,40 @@
         </ion-item>
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
+        <div *ngIf="isActivityOwner()">
+            <ion-radio-group>
+                <ion-item-divider>
+                    <ion-list-header>Winner</ion-list-header>
+                </ion-item-divider>
 
-        <ion-item >
-            <ion-input type="number" [(ngModel)]="winner" ngDefaultControl >WHO WON?</ion-input>
-        </ion-item>
+                <ion-list *ngFor="let competitor of competitors">
+                    <ion-item>
+                        <ion-label>{{competitor.id}}</ion-label>
+                        <ion-radio></ion-radio>
+                    </ion-item>
+                </ion-list>
+            </ion-radio-group>
+        </div>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
-    <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
-    <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
-    <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
-    <ion-button (click)="checkInActivity()"  [disabled]="!userIsCloseEnough()" >Check in</ion-button>
-
-    <ion-button (click)="specifyWinner()" >Specify Winner</ion-button>
-
-
+    <div *appHasRole="'user'">
+        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
+        <ion-button (click)="checkInActivity()"  [disabled]="!userIsCloseEnough()" >Check in</ion-button>
+        <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
+    </div>
+    <div *appHasRole="'admin'">
+        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
+        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Specify Winner</ion-button>
+        <ion-list *ngIf="isActivityOwner()">
+            <ion-list-header>
+                <ion-label>Participation List</ion-label>
+                <ion-badge>{{participants.length}}</ion-badge>
+            </ion-list-header>
+            <ion-item *ngFor="let participant of participants">
+                <h1>{{participant.displayname}}</h1>
+            </ion-item>
+        </ion-list>
+    </div>
 
 
 </ion-content>

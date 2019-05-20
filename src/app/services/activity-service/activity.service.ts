@@ -231,6 +231,10 @@ export class ActivityService {
 
     }
 
+    getAllActivityParticipants(id: number) {
+        // TODO
+    }
+
 
 }
 
