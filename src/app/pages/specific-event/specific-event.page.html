@@ -43,7 +43,7 @@
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
         <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
-        <ion-button (click)="checkInActivity()"  [disabled]="!userIsCloseEnough()" >Check in</ion-button>
+        <ion-button (click)="checkInActivity()" [disabled]="!userIsCloseEnough()">Check in</ion-button>
         <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
     </div>
     <div *appHasRole="'admin'">
@@ -52,9 +52,9 @@
         <ion-list *ngIf="isActivityOwner()">
             <ion-list-header>
                 <ion-label>Participation List</ion-label>
-                <ion-badge>{{participants.length}}</ion-badge>
+                <ion-badge>{{activityService.allActivityParticipants.length}}</ion-badge>
             </ion-list-header>
-            <ion-item *ngFor="let participant of participants">
+            <ion-item *ngFor="let participant of activityService.allActivityParticipants">
                 <h1>{{participant.displayname}}</h1>
             </ion-item>
         </ion-list>

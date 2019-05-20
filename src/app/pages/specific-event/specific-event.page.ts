@@ -14,7 +14,6 @@ export class SpecificEventPage implements OnInit {
     activity: any;
     user: any;
     winner: String;
-    participants: any = [];
     competitors: any = [];
 
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
@@ -32,9 +31,8 @@ export class SpecificEventPage implements OnInit {
             };
         }
         this.user = this.userService.currentUser;
-        this.participants = [{displayname: 'Test1'}, {displayname: 'Test2'}];
+        this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
-        // this.participants = this.activityService.getAllActivityParticipants(this.activity.id);
     }
 
     booked(): boolean {
@@ -54,7 +52,8 @@ export class SpecificEventPage implements OnInit {
     }
 
     acceptChallenge() {
-        // TODO
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, 1, this.activity.challengerejected, this.activity.winner);
+        this.router.navigate(['tabs/event']);
     }
 
     isChallenge(): boolean {
@@ -67,7 +66,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     isActivityOwner(): boolean {
-        return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && !this.isChallenge();
+        return (this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre); //  && !this.isChallenge()
     }
 
     checkInActivity() {
@@ -108,5 +107,10 @@ export class SpecificEventPage implements OnInit {
 
     radioChangeHandler(event) {
         this.winner = event.target.value;
+    }
+
+    declineChallenge() {
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted , 1, this.activity.winner);
+    this.router.navigate(['tabs/event']);
     }
 }

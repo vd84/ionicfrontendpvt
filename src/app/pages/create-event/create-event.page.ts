@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {NgForm} from '@angular/forms';
 import {Events} from '@ionic/angular';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
@@ -16,9 +15,11 @@ export class CreateEventPage implements OnInit {
     private events = [];
     private description: String;
     private alt_location: String;
-    private category: number;
+    private category: String;
     private challenged;
     private youthcenters = [];
+    private startdate: string;
+    private enddate: string;
 
     constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityService: ActivityService, private userService: UserService) {
     }
@@ -27,11 +28,9 @@ export class CreateEventPage implements OnInit {
     ngOnInit() {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
-        console.log(this.youthcenters);
         setTimeout(() => {
             this.youthcenterService.getAllLocations();
             this.youthcenters = this.youthcenterService.allYouthCentres;
-            console.log(this.youthcenters);
             this.loadallyouthcenters();
         }, 8000);
 
@@ -41,11 +40,10 @@ export class CreateEventPage implements OnInit {
     loadallyouthcenters() {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
-        console.log(this.youthcenters);
     }
 
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
         setTimeout(() => {
             this.activityService.getAllMyActivities();
         }, 25);
@@ -53,19 +51,22 @@ export class CreateEventPage implements OnInit {
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category, this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.getAllMyActivities();
         }, 25);
         this.router.navigate(['tabs/event/']);
     }
 
-    testPrint() {
-        setTimeout(() => {
-            console.log(this.challenged);
-
-        }, 50);
+    getCategoryID() {
+        if (this.category === 'Football') {
+            return 1;
+        } else if (this.category === 'Chess') {
+            return 11;
+        }
     }
 
-
+    onChange(event) {
+        this.category = event.target.value;
+    }
 }
