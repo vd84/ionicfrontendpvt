@@ -197,7 +197,7 @@ export class ActivityService {
                    challenged,
                    completed,
                    challengeaccepted,
-                   challengedrejected,
+                   challengerejected,
                    winner) {
 
         const httpOptions = {
@@ -220,6 +220,8 @@ export class ActivityService {
             'challenger': challenger,
             'challenged': challenged,
             'completed': completed,
+            'challengeaccepted': challengeaccepted,
+            'challengerejected': challengerejected,
             'winner': winner,
 
 

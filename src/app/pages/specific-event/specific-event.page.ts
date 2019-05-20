@@ -51,7 +51,8 @@ export class SpecificEventPage implements OnInit {
     }
 
     acceptChallenge() {
-        // TODO
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, 1, this.activity.challengerejected, this.activity.winner);
+        this.router.navigate(['tabs/event']);
     }
 
     isChallenge(): boolean {
@@ -105,5 +106,10 @@ export class SpecificEventPage implements OnInit {
 
     radioChangeHandler(event) {
         this.winner = event.target.value;
+    }
+
+    declineChallenge() {
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted , 1, this.activity.winner);
+    this.router.navigate(['tabs/event']);
     }
 }
