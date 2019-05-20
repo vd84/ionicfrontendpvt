@@ -39,6 +39,7 @@ export class SpecificEventPage implements OnInit {
 
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
+        console.log('booked: ' + this.activityService.isMyActivity(this.activity.id));
     }
 
     bookActivity() {
