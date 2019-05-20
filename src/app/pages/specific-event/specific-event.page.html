@@ -25,10 +25,20 @@
         </ion-item>
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
+        <div *ngIf="isActivityOwner()">
+            <ion-radio-group>
+                <ion-item-divider>
+                    <ion-list-header>Winner</ion-list-header>
+                </ion-item-divider>
 
-        <ion-item *ngIf="isActivityOwner()">
-            <ion-input type="number" [(ngModel)]="winner" ngDefaultControl>WHO WON?</ion-input>
-        </ion-item>
+                <ion-list *ngFor="let competitor of competitors">
+                    <ion-item>
+                        <ion-label>{{competitor.id}}</ion-label>
+                        <ion-radio></ion-radio>
+                    </ion-item>
+                </ion-list>
+            </ion-radio-group>
+        </div>
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
