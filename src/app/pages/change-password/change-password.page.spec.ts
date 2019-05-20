@@ -8,6 +8,7 @@ import {UserService} from '../../services/user-service/user.service';
 import {IonicModule, ToastController} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 describe('ChangePasswordPage', () => {
     let component: ChangePasswordPage;
@@ -15,7 +16,7 @@ describe('ChangePasswordPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, IonicModule, RouterTestingModule],
+            imports: [SharedDirectivesModule, FormsModule, IonicModule, RouterTestingModule],
             declarations: [ChangePasswordPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: ToastController, userValue: null}, {

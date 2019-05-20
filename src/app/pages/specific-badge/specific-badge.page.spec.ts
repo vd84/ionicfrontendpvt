@@ -3,6 +3,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SpecificBadgePage} from './specific-badge.page';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {FormsModule} from '@angular/forms';
 
 describe('SpecificBadgePage', () => {
     let component: SpecificBadgePage;
@@ -14,6 +16,7 @@ describe('SpecificBadgePage', () => {
         routeStub = {snapshot: {data: {badge: 'badge'}}};
 
         TestBed.configureTestingModule({
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [SpecificBadgePage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}]

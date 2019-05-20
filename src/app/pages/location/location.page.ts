@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {UserService} from '../../services/user-service/user.service';
 import {Youthcentre} from '../../Models/youthcentre';
@@ -16,7 +16,7 @@ export class LocationPage implements OnInit {
     user: any;
     allActivitiesForCenter = [];
 
-    constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService) {
+    constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router) {
     }
 
     ngOnInit() {
@@ -38,7 +38,7 @@ export class LocationPage implements OnInit {
 
         console.log('youthcentreid ' + this.youthcentre.id);
         console.log('userid ' + this.user.id);
-        this.checkinService.checkin(this.user.id,  this.youthcentre.id);
+        this.checkinService.youthcentreCheckin(this.user.id,  this.youthcentre.id);
     }
 /*    loadEvent(activity) {
         this.dataService.setData('activity', activity);
@@ -49,6 +49,10 @@ export class LocationPage implements OnInit {
         this.activityService.getYouthCenterActivities(this.youthcentre.id).subscribe( data => {
             this.allActivitiesForCenter = data;
         });
+    }
+    loadEvent(activity) {
+        this.dataService.setData('activity', activity);
+        this.router.navigateByUrl('/specific-event/activity');
     }
 
 

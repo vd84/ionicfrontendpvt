@@ -7,6 +7,7 @@ import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {FormsModule} from '@angular/forms';
+import {SharedDirectivesModule} from '../../directives/shared-directives.module';
 
 describe('RegisterPage', () => {
     let component: RegisterPage;
@@ -14,7 +15,7 @@ describe('RegisterPage', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
+            imports: [SharedDirectivesModule, FormsModule],
             declarations: [RegisterPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [{provide: Router, useValue: null}, {provide: ToastController, useValue: null}, {
