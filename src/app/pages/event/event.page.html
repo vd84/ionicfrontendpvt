@@ -18,7 +18,7 @@
     <div [ngSwitch]="activity">
         <!--CARD LIST FOR ALL EVENTS-->
         <ion-list *ngSwitchCase="'all-activities'">
-            <ion-item *ngFor="let activity of activityService.allActivities">
+            <ion-item *ngFor="let activity of activityService.adminAllActivities">
                 <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                 </ion-card>
@@ -34,7 +34,7 @@
         </ion-list>
         <!--MY PENDING ACTIVITIES-->
         <ion-list *ngSwitchCase="'pending-activities'">
-            <ion-item *ngFor="let activity of activityService.allMyPendingActivities">
+            <ion-item *ngFor="let activity of activityService.adminPendingActivities">
                 <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                 </ion-card>

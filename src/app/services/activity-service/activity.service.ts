@@ -14,9 +14,20 @@ export class ActivityService {
     challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
-    allActivities = [];
+    userAllActivities = [];
+    adminPendingActivities = [];
+
+    adminAllActivities = [];
+    allActivitiesFromDatabase = [];
+
+    allRelevantActivities = [];
+    allDeclinedActivities = [];
+
+
     allMyActivities = [];
     allMyPendingActivities = [];
+    allMySuggstion = [];
+    allYouthCentreActivites = [];
 
 
     constructor(private http: HttpClient, private userservice: UserService) {
@@ -28,9 +39,11 @@ export class ActivityService {
      */
     getAllActivities() {
         this.http.get<Event[]>(this.activityUrl).subscribe(data => {
-            this.allActivities = data;
+            this.allActivitiesFromDatabase = data;
+            this.generateAllActvitiesPage();
+            this.generateAdminPendingPage();
+            console.log(this.allMyPendingActivities);
 
-            this.filterPendingActivities();
 
 
         }, error => {
@@ -40,28 +53,61 @@ export class ActivityService {
 
     }
 
-    filterPendingActivities() {
-        console.log(this.allActivities);
 
+    generateAllActvitiesPage() {
 
-        for (const activity of this.allActivities) {
-            console.log(this.userservice.currentUser.currentyouthcentre);
-            console.log(activity);
-            console.log(activity.challenged !== this.userservice.currentUser.currentyouthcentre);
-            console.log(activity.challenger !== this.userservice.currentUser.currentyouthcentre);
-
-            if (activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre) {
-                console.log(activity + 'tas bort');
-                this.allMyPendingActivities.push(activity);
+        for (const activity of this.allActivitiesFromDatabase) {
+            if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityDeclined(activity) && this.activityIsAccepted(activity)) {
+                this.adminAllActivities.push(activity);
 
             }
-            console.log(this.allMyPendingActivities);
+        }
+
+    }
+
+    generateAdminPendingPage() {
+
+        for (const activity of this.allActivitiesFromDatabase) {
+            if ((this.activityIsSuggestion(activity) && this.isOfYourCentre(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+
+                console.log(activity);
+                this.adminPendingActivities.push(activity);
+            }
 
         }
+
     }
 
 
-    getAllMyActivities() {
+    activityIsSuggestion(activity) {
+
+        return activity.issuggestion === 1;
+
+    }
+
+    activityIsPending(activity) {
+        let youthcentre = this.userservice.currentUser.currentyouthcentre;
+
+        return (activity.challenger === youthcentre || activity.challenged === youthcentre) && (activity.challengeaccepted === 0 && activity.challengerejected === 0);
+
+    }
+
+    activityDeclined(activity) {
+
+
+        return activity.challengerejected === 1;
+    }
+
+    activityIsAccepted(activity) {
+        return activity.challengeaccepted === 1;
+    }
+
+    isOfYourCentre(activity) {
+        return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
+    }
+
+
+    generateAllMyActivities() {
         this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
             this.allMyActivities = data;
         }, error1 => {
