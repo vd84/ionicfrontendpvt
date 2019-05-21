@@ -51,7 +51,8 @@ export class SpecificEventPage implements OnInit {
     }
 
     acceptChallenge() {
-        // TODO
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, 1, this.activity.challengerejected, this.activity.winner);
+        this.router.navigate(['tabs/event']);
     }
 
     isChallenge(): boolean {
@@ -108,10 +109,16 @@ export class SpecificEventPage implements OnInit {
     }
 
     isSuggestion(): boolean {
-        return this.activityService.activityIsSuggestion(this.activity);
+        return this.activityService.activityIsSuggestion(this.activity) && this.activityService.isChallenger(this.activity);
     }
 
     createChallenge() {
+        console.log(this.activity);
         this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.userService.currentUser.id, this.activity.alternativelocation, 0, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner);
+    }
+
+    declineChallenge() {
+        this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.activity.responsibleuser, this.activity.alternativelocation, this.activity.issuggestion, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted , 1, this.activity.winner);
+    this.router.navigate(['tabs/event']);
     }
 }

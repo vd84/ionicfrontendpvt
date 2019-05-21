@@ -5,6 +5,7 @@ import {IActivity} from '../../Interfaces/activity';
 import {UserService} from '../user-service/user.service';
 import {User} from '../../Models/user';
 import {ParticipationUser} from '../../Models/ParticipationUser';
+import {ToastController} from '@ionic/angular';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class ActivityService {
     allActivityParticipants = [];
 
 
-    constructor(private http: HttpClient, private userservice: UserService) {
+    constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
 
     /**
@@ -49,6 +50,10 @@ export class ActivityService {
 
     generateAllActvitiesPage() {
 
+
+        this.adminAllActivities = [];
+
+
         for (const activity of this.allActivitiesFromDatabase) {
             if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
                 this.adminAllActivities.push(activity);
@@ -60,10 +65,15 @@ export class ActivityService {
 
     generateAdminPendingPage() {
 
-        for (const activity of this.allActivitiesFromDatabase) {
-            if ((this.activityIsSuggestion(activity) && this.isOfYourCentre(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+        this.adminPendingActivities = [];
 
-                console.log(activity);
+
+        for (const activity of this.allActivitiesFromDatabase) {
+            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+                console.log((this.activityIsSuggestion(activity) && this.isChallenger(activity)) + ' ' + activity.id);
+                console.log((this.activityIsPending(activity)) + ' ' + activity.id);
+                console.log(this.activityIsAccepted(activity) && this.isOfYourCentre(activity) + ' ' + activity.id);
+
                 this.adminPendingActivities.push(activity);
             }
 
@@ -81,7 +91,7 @@ export class ActivityService {
     activityIsPending(activity) {
         let youthcentre = this.userservice.currentUser.currentyouthcentre;
 
-        return (activity.challenger === youthcentre || activity.challenged === youthcentre) && (activity.challengeaccepted === 0 && activity.challengerejected === 0);
+        return (activity.challenger === youthcentre || activity.challenged === youthcentre) && (activity.challengeaccepted === 0 && activity.challengerejected === 0) && !this.activityIsSuggestion(activity);
 
     }
 
@@ -129,6 +139,10 @@ export class ActivityService {
 
     isChallenged(activity) {
         return activity.challenged === this.userservice.currentUser.currentyouthcentre;
+    }
+
+    isChallenger(activity) {
+        return activity.challenger === this.userservice.currentUser.currentyouthcentre;
     }
 
 
@@ -234,7 +248,7 @@ export class ActivityService {
                    challenged,
                    completed,
                    challengeaccepted,
-                   challengedrejected,
+                   challengerejected,
                    winner) {
 
         const httpOptions = {
@@ -246,9 +260,9 @@ export class ActivityService {
 
         const body = JSON.stringify({
             'id': id,
-            'responsibleuser': responsibleuser,
             'name': name,
             'description': description,
+            'responsibleuser': responsibleuser,
             'alternativelocation': alternativelocation,
             'issuggestion': issuggestion,
             'isactive': isactive,
@@ -257,6 +271,8 @@ export class ActivityService {
             'challenger': challenger,
             'challenged': challenged,
             'completed': completed,
+            'challengeaccepted': challengeaccepted,
+            'challengerejected': challengerejected,
             'winner': winner,
 
 
@@ -264,6 +280,9 @@ export class ActivityService {
 
         this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
+
+                this.presentToast('Ändring lyckad');
+                 this.getAllActivities();
             },
             error => {
                 console.log('Error');
@@ -279,6 +298,15 @@ export class ActivityService {
         }, error1 => {
             console.log(error1);
         });
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 
 

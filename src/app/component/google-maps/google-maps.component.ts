@@ -176,7 +176,7 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d < 100;
+        return d < 100000;
 
 
     }
