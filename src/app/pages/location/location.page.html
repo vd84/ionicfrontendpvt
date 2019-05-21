@@ -20,7 +20,7 @@
       <ion-label>Lon: {{youthcentre.lon}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Current number of active activities: {{allActivitiesForCenter.length}}</ion-label>
+      <ion-label>Current number of active activities: {{allActivitiesForYouthCentreToShow.length}}</ion-label>
     </ion-item>
 
   </ion-list>
@@ -31,7 +31,7 @@
   <!--UPCOMING EVENTS-->
   <ion-list>
     <ion-list-header>Upcoming Activities</ion-list-header>
-    <ion-item *ngFor="let activity of allActivitiesForCenter">
+    <ion-item *ngFor="let activity of allActivitiesForYouthCentreToShow">
         <ion-card-title (click)="loadEvent(activity)">{{activity.name}}</ion-card-title>
     </ion-item>
   </ion-list>

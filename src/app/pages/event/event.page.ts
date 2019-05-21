@@ -17,14 +17,12 @@ export class EventPage implements OnInit {
 
 
     ngOnInit() {
-        this.activityService.getAllActivities();
-        this.activityService.getAllMyActivities();
-        // this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
         this.activity = 'all-activities';
+    }
 
-
-
-
+    ionViewWillEnter() {
+        this.activityService.getAllActivities();
+        this.activityService.generateAllMyActivities();
     }
 
     loadEvent(activity) {
