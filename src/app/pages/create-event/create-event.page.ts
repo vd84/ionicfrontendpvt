@@ -42,8 +42,9 @@ export class CreateEventPage implements OnInit {
         this.youthcenters = this.youthcenterService.allYouthCentres;
     }
 
+
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
@@ -51,7 +52,7 @@ export class CreateEventPage implements OnInit {
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
