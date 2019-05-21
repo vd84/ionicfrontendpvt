@@ -25,13 +25,17 @@
         <ion-item>
             <h4>Plats: {{activity.location}}</h4>
         </ion-item>
+        <ion-item >
+            <h4>Winner: {{getWinner()}}</h4>
+        </ion-item>
         <ion-item>
             <h4>Om aktiviteten: {{activity.description}}</h4>
             <ion-textarea></ion-textarea>
         </ion-item>
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
-        <div *ngIf="isActivityOwner()">
+
+        <div *ngIf="isAdminForSpecificEvent()">
             <ion-radio-group>
                 <ion-item-divider>
                     <ion-list-header>Winner</ion-list-header>

@@ -65,6 +65,10 @@ export class SpecificEventPage implements OnInit {
         return ((this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && (!this.activityService.activityIsPending(this.activity) && !this.activityService.activityIsSuggestion(this.activity))); //  && !this.isChallenge()
     }
 
+    isAdminForSpecificEvent() {
+        return this.activity.responsibleuser === this.userService.currentUser.id;
+    }
+
     checkInActivity() {
 
         if (this.activity.isactive === 0) {
@@ -131,7 +135,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     declineSuggestion() {
-       // console.log(this.activity.id  + ' ' + this.activity.name + ' ' + this.activity.description + ' ' + this.userService.currentUser.id + ' ' + this.activity.alternativelocation + ' ' + 1 + ' ' + 0 + ' ' + this.activity.category + ' ' + this.activity.resource + ' ' + this.activity.challenger + ' ' + this.activity.challenged + ' ' + this.activity.completed + ' ' +  this.activity.challengeaccepted + ' ' + this.activity.challengerejected + ' ' + this.activity.winner + ' ' + this.activity.startdate + ' ' + this.activity.enddate);
+        // console.log(this.activity.id  + ' ' + this.activity.name + ' ' + this.activity.description + ' ' + this.userService.currentUser.id + ' ' + this.activity.alternativelocation + ' ' + 1 + ' ' + 0 + ' ' + this.activity.category + ' ' + this.activity.resource + ' ' + this.activity.challenger + ' ' + this.activity.challenged + ' ' + this.activity.completed + ' ' +  this.activity.challengeaccepted + ' ' + this.activity.challengerejected + ' ' + this.activity.winner + ' ' + this.activity.startdate + ' ' + this.activity.enddate);
         this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.userService.currentUser.id, this.activity.alternativelocation, 1, 0, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner, this.activity.startdate, this.activity.enddate);
         this.router.navigate(['tabs/event']);
     }
@@ -139,5 +143,14 @@ export class SpecificEventPage implements OnInit {
     modifySuggestion() {
         localStorage.setItem('activityToModify', JSON.stringify(this.activity));
         this.router.navigate(['modify-activity']);
+    }
+
+    getWinner() {
+        if (this.activity.winner === 0) {
+            return 'TBD';
+        } else {
+            return this.activity.winner;
+        }
+
     }
 }
