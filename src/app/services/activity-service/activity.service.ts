@@ -307,11 +307,12 @@ export class ActivityService {
             'challengeaccepted': challengeaccepted,
             'challengerejected': challengerejected,
             'winner': winner,
-            'startdate' : startdate,
-            'enddate' : enddate
+            'startdate' : this.correctTimestamp(startdate),
+            'enddate' : this.correctTimestamp(enddate)
 
 
         });
+        console.log(body);
 
         this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -324,6 +325,12 @@ export class ActivityService {
             });
 
 
+    }
+
+    correctTimestamp(timestamp: string) {
+        let output = timestamp.substr(0, 10) + 'T' + timestamp.substr(11);
+        console.log(output);
+        return output;
     }
 
     getAllActivityParticipants(activityId: number) {
