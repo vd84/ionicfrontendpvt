@@ -17,7 +17,9 @@ export class EventPage implements OnInit {
 
 
     ngOnInit() {
+        this.activityService.getAllActivities();
         this.activity = 'all-activities';
+
     }
 
     ionViewWillEnter() {
