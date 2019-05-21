@@ -41,9 +41,14 @@ export class CreateEventPage implements OnInit {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
     }
+    // slice at 17?
+    getDate(olddate) {return olddate.slice(0, 19);
+    }
 
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.getDate(this.startdate), this.getDate(this.enddate)); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        console.log('org. ' + this.startdate);
+        console.log ('new. ' + this.getDate(this.startdate));
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
@@ -51,7 +56,7 @@ export class CreateEventPage implements OnInit {
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.getDate(this.startdate), this.getDate(this.enddate)); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
