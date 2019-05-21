@@ -68,4 +68,8 @@ export class LocationPage implements OnInit {
     }
 
 
+    userIsCloseEnough() {
+        return localStorage.getItem('isCloseEnough') === 'true';
+
+    }
 }
