@@ -260,7 +260,9 @@ export class ActivityService {
                    completed,
                    challengeaccepted,
                    challengerejected,
-                   winner) {
+                   winner,
+    startdate,
+                   enddate) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -285,6 +287,8 @@ export class ActivityService {
             'challengeaccepted': challengeaccepted,
             'challengerejected': challengerejected,
             'winner': winner,
+            'startdate' : startdate,
+            'enddate' : enddate
 
 
         });

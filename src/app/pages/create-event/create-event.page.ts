@@ -41,7 +41,7 @@ export class CreateEventPage implements OnInit {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
     }
-    // slice at 17?
+    // removes the unnessesary parts of the date we recive
     getDate(olddate) {return olddate.slice(0, 19);
     }
 
