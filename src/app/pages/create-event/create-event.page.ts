@@ -41,14 +41,10 @@ export class CreateEventPage implements OnInit {
         this.youthcenterService.getAllLocations();
         this.youthcenters = this.youthcenterService.allYouthCentres;
     }
-    // removes the unnessesary parts of the date we recive
-    getDate(olddate) {return olddate.slice(0, 19);
-    }
+
 
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.getDate(this.startdate), this.getDate(this.enddate)); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
-        console.log('org. ' + this.startdate);
-        console.log ('new. ' + this.getDate(this.startdate));
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
@@ -56,7 +52,7 @@ export class CreateEventPage implements OnInit {
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.getDate(this.startdate), this.getDate(this.enddate)); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);

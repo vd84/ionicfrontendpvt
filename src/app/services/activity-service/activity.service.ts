@@ -159,8 +159,14 @@ export class ActivityService {
         return this.http.get<Event[]>(this.youthCentreUrl + id);
     }
 
+    changeDateFormat(oldFormat) {
+        return (oldFormat.slice(0, 19));
+    }
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number, startdate: String, enddate: String) {
+
+        startdate = this.changeDateFormat(startdate);
+        enddate = this.changeDateFormat(enddate);
 
         const httpOptions = {
             headers: new HttpHeaders({
