@@ -7,8 +7,6 @@ import {Subscription} from 'rxjs';
 import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
-import {filter} from 'rxjs/operators';
-import {passBoolean} from 'protractor/built/util';
 
 declare var google;
 

@@ -11,16 +11,22 @@
     <!--LISTA FÖR: NAMN DATUM PLATS BESKRIVNING -->
     <ion-list>
         <ion-item>
-            <h4>Name: {{activity.name}}</h4>
+            <h4>Namn: {{activity.name}}</h4>
         </ion-item>
         <ion-item>
-            <h4>Date: {{activity.startdate}}</h4>
+            <h4>Tid: {{activity.startdate}} - {{activity.enddate}}</h4>
         </ion-item>
         <ion-item>
-            <h4>Location: </h4>
+            <h4>Utmanare: {{activity.challenger}}</h4>
         </ion-item>
         <ion-item>
-            <h4>Description: {{activity.description}}</h4>
+            <h4>Möter: {{activity.challenged}}</h4>
+        </ion-item>
+        <ion-item>
+            <h4>Plats: {{activity.location}}</h4>
+        </ion-item>
+        <ion-item>
+            <h4>Om aktiviteten: {{activity.description}}</h4>
             <ion-textarea></ion-textarea>
         </ion-item>
 
@@ -42,16 +48,17 @@
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
-        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Attend</ion-button>
-        <ion-button (click)="removeActivity()" *ngIf="booked()">Unattend</ion-button>
-        <ion-button (click)="checkInActivity()" [disabled]="!userCanCheckIn()">Check in</ion-button>
+        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Boka</ion-button>
+        <ion-button (click)="removeActivity()" *ngIf="booked()">Avboka</ion-button>
+        <ion-button (click)="checkInActivity()" [disabled]="!userCanCheckIn()">Checka in</ion-button>
     </div>
     <div *appHasRole="'admin'">
-        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
-        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Decline Challenge</ion-button>
-        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Accept Suggestion</ion-button>
-        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Decline Suggestion</ion-button>
-        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Specify Winner</ion-button>
+        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
+        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Avslå</ion-button>
+        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
+        <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
+        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
+        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Ange vinnare</ion-button>
 
         <ion-list *ngIf="isActivityOwner()">
             <ion-list-header>
