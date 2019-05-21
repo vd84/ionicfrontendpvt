@@ -11,7 +11,6 @@ import {DataService} from '../../services/data.service';
 export class EventPage implements OnInit {
     activity: any;
 
-
     constructor(private router: Router, private authService: AuthService, private activityService: ActivityService, private dataService: DataService) {
     }
 

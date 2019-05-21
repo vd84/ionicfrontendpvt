@@ -36,6 +36,6 @@
     </ion-item>
   </ion-list>
   <!--CHECK IN BUTTON-->
-  <ion-button (click)="checkin()">check in</ion-button>
+  <ion-button (click)="checkin()" [disabled]="!userIsCloseEnough()">check in</ion-button>
  <!---->
 </ion-content>

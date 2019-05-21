@@ -20,6 +20,7 @@ export class CreateEventPage implements OnInit {
     private youthcenters = [];
     private startdate: string;
     private enddate: string;
+    private activity;
 
     constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityService: ActivityService, private userService: UserService) {
     }
