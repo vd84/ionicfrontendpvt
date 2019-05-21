@@ -8,7 +8,6 @@ import {ParticipationUser} from '../../Models/ParticipationUser';
 import {ToastController} from '@ionic/angular';
 
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -35,7 +34,6 @@ export class ActivityService {
     allActivityParticipants = [];
 
 
-
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
 
@@ -48,12 +46,28 @@ export class ActivityService {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
+            this.addMySuggestedActivitiesToMyActivitiesPage();
 
 
         }, error => {
             console.log(error);
         });
 
+
+    }
+
+    addMySuggestedActivitiesToMyActivitiesPage() {
+
+
+        for (const activity of this.allActivitiesFromDatabase) {
+            console.log(activity);
+            console.log(activity.createdby === this.userservice.currentUser.id)
+
+            if (activity.createdby === this.userservice.currentUser.id) {
+                this.allMyActivities.push(activity);
+            }
+
+        }
 
     }
 
@@ -293,23 +307,30 @@ export class ActivityService {
             'challengeaccepted': challengeaccepted,
             'challengerejected': challengerejected,
             'winner': winner,
-            'startdate' : startdate,
-            'enddate' : enddate
+            'startdate' : this.correctTimestamp(startdate),
+            'enddate' : this.correctTimestamp(enddate)
 
 
         });
+        console.log(body);
 
         this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
 
                 this.presentToast('Ändring lyckad');
-                 this.getAllActivities();
+                this.getAllActivities();
             },
             error => {
                 console.log('Error');
             });
 
 
+    }
+
+    correctTimestamp(timestamp: string) {
+        let output = timestamp.substr(0, 10) + 'T' + timestamp.substr(11);
+        console.log(output);
+        return output;
     }
 
     getAllActivityParticipants(activityId: number) {

@@ -131,6 +131,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     declineSuggestion() {
+       // console.log(this.activity.id  + ' ' + this.activity.name + ' ' + this.activity.description + ' ' + this.userService.currentUser.id + ' ' + this.activity.alternativelocation + ' ' + 1 + ' ' + 0 + ' ' + this.activity.category + ' ' + this.activity.resource + ' ' + this.activity.challenger + ' ' + this.activity.challenged + ' ' + this.activity.completed + ' ' +  this.activity.challengeaccepted + ' ' + this.activity.challengerejected + ' ' + this.activity.winner + ' ' + this.activity.startdate + ' ' + this.activity.enddate);
         this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.userService.currentUser.id, this.activity.alternativelocation, 1, 0, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner, this.activity.startdate, this.activity.enddate);
         this.router.navigate(['tabs/event']);
     }
