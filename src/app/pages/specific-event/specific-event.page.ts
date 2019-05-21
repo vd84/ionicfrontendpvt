@@ -4,6 +4,7 @@ import {UserService} from '../../services/user-service/user.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {ToastController} from '@ionic/angular';
+import {DataService} from '../../services/data.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -16,7 +17,7 @@ export class SpecificEventPage implements OnInit {
     winner: String;
     competitors: any = [];
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController) {
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService) {
     }
 
     ngOnInit() {
@@ -37,7 +38,6 @@ export class SpecificEventPage implements OnInit {
 
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
-        console.log('booked: ' + this.activityService.isMyActivity(this.activity.id));
     }
 
     bookActivity() {
@@ -79,6 +79,10 @@ export class SpecificEventPage implements OnInit {
 
         this.checkInService.activityCheckin(this.userService.currentUser.id, this.activity.id);
 
+    }
+
+    userCanCheckIn() {
+        return this.userIsCloseEnough() && this.booked();
     }
 
     userIsCloseEnough(): boolean {
@@ -130,5 +134,10 @@ export class SpecificEventPage implements OnInit {
        // console.log(this.activity.id  + ' ' + this.activity.name + ' ' + this.activity.description + ' ' + this.userService.currentUser.id + ' ' + this.activity.alternativelocation + ' ' + 1 + ' ' + 0 + ' ' + this.activity.category + ' ' + this.activity.resource + ' ' + this.activity.challenger + ' ' + this.activity.challenged + ' ' + this.activity.completed + ' ' +  this.activity.challengeaccepted + ' ' + this.activity.challengerejected + ' ' + this.activity.winner + ' ' + this.activity.startdate + ' ' + this.activity.enddate);
         this.activityService.modifyActivity(this.activity.id, this.activity.name, this.activity.description, this.userService.currentUser.id, this.activity.alternativelocation, 1, 0, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner, this.activity.startdate, this.activity.enddate);
         this.router.navigate(['tabs/event']);
+    }
+
+    modifySuggestion() {
+        localStorage.setItem('activityToModify', JSON.stringify(this.activity));
+        this.router.navigate(['modify-activity']);
     }
 }
