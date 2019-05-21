@@ -37,7 +37,6 @@ export class SpecificEventPage implements OnInit {
 
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
-        console.log('booked: ' + this.activityService.isMyActivity(this.activity.id));
     }
 
     bookActivity() {
@@ -79,6 +78,10 @@ export class SpecificEventPage implements OnInit {
 
         this.checkInService.activityCheckin(this.userService.currentUser.id, this.activity.id);
 
+    }
+
+    userCanCheckIn() {
+        return this.userIsCloseEnough() && this.booked();
     }
 
     userIsCloseEnough(): boolean {
