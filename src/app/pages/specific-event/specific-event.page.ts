@@ -37,13 +37,14 @@ export class SpecificEventPage implements OnInit {
 
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
+        console.log('booked: ' + this.activityService.isMyActivity(this.activity.id));
     }
 
     bookActivity() {
         this.user.bookActivity(this.activity); // Should we keep or remove this?
         this.activityService.submitParticipation(this.user.id, this.activity.id);
-        console.log(this.activityService.allMyActivities);
     }
+
 
     removeActivity() {
         this.user.removeBookedActivity(this.activity);
