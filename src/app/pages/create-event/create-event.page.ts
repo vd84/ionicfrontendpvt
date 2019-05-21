@@ -32,9 +32,12 @@ export class CreateEventPage implements OnInit {
             this.youthcenterService.getAllLocations();
             this.youthcenters = this.youthcenterService.allYouthCentres;
             this.loadallyouthcenters();
-        }, 8000);
-
-
+            for (const youthcentre of this.youthcenters){
+                if (youthcentre.id === this.userService.currentUser.currentyouthcentre) {
+                    this.youthcenters.splice(this.youthcenters.indexOf(youthcentre), 1);
+                }
+            }
+        }, 3000);
     }
 
     loadallyouthcenters() {
