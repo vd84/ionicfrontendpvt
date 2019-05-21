@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Profile</ion-title>
+    <ion-title>Profil</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,27 +9,30 @@
   <ion-list>
     <ion-list-header><img src=""/></ion-list-header>
     <ion-item>
-      <ion-label>Username: {{userService.currentUser.name}}</ion-label>
+      <ion-label>Användarnamn: {{userService.currentUser.name}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Permissions: {{userService.currentUser.role.includes('admin') ? 'admin' : 'user'}}</ion-label>
+      <ion-label>Kontotyp: {{userService.currentUser.role.includes('admin') ? 'admin' : 'user'}}</ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Antal Badges: {{userService.currentUser.getNumberOfBadges()}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label> Tillhör ungdomsgård: {{userService.currentUser.currentyouthcentre}} </ion-label>
     </ion-item>
 
 
   </ion-list>
 
-  <ion-button (click)="logout()">Logout</ion-button>
+  <ion-button (click)="logout()">Logga ut</ion-button>
 
   <ion-list>
-    <ion-list-header>Account and Security</ion-list-header>
+    <ion-list-header>Konto och säkerhet</ion-list-header>
     <ion-item>
-      <ion-label>Password: <ion-button (click)="changePassword()">Change password</ion-button></ion-label>
+      <ion-label>Password: <ion-button (click)="changePassword()">Byt lösenord</ion-button></ion-label>
     </ion-item>
     <ion-item>
-      <ion-button color="danger" (click)="deleteAccount()">Delete account</ion-button>
+      <ion-button color="danger" (click)="deleteAccount()">Ta bort konto</ion-button>
     </ion-item>
 
 
