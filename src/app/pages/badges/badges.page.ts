@@ -21,13 +21,15 @@ export class BadgesPage implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ionViewWillEnter() {
         this.displayAllBadges();
         this.displayAllMyBadges();
         this.displayAvailBadges();
         setTimeout(() => {
             this.progressValue = this.getProgressValue();
         }, 1000);
-
     }
 
     loadBadge(badge) {
@@ -58,19 +60,19 @@ export class BadgesPage implements OnInit {
     }
 
     displayAvailBadges() {
-            this.hasShowedAvailBadges = true;
-            let avail = true;
-            for (let badge of this.allBadges) {
-                for (let userBadge of this.allOfUsersBadges) {
-                    if (badge.id === userBadge.id) {
-                        avail = false;
-                    }
+        this.hasShowedAvailBadges = true;
+        let avail = true;
+        for (let badge of this.allBadges) {
+            for (let userBadge of this.allOfUsersBadges) {
+                if (badge.id === userBadge.id) {
+                    avail = false;
                 }
-                if (!this.allAvailBadges.includes(badge) && avail) {
-                    this.allAvailBadges.push(badge);
-                }
-                avail = true;
             }
+            if (!this.allAvailBadges.includes(badge) && avail) {
+                this.allAvailBadges.push(badge);
+            }
+            avail = true;
+        }
     }
 
 }

@@ -12,7 +12,7 @@
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">
                 <ion-label>All
-                    <ion-badge slot="end">{{activityService.allActivities.length}}</ion-badge>
+                    <ion-badge slot="end">{{activityService.adminAllActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
             <ion-segment-button *appHasRole="'user'" value="my-activities">
@@ -53,7 +53,6 @@
             </ion-item>
         </ion-list>
     </div>
-
 
 
     <ion-button *appHasRole="'admin'" (click)="goToCreateEvent()">Create Activity</ion-button>
