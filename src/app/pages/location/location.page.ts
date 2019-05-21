@@ -21,6 +21,7 @@ export class LocationPage implements OnInit {
     }
 
     ngOnInit() {
+        this.activityService.getAllActivities();
         if (this.route.snapshot.data['youthcentre']) {
             this.youthcentre = this.route.snapshot.data['youthcentre'];
             console.log(this.youthcentre);
@@ -30,11 +31,7 @@ export class LocationPage implements OnInit {
         }
         this.user = this.userService.currentUser;
 
-        setTimeout(() =>{
-            this.generateActvitiesForYouthCentreToShow();
-
-        }, 500);
-
+        this.generateActvitiesForYouthCentreToShow();
 
 
     }
@@ -52,14 +49,17 @@ export class LocationPage implements OnInit {
         }*/
 
 
-
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
     }
 
     generateActvitiesForYouthCentreToShow() {
+
         for (const activity of this.activityService.allActivities) {
+            console.log(activity.challenger + ' challenger');
+            console.log(activity.challenged + ' challenged');
+            console.log(this.youthcentre.id + ' youthcentre id');
             if (activity.challenger === this.youthcentre.id || activity.challenged === this.youthcentre.id) {
                 this.allActivitiesForYouthCentreToShow.push(activity);
 

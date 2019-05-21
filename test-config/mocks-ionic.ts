@@ -168,6 +168,19 @@ export class ActivityServiceMock {
 
     url = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
 
+
+    // alla aktiviteter som ska visas på admin sidan
+    adminActivities = [];
+    // alla aktiviteter för en user/admin
+    allActivities = [];
+    // allt från databasen
+    allActivitiesFromDatabase = [];
+    // alla mina aktiviteter som jag ska delta på
+    allMyActivities = [];
+    // allMyPendingActivities = [];
+    // alla som deltar på en specifik aktivitet
+    allActivityParticipants = [];
+
     constructor() {
     }
 
