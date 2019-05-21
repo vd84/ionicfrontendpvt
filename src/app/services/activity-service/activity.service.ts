@@ -5,6 +5,7 @@ import {IActivity} from '../../Interfaces/activity';
 import {UserService} from '../user-service/user.service';
 import {User} from '../../Models/user';
 import {ParticipationUser} from '../../Models/ParticipationUser';
+import {ToastController} from '@ionic/angular';
 
 
 
@@ -18,13 +19,15 @@ export class ActivityService {
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
-    allActivities = [];
+    adminPendingActivities = [];
+    adminAllActivities = [];
+    allActivitiesFromDatabase = [];
     allMyActivities = [];
     allMyPendingActivities = [];
     allActivityParticipants = [];
 
 
-    constructor(private http: HttpClient, private userservice: UserService) {
+    constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
 
     /**
@@ -33,9 +36,9 @@ export class ActivityService {
      */
     getAllActivities() {
         this.http.get<Event[]>(this.activityUrl).subscribe(data => {
-            this.allActivities = data;
-
-            this.filterPendingActivities();
+            this.allActivitiesFromDatabase = data;
+            this.generateAllActvitiesPage();
+            this.generateAdminPendingPage();
 
 
         }, error => {
@@ -45,28 +48,70 @@ export class ActivityService {
 
     }
 
-    filterPendingActivities() {
-        console.log(this.allActivities);
+
+    generateAllActvitiesPage() {
 
 
-        for (const activity of this.allActivities) {
-            console.log(this.userservice.currentUser.currentyouthcentre);
-            console.log(activity);
-            console.log(activity.challenged !== this.userservice.currentUser.currentyouthcentre);
-            console.log(activity.challenger !== this.userservice.currentUser.currentyouthcentre);
+        this.adminAllActivities = [];
 
-            if (activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre) {
-                console.log(activity + 'tas bort');
-                this.allMyPendingActivities.push(activity);
+
+        for (const activity of this.allActivitiesFromDatabase) {
+            if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
+                this.adminAllActivities.push(activity);
 
             }
-            console.log(this.allMyPendingActivities);
+        }
+
+    }
+
+    generateAdminPendingPage() {
+
+        this.adminPendingActivities = [];
+
+
+        for (const activity of this.allActivitiesFromDatabase) {
+            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+                console.log((this.activityIsSuggestion(activity) && this.isChallenger(activity)) + ' ' + activity.id);
+                console.log((this.activityIsPending(activity)) + ' ' + activity.id);
+                console.log(this.activityIsAccepted(activity) && this.isOfYourCentre(activity) + ' ' + activity.id);
+
+                this.adminPendingActivities.push(activity);
+            }
 
         }
+
     }
 
 
-    getAllMyActivities() {
+    activityIsSuggestion(activity) {
+
+        return activity.issuggestion === 1;
+
+    }
+
+    activityIsPending(activity) {
+        let youthcentre = this.userservice.currentUser.currentyouthcentre;
+
+        return (activity.challenger === youthcentre || activity.challenged === youthcentre) && (activity.challengeaccepted === 0 && activity.challengerejected === 0) && !this.activityIsSuggestion(activity);
+
+    }
+
+    activityIsDeclined(activity) {
+
+
+        return activity.challengerejected === 1;
+    }
+
+    activityIsAccepted(activity) {
+        return activity.challengeaccepted === 1;
+    }
+
+    isOfYourCentre(activity) {
+        return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
+    }
+
+
+    generateAllMyActivities() {
         this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
             this.allMyActivities = data;
         }, error1 => {
@@ -84,17 +129,23 @@ export class ActivityService {
     }
 
     isChallenge(id: number): boolean {
-        for (let activity of this.allMyPendingActivities) {
-            if (activity.id === id) {
+        for (let activity of this.adminPendingActivities) {
+
+            if (!this.activityIsSuggestion(activity) && !this.activityIsAccepted(activity) && !this.activityIsDeclined(activity) && activity.id === id && this.isChallenged(activity)) {
                 return true;
             }
         }
         return false;
     }
 
-    // getAllMyPendingActivities() {
-    //     return this.http.get<Event[]>(this.challengeUrl + this.userservice.currentUser.currentyouthcentre);
-    // }
+    isChallenged(activity) {
+        return activity.challenged === this.userservice.currentUser.currentyouthcentre;
+    }
+
+    isChallenger(activity) {
+        return activity.challenger === this.userservice.currentUser.currentyouthcentre;
+    }
+
 
     getYouthCenterActivities(id: number) {
         return this.http.get<Event[]>(this.youthCentreUrl + id);
@@ -210,9 +261,9 @@ export class ActivityService {
 
         const body = JSON.stringify({
             'id': id,
-            'responsibleuser': responsibleuser,
             'name': name,
             'description': description,
+            'responsibleuser': responsibleuser,
             'alternativelocation': alternativelocation,
             'issuggestion': issuggestion,
             'isactive': isactive,
@@ -230,6 +281,9 @@ export class ActivityService {
 
         this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
+
+                this.presentToast('Ändring lyckad');
+                 this.getAllActivities();
             },
             error => {
                 console.log('Error');
@@ -245,6 +299,15 @@ export class ActivityService {
         }, error1 => {
             console.log(error1);
         });
+    }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
     }
 
 

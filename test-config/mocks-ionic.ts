@@ -171,11 +171,130 @@ export class ActivityServiceMock {
     constructor() {
     }
 
-    getAllActivities(): Observable<Event[]> {
-        return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
+    getAllActivities() {
+        return true;
     }
 
-    getAllMyActivities() {
+    generateAllActivities() {
+        return true;
+    }
+
+    generateAllActvitiesPage() {
+        return true;
+    }
+
+
+    generateAdminPendingPage() {
+
+        return true;
+    }
+
+    activityIsSuggestion(activity) {
+        return true;
+    }
+
+    activityIsPending(activity) {
+        return true;
+    }
+
+    activityIsDeclined(activity) {
+        return true;
+    }
+
+    activityIsAccepted(activity) {
+        return true;
+
+    }
+
+    isOfYourCentre(activity) {
+        return true;
+    }
+
+
+
+
+    generateAllMyActivities() {
+        return true;
+    }
+
+
+    isChallenged(activity) {
+        return true;
+    }
+
+    isChallenger(activity) {
+        return true;
+    }
+
+    addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number) {
+        return true;
+    }
+
+    submitParticipation(userID: number, activityID: number) {
+        return true;
+    }
+
+    removeParticipation(userId: any, activityId: number) {
+        return true;
+    }
+
+    async presentToast(toastMessage: string) {
+        return true;
+
+    }
+
+    modifyActivity(id,
+                   name,
+                   description,
+                   responsibleuser,
+                   alternativelocation,
+                   issuggestion,
+                   isactive,
+                   category,
+                   resource,
+                   challenger,
+                   challenged,
+                   completed,
+                   challengeaccepted,
+                   challengerejected,
+                   winner) {
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        getAllMyActivities() {
         return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
     }
 

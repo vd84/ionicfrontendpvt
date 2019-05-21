@@ -48,7 +48,11 @@
     </div>
     <div *appHasRole="'admin'">
         <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Accept Challenge</ion-button>
+        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Decline Challenge</ion-button>
+        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Accept Suggestion</ion-button>
+        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Decline Suggestion</ion-button>
         <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Specify Winner</ion-button>
+
         <ion-list *ngIf="isActivityOwner()">
             <ion-list-header>
                 <ion-label>Participation List</ion-label>
