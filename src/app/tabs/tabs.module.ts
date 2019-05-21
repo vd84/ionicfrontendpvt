@@ -12,9 +12,11 @@ const routes: Routes = [
         path: '',
         component: TabsPage,
         children: [
-            {path: 'home', loadChildren: '../home/home.module#HomePageModule'},
-            {path: 'profile', loadChildren: '../profile/profile.module#ProfilePageModule'},
-            {path: 'about', loadChildren: '../about/about.module#AboutPageModule'},
+            {path: 'home', loadChildren: '../pages/home/home.module#HomePageModule'},
+            {path: 'event', loadChildren: '../pages/event/event.module#EventPageModule'},
+            {path: 'badges', loadChildren: '../pages/badges/badges.module#BadgesPageModule'},
+            {path: 'map', loadChildren: '../pages/map/map.module#MapPageModule'},
+            {path: 'settings', loadChildren: '../pages/settings/settings.module#SettingsPageModule'}
         ]
     },
 
