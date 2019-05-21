@@ -6,6 +6,7 @@ export class Youthcentre {
     private _lon: number;
     private _name: string;
     private _score: number;
+    private _isClose = false;
 
     constructor(id: number, currentactivactivities: number, lat: number, lon: number, location: number, name: string, score: number ) {
         this._id = id;
@@ -15,6 +16,7 @@ export class Youthcentre {
         this._lon = lon;
         this._name = name;
         this._score = score;
+        this._isClose = false;
     }
     get id(): number {
         return this._id;
@@ -70,5 +72,12 @@ export class Youthcentre {
 
     set score(value: number) {
         this._score = value;
+    }
+    get isClose(): boolean {
+        return this._isClose;
+    }
+
+    set isClose(value: boolean) {
+        this._isClose = value;
     }
 }

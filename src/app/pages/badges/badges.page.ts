@@ -26,7 +26,6 @@ export class BadgesPage implements OnInit {
         this.displayAvailBadges();
         setTimeout(() => {
             this.progressValue = this.getProgressValue();
-            console.log('progress' + this.progressValue);
         }, 1000);
 
     }
@@ -60,12 +59,18 @@ export class BadgesPage implements OnInit {
 
     displayAvailBadges() {
             this.hasShowedAvailBadges = true;
-            for (let i = 0; i < this.allBadges.length; i++) {
-                for (let y = 0; y < this.allOfUsersBadges.length; y++) {
-                    if (this.allOfUsersBadges[y].id !== this.allBadges[i].id) {
-                        this.allAvailBadges.push(this.allBadges[i]);
+            let avail = true;
+            for (let badge of this.allBadges) {
+                for (let userBadge of this.allOfUsersBadges) {
+                    if (badge.id === userBadge.id) {
+                        avail = false;
                     }
                 }
+                if (!this.allAvailBadges.includes(badge) && avail) {
+                    this.allAvailBadges.push(badge);
+                }
+                avail = true;
             }
     }
+
 }

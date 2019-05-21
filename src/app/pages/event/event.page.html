@@ -10,9 +10,21 @@
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
-            <ion-segment-button value="all-activities">All</ion-segment-button>
-            <ion-segment-button *appHasRole="'user'" value="my-activities">My</ion-segment-button>
-            <ion-segment-button *appHasRole="'admin'" value="pending-activities">Pending</ion-segment-button>
+            <ion-segment-button value="all-activities">
+                <ion-label>All
+                    <ion-badge slot="end">{{activityService.allActivities.length}}</ion-badge>
+                </ion-label>
+            </ion-segment-button>
+            <ion-segment-button *appHasRole="'user'" value="my-activities">
+                <ion-label>My
+                    <ion-badge slot="end">{{activityService.allMyActivities.length}}</ion-badge>
+                </ion-label>
+            </ion-segment-button>
+            <ion-segment-button *appHasRole="'admin'" value="pending-activities">
+                <ion-label>Admin
+                    <ion-badge slot="end">{{activityService.allMyPendingActivities.length}}</ion-badge>
+                </ion-label>
+            </ion-segment-button>
         </ion-segment>
     </div>
     <div [ngSwitch]="activity">

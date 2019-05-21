@@ -8,6 +8,7 @@ import {DataService} from '../../services/data.service';
 import {UserService} from '../../services/user-service/user.service';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {filter} from 'rxjs/operators';
+import {passBoolean} from 'protractor/built/util';
 
 declare var google;
 
@@ -25,6 +26,7 @@ declare var google;
     templateUrl: './google-maps.component.html'
 })
 export class GoogleMapsComponent implements OnInit {
+
 
     @ViewChild('mapElement') mapElement;
     map: any;
@@ -207,7 +209,6 @@ export class GoogleMapsComponent implements OnInit {
                 this.currentPosition.lng = data.coords.longitude;
                 console.log(this.currentPosition);
                 this.marker.setPosition(this.currentPosition);
-
             });
 
     }
