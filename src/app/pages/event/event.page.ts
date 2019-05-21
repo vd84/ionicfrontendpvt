@@ -19,7 +19,6 @@ export class EventPage implements OnInit {
     ngOnInit() {
         this.activityService.getAllActivities();
         this.activityService.generateAllMyActivities();
-        // this.activityService.getAllMyPendingActivities().subscribe(data => this.activityService.allMyPendingActivities = data);
         this.activity = 'all-activities';
 
 

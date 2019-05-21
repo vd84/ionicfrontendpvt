@@ -14,7 +14,8 @@ export class LocationPage implements OnInit {
 
     youthcentre: any;
     user: any;
-    allActivitiesForCenter = [];
+    allActivitiesForYouthCentreToShow = [];
+
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router) {
     }
@@ -28,31 +29,42 @@ export class LocationPage implements OnInit {
             console.log('Inte rätt');
         }
         this.user = this.userService.currentUser;
-        this.getActivitiesForYouthCenter();
-        console.log(this.allActivitiesForCenter);
-        console.log(this.allActivitiesForCenter.length);
+
+        setTimeout(() =>{
+            this.generateActvitiesForYouthCentreToShow();
+
+        }, 500);
+
 
 
     }
-    checkin () {
+
+    checkin() {
 
         console.log('youthcentreid ' + this.youthcentre.id);
         console.log('userid ' + this.user.id);
-        this.checkinService.youthcentreCheckin(this.user.id,  this.youthcentre.id);
+        this.checkinService.youthcentreCheckin(this.user.id, this.youthcentre.id);
     }
-/*    loadEvent(activity) {
-        this.dataService.setData('activity', activity);
-        this.router.navigateByUrl('/specific-event/activity');
-    }*/
 
-    getActivitiesForYouthCenter() {
-        this.activityService.getYouthCenterActivities(this.youthcentre.id).subscribe( data => {
-            this.allActivitiesForCenter = data;
-        });
-    }
+    /*    loadEvent(activity) {
+            this.dataService.setData('activity', activity);
+            this.router.navigateByUrl('/specific-event/activity');
+        }*/
+
+
+
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
+    }
+
+    generateActvitiesForYouthCentreToShow() {
+        for (const activity of this.activityService.allActivities) {
+            if (activity.challenger === this.youthcentre.id || activity.challenged === this.youthcentre.id) {
+                this.allActivitiesForYouthCentreToShow.push(activity);
+
+            }
+        }
     }
 
 
