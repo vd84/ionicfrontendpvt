@@ -68,7 +68,7 @@ export class GoogleMapsComponent implements OnInit {
         // Adds map with marker att currentLocation
         setTimeout(() => {
             this.map = new google.maps.Map(this.mapElement.nativeElement, this.mapOptions);
-        }, 5000);
+        }, 9000);
         this.startTracking();
 
     }
