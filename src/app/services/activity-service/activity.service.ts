@@ -15,16 +15,25 @@ import {ToastController} from '@ionic/angular';
 export class ActivityService {
 
     activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
-    challengeUrl = 'https://webbapppvt15grupp2.herokuapp.com/activityChallenged/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
-    adminPendingActivities = [];
-    adminAllActivities = [];
+
+    // alla aktiviteter som ska visas på admin sidan
+    adminActivities = [];
+
+    // alla aktiviteter för en user/admin
+    allActivities = [];
+    // allt från databasen
     allActivitiesFromDatabase = [];
+    // alla mina aktiviteter som jag ska delta på
     allMyActivities = [];
-    allMyPendingActivities = [];
+
+    // allMyPendingActivities = [];
+
+    // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
+
 
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
@@ -48,16 +57,15 @@ export class ActivityService {
 
     }
 
-
     generateAllActvitiesPage() {
 
 
-        this.adminAllActivities = [];
+        this.allActivities = [];
 
 
         for (const activity of this.allActivitiesFromDatabase) {
             if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
-                this.adminAllActivities.push(activity);
+                this.allActivities.push(activity);
 
             }
         }
@@ -66,7 +74,7 @@ export class ActivityService {
 
     generateAdminPendingPage() {
 
-        this.adminPendingActivities = [];
+        this.adminActivities = [];
 
 
         for (const activity of this.allActivitiesFromDatabase) {
@@ -75,7 +83,7 @@ export class ActivityService {
                 console.log((this.activityIsPending(activity)) + ' ' + activity.id);
                 console.log(this.activityIsAccepted(activity) && this.isOfYourCentre(activity) + ' ' + activity.id);
 
-                this.adminPendingActivities.push(activity);
+                this.adminActivities.push(activity);
             }
 
         }
@@ -129,7 +137,7 @@ export class ActivityService {
     }
 
     isChallenge(id: number): boolean {
-        for (let activity of this.adminPendingActivities) {
+        for (let activity of this.adminActivities) {
 
             if (!this.activityIsSuggestion(activity) && !this.activityIsAccepted(activity) && !this.activityIsDeclined(activity) && activity.id === id && this.isChallenged(activity)) {
                 return true;
@@ -292,8 +300,8 @@ export class ActivityService {
 
     }
 
-    getAllActivityParticipants(id: number) {
-        this.http.get<ParticipationUser[]>(this.participationByActivityUrl + id).subscribe(data => {
+    getAllActivityParticipants(activityId: number) {
+        this.http.get<ParticipationUser[]>(this.participationByActivityUrl + activityId).subscribe(data => {
             this.allActivityParticipants = data;
             console.log(data);
         }, error1 => {
