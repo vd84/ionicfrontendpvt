@@ -12,12 +12,12 @@
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">
                 <ion-label>Alla
-                    <ion-badge slot="end">{{activityService.allActivities.length}}</ion-badge>
+                    <ion-badge color="light" slot="end">{{activityService.allActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
             <ion-segment-button *appHasRole="'user'" value="my-activities">
                 <ion-label>Mina
-                    <ion-badge slot="end">{{activityService.allMyActivities.length}}</ion-badge>
+                    <ion-badge color="light" slot="end">{{activityService.allMyActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
             <ion-segment-button *appHasRole="'admin'" value="pending-activities">
