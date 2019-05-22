@@ -5,7 +5,7 @@ export class User {
     private _role: string;
     private _currentyouthcentre: number;
     private _bookedActivities = [];
-    private _picture;
+    private _picture: string;
     private _numberOfBadges: number;
     private _isfacebookuser: number;
 
@@ -19,6 +19,8 @@ export class User {
         this._isfacebookuser = isfacebookuser;
 
     }
+
+
 
     get getBookedActivities() {
         return this._bookedActivities;
@@ -126,5 +128,10 @@ export class User {
 
     set isfacebookuser(value: number) {
         this._isfacebookuser = value;
+    }
+
+
+    set role(value: string) {
+        this._role = value;
     }
 }

@@ -6,25 +6,14 @@
 
 <ion-content padding>
 
-    <!--ACTIVITY SEARCH BAR-->
-    <ion-searchbar placeholder="Search activity"></ion-searchbar>
+    <ion-button (click)="goToSettings()">Settings</ion-button>
 
-    <!--ACTIVITY LIST-->
-    <ion-list>
-        <ion-list-header>
-            <ion-item>My Activities</ion-item>
-        </ion-list-header>
-        <ion-item>
-            <ion-label>Activity1</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label>Activity2</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label>Activity3</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label>Activity4</ion-label>
-        </ion-item>
-    </ion-list>
+    <ion-item>{{userservice.currentUser.picture}}</ion-item>
+
+    <ion-item>{{userservice.currentUser.displayname}}</ion-item>
+
+
+
+
+
 </ion-content>

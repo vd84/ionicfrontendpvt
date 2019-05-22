@@ -16,7 +16,7 @@ const routes: Routes = [
             {path: 'event', loadChildren: '../pages/event/event.module#EventPageModule'},
             {path: 'badges', loadChildren: '../pages/badges/badges.module#BadgesPageModule'},
             {path: 'map', loadChildren: '../pages/map/map.module#MapPageModule'},
-            {path: 'settings', loadChildren: '../pages/settings/settings.module#SettingsPageModule'},
+            {path: 'profile', loadChildren: '../pages/profile/profile.module#ProfilePageModule'},
         ]
     },
 ];
