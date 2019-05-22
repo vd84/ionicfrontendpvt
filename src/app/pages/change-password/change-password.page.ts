@@ -24,7 +24,7 @@ export class ChangePasswordPage implements OnInit {
 
         // här måste även gamla lösenordet skickas in, görs inte nu
 
-        this.userService.modifyUser(this.userService.currentUser.name, this.newPassword, this.userService.currentUser.currentyouthcentre);
+        this.userService.modifyUser(this.userService.currentUser.name, this.userService.currentUser.displayname, this.newPassword, this.userService.currentUser.currentyouthcentre);
 
 
     }
