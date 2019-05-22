@@ -296,7 +296,6 @@ export class GoogleMapsComponent implements OnInit {
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
     }
-
     addStartMarker() {
         setTimeout(() => {
             /*Marker Options*/

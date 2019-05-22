@@ -125,7 +125,7 @@ export class ActivityService {
 
     isMyActivity(id: number): boolean {
         for (let activity of this.allMyActivities) {
-            if (activity.id === id) {
+            if (activity.id === id && activity.issuggestion === 0) {
                 return true;
             }
         }

@@ -83,7 +83,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
-        return this.userIsCloseEnough() && this.booked() && this.isOnGoing();
+        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
     }
 
     userIsCloseEnough(): boolean {
