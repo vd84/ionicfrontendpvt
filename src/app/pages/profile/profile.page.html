@@ -6,11 +6,19 @@
 
 <ion-content padding>
 
-    <ion-button (click)="goToSettings()">Settings</ion-button>
+    <ion-icon (click)="goToSettings()" name="cog" size="" >Settings</ion-icon>
 
-    <ion-item>{{userservice.currentUser.picture}}</ion-item>
+    <ion-img [src]="userservice.currentUser.picture"></ion-img>
 
     <ion-item>{{userservice.currentUser.displayname}}</ion-item>
+
+    <ion-item>{{userservice.currentUser.numberOfBadges}}</ion-item>
+
+    <ion-item>{{getMyYouthCentre()}}</ion-item>
+
+
+
+
 
 
 

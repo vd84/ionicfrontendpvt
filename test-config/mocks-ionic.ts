@@ -125,7 +125,7 @@ export class BadgeServiceMock {
 export class UserServiceMock {
 
     currentUser: User = new User(1, 'MockUser', 'Admin',
-        1, 'MockUser');
+        1, 'MockUser', 0);
 
     currentUserJson;
 
@@ -328,7 +328,7 @@ export class ActivityServiceMock {
     }
 
     getAllActivityParticipants(id: number) {
-        return Observable.of([new User(1, 'MockResponseUser1', 'user', 1, 'MockResponseUser1')]);
+        return Observable.of([new User(1, 'MockResponseUser1', 'user', 1, 'MockResponseUser1',0)]);
     }
 }
 
