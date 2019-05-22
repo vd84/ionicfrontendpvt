@@ -17,6 +17,8 @@
   ion-card {
     position: relative;
     text-align: center;
+    --color: white !important;
+    --background: blue !important;
   }
 
   //scss for title and subtitles of cards.
