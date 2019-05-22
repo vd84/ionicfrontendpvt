@@ -162,6 +162,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     private userAlreadyCheckedIn() {
+       // to do...
         return false;
     }
 }

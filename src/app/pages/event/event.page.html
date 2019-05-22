@@ -1,22 +1,22 @@
 <ion-header>
     <ion-toolbar color="light">
-        <ion-title>Event</ion-title>
+        <ion-title>Aktivteter</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <!--SEARCH-BAR-->
-    <ion-searchbar placeholder="Search activity"></ion-searchbar>
+    <ion-searchbar placeholder="Sök aktivitet"></ion-searchbar>
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">
-                <ion-label>All
+                <ion-label>Alla
                     <ion-badge slot="end">{{activityService.allActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
             <ion-segment-button *appHasRole="'user'" value="my-activities">
-                <ion-label>My
+                <ion-label>Mina
                     <ion-badge slot="end">{{activityService.allMyActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
@@ -55,8 +55,8 @@
     </div>
 
 
-    <ion-button *appHasRole="'admin'" (click)="goToCreateEvent()">Create Activity</ion-button>
-    <ion-button *appHasRole="'user'" (click)="goToCreateEvent()">Suggest Activity</ion-button>
+    <ion-button *appHasRole="'admin'" (click)="goToCreateEvent()">Skapa aktivitet</ion-button>
+    <ion-button *appHasRole="'user'" (click)="goToCreateEvent()">Föreslå aktivitet</ion-button>
 
 
 </ion-content>

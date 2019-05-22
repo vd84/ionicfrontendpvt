@@ -12,18 +12,18 @@
             <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
                 <div padding>
                     <ion-item>
-                        <ion-label>Activity name:</ion-label>
+                        <ion-label>Activitetsnamn:</ion-label>
                         <ion-input name="Event_name" type="text" placeholder="Choose a name" ngModel required
                                    [(ngModel)]="name" ngDefaultControl></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Start Date:</ion-label>
+                        <ion-label>Börjar:</ion-label>
                         <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
                                       placeholder="Select start date"
                                       [(ngModel)]="startdate" ngDefaultControl></ion-datetime>
                     </ion-item>
                     <ion-item>
-                        <ion-label>End Date:</ion-label>
+                        <ion-label>Slutar:</ion-label>
                         <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
                                       placeholder="Select end date"
                                       [(ngModel)]="enddate" ngDefaultControl></ion-datetime>
@@ -35,25 +35,25 @@
                                    [(ngModel)]="location" ngDefaultControl></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Description:</ion-label>
+                        <ion-label>Beskrivning:</ion-label>
                         <ion-input name="description" type="text" placeholder="Describe your event" ngModel required
                                    [(ngModel)]="description" ngDefaultControl></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Alternative Location:</ion-label>
+                        <ion-label>Alternativ plats:</ion-label>
                         <ion-input name="alternativ_plats" type="text" placeholder="Add an alternative location" ngModel
                                    required
                                    [(ngModel)]="alt_location" ngDefaultControl></ion-input>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Category:</ion-label>
+                        <ion-label>Kategori:</ion-label>
                         <ion-select placeholder="Select One" (ionChange)="onChange($event)">
                             <ion-select-option value="Football">Football</ion-select-option>
                             <ion-select-option value="Chess">Chess</ion-select-option>
                         </ion-select>
                     </ion-item>
                     <ion-item>
-                        <ion-label>Youth Center:</ion-label>
+                        <ion-label>Ungdomsgård:</ion-label>
                         <ion-select [(ngModel)]="challenged" ngDefaultControl>
                             <ion-select-option *ngFor="let challenged of youthcenters"
                                                [value]="challenged.id">{{challenged.name}} </ion-select-option>
@@ -66,12 +66,12 @@
                 </div>
                 <div padding>
                     <ion-button *appHasRole="'user'" size="large" type="submit" expand="block"
-                                (click)='createSuggestion()'>Suggest Activity
+                                (click)='createSuggestion()'>Föreslå aktivitet
                     </ion-button>
                 </div>
                 <div padding>
                     <ion-button *appHasRole="'admin'" size="large" type="submit" expand="block"
-                                (click)='createActivity()'>Create Activity
+                                (click)='createActivity()'>Skapa aktivitet
                     </ion-button>
                 </div>
             </ion-col>
