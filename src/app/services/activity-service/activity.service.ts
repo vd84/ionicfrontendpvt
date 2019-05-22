@@ -25,7 +25,7 @@ export class ActivityService {
     allActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
-    // alla mina aktiviteter som jag ska delta på
+    // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
 
     // allMyPendingActivities = [];
