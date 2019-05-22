@@ -34,6 +34,7 @@ export class SpecificEventPage implements OnInit {
         this.user = this.userService.currentUser;
         this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
+
     }
 
     booked(): boolean {
@@ -86,7 +87,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
-        return this.userIsCloseEnough() && this.booked();
+        return this.userIsCloseEnough() && this.booked() && this.isOnGoing();
     }
 
     userIsCloseEnough(): boolean {
@@ -151,6 +152,15 @@ export class SpecificEventPage implements OnInit {
         } else {
             return this.activity.winner;
         }
+
+    }
+
+    private isOnGoing() {
+
+        let today = new Date();
+        let activitystartdate  = new Date(this.activity.startdate);
+        let activityenddate = new Date(this.activity.enddate);
+           return (today >= activitystartdate) && (today <= activityenddate);
 
     }
 }
