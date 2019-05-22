@@ -20,19 +20,14 @@ export class ActivityService {
 
     // alla aktiviteter som ska visas på admin sidan
     adminActivities = [];
-
     // alla aktiviteter för en user/admin
     allActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
     // alla mina aktiviteter som jag ska delta på
     allMyActivities = [];
-
-    // allMyPendingActivities = [];
-
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
-
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
@@ -42,11 +37,12 @@ export class ActivityService {
      *
      */
     getAllActivities() {
+        console.log('called generate all activities');
         this.http.get<Event[]>(this.activityUrl).subscribe(data => {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
-            this.addMySuggestedActivitiesToMyActivitiesPage();
+            this.generateAllMyActivities();
 
 
         }, error => {
@@ -57,26 +53,15 @@ export class ActivityService {
     }
 
     addMySuggestedActivitiesToMyActivitiesPage() {
-
-
         for (const activity of this.allActivitiesFromDatabase) {
-            console.log(activity);
-            console.log(activity.createdby === this.userservice.currentUser.id)
-
             if (activity.createdby === this.userservice.currentUser.id) {
                 this.allMyActivities.push(activity);
             }
-
         }
-
     }
 
     generateAllActvitiesPage() {
-
-
         this.allActivities = [];
-
-
         for (const activity of this.allActivitiesFromDatabase) {
             if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
                 this.allActivities.push(activity);
@@ -87,21 +72,12 @@ export class ActivityService {
     }
 
     generateAdminPendingPage() {
-
         this.adminActivities = [];
-
-
         for (const activity of this.allActivitiesFromDatabase) {
             if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
-                console.log((this.activityIsSuggestion(activity) && this.isChallenger(activity)) + ' ' + activity.id);
-                console.log((this.activityIsPending(activity)) + ' ' + activity.id);
-                console.log(this.activityIsAccepted(activity) && this.isOfYourCentre(activity) + ' ' + activity.id);
-
                 this.adminActivities.push(activity);
             }
-
         }
-
     }
 
 
@@ -134,11 +110,17 @@ export class ActivityService {
 
 
     generateAllMyActivities() {
+        this.allMyActivities = [];
         this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
-            this.allMyActivities = data;
+            for (let activity of data) {
+                this.allMyActivities.push(activity);
+            }
         }, error1 => {
             console.log(error1);
         });
+        this.addMySuggestedActivitiesToMyActivitiesPage();
+
+
     }
 
     isMyActivity(id: number): boolean {
@@ -202,8 +184,8 @@ export class ActivityService {
             'resource': 1,
             'challenger': challenger,
             'challenged': challengedyouthcenter,
-            'startdate' : startdate,
-            'enddate' : enddate
+            'startdate': startdate,
+            'enddate': enddate
 
         });
 
@@ -281,7 +263,7 @@ export class ActivityService {
                    challengeaccepted,
                    challengerejected,
                    winner,
-    startdate,
+                   startdate,
                    enddate) {
 
         const httpOptions = {
@@ -307,8 +289,8 @@ export class ActivityService {
             'challengeaccepted': challengeaccepted,
             'challengerejected': challengerejected,
             'winner': winner,
-            'startdate' : this.correctTimestamp(startdate),
-            'enddate' : this.correctTimestamp(enddate)
+            'startdate': this.correctTimestamp(startdate),
+            'enddate': this.correctTimestamp(enddate)
 
 
         });
