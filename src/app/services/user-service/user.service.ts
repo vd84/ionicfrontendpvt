@@ -133,7 +133,7 @@ export class UserService {
     }
 
 
-    deleteUser(username: string, password: string) {
+     deleteUser( username: String, password: String ) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -143,8 +143,27 @@ export class UserService {
 
         };
 
-        this.http.delete(this.url + this.authService.currentUser.value.name, httpOptions);
+        const body = JSON.stringify({
+            'id': 1,
+            'username': username,
+            'displayname': 'unknown888',
+            'password': password,
+            'active': 0,
+            'points': 0,
+            'fairplaypoints': 0,
+            'currentyouthcentre': 3,
+            // 'facebooklogin': 'Face1',
+            // 'facebookpassword': 'pass',
+            'isFacebookUser': 0,
+            'role': 1
+        });
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
+                console.log(data);
 
+            },
+            error => {
+                console.log('Error');
+            });
 
     }
 
