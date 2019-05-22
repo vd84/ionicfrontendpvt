@@ -83,7 +83,8 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
-        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
+        // return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
+        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.userAlreadyCheckedIn();
     }
 
     userIsCloseEnough(): boolean {
@@ -158,5 +159,10 @@ export class SpecificEventPage implements OnInit {
         let activityenddate = new Date(this.activity.enddate);
            return (today >= activitystartdate) && (today <= activityenddate);
 
+    }
+
+    private userAlreadyCheckedIn() {
+       // to do...
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>Badges</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -7,15 +7,15 @@
 <ion-content padding>
     <!--PROGRESS BAR-->
     <ion-list>
-        <ion-list-header>My Progress</ion-list-header>
+        <ion-list-header>Mina framsteg</ion-list-header>
         <ion-progress-bar value="{{progressValue}}"></ion-progress-bar>
     </ion-list>
     <!--SEGMENT OPTIONS-->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-badges">
-            <ion-segment-button value="all-badges">All</ion-segment-button>
-            <ion-segment-button value="taken-badges">Taken</ion-segment-button>
-            <ion-segment-button value="avail-badges" (click)="displayAvailBadges()">Available</ion-segment-button>
+            <ion-segment-button value="all-badges">Alla</ion-segment-button>
+            <ion-segment-button value="taken-badges">Tagna</ion-segment-button>
+            <ion-segment-button value="avail-badges" (click)="displayAvailBadges()">Tillgängliga</ion-segment-button>
         </ion-segment>
     </div>
     <!--LIST OF ALL BADGES-->
