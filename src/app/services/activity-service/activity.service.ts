@@ -74,7 +74,7 @@ export class ActivityService {
     generateAdminPendingPage() {
         this.adminActivities = [];
         for (const activity of this.allActivitiesFromDatabase) {
-            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity)) || (this.activityIsDeclined(activity) && this.isOfYourCentre(activity))) {
                 this.adminActivities.push(activity);
             }
         }
@@ -248,6 +248,8 @@ export class ActivityService {
     }
 
 
+
+
     modifyActivity(id,
                    name,
                    description,
@@ -322,6 +324,26 @@ export class ActivityService {
         }, error1 => {
             console.log(error1);
         });
+    }
+
+    endDateHasNotPassed(activity) {
+
+        let today = new Date();
+
+        let activityenddate = new Date(activity.enddate);
+
+        return (today <= activityenddate);
+
+
+    }
+
+    isOnGoing(activity) {
+
+        let today = new Date();
+        let activitystartdate = new Date(activity.startdate);
+        let activityenddate = new Date(activity.enddate);
+        return (today >= activitystartdate) && (today <= activityenddate);
+
     }
 
     async presentToast(toastMessage: string) {
