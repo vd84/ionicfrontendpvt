@@ -11,7 +11,6 @@ import {SharedDirectivesModule} from '../../directives/shared-directives.module'
 import {FormsModule} from '@angular/forms';
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {ToastController} from '@ionic/angular';
-import {DataService} from '../../services/data.service';
 
 describe('SpecificEventPage', () => {
     let component: SpecificEventPage;

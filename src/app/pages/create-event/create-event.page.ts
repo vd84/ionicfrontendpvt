@@ -53,7 +53,8 @@ export class CreateEventPage implements OnInit {
             this.activityService.generateAllMyActivities();
             console.log(this.activityService.generateAllMyActivities());
         }, 25);
-        this.router.navigate(['tabs/event/']);
+        this.router.navigate(['tabs/home/']);
+
     }
 
     createActivity() {
@@ -61,7 +62,7 @@ export class CreateEventPage implements OnInit {
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
-        this.router.navigate(['tabs/event/']);
+        this.router.navigate(['tabs/home/']);
     }
 
     getCategoryID() {
