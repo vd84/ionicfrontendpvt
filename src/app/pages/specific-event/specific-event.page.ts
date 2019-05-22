@@ -63,11 +63,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     isActivityOwner(): boolean {
-        return ((this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && (!this.activityService.activityIsPending(this.activity) && !this.activityService.activityIsSuggestion(this.activity))); //  && !this.isChallenge()
-    }
-
-    isAdminForSpecificEvent() {
-        return this.activity.responsibleuser === this.userService.currentUser.id;
+        return ((this.activity.challenger === this.user.currentyouthcentre || this.activity.challenged === this.user.currentyouthcentre) && (!this.activityService.activityIsPending(this.activity) && !this.activityService.activityIsSuggestion(this.activity))) && (this.userService.currentUser.role === 'admin');
     }
 
     checkInActivity() {
