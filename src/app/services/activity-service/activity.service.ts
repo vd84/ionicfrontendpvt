@@ -24,7 +24,7 @@ export class ActivityService {
     allActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
-    // alla mina aktiviteter som jag ska delta på
+    // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
@@ -125,7 +125,7 @@ export class ActivityService {
 
     isMyActivity(id: number): boolean {
         for (let activity of this.allMyActivities) {
-            if (activity.id === id) {
+            if (activity.id === id && activity.issuggestion === 0) {
                 return true;
             }
         }

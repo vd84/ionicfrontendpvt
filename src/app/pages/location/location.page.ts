@@ -72,4 +72,11 @@ export class LocationPage implements OnInit {
         return localStorage.getItem('isCloseEnough') === 'true';
 
     }
+
+    userCanCheckIn() {
+        if (this.youthcentre.checkedin === 0  && this.userIsCloseEnough() ) {
+            this.youthcentre.checkedin = 1;
+            return true;
+        }
+    }
 }
