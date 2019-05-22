@@ -17,6 +17,7 @@ export class SpecificEventPage implements OnInit {
     winner: String;
     competitors: any = [];
 
+
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService) {
     }
 
@@ -83,7 +84,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
-        return this.userIsCloseEnough() && this.booked() && this.isOnGoing();
+        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.userAlreadyCheckedIn();
     }
 
     userIsCloseEnough(): boolean {
@@ -158,5 +159,9 @@ export class SpecificEventPage implements OnInit {
         let activityenddate = new Date(this.activity.enddate);
            return (today >= activitystartdate) && (today <= activityenddate);
 
+    }
+
+    private userAlreadyCheckedIn() {
+        return false;
     }
 }
