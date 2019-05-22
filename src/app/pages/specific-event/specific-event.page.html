@@ -52,7 +52,7 @@
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
-        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Boka</ion-button>
+        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge() && !isSuggestion()">Boka</ion-button>
         <ion-button (click)="removeActivity()" *ngIf="booked()">Avboka</ion-button>
         <ion-button (click)="checkInActivity()" [disabled]="!userCanCheckIn()">Checka in</ion-button>
     </div>

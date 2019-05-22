@@ -17,7 +17,6 @@ export class SpecificEventPage implements OnInit {
     winner: String;
     competitors: any = [];
 
-
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService) {
     }
 
@@ -88,6 +87,7 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
+        // return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
         return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.userAlreadyCheckedIn();
     }
 
