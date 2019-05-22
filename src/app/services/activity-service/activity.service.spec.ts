@@ -1,18 +1,32 @@
-import { TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ActivityService } from './activity.service';
+import {ActivityService} from './activity.service';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user-service/user.service';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {ToastController} from '@ionic/angular';
+import {SpecificEventPage} from '../../pages/specific-event/specific-event.page';
 
 describe('ActivityService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [{provide: HttpClient, useValue: null}, {provide: UserService, useValue: new UserServiceMock()}, {provide: ToastController, useValue: null} ]
-  }));
+    let service: ActivityService;
+    beforeEach(() => TestBed.configureTestingModule({
+        providers: [{provide: HttpClient, useValue: null}, {
+            provide: UserService,
+            useValue: new UserServiceMock()
+        }, {provide: ToastController, useValue: null}]
+    }));
 
-  it('should be created', () => {
-    const service: ActivityService = TestBed.get(ActivityService);
-    expect(service).toBeTruthy();
-  });
+    beforeEach(() => {
+        service = TestBed.get(ActivityService);
+    });
+
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
+
+    it('should have a variable activityUrl set to the correct path', () => {
+        expect(service.activityUrl).toBeTruthy();
+        expect(service.activityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/activity/');
+    });
+
 });

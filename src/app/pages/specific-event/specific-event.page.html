@@ -35,7 +35,7 @@
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
 
-        <div *ngIf="isAdminForSpecificEvent()">
+        <div *ngIf="isActivityOwner()">
             <ion-radio-group>
                 <ion-item-divider>
                     <ion-list-header>Winner</ion-list-header>
