@@ -36,6 +36,10 @@ export class SpecificEventPage implements OnInit {
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
     }
 
+    ionViewDidEnter() {
+
+    }
+
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
     }
