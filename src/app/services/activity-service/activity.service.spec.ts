@@ -29,4 +29,19 @@ describe('ActivityService', () => {
         expect(service.activityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/activity/');
     });
 
+    it('should have a variable participationUrl set to the correct path', () => {
+        expect(service.participationUrl).toBeTruthy();
+        expect(service.participationUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/participation/');
+    });
+
+    it('should have a variable youthCentreUrl set to the correct path', () => {
+        expect(service.youthCentreUrl).toBeTruthy();
+        expect(service.youthCentreUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/');
+    });
+
+    it('should have a variable participationByActivityUrl set to the correct path', () => {
+        expect(service.participationByActivityUrl).toBeTruthy();
+        expect(service.participationByActivityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/');
+    });
+
 });
