@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Ändra aktivitet</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row color="primary" justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <div padding>
+                    <ion-item>
+                        <ion-label>Activity name:</ion-label>
+                        <ion-input name="Event_name" type="text" placeholder="Choose a name" ngModel required
+                                   [(ngModel)]="name" ngDefaultControl></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Start Date:</ion-label>
+                        <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
+                                      placeholder="Select start date"
+                                      [(ngModel)]="startdate" ngDefaultControl></ion-datetime>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>End Date:</ion-label>
+                        <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
+                                      placeholder="Select end date"
+                                      [(ngModel)]="enddate" ngDefaultControl></ion-datetime>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Description:</ion-label>
+                        <ion-input name="description" type="text" placeholder="Describe your event" ngModel required
+                                   [(ngModel)]="description" ngDefaultControl></ion-input>
+                    </ion-item>
+                    <div padding>
+                        <ion-button size="large" type="submit" expand="block"
+                                    (click)='sendSuggestionAsChallenge()'>Skicka som utmaning
+                        </ion-button>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
