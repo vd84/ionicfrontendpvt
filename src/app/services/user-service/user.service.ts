@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../Models/user';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -54,8 +55,17 @@ export class UserService {
 
         };
 
+        let role;
+
+        if (this.currentUser.role === 'user') {
+            role = 1;
+        } else {
+            role = 11;
+        }
+
+
         const body = JSON.stringify({
-            'id': 1,
+            'id': this.currentUser.id,
             'username': this.currentUser.name,
             'displayname': this.currentUser.displayname,
             'password': password,
@@ -65,10 +75,13 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'facebooklogin': 'Face1',
             'facebookpassword': 'pass',
-            'role': 1,
+            'role': role,
             'isfacebookuser': this.currentUser.isfacebookuser,
             'image': this.currentUser.picture
+
         });
+
+        console.log(body);
 
         this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -135,7 +148,7 @@ export class UserService {
     }
 
 
-    deleteUser(password) {
+    deleteUser() {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -158,7 +171,7 @@ export class UserService {
             'isFacebookUser': 0,
             'image': this.currentUser.picture
         });
-        this.http.put(this.url, body, httpOptions).subscribe(data => {
+        return this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
                 this.presentToast('Kontot avslutat');
                 this.router.navigate(['../login']);
@@ -247,6 +260,29 @@ export class UserService {
             }
         );
 
+    }
+
+    checkLogin(username: String, password: String, isfacebookuser: number): Observable<User> {
+
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        const body = JSON.stringify({
+
+
+            username: username,
+            password: password,
+            isfacebookuser: isfacebookuser
+
+        });
+
+        return this.http.post<User>(this.url + 'login', body, httpOptions);
     }
 
     addYouthCentre(youthcentre) {

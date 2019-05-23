@@ -40,18 +40,15 @@ export class YouthcenterService {
     }
 
 
-    getTheRightId() {
+    getTheRightId(id) {
 
         let returnStatement = '';
 
-        console.log(this.userService.currentUser.currentyouthcentre);
 
         for (const youthCentre of this.allYouthCentres) {
-            console.log(youthCentre.id === this.userService.currentUser.currentyouthcentre);
-            console.log(this.userService.currentUser.currentyouthcentre);
 
             console.log(youthCentre.id);
-            if (youthCentre.id === this.userService.currentUser.currentyouthcentre) {
+            if (youthCentre.id === id) {
                 returnStatement = youthCentre.name;
                 return returnStatement;
             } else {
