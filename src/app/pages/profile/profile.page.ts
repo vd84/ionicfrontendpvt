@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {YouthcenterService} from '../../services/youthcenter.service';
+import {BadgeService} from '../../services/badge-service/badge.service';
 
 @Component({
     selector: 'app-profile',
@@ -10,21 +11,32 @@ import {YouthcenterService} from '../../services/youthcenter.service';
 export class ProfilePage implements OnInit {
 
     allCentres = [];
+    ourId: any;
+    currentyouthcentre;
+    youthCentres = [];
+    private allMyBadges = [];
 
-    constructor(private router: Router, private userservice: UserService, private youthcentreservice: YouthcenterService) {
+    constructor(private router: Router, private userservice: UserService, private youthcentreService: YouthcenterService, private badgeservice: BadgeService) {
     }
 
     ngOnInit() {
-        setTimeout( () => {
-
-            this.youthcentreservice.getAllLocations();
-
-
-        this.allCentres = this.youthcentreservice.allYouthCentres; // Även fast den har 8 sek på sig blir det en
-                                                            // tom lista även fast det bör finnas saker där.. Så snabbt vi kommer
-                                                            // in i maps finns det platser men på profilsidan finns de inte.
         console.log(this.allCentres);
-        }, 8000);
+
+        this.youthcentreService.getAllLocations();
+        this.youthCentres = this.youthcentreService.allYouthCentres;
+        setTimeout(() => {
+            this.youthcentreService.getAllLocations();
+            this.youthCentres = this.youthcentreService.allYouthCentres;
+        }, 200);
+
+
+        setTimeout(() => {
+            this.getMyYouthCentre();
+
+        }, 200);
+
+        this.displayAllMyBadges();
+
     }
 
     goToSettings() {
@@ -34,11 +46,22 @@ export class ProfilePage implements OnInit {
     }
 
     getMyYouthCentre() {
-        for (const youthcentre of this.allCentres) {
-            if (youthcentre.id === this.userservice.currentUser.currentyouthcentre) {
-                return youthcentre.name;
-            }
-            return 'Du har ingen ungdomsgård';
-        }
+
+        this.ourId = this.youthcentreService.getTheRightId();
+    }
+
+    addYouthCentre() {
+        this.userservice.addYouthCentre(this.currentyouthcentre);
+    }
+
+    displayAllMyBadges() {
+        this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
+            this.allMyBadges = data;
+        });
+    }
+
+    doesNotHaveYouthCentre() {
+        return this.userservice.currentUser.currentyouthcentre === undefined;
     }
 }
+

@@ -135,7 +135,7 @@ export class UserService {
     }
 
 
-     deleteUser() {
+    deleteUser(password) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -204,7 +204,6 @@ export class UserService {
     }
 
 
-
     login(username: String, password: String, isfacebookuser: number) {
 
 
@@ -225,7 +224,8 @@ export class UserService {
 
         });
 
-        this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(data => {
+        this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(
+            data => {
                 this.currentUserJson = data;
                 console.log(this.currentUserJson);
 
@@ -235,17 +235,52 @@ export class UserService {
                 } else {
                     role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname, this.currentUserJson[0].isfacebookuser);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
 
                 this.currentUser.picture = this.currentUserJson[0].image;
 
                 console.log(this.currentUser);
-                this.presentToast('Welcome ' + this.currentUser.displayname + '!');
+                this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
                 this.presentToast('Invalid credentials');
             }
         );
+
+    }
+
+    addYouthCentre(youthcentre) {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        const body = JSON.stringify({
+            'id': 1,
+            'username': this.currentUser.name,
+            'displayname': this.currentUser.displayname,
+            'password': 'pass1',
+            'active': 1,
+            'points': 0,
+            'fairplaypoints': 0,
+            'currentyouthcentre': youthcentre,
+            'facebooklogin': 'Face1',
+            'facebookpassword': 'pass',
+            'role': 1,
+            'isfacebookuser': this.currentUser.isfacebookuser,
+            'image': this.currentUser.picture
+        });
+
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
+                console.log(data);
+            },
+            error => {
+                console.log('Error');
+            });
 
     }
 
@@ -257,6 +292,7 @@ export class UserService {
         });
         toast.present();
     }
+
 
 }
 
