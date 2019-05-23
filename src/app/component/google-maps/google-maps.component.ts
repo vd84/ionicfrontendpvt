@@ -33,6 +33,7 @@ export class GoogleMapsComponent implements OnInit {
     markerOptions: any = {position: null, map: null, title: null};
     marker: any;
     alllocations = [];
+    allMarkers = [];
     isTracking = false;
     positionSubscription: Subscription;
     currentPosition = {lat: null, lng: null};
@@ -317,28 +318,66 @@ export class GoogleMapsComponent implements OnInit {
 
 
 
+    removeAllMarkers() {
+        for (const marker of this.allMarkers) {
+
+            marker.setMap(null);
+
+
+        }
+        this.allMarkers = [];
+        this.addAllMarkers();
+
+    }
 
 
     addAllMarkers() {
+
 
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
 
 
-            console.log(this.alllocations);
-
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
+
+
                 let marker;
-
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(place.lat, place.lon),
-                    map: this.map,
-                    description: place.id,
-                    icon: 'assets/icon/house-icon.png'
+                let checkedInYouthCentre = place.checkedin === this.userservice.currentUser.id;
 
 
-                });
+                if (!checkedInYouthCentre) {
+
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(place.lat, place.lon),
+                        map: this.map,
+                        description: place.id,
+                        icon: {
+                            url: 'assets/icon/house-icon.png', scaledSize: {height: 30, width: 30}
+                        }
+
+
+                    });
+
+                } else {
+
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(place.lat, place.lon),
+                        map: this.map,
+                        description: place.id,
+                        icon: {
+                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 30, width: 30}
+                        }
+
+
+                    });
+
+
+                }
+
+                this.allMarkers.push(marker);
+
+
                 // Makes markers clickable and sends them to locationpage
 
                 marker.addListener('click', () => { // Skriver ut rätt id. Något blir fel när jag skickar den.
@@ -362,6 +401,9 @@ export class GoogleMapsComponent implements OnInit {
                 });
             }
         }, 5000);
+        console.log(this.allMarkers);
+        console.log(this.alllocations);
+
     }
 
     checkInOnCentre() {
@@ -394,7 +436,7 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d < 1000;
+        return d < 1000000000000000;
 
 
     }

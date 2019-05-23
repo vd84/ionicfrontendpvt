@@ -136,7 +136,7 @@ export class UserService {
     }
 
 
-     deleteUser(password) {
+    deleteUser(password) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -203,7 +203,6 @@ export class UserService {
     }
 
 
-
     login(username: String, password: String, isfacebookuser: number) {
 
 
@@ -224,7 +223,8 @@ export class UserService {
 
         });
 
-        this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(data => {
+        this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(
+            data => {
                 this.currentUserJson = data;
                 console.log(this.currentUserJson);
 

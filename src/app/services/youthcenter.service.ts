@@ -19,16 +19,46 @@ export class YouthcenterService {
     }
 
     getAllLocations() {
-        this.http.get<Location[]>(this.url + this.userService.currentUser.id ).subscribe(data => {
+        return this.http.get<Location[]>(this.url + this.userService.currentUser.id).subscribe(data => {
                 this.allYouthCentres = data;
+                console.log(this.allYouthCentres);
+
             }, error1 => {
                 console.log(error1);
 
             }
         );
     }
+
+    getTheRightId() {
+
+        let returnStatement = '';
+
+        console.log(this.userService.currentUser.currentyouthcentre);
+
+        for (const youthCentre of this.allYouthCentres) {
+            console.log(youthCentre.id === this.userService.currentUser.currentyouthcentre);
+            console.log(youthCentre.id);
+            if (youthCentre.id === this.userService.currentUser.currentyouthcentre) {
+                returnStatement = youthCentre.name;
+                return returnStatement;
+            } else {
+                returnStatement = 'Du har ingen ungdomsgård';
+            }
+
+        }
+        return returnStatement;
+
+
+    }
+
+
+    getAllLocationsObservable() {
+        return this.http.get<Location[]>(this.url + this.userService.currentUser.id);
+    }
+
     getAllLocations2(): Observable<Location[]> {
-       return this.http.get<Location[]>(this.url);
+        return this.http.get<Location[]>(this.url);
     }
 
 
