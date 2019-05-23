@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="light">
-    <ion-title>Profil</ion-title>
+    <ion-title>Inställningar</ion-title>
+    <ion-back-button color = "dark"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
@@ -32,11 +33,12 @@
   <ion-list>
     <ion-list-header>Konto och säkerhet</ion-list-header>
     <ion-item>
-      <ion-label>Lösenord: <ion-button (click)="changePassword()">Byt lösenord</ion-button></ion-label>
+      <ion-button (click)="changePassword()">Byt lösenord</ion-button>
     </ion-item>
     <ion-item>
       <ion-button color="danger" (click)="deleteAccount()">Ta bort konto</ion-button>
     </ion-item>
+
 
 
   </ion-list>

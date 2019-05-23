@@ -20,7 +20,6 @@ export class YouthcenterService {
 
     getAllLocations() {
         this.http.get<Location[]>(this.url + this.userService.currentUser.id ).subscribe(data => {
-            console.log(this.userService.currentUser.id );
                 this.allYouthCentres = data;
             }, error1 => {
                 console.log(error1);
