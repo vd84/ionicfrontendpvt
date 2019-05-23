@@ -48,6 +48,8 @@ export class YouthcenterService {
 
         for (const youthCentre of this.allYouthCentres) {
             console.log(youthCentre.id === this.userService.currentUser.currentyouthcentre);
+            console.log(this.userService.currentUser.currentyouthcentre);
+
             console.log(youthCentre.id);
             if (youthCentre.id === this.userService.currentUser.currentyouthcentre) {
                 returnStatement = youthCentre.name;

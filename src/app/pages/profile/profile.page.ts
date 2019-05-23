@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {YouthcenterService} from '../../services/youthcenter.service';
+import {BadgeService} from '../../services/badge-service/badge.service';
 
 @Component({
     selector: 'app-profile',
@@ -12,26 +13,29 @@ export class ProfilePage implements OnInit {
     allCentres = [];
     ourId: any;
     currentyouthcentre;
-    youthCentres: any;
+    youthCentres = [];
+    private allMyBadges = [];
 
-    constructor(private router: Router, private userservice: UserService, private youthcentreservice: YouthcenterService) {
+    constructor(private router: Router, private userservice: UserService, private youthcentreService: YouthcenterService, private badgeservice: BadgeService) {
     }
 
     ngOnInit() {
         console.log(this.allCentres);
 
-        this.youthcentreservice.getAllLocations();
-
+        this.youthcentreService.getAllLocations();
+        this.youthCentres = this.youthcentreService.allYouthCentres;
         setTimeout(() => {
-            this.youthcentreservice.getAllLocations();
-            this.youthCentres = this.youthCentres.allYouthCentres;
-        }, 2000);
+            this.youthcentreService.getAllLocations();
+            this.youthCentres = this.youthcentreService.allYouthCentres;
+        }, 200);
 
 
         setTimeout(() => {
             this.getMyYouthCentre();
 
-        }, 1000);
+        }, 200);
+
+        this.displayAllMyBadges();
 
     }
 
@@ -43,11 +47,21 @@ export class ProfilePage implements OnInit {
 
     getMyYouthCentre() {
 
-        this.ourId = this.youthcentreservice.getTheRightId();
+        this.ourId = this.youthcentreService.getTheRightId();
     }
 
     addYouthCentre() {
         this.userservice.addYouthCentre(this.currentyouthcentre);
+    }
+
+    displayAllMyBadges() {
+        this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
+            this.allMyBadges = data;
+        });
+    }
+
+    doesNotHaveYouthCentre() {
+        return this.userservice.currentUser.currentyouthcentre === undefined;
     }
 }
 

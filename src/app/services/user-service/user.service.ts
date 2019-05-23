@@ -233,7 +233,7 @@ export class UserService {
                 } else {
                     role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname, this.currentUserJson[0].isfacebookuser);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
 
                 this.currentUser.picture = this.currentUserJson[0].image;
 

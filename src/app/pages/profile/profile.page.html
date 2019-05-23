@@ -6,38 +6,49 @@
 
 <ion-content padding>
 
-    <ion-icon (click)="goToSettings()" name="cog" size="" >Settings</ion-icon>
+    <ion-icon (click)="goToSettings()" name="cog" size="">Settings</ion-icon>
 
     <ion-img [src]="userservice.currentUser.picture"></ion-img>
 
-    <ion-item>{{userservice.currentUser.displayname}}</ion-item>
+    <ion-item> Namn: {{userservice.currentUser.displayname}}</ion-item>
 
-    <ion-item>{{userservice.currentUser.numberOfBadges}}</ion-item>
+    <ion-item> Fritidsgård: {{ourId}}</ion-item>
 
-    <ion-item>{{ourId}}</ion-item>
-
-    <ion-item>Du har ingen ungdomsgård, lägg till en nedan</ion-item>
-
-
-    <ion-item>
-        <ion-label>Ungdomsgård:</ion-label>
-        <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
-            <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
-                               [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
-        </ion-select>
-
+    <ion-item> Antal badges: {{allMyBadges.length}}
+        <ion-item *ngFor="let badges of allMyBadges">
+        <img src={{badges.image}}/>
+    </ion-item>
     </ion-item>
 
 
-    <ion-button (click)="addYouthCentre()">Lägg till Ungdomsgård</ion-button>
+
+    <div *ngIf="doesNotHaveYouthCentre()">
+        <ion-item>Du har ingen ungdomsgård, lägg till en nedan</ion-item>
 
 
+        <ion-item>
+            <ion-label>Ungdomsgård:</ion-label>
+            <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
+                <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                                   [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+            </ion-select>
+
+        </ion-item>
 
 
+        <ion-button (click)="addYouthCentre()">Lägg till Ungdomsgård</ion-button>
 
-
-
+    </div>
 
 
 
 </ion-content>
+
+
+
+
+
+
+
+
+
