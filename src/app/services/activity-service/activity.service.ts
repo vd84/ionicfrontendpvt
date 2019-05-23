@@ -13,20 +13,21 @@ import {ToastController} from '@ionic/angular';
 })
 export class ActivityService {
 
+    // ALL URLS FOR OUR API-CALLS
     activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
 
-    // alla aktiviteter som ska visas på admin sidan
+    // ALL ACTIVITIES ON THE ADMIN PAGE
     adminActivities = [];
-    // alla aktiviteter för en user/admin
+    // ALL ACTIVITIES SHOWN TO A SINGLE USER/ADMIN
     allActivities = [];
-    // allt från databasen
+    // ALL ACTIVITIES FROM THE DATABASE
     allActivitiesFromDatabase = [];
-    // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
+    // ALL THE ACTIVITIES IN THE USER MY-TAB
     allMyActivities = [];
-    // alla som deltar på en specifik aktivitet
+    // ALL PARTICIPANTS ON A SPECIFIC ACTIVITY
     allActivityParticipants = [];
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
@@ -37,7 +38,6 @@ export class ActivityService {
      *
      */
     getAllActivities() {
-        console.log('called generate all activities');
         this.http.get<Event[]>(this.activityUrl).subscribe(data => {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
