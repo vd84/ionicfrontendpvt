@@ -159,6 +159,7 @@ export class UserServiceMock {
 
 
     login(username: String, password: String, isfacebookuser: boolean) {
+        return true;
     }
 
 
@@ -184,12 +185,12 @@ export class ActivityServiceMock {
     constructor() {
     }
 
-    getAllActivities() {
-        return true;
+    getAllActivities(): Observable<Object[]> {
+        return Observable.of([{name: 'MockResponseActivity1'}]);
     }
 
-    generateAllActivities() {
-        return true;
+    getAllBadges(): Observable<Badge[]> {
+        return Observable.of([new Badge(1, 'MockResponseBadge1', 'MockResponseDescription', null), new Badge(2, 'MockResponseBadge2', 'MockResponseDescription', null)]);
     }
 
     generateAllActvitiesPage() {
@@ -222,8 +223,6 @@ export class ActivityServiceMock {
     isOfYourCentre(activity) {
         return true;
     }
-
-
 
 
     generateAllMyActivities() {
@@ -275,39 +274,7 @@ export class ActivityServiceMock {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        getAllMyActivities() {
+    getAllMyActivities() {
         return Observable.of([new Event('MockResponseEvent1', null, null, null)]);
     }
 
@@ -337,4 +304,12 @@ export class YouthCenterServiceMock {
     getAllLocations() {
         return null;
     }
+}
+
+export class RouterMock {
+
+    navigate(path: String) {
+        return path;
+    }
+
 }

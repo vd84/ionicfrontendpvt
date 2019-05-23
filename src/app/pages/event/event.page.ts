@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/authentication-service/auth.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 
@@ -11,7 +10,7 @@ import {DataService} from '../../services/data.service';
 export class EventPage implements OnInit {
     activity: any;
 
-    constructor(private router: Router, private authService: AuthService, private activityService: ActivityService, private dataService: DataService) {
+    constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
 
 
