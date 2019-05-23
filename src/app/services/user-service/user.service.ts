@@ -240,7 +240,7 @@ export class UserService {
                 this.currentUser.picture = this.currentUserJson[0].image;
 
                 console.log(this.currentUser);
-                this.presentToast('Welcome ' + this.currentUser.displayname + '!');
+                this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
                 this.presentToast('Invalid credentials');
