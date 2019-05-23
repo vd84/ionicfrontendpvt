@@ -6,7 +6,7 @@
 
 <ion-content padding>
     <!--SEARCH-BAR-->
-    <ion-searchbar placeholder="Sök aktivitet"></ion-searchbar>
+    <ion-searchbar placeholder="Sök aktivitet" (ionBlur)="hasSearched = false" (ionFocus)="hasSearched = true" (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false" (ionInput)="searchActivity($event)"></ion-searchbar>
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
@@ -28,28 +28,45 @@
         </ion-segment>
     </div>
     <div [ngSwitch]="activity">
-        <!--CARD LIST FOR ALL ACTIVITIES-->
-        <ion-list class="activity-list" *ngSwitchCase="'all-activities'">
-            <ion-item lines="none" *ngFor="let activity of activityService.allActivities">
-                <ion-card class="clickable-cards" (click)="loadEvent(activity)">
+        <!--CARD LIST FOR ALL EVENTS-->
+        <div *ngIf="!hasSearched">
+        <ion-list *ngSwitchCase="'all-activities'">
+            <ion-item *ngFor="let activity of activityService.allActivities">
+                <ion-card color="{{calculateColorForCard(activity)}}" (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                     <ion-card-subtitle></ion-card-subtitle>
+
+
                 </ion-card>
             </ion-item>
         </ion-list>
+        </div>
+
+        <div *ngIf="hasSearched">
+            <ion-list *ngSwitchCase="'all-activities'">
+                <ion-item *ngFor="let activity of searchedActivities">
+                    <ion-card color="{{calculateColorForCard(activity)}}" (click)="loadEvent(activity)">
+                        <ion-card-title>{{activity.name}}</ion-card-title>
+                        <ion-card-subtitle></ion-card-subtitle>
+                    </ion-card>
+                </ion-item>
+            </ion-list>
+        </div>
         <!--MY ACTIVITY LIST-->
-        <ion-list class="activity-list" *ngSwitchCase="'my-activities'">
-            <ion-item lines="none" *ngFor="let activity of activityService.allMyActivities">
-                <ion-card class="clickable-cards" (click)="loadEvent(activity)">
+        <ion-list *ngSwitchCase="'my-activities'">
+            <ion-item *ngFor="let activity of activityService.allMyActivities">
+                <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                     <ion-card-subtitle>{{isSuggestionReturnString(activity)}}</ion-card-subtitle>
                     <ion-card-subtitle>{{activityService.endDateHasNotPassed(activity)}}</ion-card-subtitle>
+
+
                 </ion-card>
             </ion-item>
         </ion-list>
         <!--MY PENDING ACTIVITIES-->
-        <ion-list class="activity-list" *ngSwitchCase="'pending-activities'">
-            <ion-item lines="none" *ngFor="let activity of activityService.adminActivities">
+        <ion-list *ngSwitchCase="'pending-activities'">
+            <ion-item *ngFor="let activity of activityService.adminActivities">
                 <ion-card (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
                     <ion-card-subtitle>{{isChallengerReturnString(activity)}}</ion-card-subtitle>
@@ -57,6 +74,11 @@
                     <ion-card-subtitle>{{isSuggestionReturnString(activity)}}</ion-card-subtitle>
                     <ion-card-subtitle>{{isRejectedReturnString(activity)}}</ion-card-subtitle>
                     <ion-card-subtitle>{{activityService.endDateHasNotPassed(activity)}}</ion-card-subtitle>
+
+
+
+
+
                 </ion-card>
             </ion-item>
         </ion-list>

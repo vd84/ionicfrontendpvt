@@ -148,8 +148,8 @@ export class UserService {
         const body = JSON.stringify({
             'id': this.currentUser.id,
             'username': this.currentUser.name,
-            'displayname': 'unknown888',
-            'password': password,
+            'displayname': 'terminated account',
+            'password': 'terminated',
             'active': 0,
             'points': 0,
             'fairplaypoints': 0,
@@ -160,6 +160,8 @@ export class UserService {
         });
         this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
+                this.presentToast('Kontot avslutat');
+                this.router.navigate(['../login']);
 
             },
             error => {
@@ -238,7 +240,7 @@ export class UserService {
                 this.currentUser.picture = this.currentUserJson[0].image;
 
                 console.log(this.currentUser);
-                this.presentToast('Welcome ' + this.currentUser.displayname + '!');
+                this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);
             }, error => {
                 this.presentToast('Invalid credentials');
