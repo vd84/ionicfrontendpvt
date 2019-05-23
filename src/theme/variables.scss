@@ -78,7 +78,24 @@
   /** background **/
   --ion-background-color: linear-gradient(#ffff1c, #00c3ff);
 
-// #aebcf4
+
+
+  .ion-color-inactive {
+    --ion-color-base: #d4d2d1;
+    --ion-color-base-rgb: 255,255,0;
+    --ion-color-contrast: #000000;
+    --ion-color-contrast-rgb: 0,0,0;
+    --ion-color-shade: #d4d2d1;
+    --ion-color-tint: #d4d2d1;
+  }
+  .ion-color-active {
+    --ion-color-base: #ffff00;
+    --ion-color-base-rgb: 255,255,0;
+    --ion-color-contrast: #000000;
+    --ion-color-contrast-rgb: 0,0,0;
+    --ion-color-shade: #e0e000;
+    --ion-color-tint: #ffff1a;
+  }
 
   .ion-color-vibrant {
     --ion-color-base: #ffff00;

@@ -37,6 +37,10 @@ export class SpecificEventPage implements OnInit {
 
     }
 
+    ionViewDidEnter() {
+
+    }
+
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
     }
@@ -84,7 +88,7 @@ export class SpecificEventPage implements OnInit {
 
     userCanCheckIn() {
         // return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
-        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.userAlreadyCheckedIn();
+        return this.userIsCloseEnough() && this.booked() && this.activityService.isOnGoing(this.activity) && !this.userAlreadyCheckedIn();
     }
 
     userIsCloseEnough(): boolean {
@@ -152,17 +156,10 @@ export class SpecificEventPage implements OnInit {
 
     }
 
-    private isOnGoing() {
 
-        let today = new Date();
-        let activitystartdate  = new Date(this.activity.startdate);
-        let activityenddate = new Date(this.activity.enddate);
-           return (today >= activitystartdate) && (today <= activityenddate);
-
-    }
 
     private userAlreadyCheckedIn() {
-       // to do...
+        // to do...
         return false;
     }
 }

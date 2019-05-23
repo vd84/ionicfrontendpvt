@@ -26,7 +26,23 @@ export class ModifyActivityPage implements OnInit {
     }
 
     sendSuggestionAsChallenge() {
-        this.activityService.modifyActivity(this.activity.id, this.name, this.description, this.userService.currentUser.id, 'ALTLOCATION', 0, this.activity.isactive, this.activity.category, this.activity.resource, this.activity.challenger, this.activity.challenged, this.activity.completed, this.activity.challengeaccepted, this.activity.challengerejected, this.activity.winner, this.startdate, this.enddate);
+        this.activityService.modifyActivity(this.activity.id,
+            this.name,
+            this.description,
+            this.userService.currentUser.id,
+            this.activity.alternativelocation,
+            0,
+            this.activity.isactive,
+            this.activity.category,
+            this.activity.resource,
+            this.activity.challenger,
+            this.activity.challenged,
+            this.activity.completed,
+            this.activity.challengeaccepted,
+            this.activity.challengerejected,
+            this.activity.winner,
+            this.startdate,
+            this.enddate);
         this.router.navigate(['tabs/home']);
     }
 }

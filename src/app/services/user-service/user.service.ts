@@ -44,7 +44,7 @@ export class UserService {
 
 
      **/
-    modifyUser(username: String, password: String, currentyouthcentre: number) {
+    changePassword(password: String) {
 
 
         const httpOptions = {
@@ -57,15 +57,18 @@ export class UserService {
 
         const body = JSON.stringify({
             'id': 1,
-            'username': username,
+            'username': this.currentUser.name,
+            'displayname': this.currentUser.displayname,
             'password': password,
             'active': 1,
             'points': 0,
             'fairplaypoints': 0,
-            'currentyouthcentre': currentyouthcentre,
+            'currentyouthcentre': this.currentUser.currentyouthcentre,
             'facebooklogin': 'Face1',
             'facebookpassword': 'pass',
-            'role': 1
+            'role': 1,
+            'isfacebookuser': this.currentUser.isfacebookuser,
+            'image': this.currentUser.picture
         });
 
         this.http.put(this.url, body, httpOptions).subscribe(data => {
@@ -115,7 +118,7 @@ export class UserService {
                 } else {
                     role = 'user';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
@@ -133,7 +136,7 @@ export class UserService {
     }
 
 
-    deleteUser(username: string, password: string) {
+     deleteUser(password) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -143,10 +146,62 @@ export class UserService {
 
         };
 
-        this.http.delete(this.url + this.authService.currentUser.value.name, httpOptions);
+        const body = JSON.stringify({
+            'id': this.currentUser.id,
+            'username': this.currentUser.name,
+            'displayname': 'unknown888',
+            'password': password,
+            'active': 0,
+            'points': 0,
+            'fairplaypoints': 0,
+            'currentyouthcentre': this.currentUser.currentyouthcentre,
+            'role': 1,
+            'isFacebookUser': 0,
+            'image': this.currentUser.picture
+        });
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
+                console.log(data);
 
+            },
+            error => {
+                console.log('Error');
+            });
 
     }
+
+    changeImage(picture, password) {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        const body = JSON.stringify({
+            'id': this.currentUser.id,
+            'username': this.currentUser.name,
+            'displayname': this.currentUser.displayname,
+            'password': password,
+            'active': 0,
+            'points': 0,
+            'fairplaypoints': 0,
+            'currentyouthcentre': this.currentUser.currentyouthcentre,
+            'role': 1,
+            'isFacebookUser': 0,
+            'image': this.currentUser.picture
+        });
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
+                console.log(data);
+
+            },
+            error => {
+                console.log('Error');
+            });
+
+    }
+
 
 
     login(username: String, password: String, isfacebookuser: number) {
@@ -179,7 +234,10 @@ export class UserService {
                 } else {
                     role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].displayname, this.currentUserJson[0].isfacebookuser);
+
+                this.currentUser.picture = this.currentUserJson[0].image;
+
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.displayname + '!');
                 this.router.navigate(['../tabs/home']);

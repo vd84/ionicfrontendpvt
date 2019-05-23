@@ -25,7 +25,8 @@ export class YouthcenterService {
                 console.log(error1);
 
             }
-        );
+
+        ); console.log(this.allYouthCentres);
     }
     getAllLocations2(): Observable<Location[]> {
        return this.http.get<Location[]>(this.url);

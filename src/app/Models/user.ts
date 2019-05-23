@@ -5,18 +5,22 @@ export class User {
     private _role: string;
     private _currentyouthcentre: number;
     private _bookedActivities = [];
-    private _picture;
+    private _picture: string;
     private _numberOfBadges: number;
+    private _isfacebookuser: number;
 
 
-    constructor(id: number, name: string, role: string, currentyouthcentre: number, displayname: string) {
+    constructor(id: number, name: string, role: string, currentyouthcentre: number, displayname: string, isfacebookuser: number) {
         this._id = id;
         this._name = name;
         this._role = role;
         this._currentyouthcentre = currentyouthcentre;
         this._displayname = displayname;
+        this._isfacebookuser = isfacebookuser;
 
     }
+
+
 
     get getBookedActivities() {
         return this._bookedActivities;
@@ -115,5 +119,19 @@ export class User {
 
     set numberOfBadges(value: number) {
         this._numberOfBadges = value;
+    }
+
+
+    get isfacebookuser(): number {
+        return this._isfacebookuser;
+    }
+
+    set isfacebookuser(value: number) {
+        this._isfacebookuser = value;
+    }
+
+
+    set role(value: string) {
+        this._role = value;
     }
 }
