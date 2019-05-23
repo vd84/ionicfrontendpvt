@@ -35,7 +35,7 @@
 
         <!--Ska kunna välja i dropdown av de två som tävlar*-->
 
-        <div *ngIf="isActivityOwner()">
+        <div *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
             <ion-radio-group>
                 <ion-item-divider>
                     <ion-list-header>Winner</ion-list-header>
@@ -52,9 +52,9 @@
     </ion-list>
     <!--BOKA/AVBOKA KNAPPAR-->
     <div *appHasRole="'user'">
-        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge()">Boka</ion-button>
-        <ion-button (click)="removeActivity()" *ngIf="booked()">Avboka</ion-button>
-        <ion-button (click)="checkInActivity()" [disabled]="!userCanCheckIn()">Checka in</ion-button>
+        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity)">Boka</ion-button>
+        <ion-button (click)="removeActivity()" *ngIf="booked() && activityService.endDateHasNotPassed(activity)">Avboka</ion-button>
+        <ion-button (click)="checkInActivity()" *ngIf="!isSuggestion()" [disabled]="!userCanCheckIn()">Checka in</ion-button>
     </div>
     <div *appHasRole="'admin'">
         <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
@@ -62,9 +62,9 @@
         <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
         <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
         <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
-        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner()">Ange vinnare</ion-button>
+        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">Ange vinnare</ion-button>
 
-        <ion-list *ngIf="isActivityOwner()">
+        <ion-list *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
             <ion-list-header>
                 <ion-label>Participation List</ion-label>
                 <ion-badge>{{activityService.allActivityParticipants.length}}</ion-badge>

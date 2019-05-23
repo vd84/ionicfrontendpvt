@@ -17,7 +17,6 @@ export class SpecificEventPage implements OnInit {
     winner: String;
     competitors: any = [];
 
-
     constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService) {
     }
 
@@ -35,6 +34,10 @@ export class SpecificEventPage implements OnInit {
         this.user = this.userService.currentUser;
         this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
+
+    }
+
+    ionViewDidEnter() {
 
     }
 
@@ -84,7 +87,8 @@ export class SpecificEventPage implements OnInit {
     }
 
     userCanCheckIn() {
-        return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.userAlreadyCheckedIn();
+        // return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
+        return this.userIsCloseEnough() && this.booked() && this.activityService.isOnGoing(this.activity) && !this.userAlreadyCheckedIn();
     }
 
     userIsCloseEnough(): boolean {
@@ -152,17 +156,10 @@ export class SpecificEventPage implements OnInit {
 
     }
 
-    private isOnGoing() {
 
-        let today = new Date();
-        let activitystartdate  = new Date(this.activity.startdate);
-        let activityenddate = new Date(this.activity.enddate);
-           return (today >= activitystartdate) && (today <= activityenddate);
-
-    }
 
     private userAlreadyCheckedIn() {
-       // to do...
+        // to do...
         return false;
     }
 }

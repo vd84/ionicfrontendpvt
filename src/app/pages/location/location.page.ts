@@ -41,6 +41,8 @@ export class LocationPage implements OnInit {
         console.log('youthcentreid ' + this.youthcentre.id);
         console.log('userid ' + this.user.id);
         this.checkinService.youthcentreCheckin(this.user.id, this.youthcentre.id);
+        this.youthcentre.checkedin = this.userService.currentUser.id;
+
     }
 
     /*    loadEvent(activity) {
@@ -71,5 +73,13 @@ export class LocationPage implements OnInit {
     userIsCloseEnough() {
         return localStorage.getItem('isCloseEnough') === 'true';
 
+    }
+
+    userCanCheckIn() {
+
+
+        if (this.youthcentre.checkedin === 0  && this.userIsCloseEnough() ) {
+            return true;
+        }
     }
 }

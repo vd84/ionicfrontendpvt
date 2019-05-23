@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {IActivity} from '../../Interfaces/activity';
 import {UserService} from '../user-service/user.service';
+import {User} from '../../Models/user';
 import {ParticipationUser} from '../../Models/ParticipationUser';
 import {ToastController} from '@ionic/angular';
 
@@ -72,7 +74,7 @@ export class ActivityService {
     generateAdminPendingPage() {
         this.adminActivities = [];
         for (const activity of this.allActivitiesFromDatabase) {
-            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity))) {
+            if ((this.activityIsSuggestion(activity) && this.isChallenger(activity)) || (this.activityIsPending(activity)) || (this.activityIsAccepted(activity) && this.isOfYourCentre(activity)) || (this.activityIsDeclined(activity) && this.isOfYourCentre(activity))) {
                 this.adminActivities.push(activity);
             }
         }
@@ -123,7 +125,7 @@ export class ActivityService {
 
     isMyActivity(id: number): boolean {
         for (let activity of this.allMyActivities) {
-            if (activity.id === id) {
+            if (activity.id === id && activity.issuggestion === 0) {
                 return true;
             }
         }
@@ -246,6 +248,8 @@ export class ActivityService {
     }
 
 
+
+
     modifyActivity(id,
                    name,
                    description,
@@ -320,6 +324,26 @@ export class ActivityService {
         }, error1 => {
             console.log(error1);
         });
+    }
+
+    endDateHasNotPassed(activity) {
+
+        let today = new Date();
+
+        let activityenddate = new Date(activity.enddate);
+
+        return (today <= activityenddate);
+
+
+    }
+
+    isOnGoing(activity) {
+
+        let today = new Date();
+        let activitystartdate = new Date(activity.startdate);
+        let activityenddate = new Date(activity.enddate);
+        return (today >= activitystartdate) && (today <= activityenddate);
+
     }
 
     async presentToast(toastMessage: string) {

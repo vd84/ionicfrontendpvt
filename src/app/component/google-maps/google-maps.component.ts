@@ -286,6 +286,8 @@ export class GoogleMapsComponent implements OnInit {
         }, 5000);
         this.startTracking();
 
+        console.log(this.alllocations);
+
     }
 
     ngOnInit(): void {
@@ -392,7 +394,7 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d < 100000000000000000000;
+        return d < 1000;
 
 
     }

@@ -33,7 +33,12 @@ export class CreateEventPage implements OnInit {
             this.youthcenterService.getAllLocations();
             this.youthcenters = this.youthcenterService.allYouthCentres;
             this.loadallyouthcenters();
-        }, 8000);
+            for (const youthcentre of this.youthcenters) {
+                if (youthcentre.id === this.userService.currentUser.currentyouthcentre) {
+                    this.youthcenters.splice(this.youthcenters.indexOf(youthcentre), 1);
+                }
+            }
+        }, 3000);
     }
 
     loadallyouthcenters() {
@@ -46,6 +51,7 @@ export class CreateEventPage implements OnInit {
         this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
+            console.log(this.activityService.generateAllMyActivities());
         }, 25);
         this.router.navigate(['tabs/home/']);
 

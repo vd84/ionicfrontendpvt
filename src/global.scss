@@ -10,6 +10,27 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+
+// LIST STYLING
+
+ion-list {
+  --ion-background-color: transparent;
+}
+
+ion-list ion-item {
+  --ion-background-color: transparent;
+  lines: none;
+  webkit-box-shadow: 14px 14px 88px -27px rgba(0,0,0,0.82);
+  -moz-box-shadow: 14px 14px 88px -27px rgba(0,0,0,0.82);
+  box-shadow: 14px 14px 88px -27px rgba(0,0,0,0.82);
+}
+
+.clickable-cards {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
 //Div for cards
 .card-background-page {
 
@@ -17,6 +38,7 @@
   ion-card {
     position: relative;
     text-align: center;
+    border-radius: 40px !important;
   }
 
   //scss for title and subtitles of cards.
@@ -46,6 +68,9 @@
   height: 80%;
 }
 
+ion-icon {
+  font-size: 40px; //Preferred size here
+}
 
 
 
