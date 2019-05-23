@@ -26,7 +26,7 @@
             <h4>Plats: {{activity.location}}</h4>
         </ion-item>
         <ion-item >
-            <h4>Winner: {{getWinner()}}</h4>
+            <h4>Vinnare: {{getWinner()}}</h4>
         </ion-item>
         <ion-item>
             <h4>Om aktiviteten: {{activity.description}}</h4>
@@ -38,7 +38,7 @@
         <div *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
             <ion-radio-group>
                 <ion-item-divider>
-                    <ion-list-header>Winner</ion-list-header>
+                    <ion-list-header>Vinnare</ion-list-header>
                 </ion-item-divider>
 
                 <ion-list *ngFor="let competitor of competitors">

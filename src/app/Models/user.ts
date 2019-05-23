@@ -10,7 +10,7 @@ export class User {
     private _isfacebookuser: number;
 
 
-    constructor(id: number, name: string, role: string, currentyouthcentre: number, displayname: string, isfacebookuser: number) {
+    constructor(id: number, name: string,  displayname: string,  role: string, currentyouthcentre: number, isfacebookuser: number) {
         this._id = id;
         this._name = name;
         this._role = role;
@@ -19,7 +19,6 @@ export class User {
         this._isfacebookuser = isfacebookuser;
 
     }
-
 
 
     get getBookedActivities() {
@@ -52,7 +51,6 @@ export class User {
     getNumberOfBadges() {
         return this._numberOfBadges;
     }
-
 
 
     get role(): string {

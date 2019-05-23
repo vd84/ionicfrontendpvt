@@ -5,9 +5,10 @@ import {RegisterPage} from './register.page';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 import {UserService} from '../../services/user-service/user.service';
-import {UserServiceMock} from '../../../../test-config/mocks-ionic';
+import {UserServiceMock, YouthCenterServiceMock} from '../../../../test-config/mocks-ionic';
 import {FormsModule} from '@angular/forms';
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
+import {YouthcenterService} from '../../services/youthcenter.service';
 
 describe('RegisterPage', () => {
     let component: RegisterPage;
@@ -21,7 +22,7 @@ describe('RegisterPage', () => {
             providers: [{provide: Router, useValue: null}, {provide: ToastController, useValue: null}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            }]
+            }, {provide: YouthcenterService, useValue: new YouthCenterServiceMock()}]
         })
             .compileComponents();
     }));

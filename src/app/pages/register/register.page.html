@@ -9,26 +9,32 @@
 
 <ion-content>
     <ion-list class="register-account-list" padding>
-        <ion-item>
-            <ion-input name="username" placeholder="Användarnamn" type="username" ngModel required
+        <ion-item class="list-item-white">
+            <ion-label>Användarnamn:</ion-label>
+            <ion-input name="username" placeholder="..." type="username" ngModel required
                        [(ngModel)]="username" ngDefaultControl></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-input name="displayname" placeholder="Visningsnamn" type="username" ngModel required
+        <ion-item class="list-item-white">
+            <ion-label>Visningsnamn:</ion-label>
+            <ion-input name="displayname" placeholder="..." type="username" ngModel required
                        [(ngModel)]="displayname" ngDefaultControl></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-input name="password" placeholder="Lösenord" type="password" ngModel required
+        <ion-item class="list-item-white">
+            <ion-label>Lösenord:</ion-label>
+            <ion-input name="password" placeholder="..." type="password" ngModel required
                        [(ngModel)]="password" ngDefaultControl></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-input name="email" placeholder="E-post" type="email" ngModel required
+        <ion-item class="list-item-white">
+            <ion-label>E-post:</ion-label>
+            <ion-input name="email" placeholder="..." type="email" ngModel required
                        [(ngModel)]="email" ngDefaultControl></ion-input>
         </ion-item>
-        <ion-item>
-            <ion-input name="currentyouthcentre" placeholder="Fritidsgård" type="number" ngModel
-                       required
-                       [(ngModel)]="currentyouthcentre" ngDefaultControl></ion-input>
+        <ion-item class="list-item-white">
+            <ion-label>Ungdomsgård:</ion-label>
+            <ion-select class="select-box"[(ngModel)]="currentyouthcentre" ngDefaultControl>
+                <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                                   [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+            </ion-select>
         </ion-item>
     </ion-list>
     <div padding>

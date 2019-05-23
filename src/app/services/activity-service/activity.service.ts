@@ -13,21 +13,21 @@ import {ToastController} from '@ionic/angular';
 })
 export class ActivityService {
 
-    // ALL URLS FOR OUR API-CALLS
-    activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
 
-    // ALL ACTIVITIES ON THE ADMIN PAGE
+    // alla aktiviteter som ska visas på admin sidan
     adminActivities = [];
-    // ALL ACTIVITIES SHOWN TO A SINGLE USER/ADMIN
+    // alla aktiviteter för en user/admin
     allActivities = [];
-    // ALL ACTIVITIES FROM THE DATABASE
+    // allt från databasen
     allActivitiesFromDatabase = [];
-    // ALL THE ACTIVITIES IN THE USER MY-TAB
+    // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
-    // ALL PARTICIPANTS ON A SPECIFIC ACTIVITY
+    // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
@@ -38,7 +38,8 @@ export class ActivityService {
      *
      */
     getAllActivities() {
-        this.http.get<Event[]>(this.activityUrl).subscribe(data => {
+        console.log('called generate all activities');
+        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
@@ -111,7 +112,7 @@ export class ActivityService {
 
     generateAllMyActivities() {
         this.allMyActivities = [];
-        this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
+        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             for (let activity of data) {
                 this.allMyActivities.push(activity);
             }
@@ -189,7 +190,7 @@ export class ActivityService {
 
         });
 
-        this.http.post<IActivity>(this.activityUrl, body, httpOptions).subscribe(data => {
+        this.http.post<IActivity>(this.postAndPutactivityUrl, body, httpOptions).subscribe(data => {
 
                 console.log(data);
 
@@ -298,7 +299,7 @@ export class ActivityService {
         });
         console.log(body);
 
-        this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
+        this.http.put(this.postAndPutactivityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
 
                 this.presentToast('Ändring lyckad');
