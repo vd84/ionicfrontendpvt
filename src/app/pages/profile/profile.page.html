@@ -1,12 +1,12 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <ion-title>Profile</ion-title>
+        <ion-title>Profil</ion-title>
+        <ion-icon slot = "end" (click)="goToSettings()" name="cog" size="" >Settings</ion-icon>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-icon (click)="goToSettings()" name="cog" size="" >Settings</ion-icon>
 
     <ion-img [src]="userservice.currentUser.picture"></ion-img>
 
