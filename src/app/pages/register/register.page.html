@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <form>
+
         <ion-grid>
             <ion-row color="primary" justify-content-center>
                 <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -35,8 +35,12 @@
                                        [(ngModel)]="email" ngDefaultControl></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-input name="currentyouthcentre" placeholder="Youth centre" type="number" ngModel required
-                                       [(ngModel)]="currentyouthcentre" ngDefaultControl></ion-input>
+                            <ion-label>Ungdomsgård:</ion-label>
+                            <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
+                                <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                                                   [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+                            </ion-select>
+
                         </ion-item>
                     </div>
                     <div padding>
@@ -46,7 +50,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </form>
+
 </ion-content>
 
 

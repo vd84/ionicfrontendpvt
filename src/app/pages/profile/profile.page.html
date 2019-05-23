@@ -16,6 +16,22 @@
 
     <ion-item>{{ourId}}</ion-item>
 
+    <ion-item>Du har ingen ungdomsgård, lägg till en nedan</ion-item>
+
+
+    <ion-item>
+        <ion-label>Ungdomsgård:</ion-label>
+        <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
+            <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                               [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+        </ion-select>
+
+    </ion-item>
+
+
+    <ion-button (click)="addYouthCentre()">Lägg till Ungdomsgård</ion-button>
+
+
 
 
 

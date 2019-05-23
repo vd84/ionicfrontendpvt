@@ -11,6 +11,8 @@ export class ProfilePage implements OnInit {
 
     allCentres = [];
     ourId: any;
+    currentyouthcentre;
+    youthCentres: any;
 
     constructor(private router: Router, private userservice: UserService, private youthcentreservice: YouthcenterService) {
     }
@@ -20,11 +22,16 @@ export class ProfilePage implements OnInit {
 
         this.youthcentreservice.getAllLocations();
 
+        setTimeout(() => {
+            this.youthcentreservice.getAllLocations();
+            this.youthCentres = this.youthCentres.allYouthCentres;
+        }, 2000);
+
 
         setTimeout(() => {
             this.getMyYouthCentre();
 
-        }, 100);
+        }, 1000);
 
     }
 
@@ -37,6 +44,10 @@ export class ProfilePage implements OnInit {
     getMyYouthCentre() {
 
         this.ourId = this.youthcentreservice.getTheRightId();
+    }
+
+    addYouthCentre() {
+        this.userservice.addYouthCentre(this.currentyouthcentre);
     }
 }
 

@@ -247,6 +247,41 @@ export class UserService {
 
     }
 
+    addYouthCentre(youthcentre) {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        const body = JSON.stringify({
+            'id': 1,
+            'username': this.currentUser.name,
+            'displayname': this.currentUser.displayname,
+            'password': 'pass1',
+            'active': 1,
+            'points': 0,
+            'fairplaypoints': 0,
+            'currentyouthcentre': youthcentre,
+            'facebooklogin': 'Face1',
+            'facebookpassword': 'pass',
+            'role': 1,
+            'isfacebookuser': this.currentUser.isfacebookuser,
+            'image': this.currentUser.picture
+        });
+
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
+                console.log(data);
+            },
+            error => {
+                console.log('Error');
+            });
+
+    }
+
     async presentToast(toastMessage: string) {
         const toast = await this.toastController.create({
             message: toastMessage,
@@ -255,6 +290,7 @@ export class UserService {
         });
         toast.present();
     }
+
 
 }
 
