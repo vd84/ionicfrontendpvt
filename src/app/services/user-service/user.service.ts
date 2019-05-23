@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../Models/user';
-import {AuthService} from '../authentication-service/auth.service';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 
@@ -20,7 +19,7 @@ export class UserService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastController: ToastController) {
+    constructor(private http: HttpClient, private router: Router, private toastController: ToastController) {
 
 
     }
@@ -258,7 +257,6 @@ export class UserService {
         });
         toast.present();
     }
-
 
 }
 
