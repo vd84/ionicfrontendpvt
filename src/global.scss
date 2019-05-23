@@ -35,7 +35,7 @@
   width: fit-content;
 }
 
-.login-page-buttons ion-button {
+ion-button {
   color: rgba(0, 0, 0, 1);
 
   border-color: rgba(255, 255, 255, 1);
@@ -55,6 +55,12 @@
   font-size: 30px;
   color: white;
   text-align: center;
+}
+
+// REGISTER ACCOUNT
+.register-account-list {
+  padding-top: 40%;
+  padding-bottom: 30%;
 }
 
 // LIST STYLING
