@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/authentication-service/auth.service';
 import {UserService} from '../../services/user-service/user.service';
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../Models/user';
-import {AuthService} from '../authentication-service/auth.service';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
 
@@ -20,7 +19,7 @@ export class UserService {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
-    constructor(private http: HttpClient, private authService: AuthService, private router: Router, private toastController: ToastController) {
+    constructor(private http: HttpClient, private router: Router, private toastController: ToastController) {
 
 
     }
@@ -136,7 +135,7 @@ export class UserService {
     }
 
 
-     deleteUser(password) {
+     deleteUser() {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -149,8 +148,8 @@ export class UserService {
         const body = JSON.stringify({
             'id': this.currentUser.id,
             'username': this.currentUser.name,
-            'displayname': 'unknown888',
-            'password': password,
+            'displayname': 'terminated account',
+            'password': 'terminated',
             'active': 0,
             'points': 0,
             'fairplaypoints': 0,
@@ -161,6 +160,8 @@ export class UserService {
         });
         this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
+                this.presentToast('Kontot avslutat');
+                this.router.navigate(['../login']);
 
             },
             error => {
@@ -256,7 +257,6 @@ export class UserService {
         });
         toast.present();
     }
-
 
 }
 

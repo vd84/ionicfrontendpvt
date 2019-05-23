@@ -4,7 +4,6 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {SpecificEventPage} from './specific-event.page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
-import {ParticipationService} from '../../services/participation-service/participation.service';
 import {ActivityServiceMock, UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
@@ -27,7 +26,7 @@ describe('SpecificEventPage', () => {
             providers: [{provide: Router, useValue: null}, {provide: ActivatedRoute, useValue: routeStub}, {
                 provide: UserService,
                 useValue: new UserServiceMock()
-            }, {provide: ParticipationService, useValue: null},
+            },
                 {provide: ActivityService, useValue: new ActivityServiceMock()},
                 {
                     provide: CheckinService,

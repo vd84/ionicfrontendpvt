@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/authentication-service/auth.service';
 import {UserService} from '../../services/user-service/user.service';
-import {AlertController, LoadingController, NavController, Platform, ToastController} from '@ionic/angular';
-import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook/ngx';
+import {AlertController, LoadingController, Platform, ToastController} from '@ionic/angular';
+import {Facebook} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 
 @Component({
@@ -12,8 +11,8 @@ import {NativeStorage} from '@ionic-native/native-storage/ngx';
 })
 export class LoginPage implements OnInit {
 
-    private username: string;
-    private password: string;
+    username: string;
+    password: string;
     currentyouthcentre: number;
 
     users: any;
@@ -22,7 +21,6 @@ export class LoginPage implements OnInit {
 
 
     constructor(private router: Router,
-                private authService: AuthService,
                 private userService: UserService,
                 public toastController: ToastController,
                 private fb: Facebook,
@@ -34,8 +32,6 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
-
-
     }
 
 
@@ -101,8 +97,6 @@ export class LoginPage implements OnInit {
 
     newLogin() {
         this.userService.login(this.username, this.password, 0);
-
-
     }
 
     createProfile() {

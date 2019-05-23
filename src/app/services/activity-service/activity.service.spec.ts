@@ -1,23 +1,27 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {fakeAsync, getTestBed, TestBed, tick} from '@angular/core/testing';
 
 import {ActivityService} from './activity.service';
-import {HttpClient} from '@angular/common/http';
 import {UserService} from '../user-service/user.service';
 import {UserServiceMock} from '../../../../test-config/mocks-ionic';
 import {ToastController} from '@ionic/angular';
-import {SpecificEventPage} from '../../pages/specific-event/specific-event.page';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpClient, HttpRequest} from '@angular/common/http';
+import {User} from '../../Models/user';
 
 describe('ActivityService', () => {
+    let injector: TestBed;
     let service: ActivityService;
-    beforeEach(() => TestBed.configureTestingModule({
-        providers: [{provide: HttpClient, useValue: null}, {
-            provide: UserService,
-            useValue: new UserServiceMock()
-        }, {provide: ToastController, useValue: null}]
-    }));
 
     beforeEach(() => {
-        service = TestBed.get(ActivityService);
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [ActivityService, {provide: UserService, useValue: new UserServiceMock()}, {
+                provide: ToastController,
+                useValue: null
+            }, {provide: HttpClient, useValue: null}]
+        });
+        injector = getTestBed();
+        service = injector.get(ActivityService);
     });
 
     it('should be created', () => {
@@ -44,4 +48,11 @@ describe('ActivityService', () => {
         expect(service.participationByActivityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/');
     });
 
+    it('should have the following lists: adminActivities, allActivities, allActivitiesFromDatabase, allMyActivities & allActivityParticipants', () => {
+        expect(service.adminActivities).toBeTruthy();
+        expect(service.allActivities).toBeTruthy();
+        expect(service.allActivitiesFromDatabase).toBeTruthy();
+        expect(service.allMyActivities).toBeTruthy();
+        expect(service.allActivityParticipants).toBeTruthy();
+    });
 });
