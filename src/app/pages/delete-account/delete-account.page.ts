@@ -31,8 +31,6 @@ export class DeleteAccountPage implements OnInit {
     deleteUser() {
          this.userService.deleteUser(this.username, this.password);
 
-        // this.userService.deleteUser(this.userService.currentUser.id);
-
     }
 
 

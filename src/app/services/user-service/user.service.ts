@@ -148,14 +148,15 @@ export class UserService {
         const body = JSON.stringify({
             'id': this.currentUser.id,
             'username': username,
-            'displayname': 'unknown888',
+            'displayname': 'terminated',
             'password': password,
             'active': 0,
             'points': 0,
             'fairplaypoints': 0,
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'role': 1,
-            'isFacebookUser': 0
+            'isFacebookUser': 0,
+            'image': null
         });
         this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
