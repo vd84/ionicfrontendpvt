@@ -13,7 +13,8 @@ import {ToastController} from '@ionic/angular';
 })
 export class ActivityService {
 
-    activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
@@ -38,7 +39,7 @@ export class ActivityService {
      */
     getAllActivities() {
         console.log('called generate all activities');
-        this.http.get<Event[]>(this.activityUrl).subscribe(data => {
+        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
@@ -111,7 +112,7 @@ export class ActivityService {
 
     generateAllMyActivities() {
         this.allMyActivities = [];
-        this.http.get<Event[]>(this.activityUrl + this.userservice.currentUser.id).subscribe(data => {
+        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             for (let activity of data) {
                 this.allMyActivities.push(activity);
             }
@@ -189,7 +190,7 @@ export class ActivityService {
 
         });
 
-        this.http.post<IActivity>(this.activityUrl, body, httpOptions).subscribe(data => {
+        this.http.post<IActivity>(this.postAndPutactivityUrl, body, httpOptions).subscribe(data => {
 
                 console.log(data);
 
@@ -298,7 +299,7 @@ export class ActivityService {
         });
         console.log(body);
 
-        this.http.put(this.activityUrl, body, httpOptions).subscribe(data => {
+        this.http.put(this.postAndPutactivityUrl, body, httpOptions).subscribe(data => {
                 console.log(data);
 
                 this.presentToast('Ändring lyckad');
