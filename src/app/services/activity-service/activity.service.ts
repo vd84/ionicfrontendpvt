@@ -6,6 +6,7 @@ import {UserService} from '../user-service/user.service';
 import {User} from '../../Models/user';
 import {ParticipationUser} from '../../Models/ParticipationUser';
 import {ToastController} from '@ionic/angular';
+import {Category} from '../../Models/Category';
 
 
 @Injectable({
@@ -19,6 +20,8 @@ export class ActivityService {
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
 
+    categoryUrl = 'http://webbapppvt15grupp2.herokuapp.com/category';
+
     // alla aktiviteter som ska visas på admin sidan
     adminActivities = [];
     // alla aktiviteter för en user/admin
@@ -29,6 +32,9 @@ export class ActivityService {
     allMyActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
+
+    // Lista för alla kategorier
+    allCategories = [];
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
@@ -44,6 +50,7 @@ export class ActivityService {
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
             this.generateAllMyActivities();
+            this.getAllCategories();
 
 
         }, error => {
@@ -107,6 +114,11 @@ export class ActivityService {
 
     isOfYourCentre(activity) {
         return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
+    }
+    getAllCategories() {
+        this.http.get<Category[]>(this.categoryUrl).subscribe( data => {
+            this.allCategories = data;
+        });
     }
 
 
