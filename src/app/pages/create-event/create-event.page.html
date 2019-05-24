@@ -44,9 +44,9 @@
         </ion-item>
         <ion-item class="list-item-white">
             <ion-label>Kategori:</ion-label>
-            <ion-select placeholder="Select One" (ionChange)="onChange($event)">
-                <ion-select-option value="Football">Football</ion-select-option>
-                <ion-select-option value="Chess">Chess</ion-select-option>
+            <ion-select [(ngModel)]="category" ngDefaultControl>
+                <ion-select-option *ngFor="let category of allCategories"
+                                   [value]="category">{{category.name}} </ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item class="list-item-white">

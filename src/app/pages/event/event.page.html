@@ -9,6 +9,15 @@
     <ion-searchbar placeholder="Sök aktivitet" (ionBlur)="hasSearched = false" (ionFocus)="hasSearched = true"
                    (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false"
                    (ionInput)="searchActivity($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Sök aktivitet" (ionFocus)="hasSearched = true" (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false" (ionInput)="searchActivity($event)"></ion-searchbar>
+
+    <ion-item>
+        <ion-label>Kategori:</ion-label>
+        <ion-select>
+            <ion-select-option></ion-select-option>
+        </ion-select>
+    </ion-item>
+
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
         <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">

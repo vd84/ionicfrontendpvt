@@ -23,7 +23,7 @@
         <ion-list *ngSwitchCase="'all-badges'">
             <ion-item *ngFor="let badge of allBadges">
                 <ion-card (click) = loadBadge(badge)>
-                    <img src={{badge.image}} style ="width:20px;height:20px;" [height]="24324324320" [width]="24324324320"/>
+                    <img src={{badge.image}} />
                     <ion-card-title>{{badge.name}}</ion-card-title>
                 </ion-card>
             </ion-item>
