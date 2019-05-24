@@ -393,6 +393,7 @@ export class GoogleMapsComponent implements OnInit {
                         console.log(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude));
                         localStorage.setItem('isCloseEnough', String(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude)));
                         console.log(localStorage.getItem('isCloseEnough'));
+                        // Tillagd kommentar
 
 
                     }));
@@ -436,7 +437,7 @@ export class GoogleMapsComponent implements OnInit {
         let d = R * c;
         d = d * 1000;
 
-        return d < 1000000000000000;
+        return d < 10;
 
 
     }

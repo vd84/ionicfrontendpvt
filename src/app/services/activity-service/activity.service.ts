@@ -16,7 +16,6 @@ export class ActivityService {
 
     // Denna url är även för att hämta aktivititer för specifik user, alltså om den attendat
     postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
-    // getactivityUrl kräver att userId läggs till efter
     getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
@@ -37,6 +36,7 @@ export class ActivityService {
 
     // Lista för alla kategorier
     allCategories = [];
+
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
