@@ -9,9 +9,10 @@
     <ion-searchbar placeholder="Sök aktivitet" (ionBlur)="hasSearched = false" (ionFocus)="hasSearched = true"
                    (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false"
                    (ionInput)="searchActivity($event)"></ion-searchbar>
-    <ion-searchbar placeholder="Sök aktivitet" (ionFocus)="hasSearched = true" (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false" (ionInput)="searchActivity($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Sök aktivitet" (ionFocus)="hasSearched = true" (ionCancel)="hasSearched = false"
+                   (ionClear)="hasSearched = false" (ionInput)="searchActivity($event)"></ion-searchbar>
 
-    <ion-item>
+    <ion-item lines="none" class="category-dropdown">
         <ion-label>Kategori:</ion-label>
         <ion-select>
             <ion-select-option></ion-select-option>
@@ -45,9 +46,7 @@
                 <ion-item lines="none" *ngFor="let activity of activityService.allActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle></ion-card-subtitle>
-
-
+                        <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -58,7 +57,7 @@
                 <ion-item lines="none" *ngFor="let activity of searchedActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle></ion-card-subtitle>
+                        <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -68,8 +67,7 @@
             <ion-item lines="none" *ngFor="let activity of activityService.allMyActivities">
                 <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
-                    <ion-card-subtitle>{{isSuggestionReturnString(activity)}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{activityService.endDateHasNotPassed(activity)}}</ion-card-subtitle>
+                    <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                 </ion-card>
             </ion-item>
         </ion-list>
@@ -78,11 +76,7 @@
             <ion-item lines="none" *ngFor="let activity of activityService.adminActivities">
                 <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                     <ion-card-title>{{activity.name}}</ion-card-title>
-                    <ion-card-subtitle>{{isChallengerReturnString(activity)}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{isChallengedReturnString(activity)}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{isSuggestionReturnString(activity)}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{isRejectedReturnString(activity)}}</ion-card-subtitle>
-                    <ion-card-subtitle>{{activityService.endDateHasNotPassed(activity)}}</ion-card-subtitle>
+                    <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                 </ion-card>
             </ion-item>
         </ion-list>
@@ -93,8 +87,12 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="start">
-            <ion-button class="create-activity-buttons" *appHasRole="'admin'" (click)="goToCreateEvent()">Skapa aktivitet</ion-button>
-            <ion-button class="create-activity-buttons" *appHasRole="'user'" (click)="goToCreateEvent()">Föreslå aktivitet</ion-button>
+            <ion-button class="create-activity-buttons" *appHasRole="'admin'" (click)="goToCreateEvent()">Skapa
+                aktivitet
+            </ion-button>
+            <ion-button class="create-activity-buttons" *appHasRole="'user'" (click)="goToCreateEvent()">Föreslå
+                aktivitet
+            </ion-button>
         </ion-fab-list>
     </ion-fab>
 

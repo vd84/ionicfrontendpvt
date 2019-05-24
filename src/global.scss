@@ -10,8 +10,9 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+// ******PAGE SPECIFIC STYLING*****
 
-// LOGIN PAGE
+// ***LOGIN PAGE***
 
 .logo ion-img {
   width: 70%;
@@ -22,7 +23,7 @@
 }
 
 .login-page-buttons {
-  pdding-top: 25%;
+  padding-top: 25%;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -35,21 +36,6 @@
   width: fit-content;
 }
 
-ion-button {
-  color: rgba(0, 0, 0, 1);
-
-  border-color: rgba(255, 255, 255, 1);
-  border-style: solid;
-  border-width: 1px;
-
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
-  0 10px 0 0 rgba(255, 255, 255, 0.5) inset,
-  0 0 5px 2px rgba(255, 255, 255, 0.75),
-  0 0 10px 2px rgba(255, 255, 255, 0.75) inset !important;
-  --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .2) 100%); /* W3C */
-  font-size: 20px;
-}
-
 .login-fields .placeholder-text {
   --placeholder-color: white;
   --plceholder-opacity: 1;
@@ -58,9 +44,8 @@ ion-button {
   text-align: center;
 }
 
-// REGISTER ACCOUNT
+// ***REGISTER ACCOUNT***
 .register-account-list {
-  padding-top: 40%;
   padding-bottom: 10%;
 }
 
@@ -68,12 +53,7 @@ ion-button {
   padding-bottom: 20px;
 }
 
-.alert-button {
-  color: black !important;
-}
-
-// ACTIVITY PAGE
-
+// ***ACTIVITY PAGE***
 .add-fab {
   color: rgba(0, 0, 0, 1);
 
@@ -89,13 +69,94 @@ ion-button {
   --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 100%); /* W3C */
 }
 
-// CREATE ACTIVITY PAGE
+.category-dropdown {
+  --ion-background-color: transparent;
+}
+
+// ***CREATE ACTIVITY PAGE***
 .create-activity-list {
-  padding-top: 40%;
   padding-bottom: 10%;
 }
-// LIST STYLING
 
+.create-activity-list ion-item {
+  padding-bottom: 20px;
+}
+
+.date-picker {
+  padding: 0;
+}
+
+.date-picker ion-col {
+  padding: 0;
+}
+
+.in-list-datetime {
+  --padding-bottom: 0;
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+// ***MAP PAGE STYLING***
+.map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.map-buttons {
+  position: absolute;
+  bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 25px;
+
+  button {
+    padding: 10px 10px 10px 10px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    background: white;
+    font-size: 16px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.28);
+  }
+}
+
+// *****GENERAL STYLING*****
+
+// BUTTON STYLING
+ion-button {
+  color: rgba(0, 0, 0, 1);
+
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+  0 10px 0 0 rgba(255, 255, 255, 0.5) inset,
+  0 0 5px 2px rgba(255, 255, 255, 0.75),
+  0 0 10px 2px rgba(255, 255, 255, 0.75) inset !important;
+  --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .2) 100%); /* W3C */
+  font-size: 20px;
+}
+
+// DATETIME-PICKER STYLING
+ion-datetime {
+  --placeholder-color: black;
+}
+
+.picker-button {
+  color: black !important;
+}
+
+.picker-wrapper {
+  --background: white;
+}
+
+// SELECTOR ALERT WINDOW STYLING
+.alert-button {
+  color: black !important;
+}
+
+// LIST STYLING
 ion-list {
   --ion-background-color: transparent;
 }
@@ -106,16 +167,27 @@ ion-list {
   // box-shadow: 14px 14px 88px -27px rgba(0, 0, 0, 0.82);
 }
 
-.list-item-white {
-  color: white;
-  --placeholder-color: white;
-  font-size: 20px;
+.list-card {
+  margin-top: 20%;
+  background: white;
 }
 
 .clickable-cards {
   width: 100%;
+  min-height: 100px;
   text-align: center;
   font-size: 25px;
+  background: white;
+
+  ion-card-title {
+    color: black;
+  }
+
+  ion-card-subtitle {
+    color: black;
+  }
+
+
 }
 
 //Div for cards
@@ -153,15 +225,13 @@ ion-list {
   }
 }
 
-.map {
-  height: 80%;
-}
 
 ion-icon {
   font-size: 40px; //Preferred size here
 }
 
-.block {
+
+/*.block {
   display: block;
   width: 100%;
   border: none;
@@ -172,16 +242,7 @@ ion-icon {
   text-align: center;
 }
 
-.block {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #fff;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
+ */
 
 .badge {
   max-width: 100%;

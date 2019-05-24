@@ -7,56 +7,85 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list class="create-activity-list" padding>
-        <ion-item class="list-item-white">
-            <ion-label>Aktivitetsnamn:</ion-label>
-            <ion-input name="Event_name" type="text" placeholder="..." ngModel required
-                       [(ngModel)]="name" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Börjar:</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
-                          placeholder="Select start date"
-                          [(ngModel)]="startdate" ngDefaultControl></ion-datetime>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Slutar:</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD H:mm" pickerFormat="YYYY-MM-DD H:mm"
-                          placeholder="Select end date"
-                          [(ngModel)]="enddate" ngDefaultControl></ion-datetime>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Location:</ion-label>
-            <ion-input name="location" type="text" placeholder="Add a location" ngModel
-                       required
-                       [(ngModel)]="location" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Beskrivning:</ion-label>
-            <ion-input name="description" type="text" placeholder="Describe your event" ngModel required
-                       [(ngModel)]="description" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Alternativ plats:</ion-label>
-            <ion-input name="alternativ_plats" type="text" placeholder="Add an alternative location" ngModel
-                       required
-                       [(ngModel)]="alt_location" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Kategori:</ion-label>
-            <ion-select [(ngModel)]="category" ngDefaultControl>
-                <ion-select-option *ngFor="let category of allCategories"
-                                   [value]="category">{{category.name}} </ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Ungdomsgård:</ion-label>
-            <ion-select [(ngModel)]="challenged" ngDefaultControl>
-                <ion-select-option *ngFor="let challenged of youthcenters"
-                                   [value]="challenged.id">{{challenged.name}} </ion-select-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
+    <ion-card class="list-card">
+        <ion-list class="create-activity-list" padding>
+            <ion-item class="list-item-white">
+                <ion-label>Aktivitetsnamn:</ion-label>
+                <ion-input name="Event_name" type="text" placeholder="..." ngModel required
+                           [(ngModel)]="name" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-grid class="date-picker">
+                    <ion-row>
+                        <ion-col>
+                            <label>Startar:</label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-datetime class="in-list-datetime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"
+                                          placeholder="datum"
+                                          [(ngModel)]="startdate" ngDefaultControl></ion-datetime>
+                        </ion-col>
+                        <ion-col>
+                            <ion-datetime class="in-list-datetime" displayFormat="H:mm" pickerFormat="H:mm"
+                                          placeholder="tid"
+                                          [(ngModel)]="starttime" ngDefaultControl></ion-datetime>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-grid class="date-picker">
+                    <ion-row>
+                        <ion-col>
+                            <ion-label>Slutar:</ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-datetime class="in-list-datetime" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"
+                                          placeholder="datum"
+                                          [(ngModel)]="enddate" ngDefaultControl></ion-datetime>
+                        </ion-col>
+                        <ion-col>
+                            <ion-datetime class="in-list-datetime" displayFormat="H:mm" pickerFormat="H:mm"
+                                          placeholder="tid"
+                                          [(ngModel)]="endtime" ngDefaultControl></ion-datetime>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Location:</ion-label>
+                <ion-input name="location" type="text" placeholder="..." ngModel
+                           required
+                           [(ngModel)]="location" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Beskrivning:</ion-label>
+                <ion-input name="description" type="text" placeholder="..." ngModel required
+                           [(ngModel)]="description" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Plats:</ion-label>
+                <ion-input name="alt_location" type="text" placeholder="..." ngModel
+                           required
+                           [(ngModel)]="alt_location" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Kategori:</ion-label>
+                <ion-select [(ngModel)]="category" ngDefaultControl>
+                    <ion-select-option *ngFor="let category of allCategories"
+                                       [value]="category">{{category.name}} </ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Ungdomsgård:</ion-label>
+                <ion-select [(ngModel)]="challenged" ngDefaultControl>
+                    <ion-select-option *ngFor="let challenged of youthcenters"
+                                       [value]="challenged.id">{{challenged.name}} </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
     <div padding>
         <ion-button *appHasRole="'user'" size="large" type="submit" expand="block"
                     (click)='createSuggestion()'>Föreslå aktivitet

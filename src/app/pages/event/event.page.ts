@@ -116,4 +116,8 @@ export class EventPage implements OnInit {
         }
     }
 
+    getStartDate(activity: any) {
+        let date = new Date(activity.startdate);
+        return date.toLocaleDateString();
+    }
 }

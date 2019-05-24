@@ -19,7 +19,9 @@ export class CreateEventPage implements OnInit {
     private challenged;
     private youthcenters = [];
     private startdate: string;
+    private starttime: string;
     private enddate: string;
+    private endtime: string;
     private activity;
     private allCategories = [];
 
