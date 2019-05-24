@@ -36,7 +36,8 @@ export class YouthcenterService {
                 console.log(error1);
 
             }
-        );
+
+        ); console.log(this.allYouthCentres);
     }
 
 
