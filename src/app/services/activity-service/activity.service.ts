@@ -14,6 +14,7 @@ import {Category} from '../../Models/Category';
 })
 export class ActivityService {
 
+    // Denna url är även för att hämta aktivititer för specifik user, alltså om den attendat
     postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
     // getactivityUrl kräver att userId läggs till efter
     getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
@@ -63,11 +64,25 @@ export class ActivityService {
 
     addMySuggestedActivitiesToMyActivitiesPage() {
         for (const activity of this.allActivitiesFromDatabase) {
+            if (activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) {
+                this.allMyActivities.push(activity);
+            }
+        }
+
+    }
+
+    /*addMySuggestedActivitiesToMyActivitiesPage() {
+        for (const activity of this.allActivitiesFromDatabase) {
             if (activity.createdby === this.userservice.currentUser.id) {
                 this.allMyActivities.push(activity);
             }
         }
-    }
+        setTimeout(() => {
+
+            console.log('Skrivs ut Andra gången');
+            console.log(this.allMyActivities);
+        }, 300);
+    }*/
 
     generateAllActvitiesPage() {
         this.allActivities = [];
@@ -125,14 +140,15 @@ export class ActivityService {
 
     generateAllMyActivities() {
         this.allMyActivities = [];
-        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+        this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             for (let activity of data) {
                 this.allMyActivities.push(activity);
             }
         }, error1 => {
             console.log(error1);
         });
-        this.addMySuggestedActivitiesToMyActivitiesPage();
+            this.addMySuggestedActivitiesToMyActivitiesPage();
+
 
 
     }

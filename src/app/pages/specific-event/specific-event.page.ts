@@ -5,6 +5,8 @@ import {ActivityService} from '../../services/activity-service/activity.service'
 import {CheckinService} from '../../services/checkin-service/checkin.service';
 import {ToastController} from '@ionic/angular';
 import {DataService} from '../../services/data.service';
+import {Youthcentre} from '../../Models/youthcentre';
+import {YouthcenterService} from '../../services/youthcenter.service';
 
 @Component({
     selector: 'app-specific-event',
@@ -16,8 +18,10 @@ export class SpecificEventPage implements OnInit {
     user: any;
     winner: String;
     competitors: any = [];
+    challenger;
 
-    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService) {
+
+    constructor(private router: Router, private route: ActivatedRoute, private userService: UserService, private activityService: ActivityService, private checkInService: CheckinService, private toastController: ToastController, private dataService: DataService, private youthcentreservice: YouthcenterService) {
     }
 
     ngOnInit() {
@@ -34,12 +38,21 @@ export class SpecificEventPage implements OnInit {
         this.user = this.userService.currentUser;
         this.activityService.getAllActivityParticipants(this.activity.id);
         this.competitors = [{id: this.activity.challenger, isWinner: false}, {id: this.activity.challenged, isWinner: false}];
+        this.getYouthCentreName();
 
     }
 
-    ionViewDidEnter() {
+    getYouthCentreName() {
+        this.youthcentreservice.getAllLocations();
 
+        setTimeout(() => {
+            this.challenger = this.youthcentreservice.getTheRightId(this.activity.challenger);
+
+        }, 400);
+
+        console.log(this.challenger);
     }
+
 
     booked(): boolean {
         return this.activityService.isMyActivity(this.activity.id);
@@ -157,9 +170,10 @@ export class SpecificEventPage implements OnInit {
     }
 
 
-
     private userAlreadyCheckedIn() {
         // to do...
         return false;
     }
+
+
 }
