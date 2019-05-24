@@ -18,6 +18,7 @@ export class UserService {
 
 
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
+    avatarUrl = 'https://webbapppvt15grupp2.herokuapp.com/avatar/';
 
 
     constructor(private http: HttpClient, private router: Router, private toastController: ToastController) {
@@ -250,7 +251,7 @@ export class UserService {
                 }
                 this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
 
-                this.currentUser.picture = this.currentUserJson[0].image;
+                this.getMyAvatar();
 
                 console.log(this.currentUser);
                 this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
@@ -317,6 +318,45 @@ export class UserService {
             error => {
                 console.log('Error');
             });
+
+    }
+
+
+    getAllAvatars() {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        this.http.get(this.avatarUrl, httpOptions).subscribe(data => {
+            console.log(data);
+        }, error1 => {
+            console.log(error1);
+        });
+
+    }
+
+
+    getMyAvatar() {
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            })
+
+        };
+
+        this.http.get(this.avatarUrl + this.currentUser.id, httpOptions).subscribe(data => {
+            console.log(data);
+            this.currentUser.picture = data[0].image
+        }, error1 => {
+            console.log(error1);
+        });
 
     }
 
