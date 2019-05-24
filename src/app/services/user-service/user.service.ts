@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../../Models/user';
 import {Router} from '@angular/router';
 import {ToastController} from '@ionic/angular';
-import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -18,7 +17,6 @@ export class UserService {
 
 
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
-    avatarUrl = 'https://webbapppvt15grupp2.herokuapp.com/avatar/';
 
 
     constructor(private http: HttpClient, private router: Router, private toastController: ToastController) {
@@ -56,17 +54,8 @@ export class UserService {
 
         };
 
-        let role;
-
-        if (this.currentUser.role === 'user') {
-            role = 1;
-        } else {
-            role = 11;
-        }
-
-
         const body = JSON.stringify({
-            'id': this.currentUser.id,
+            'id': 1,
             'username': this.currentUser.name,
             'displayname': this.currentUser.displayname,
             'password': password,
@@ -76,13 +65,10 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'facebooklogin': 'Face1',
             'facebookpassword': 'pass',
-            'role': role,
+            'role': 1,
             'isfacebookuser': this.currentUser.isfacebookuser,
             'image': this.currentUser.picture
-
         });
-
-        console.log(body);
 
         this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -131,7 +117,7 @@ export class UserService {
                 } else {
                     role = 'user';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
@@ -149,7 +135,7 @@ export class UserService {
     }
 
 
-    deleteUser() {
+    deleteUser(password) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -172,7 +158,7 @@ export class UserService {
             'isFacebookUser': 0,
             'image': this.currentUser.picture
         });
-        return this.http.put(this.url, body, httpOptions).subscribe(data => {
+        this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
                 this.presentToast('Kontot avslutat');
                 this.router.navigate(['../login']);
@@ -249,9 +235,9 @@ export class UserService {
                 } else {
                     role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl);
 
-                this.getMyAvatar();
+                this.currentUser.picture = this.currentUserJson[0].image;
 
                 console.log(this.currentUser);
                 this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
@@ -261,29 +247,6 @@ export class UserService {
             }
         );
 
-    }
-
-    checkLogin(username: String, password: String, isfacebookuser: number): Observable<User> {
-
-
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-
-        };
-
-        const body = JSON.stringify({
-
-
-            username: username,
-            password: password,
-            isfacebookuser: isfacebookuser
-
-        });
-
-        return this.http.post<User>(this.url + 'login', body, httpOptions);
     }
 
     addYouthCentre(youthcentre) {
@@ -318,45 +281,6 @@ export class UserService {
             error => {
                 console.log('Error');
             });
-
-    }
-
-
-    getAllAvatars() {
-
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-
-        };
-
-        this.http.get(this.avatarUrl, httpOptions).subscribe(data => {
-            console.log(data);
-        }, error1 => {
-            console.log(error1);
-        });
-
-    }
-
-
-    getMyAvatar() {
-
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            })
-
-        };
-
-        this.http.get(this.avatarUrl + this.currentUser.id, httpOptions).subscribe(data => {
-            console.log(data);
-            this.currentUser.picture = data[0].image
-        }, error1 => {
-            console.log(error1);
-        });
 
     }
 

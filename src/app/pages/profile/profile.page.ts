@@ -47,7 +47,7 @@ export class ProfilePage implements OnInit {
 
     getMyYouthCentre() {
 
-        this.ourId = this.youthcentreService.getTheRightId(this.userservice.currentUser.currentyouthcentre);
+        this.ourId = this.youthcentreService.getTheRightId();
     }
 
     addYouthCentre() {

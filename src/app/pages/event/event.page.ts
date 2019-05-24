@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
-import {getValue} from '@angular/core/src/render3/styling/class_and_style_bindings';
-import {Events} from '@ionic/angular';
 
 @Component({
     selector: 'app-event',
@@ -13,9 +11,9 @@ export class EventPage implements OnInit {
     activity: any;
     hasSearched = false;
     searchedActivities = [];
+
     constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
-
 
     ngOnInit() {
         this.activity = 'all-activities';
@@ -29,6 +27,7 @@ export class EventPage implements OnInit {
     ionViewWillEnter() {
         console.log('WILL ENTER VIEW');
         this.activityService.getAllActivities();
+        this.activityService.getAllCategories();
     }
 
     loadEvent(activity) {
@@ -104,18 +103,17 @@ export class EventPage implements OnInit {
         }
 
 
-
-
     }
+
     searchActivity(ev: any) {
         this.searchedActivities = [];
         let input = ev.target.value;
-        let inputReg = new RegExp(input, 'i' );
+        let inputReg = new RegExp(input, 'i');
         for (let act of this.activityService.allActivities) {
             if (inputReg.exec(act.name)) {
                 this.searchedActivities.push(act);
             }
         }
-        }
+    }
 
 }
