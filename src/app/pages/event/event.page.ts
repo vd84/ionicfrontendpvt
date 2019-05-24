@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/authentication-service/auth.service';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 import {getValue} from '@angular/core/src/render3/styling/class_and_style_bindings';
@@ -14,7 +13,7 @@ export class EventPage implements OnInit {
     activity: any;
     hasSearched = false;
     searchedActivities = [];
-    constructor(private router: Router, private authService: AuthService, private activityService: ActivityService, private dataService: DataService) {
+    constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
 
 
@@ -111,18 +110,12 @@ export class EventPage implements OnInit {
     searchActivity(ev: any) {
         this.searchedActivities = [];
         let input = ev.target.value;
-        console.log('input ' + input);
-        // let charInput = input.split('');
+        let inputReg = new RegExp(input, 'i' );
         for (let act of this.activityService.allActivities) {
-           // let index = 0;
-          //  let actChar = act.name.split('');
-            for (let i = 0; i < act.name; i++) {
-                if (input[i] === act.name[i]) {
-                    if (!this.searchedActivities.includes((act))) {
-                        this.searchedActivities.push(act);
-                    }
-                }
+            if (inputReg.exec(act.name)) {
+                this.searchedActivities.push(act);
             }
         }
-    }
+        }
+
 }
