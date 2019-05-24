@@ -4,6 +4,7 @@ import {ActivityService} from '../../services/activity-service/activity.service'
 import {DataService} from '../../services/data.service';
 import {getValue} from '@angular/core/src/render3/styling/class_and_style_bindings';
 import {Events} from '@ionic/angular';
+import {Category} from '../../Models/Category';
 
 @Component({
     selector: 'app-event',
@@ -29,6 +30,7 @@ export class EventPage implements OnInit {
     ionViewWillEnter() {
         console.log('WILL ENTER VIEW');
         this.activityService.getAllActivities();
+        this.activityService.getAllCategories();
     }
 
     loadEvent(activity) {
@@ -112,8 +114,8 @@ export class EventPage implements OnInit {
         let input = ev.target.value;
         let inputReg = new RegExp(input, 'i' );
         for (let act of this.activityService.allActivities) {
-            if (inputReg.exec(act.name)) {
-                this.searchedActivities.push(act);
+                if (inputReg.exec(act.name)) {
+                    this.searchedActivities.push(act);
             }
         }
         }
