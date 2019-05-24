@@ -39,6 +39,8 @@ ion-list ion-item {
     position: relative;
     text-align: center;
     border-radius: 40px !important;
+    --color: white !important;
+    --background: blue !important;
   }
 
   //scss for title and subtitles of cards.
