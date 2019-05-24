@@ -92,8 +92,10 @@ export class LocationPage implements OnInit {
     }
     userPlacement(targetlat, targetlon, userlat, userlon) {
 
+        // might be unnessesary
          let  userlatbeforetracking = parseFloat(localStorage.getItem(userlat));
          let userlonbeforetracking = parseFloat(localStorage.getItem(userlon));
+
        if (userlatbeforetracking != null) {
            userlatbeforetracking = userlat;
            userlonbeforetracking = userlon;
