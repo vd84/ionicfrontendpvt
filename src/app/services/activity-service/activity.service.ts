@@ -37,6 +37,12 @@ export class ActivityService {
     // Lista för alla kategorier
     allCategories = [];
 
+    // All my correct activities
+    allMyCorrectActivities = [];
+
+    // All my suggested activities
+    allMySuggestedActivities = [];
+
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
 
@@ -62,8 +68,10 @@ export class ActivityService {
     }
 
     addMySuggestedActivitiesToMyActivitiesPage() {
+        console.log('Läggs till i add my suggested activities ');
         for (const activity of this.allActivitiesFromDatabase) {
             if (activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) {
+                console.log(activity);
                 this.allMyActivities.push(activity);
             }
         }
@@ -138,16 +146,19 @@ export class ActivityService {
 
 
     generateAllMyActivities() {
+        console.log('läggs till i generate all my activites');
         this.allMyActivities = [];
         this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
             for (let activity of data) {
+                console.log(activity);
                 this.allMyActivities.push(activity);
             }
         }, error1 => {
             console.log(error1);
         });
+        setTimeout(() => {
             this.addMySuggestedActivitiesToMyActivitiesPage();
-
+        }, 5000);
 
 
     }
