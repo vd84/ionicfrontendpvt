@@ -14,6 +14,7 @@ import {ToastController} from '@ionic/angular';
 export class ActivityService {
 
     postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
+    // getactivityUrl kräver att userId läggs till efter
     getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
