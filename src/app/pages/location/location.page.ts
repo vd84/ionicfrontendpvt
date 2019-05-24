@@ -19,6 +19,7 @@ export class LocationPage implements OnInit {
     currentPosition = {lat: null, lng: null};
     location = {lat: null, lng: null};
 
+
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router, public geolocation: Geolocation) {
         this.geolocation.getCurrentPosition().then((position) => {
             this.location.lat = position.coords.latitude;
@@ -90,9 +91,13 @@ export class LocationPage implements OnInit {
         }
     }
     userPlacement(targetlat, targetlon, userlat, userlon) {
-        // let userlon = null;
-        // let userlat = null;
 
+         let  userlatbeforetracking = parseFloat(localStorage.getItem(userlat));
+         let userlonbeforetracking = parseFloat(localStorage.getItem(userlon));
+       if (userlatbeforetracking != null) {
+           userlatbeforetracking = userlat;
+           userlonbeforetracking = userlon;
+       }
 
         function toRad(x) {
             return x * Math.PI / 180;
