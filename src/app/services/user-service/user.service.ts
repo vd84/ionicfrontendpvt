@@ -135,7 +135,7 @@ export class UserService {
     }
 
 
-    deleteUser() {
+    deleteUser(password) {
 
         const httpOptions = {
             headers: new HttpHeaders({
