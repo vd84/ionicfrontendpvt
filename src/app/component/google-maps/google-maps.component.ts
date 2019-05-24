@@ -473,7 +473,7 @@ export class GoogleMapsComponent implements OnInit {
 
                     if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
                         this.presentToast('Aktivitet hittad på ' + place.name + '! (' +  this.howfaraway(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon ) +  ' härifrån)');
-                        console.log(place.name);
+
                     }
                 }
                 console.log(this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, this.alllocations[0].lat, this.alllocations[0].lon));
