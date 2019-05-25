@@ -337,7 +337,6 @@ export class GoogleMapsComponent implements OnInit {
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
 
-
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
 
