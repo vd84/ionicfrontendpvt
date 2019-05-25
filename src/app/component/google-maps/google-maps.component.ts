@@ -463,8 +463,6 @@ export class GoogleMapsComponent implements OnInit {
             frequency: 3000,
             enableHighAccuracy: true
         };
-        localStorage.setItem('userlat', String(this.currentPosition.lat));
-        localStorage.setItem('userlng', String(this.currentPosition.lng));
 
         this.positionSubscription = this.geolocation.watchPosition(options)
             .subscribe(data => {
