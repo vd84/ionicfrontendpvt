@@ -58,6 +58,7 @@ export class GoogleMapsComponent implements OnInit {
             this.location.lng = position.coords.longitude;
         });
         this.currentPosition = this.location;
+
         /*Map options*/
         this.mapOptions = {
             center: this.location,
@@ -299,6 +300,8 @@ export class GoogleMapsComponent implements OnInit {
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
+        localStorage.setItem('orglat', String(this.currentPosition.lat));
+        localStorage.setItem('orglng', String(this.currentPosition.lng));
     }
 
     addStartMarker() {

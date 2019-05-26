@@ -5,7 +5,7 @@ import {UserService} from '../../services/user-service/user.service';
 import {Youthcentre} from '../../Models/youthcentre';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
+
 
 @Component({
     selector: 'app-location',
@@ -18,15 +18,16 @@ export class LocationPage implements OnInit {
     allActivitiesForYouthCentreToShow = [];
     currentPosition = {lat: null, lng: null};
     location = {lat: null, lng: null};
+    currentPositionString;
 
 
 
-    constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router, public geolocation: Geolocation) {
-        this.geolocation.getCurrentPosition().then((position) => {
-            this.location.lat = position.coords.latitude;
-            this.location.lng = position.coords.longitude;
-        });
+    constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router) {
         this.currentPosition = this.location;
+        this.currentPositionString = localStorage.getItem('orglat');
+        this.currentPosition.lat = parseFloat(this.currentPositionString);
+        this.currentPositionString = localStorage.getItem('orglng');
+        this.currentPosition.lng = parseFloat(this.currentPositionString);
     }
 
     ngOnInit() {
