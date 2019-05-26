@@ -99,7 +99,6 @@ export class LocationPage implements OnInit {
         }
 
             if (localStorage.getItem('tracking') === 'true') {
-                console.log('kommer den hit');
                 userlat = localStorage.getItem('tuserlat');
                 userlon = localStorage.getItem('tuserlon');
 
@@ -132,5 +131,4 @@ export class LocationPage implements OnInit {
             }
 
         }
-
 }
