@@ -38,6 +38,7 @@ export class GoogleMapsComponent implements OnInit {
     positionSubscription: Subscription;
     currentPosition = {lat: null, lng: null};
     user: any;
+    trackingDone = false;
 
 
     constructor(public geolocation: Geolocation,
@@ -480,6 +481,14 @@ export class GoogleMapsComponent implements OnInit {
 
                 this.currentPosition.lat = data.coords.latitude;
                 this.currentPosition.lng = data.coords.longitude;
+
+                if (!this.trackingDone) {
+                    localStorage.setItem('tracking', 'true');
+                    localStorage.setItem('tuserlat', String(this.currentPosition.lat));
+                    localStorage.setItem('tuserlon', String(this.currentPosition.lng));
+                    this.trackingDone = true;
+                }
+
                 console.log(this.currentPosition);
                 this.marker.setPosition(this.currentPosition);
             });
