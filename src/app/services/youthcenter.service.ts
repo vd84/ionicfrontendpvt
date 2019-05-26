@@ -25,12 +25,13 @@ export class YouthcenterService {
         if (this.userService.currentUser === undefined) {
             id = 0;
         } else {
-            id = this.userService.currentUser.currentyouthcentre;
+            id = this.userService.currentUser.id;
         }
-
         return this.http.get<Location[]>(this.url + id).subscribe(data => {
                 this.allYouthCentres = data;
-                console.log(this.allYouthCentres);
+                    console.log(data);
+
+
 
             }, error1 => {
                 console.log(error1);

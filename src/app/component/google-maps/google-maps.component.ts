@@ -38,6 +38,7 @@ export class GoogleMapsComponent implements OnInit {
     positionSubscription: Subscription;
     currentPosition = {lat: null, lng: null};
     user: any;
+    trackingDone = false;
 
 
     constructor(public geolocation: Geolocation,
@@ -57,6 +58,7 @@ export class GoogleMapsComponent implements OnInit {
             this.location.lng = position.coords.longitude;
         });
         this.currentPosition = this.location;
+
         /*Map options*/
         this.mapOptions = {
             center: this.location,
@@ -298,6 +300,8 @@ export class GoogleMapsComponent implements OnInit {
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
+        localStorage.setItem('orglat', String(this.currentPosition.lat));
+        localStorage.setItem('orglng', String(this.currentPosition.lng));
     }
 
     addStartMarker() {
@@ -336,7 +340,6 @@ export class GoogleMapsComponent implements OnInit {
 
         setTimeout(() => {
             this.alllocations = this.youthcenterService.allYouthCentres;
-
 
             // Loops through all places and adds blue marker
             for (const place of this.alllocations) {
@@ -393,7 +396,6 @@ export class GoogleMapsComponent implements OnInit {
                         console.log(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude));
                         localStorage.setItem('isCloseEnough', String(this.calculateIfCloseEnough(place.lat, place.lon, pos.coords.latitude, pos.coords.longitude)));
                         console.log(localStorage.getItem('isCloseEnough'));
-                        // Tillagd kommentar
 
 
                     }));
@@ -412,7 +414,7 @@ export class GoogleMapsComponent implements OnInit {
 
     }
 
-    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+    calculateDistance(userlat, userlon, targetlat, targetlon) {
 
         function toRad(x) {
             return x * Math.PI / 180;
@@ -435,13 +437,28 @@ export class GoogleMapsComponent implements OnInit {
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         let d = R * c;
-        d = d * 1000;
 
-        return d < 10;
+
+        return d;
 
 
     }
 
+    howfaraway(userlat, userlon, targetlat, targetlon) {
+
+        let d = this.calculateDistance(userlat, userlon, targetlat, targetlon);
+
+        if (d > 1) { return Math.round(d) + ' km'; } else if (d <= 1) { return Math.round(d * 1000) + ' meter'; }
+    }
+
+    calculateIfCloseEnough(userlat, userlon, targetlat, targetlon): boolean {
+
+        let d = this.calculateDistance(userlat, userlon, targetlat, targetlon);
+        d = d * 1000;
+         return d < 1000000000000000;
+       // return d < 100;
+
+    }
 
     startTracking() {
         this.isTracking = true;
@@ -458,7 +475,8 @@ export class GoogleMapsComponent implements OnInit {
                 for (const place of this.alllocations) {
 
                     if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
-                        this.presentToast('nearby event found!');
+                        this.presentToast('Aktivitet hittad på ' + place.name + '! (' +  this.howfaraway(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon) + ')');
+
                     }
                 }
                 console.log(this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, this.alllocations[0].lat, this.alllocations[0].lon));
@@ -466,6 +484,14 @@ export class GoogleMapsComponent implements OnInit {
 
                 this.currentPosition.lat = data.coords.latitude;
                 this.currentPosition.lng = data.coords.longitude;
+
+                if (!this.trackingDone) {
+                    localStorage.setItem('tracking', 'true');
+                    localStorage.setItem('tuserlat', String(this.currentPosition.lat));
+                    localStorage.setItem('tuserlon', String(this.currentPosition.lng));
+                    this.trackingDone = true;
+                }
+
                 console.log(this.currentPosition);
                 this.marker.setPosition(this.currentPosition);
             });
