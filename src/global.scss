@@ -73,6 +73,17 @@
   --ion-background-color: transparent;
 }
 
+.notification-container {
+  margin: auto;
+  padding: 10px;
+  background: green;
+  border-radius: 20px;
+  height: fit-content;
+  width: fit-content;
+  color: white;
+  font-size: 18px;
+}
+
 // ***CREATE ACTIVITY PAGE***
 .create-activity-list {
   padding-bottom: 10%;
@@ -97,6 +108,15 @@
   --padding-end: 0;
 }
 
+.activity-button-group {
+  margin: auto;
+
+  ion-button {
+    width: 100%;
+  }
+
+}
+
 // ***MAP PAGE STYLING***
 .map {
   height: 100%;
@@ -116,13 +136,51 @@
     margin-bottom: 5%;
     background: white;
     font-size: 16px;
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.28);
   }
+}
+
+// ***BADGE PAGE***
+ion-progress-bar {
+  height: 18px;
+  --buffer-background: white;
+  --progress-background: #00c3ff;
+  border-radius: 10px;
+}
+
+.progress-bar ion-list-header {
+  justify-content: center;
+  font-size: 18px;
+}
+
+.badge-icon {
+  height: 50% !important;
+  width: 50% !important;
+  margin: auto;
+}
+
+// ***PROFILE PAGE***
+.profile-pic {
+  margin: auto;
+  width: 80%;
+  background: white;
+  border: solid black 1px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-page-name-item {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.profile-information-section {
+  padding-top: 20px;
 }
 
 // *****GENERAL STYLING*****
 
-// BUTTON STYLING
+// ***BUTTON STYLING***
 ion-button {
   color: rgba(0, 0, 0, 1);
 
@@ -138,7 +196,7 @@ ion-button {
   font-size: 20px;
 }
 
-// DATETIME-PICKER STYLING
+// ***DATETIME-PICKER STYLING***
 ion-datetime {
   --placeholder-color: black;
 }
@@ -151,12 +209,12 @@ ion-datetime {
   --background: white;
 }
 
-// SELECTOR ALERT WINDOW STYLING
+// ***SELECTOR ALERT WINDOW STYLING***
 .alert-button {
   color: black !important;
 }
 
-// LIST STYLING
+// ***LIST STYLING***
 ion-list {
   --ion-background-color: transparent;
 }
@@ -186,8 +244,16 @@ ion-list {
   ion-card-subtitle {
     color: black;
   }
+}
 
+// ***SEARCHBAR STYLING***
+.searchbar-input-container {
+  --background: transparent;
+}
 
+// ***ION-BADGE STYLING***
+ion-badge {
+  background: #00c3ff;
 }
 
 //Div for cards
@@ -225,28 +291,8 @@ ion-list {
   }
 }
 
-
 ion-icon {
   font-size: 40px; //Preferred size here
-}
-
-
-/*.block {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #fff;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-
- */
-
-.badge {
-  max-width: 100%;
-  height: 20px;
 }
 
 

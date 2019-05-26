@@ -6,7 +6,7 @@
 
 <ion-content padding>
     <!--PROGRESS BAR-->
-    <ion-list>
+    <ion-list class="progress-bar">
         <ion-list-header>Mina framsteg</ion-list-header>
         <ion-progress-bar color="dark" value="{{progressValue}}"></ion-progress-bar>
     </ion-list>
@@ -20,29 +20,41 @@
     </div>
     <!--LIST OF ALL BADGES-->
     <div [ngSwitch]="badgeList">
-        <ion-list *ngSwitchCase="'all-badges'">
+        <ion-list lines="none" *ngSwitchCase="'all-badges'">
             <ion-item *ngFor="let badge of allBadges">
-                <ion-card (click) = loadBadge(badge)>
-                    <img src={{badge.image}} />
-                    <ion-card-title>{{badge.name}}</ion-card-title>
+                <ion-card class="clickable-cards" (click)=loadBadge(badge)>
+                    <ion-card-header>
+                        <ion-card-title>{{badge.name}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <img class="badge-icon" src={{badge.image}}/>
+                    </ion-card-content>
                 </ion-card>
             </ion-item>
         </ion-list>
         <!--LIST OF ALL USERS TAKEN BADGES-->
-        <ion-list *ngSwitchCase="'taken-badges'">
+        <ion-list lines="none" *ngSwitchCase="'taken-badges'">
             <ion-item *ngFor="let badge of allOfUsersBadges">
-                <ion-card (click)="loadBadge(badge)">
-                    <img src={{badge.image}}/>
-                    <ion-card-title>{{badge.name}}</ion-card-title>
+                <ion-card class="clickable-cards" (click)="loadBadge(badge)">
+                    <ion-card-header>
+                        <ion-card-title>{{badge.name}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <img class="badge-icon" src={{badge.image}}/>
+                    </ion-card-content>
                 </ion-card>
             </ion-item>
         </ion-list>
         <!-- LIST OF ALL AVAILABLE BADGES-->
-        <ion-list *ngSwitchCase="'avail-badges'">
+        <ion-list lines="none" *ngSwitchCase="'avail-badges'">
             <ion-item *ngFor="let badge of allAvailBadges">
-                <ion-card (click)="loadBadge(badge)">
-                    <img src={{badge.image}}/>
-                    <ion-card-title>{{badge.name}}</ion-card-title>
+                <ion-card class="clickable-cards" (click)="loadBadge(badge)">
+                    <ion-card-header>
+                        <ion-card-title>{{badge.name}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <img class="badge-icon" src={{badge.image}}/>
+                    </ion-card-content>
                 </ion-card>
             </ion-item>
         </ion-list>

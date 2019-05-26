@@ -29,16 +29,15 @@ export class YouthcenterService {
         }
         return this.http.get<Location[]>(this.url + id).subscribe(data => {
                 this.allYouthCentres = data;
-                    console.log(data);
-
+                console.log(data);
 
 
             }, error1 => {
                 console.log(error1);
 
             }
-
-        ); console.log(this.allYouthCentres);
+        );
+        console.log(this.allYouthCentres);
     }
 
 
@@ -48,15 +47,12 @@ export class YouthcenterService {
 
 
         for (const youthCentre of this.allYouthCentres) {
-
-            console.log(youthCentre.id);
             if (youthCentre.id === id) {
                 returnStatement = youthCentre.name;
                 return returnStatement;
             } else {
                 returnStatement = 'Du har ingen ungdomsgård';
             }
-
         }
         return returnStatement;
 

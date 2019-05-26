@@ -120,4 +120,12 @@ export class EventPage implements OnInit {
         let date = new Date(activity.startdate);
         return date.toLocaleDateString();
     }
+
+    getActivityLabel(activity: any) {
+        if (this.activityService.activityIsSuggestion(activity)) {
+            return 'Suggestion';
+        } else {
+            return this.calculateColorForCard(activity);
+        }
+    }
 }

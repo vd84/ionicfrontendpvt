@@ -50,7 +50,6 @@ export class SpecificEventPage implements OnInit {
 
         }, 400);
 
-        console.log(this.challenger);
     }
 
 
@@ -164,7 +163,7 @@ export class SpecificEventPage implements OnInit {
         if (this.activity.winner === 0) {
             return 'TBD';
         } else {
-            return this.activity.winner;
+            return this.youthcentreservice.getTheRightId(this.activity.winner);
         }
 
     }
