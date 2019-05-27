@@ -15,6 +15,7 @@ export class BadgesPage implements OnInit {
     allAvailBadges = [];
     hasShowedAvailBadges = false;
     progressValue = 0.0;
+    // En kommentar
 
     constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService) {
         this.badgeList = 'all-badges';
