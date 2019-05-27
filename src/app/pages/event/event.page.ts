@@ -109,7 +109,7 @@ export class EventPage implements OnInit {
         this.searchedActivities = [];
         let input = ev.target.value;
         let inputReg = new RegExp(input, 'i');
-        for (let act of this.activityService.allActivities) {
+        for (let act of this.activityService.allActiveActivities) {
             if (inputReg.exec(act.name)) {
                 this.searchedActivities.push(act);
             }

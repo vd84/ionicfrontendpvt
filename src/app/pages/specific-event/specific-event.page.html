@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>{{activity.name}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
@@ -7,10 +7,10 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content style="--padding-top: 20%">
     <!--LISTA FÖR: NAMN DATUM PLATS BESKRIVNING -->
     <ion-card class="list-card">
-        <ion-list>
+        <ion-list padding>
             <ion-item>
                 <h4>Namn: {{activity.name}}</h4>
             </ion-item>
@@ -38,7 +38,7 @@
 
 
     <!--BOKA/AVBOKA KNAPPAR-->
-    <div class="activity-button-group" *appHasRole="'user'">
+    <div class="activity-button-group" *appHasRole="'user'" padding>
         <ion-button (click)="bookActivity()"
                     *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity)">
             Boka
@@ -67,12 +67,22 @@
                 </ion-item>
             </ion-list>
         </ion-card>
-        <div class="activity-button-group">
-            <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
-            <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Avslå</ion-button>
-            <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
-            <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
-            <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
+        <div class="activity-button-group" padding>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
+                        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
+                        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Avslå</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
             <ion-button (click)="specifyWinner()"
                         *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">Ange vinnare
             </ion-button>

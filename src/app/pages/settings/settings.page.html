@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="--padding-top: 20%">
 
     <ion-card class="list-card">
         <ion-list>
@@ -35,6 +35,8 @@
         </ion-list>
     </ion-card>
 
-    <ion-button (click)="logout()" size="large" type="submit" expand="block">Logga ut</ion-button>
+    <div padding>
+        <ion-button (click)="logout()" size="large" type="submit" expand="block">Logga ut</ion-button>
+    </div>
 
 </ion-content>
