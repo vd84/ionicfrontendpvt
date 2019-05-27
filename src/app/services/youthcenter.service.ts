@@ -28,6 +28,7 @@ export class YouthcenterService {
             id = this.userService.currentUser.id;
         }
         return this.http.get<Location[]>(this.url + id).subscribe(data => {
+            console.log('youthcentreService ' + ' getAllLocations');
                 this.allYouthCentres = data;
                 console.log(data);
 
