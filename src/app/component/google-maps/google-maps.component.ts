@@ -300,6 +300,7 @@ export class GoogleMapsComponent implements OnInit {
         this.youthcenterService.getAllLocations();
         this.alllocations = this.youthcenterService.allYouthCentres;
         this.addAllMarkers();
+        // setting the users position so its available to location.page
         localStorage.setItem('orglat', String(this.currentPosition.lat));
         localStorage.setItem('orglng', String(this.currentPosition.lng));
     }
@@ -312,6 +313,7 @@ export class GoogleMapsComponent implements OnInit {
             this.markerOptions.title = 'My Location';
             this.markerOptions.icon = 'assets/icon/map-person-icon.png';
             this.marker = new google.maps.Marker(this.markerOptions);
+
         }, 5000);
     }
 
@@ -358,7 +360,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/house-icon.png', scaledSize: {height: 30, width: 30}
+                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 23, width: 23}
                         }
 
 
@@ -371,7 +373,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 30, width: 30}
+                            url: 'assets/icon/house-icon.png', scaledSize: {height: 23, width: 23}
                         }
 
 
@@ -457,8 +459,9 @@ export class GoogleMapsComponent implements OnInit {
 
         let d = this.calculateDistance(userlat, userlon, targetlat, targetlon);
         d = d * 1000;
-         return d < 1000000000000000;
-       // return d < 100;
+        // kommentaren under är den return vi haft under testning...
+         // return d < 1000000000000000;
+       return d < 300;
 
     }
 
@@ -488,6 +491,7 @@ export class GoogleMapsComponent implements OnInit {
                 this.currentPosition.lng = data.coords.longitude;
 
                 if (!this.trackingDone) {
+                    // sends to location in order to let location now where it should get the users position from
                     localStorage.setItem('tracking', 'true');
                     localStorage.setItem('tuserlat', String(this.currentPosition.lat));
                     localStorage.setItem('tuserlon', String(this.currentPosition.lng));

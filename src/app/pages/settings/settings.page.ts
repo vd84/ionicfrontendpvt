@@ -20,7 +20,7 @@ export class SettingsPage implements OnInit {
     constructor(private router: Router,
                 private nativeStorage: NativeStorage,
                 private userService: UserService,
-                private youthcenterService: YouthcenterService
+                private youthCenterService: YouthcenterService
     ) {
     }
 
@@ -44,8 +44,8 @@ export class SettingsPage implements OnInit {
 
     ngOnInit(): void {
 
-        this.youthcenterService.getAllLocations();
-        this.youthcenters = this.youthcenterService.allYouthCentres;
+        this.youthCenterService.getAllLocations();
+        this.youthcenters = this.youthCenterService.allYouthCentres;
 
     }
 

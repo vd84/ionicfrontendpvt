@@ -1,12 +1,13 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>Ny aktivitet</ion-title>
         <ion-buttons slot="start">
             <ion-back-button text="Tillbaka"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+
+<ion-content style="--padding-top: 20%;">
     <ion-card class="list-card">
         <ion-list class="create-activity-list" padding>
             <ion-item class="list-item-white">
@@ -51,12 +52,6 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-            </ion-item>
-            <ion-item class="list-item-white">
-                <ion-label>Location:</ion-label>
-                <ion-input name="location" type="text" placeholder="..." ngModel
-                           required
-                           [(ngModel)]="location" ngDefaultControl></ion-input>
             </ion-item>
             <ion-item class="list-item-white">
                 <ion-label>Beskrivning:</ion-label>

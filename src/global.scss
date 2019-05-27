@@ -161,7 +161,9 @@ ion-progress-bar {
 // ***PROFILE PAGE***
 .profile-pic {
   margin: auto;
-  width: 80%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  width: 60%;
   background: white;
   border: solid black 1px;
   border-radius: 50%;
@@ -226,16 +228,22 @@ ion-list {
 }
 
 .list-card {
-  margin-top: 20%;
+  margin-bottom: 15px;
+  margin-top: 0;
   background: white;
+  border-radius: 30px;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
 }
 
 .clickable-cards {
   width: 100%;
-  min-height: 100px;
   text-align: center;
   font-size: 25px;
   background: white;
+  border-radius: 30px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
 
   ion-card-title {
     color: black;

@@ -50,17 +50,26 @@ export class CreateEventPage implements OnInit {
         this.youthcenters = this.youthcenterService.allYouthCentres;
     }
 
+    correctDates() {
+        this.startdate = this.startdate.slice(0, 11) + this.starttime.slice(11, 20);
+        this.enddate = this.enddate.slice(0, 11) + this.endtime.slice(11, 20);
+    }
+
 
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
-        setTimeout(() => {
-            this.activityService.generateAllMyActivities();
-        }, 25);
-        this.router.navigate(['tabs/home/']);
+        this.correctDates();
+        console.log(this.enddate);
+        /* this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+         setTimeout(() => {
+             this.activityService.generateAllMyActivities();
+         }, 25);
+         this.router.navigate(['tabs/home/']);
 
+         */
     }
 
     createActivity() {
+        this.correctDates();
         this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
