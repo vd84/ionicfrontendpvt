@@ -93,7 +93,7 @@ export class LocationPage implements OnInit {
             return true;
         }
     }
-    // method for getting distance to youthcenter
+    // method for getting distance to youthcenter from the users position
     userPlacement(targetlat, targetlon, userlat, userlon) {
 
         function toRad(x) {
