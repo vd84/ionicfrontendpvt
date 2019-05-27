@@ -19,7 +19,7 @@
 
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
-        <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
+        <ion-segment color="light" (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">
                 <ion-label>Alla
                     <ion-badge color="light" slot="end">{{activityService.allActiveActivities.length}}</ion-badge>
