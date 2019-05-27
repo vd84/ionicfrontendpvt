@@ -2,7 +2,7 @@
     <ion-toolbar color="light">
         <ion-title>Inställningar</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button text="Tillbaka"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -24,6 +24,13 @@
             <ion-item>
                 <ion-label>
                     Ungdomsgård: {{youthCenterService.getTheRightId(userService.currentUser.currentyouthcentre)}} </ion-label>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Ungdomsgård:</ion-label>
+                <ion-select [(ngModel)]="chosenYouthCentre" ngDefaultControl>
+                    <ion-select-option *ngFor="let youthcentre of youthcenters"
+                                       [value]="youthcentre.id">{{youthcentre.name}} </ion-select-option>
+                </ion-select>
             </ion-item>
             <ion-item-divider>Konto och säkerhet</ion-item-divider>
             <ion-item>

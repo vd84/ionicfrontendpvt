@@ -24,6 +24,7 @@ export class LocationPage implements OnInit {
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router) {
         this.currentPosition = this.location;
+        // getting the users position from google maps components.
         this.currentPositionString = localStorage.getItem('orglat');
         this.currentPosition.lat = parseFloat(this.currentPositionString);
         this.currentPositionString = localStorage.getItem('orglng');
@@ -92,7 +93,7 @@ export class LocationPage implements OnInit {
             return true;
         }
     }
-
+    // method for getting distance to youthcenter from the users position
     userPlacement(targetlat, targetlon, userlat, userlon) {
 
         function toRad(x) {

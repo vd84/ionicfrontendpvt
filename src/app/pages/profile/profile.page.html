@@ -53,14 +53,14 @@
     <div *ngIf="doesNotHaveYouthCentre()">
         <ion-list>
             <ion-list-header color="danger">Du har ingen ungdomsgård, lägg till en nedan</ion-list-header>
-            <ion-item>
+            <!--ion-item>
                 <ion-label>Ungdomsgård:</ion-label>
                 <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
                     <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
                                        [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
                 </ion-select>
 
-            </ion-item>
+            </ion-item-->
         </ion-list>
 
         <ion-button (click)="addYouthCentre()" size="large" type="submit" expand="block">Lägg till ungdomsgård

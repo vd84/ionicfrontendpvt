@@ -13,6 +13,9 @@ import {YouthcenterService} from '../../services/youthcenter.service';
 })
 export class SettingsPage implements OnInit {
 
+    youthcenters = [];
+    chosenYouthCentre;
+
 
     constructor(private router: Router,
                 private nativeStorage: NativeStorage,
@@ -40,5 +43,10 @@ export class SettingsPage implements OnInit {
     }
 
     ngOnInit(): void {
+
+        this.youthCenterService.getAllLocations();
+        this.youthcenters = this.youthCenterService.allYouthCentres;
+
     }
+
 }

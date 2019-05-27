@@ -49,6 +49,7 @@ export class ActivityService {
     getAllActivities() {
         console.log('called generate all activities');
         this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+            console.log('Activity Service');
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
@@ -138,9 +139,9 @@ export class ActivityService {
     isOfYourCentre(activity) {
         return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
     }
-
     getAllCategories() {
-        this.http.get<Category[]>(this.categoryUrl).subscribe(data => {
+        this.http.get<Category[]>(this.categoryUrl).subscribe( data => {
+            console.log('Activity Service' + ' getAllCategories ');
             this.allCategories = data;
         });
     }
@@ -149,6 +150,7 @@ export class ActivityService {
     generateAllMyActivities() {
         this.allMyActivities = [];
         this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+            console.log('Activity Service' + ' + GenerateAllMyActivites');
             for (let activity of data) {
                 this.allMyActivities.push(activity);
             }
@@ -156,6 +158,7 @@ export class ActivityService {
             console.log(error1);
         });
         this.addMySuggestedActivitiesToMyActivitiesPage();
+
 
 
     }
@@ -285,6 +288,8 @@ export class ActivityService {
     }
 
 
+
+
     modifyActivity(id,
                    name,
                    description,
@@ -354,6 +359,7 @@ export class ActivityService {
 
     getAllActivityParticipants(activityId: number) {
         this.http.get<ParticipationUser[]>(this.participationByActivityUrl + activityId).subscribe(data => {
+            console.log('Activity Service' + ' + getallactivityparticipants');
             this.allActivityParticipants = data;
             console.log(data);
         }, error1 => {
@@ -368,6 +374,7 @@ export class ActivityService {
         let activityenddate = new Date(activity.enddate);
 
         return (today <= activityenddate);
+
 
     }
 
