@@ -8,35 +8,38 @@
 </ion-header>
 
 <ion-content>
-    <ion-list class="register-account-list" padding>
-        <ion-item class="list-item-white">
-            <ion-label>Användarnamn:</ion-label>
-            <ion-input name="username" placeholder="..." type="username" ngModel required
-                       [(ngModel)]="username" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Visningsnamn:</ion-label>
-            <ion-input name="displayname" placeholder="..." type="username" ngModel required
-                       [(ngModel)]="displayname" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Lösenord:</ion-label>
-            <ion-input name="password" placeholder="..." type="password" ngModel required
-                       [(ngModel)]="password" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>E-post:</ion-label>
-            <ion-input name="email" placeholder="..." type="email" ngModel required
-                       [(ngModel)]="email" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item class="list-item-white">
-            <ion-label>Ungdomsgård:</ion-label>
-            <ion-select class="select-box"[(ngModel)]="currentyouthcentre" ngDefaultControl>
-                <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
-                                   [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
+    <ion-card class="list-card">
+        <ion-list class="register-account-list" padding>
+            <ion-item class="list-item-white">
+                <ion-label>Användarnamn:</ion-label>
+                <ion-input name="username" placeholder="..." type="username" ngModel required
+                           [(ngModel)]="username" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Visningsnamn:</ion-label>
+                <ion-input name="displayname" placeholder="..." type="username" ngModel required
+                           [(ngModel)]="displayname" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Lösenord:</ion-label>
+                <ion-input name="password" placeholder="..." type="password" ngModel required
+                           [(ngModel)]="password" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>E-post:</ion-label>
+                <ion-input name="email" placeholder="..." type="email" ngModel required
+                           [(ngModel)]="email" ngDefaultControl></ion-input>
+            </ion-item>
+            <ion-item class="list-item-white">
+                <ion-label>Ungdomsgård:</ion-label>
+                <ion-select class="select-box" [(ngModel)]="currentyouthcentre" ngDefaultControl>
+                    <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                                       [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
     <div padding>
         <ion-button size="large" type="submit" expand="block" (click)="createUserAndPost()">Skapa
         </ion-button>

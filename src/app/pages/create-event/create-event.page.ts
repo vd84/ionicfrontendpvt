@@ -15,12 +15,15 @@ export class CreateEventPage implements OnInit {
     private events = [];
     private description: String;
     private alt_location: String;
-    private category: String;
+    private category;
     private challenged;
     private youthcenters = [];
     private startdate: string;
+    private starttime: string;
     private enddate: string;
+    private endtime: string;
     private activity;
+    private allCategories = [];
 
     constructor(private router: Router, private createdEvents: Events, private youthcenterService: YouthcenterService, private activityService: ActivityService, private userService: UserService) {
     }
@@ -33,6 +36,7 @@ export class CreateEventPage implements OnInit {
             this.youthcenterService.getAllLocations();
             this.youthcenters = this.youthcenterService.allYouthCentres;
             this.loadallyouthcenters();
+            this.allCategories = this.activityService.allCategories;
             for (const youthcentre of this.youthcenters) {
                 if (youthcentre.id === this.userService.currentUser.currentyouthcentre) {
                     this.youthcenters.splice(this.youthcenters.indexOf(youthcentre), 1);
@@ -48,32 +52,19 @@ export class CreateEventPage implements OnInit {
 
 
     createSuggestion() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
-            console.log(this.activityService.generateAllMyActivities());
         }, 25);
         this.router.navigate(['tabs/home/']);
 
     }
 
     createActivity() {
-        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.getCategoryID(), this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = false
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 0, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = false
         setTimeout(() => {
             this.activityService.generateAllMyActivities();
         }, 25);
         this.router.navigate(['tabs/home/']);
-    }
-
-    getCategoryID() {
-        if (this.category === 'Football') {
-            return 1;
-        } else if (this.category === 'Chess') {
-            return 11;
-        }
-    }
-
-    onChange(event) {
-        this.category = event.target.value;
     }
 }

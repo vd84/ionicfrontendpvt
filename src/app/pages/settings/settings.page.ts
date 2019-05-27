@@ -4,6 +4,8 @@ import {UserService} from '../../services/user-service/user.service';
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {NativeStorage} from '@ionic-native/native-storage/ngx';
 import {LoadingController} from '@ionic/angular';
+import {YouthCenterServiceMock} from '../../../../test-config/mocks-ionic';
+import {YouthcenterService} from '../../services/youthcenter.service';
 
 @Component({
     selector: 'app-settings',
@@ -14,8 +16,8 @@ export class SettingsPage implements OnInit {
 
     constructor(private router: Router,
                 private nativeStorage: NativeStorage,
-                public loadingController: LoadingController,
                 private userService: UserService,
+                private youthCenterService: YouthcenterService
     ) {
     }
 

@@ -1,46 +1,67 @@
 <ion-header>
     <ion-toolbar color="primary">
         <ion-title>Profil</ion-title>
-        <ion-icon slot = "end" (click)="goToSettings()" name="cog" size="" >Settings</ion-icon>
+        <ion-icon slot="end" (click)="goToSettings()" name="cog" size="">Settings</ion-icon>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-icon (click)="goToSettings()" name="cog" size="">Settings</ion-icon>
+    <div class="profile-pic">
+        <ion-img [src]="userservice.currentUser.avatarurl"></ion-img>
+    </div>
 
-    <ion-img [src]="userservice.currentUser.picture"></ion-img>
 
-    <ion-item> Namn: {{userservice.currentUser.displayname}}</ion-item>
+    <ion-list lines="none">
+        <ion-item class="profile-page-name-item">
+            <ion-label>{{userservice.currentUser.displayname}}</ion-label>
+        </ion-item>
+        <ion-item class="profile-information-section">
+            <ion-card class="clickable-cards">
+                <ion-card-content>
+                    <ion-list lines="none">
+                        <ion-item>
+                            <ion-label>Fritidsgård: {{ourId}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Antal badges: {{allMyBadges.length}}</ion-label>
 
-    <ion-item> Fritidsgård: {{ourId}}</ion-item>
-
-    <ion-item> Antal badges: {{allMyBadges.length}}
-        <ion-item *ngFor="let badges of allMyBadges">
-        <img class="badge" src={{badges.image}}/>
-    </ion-item>
-    </ion-item>
-
+                        </ion-item>
+                    </ion-list>
+                </ion-card-content>
+            </ion-card>
+        </ion-item>
+        <ion-item>
+            <ion-card class="clickable-cards">
+                <ion-grid class="profile-badge-list">
+                    <ion-row>
+                        <ion-col size="4" *ngFor="let badges of allMyBadges">
+                            <img src={{badges.image}}/>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </ion-item>
+    </ion-list>
 
 
     <div *ngIf="doesNotHaveYouthCentre()">
-        <ion-item>Du har ingen ungdomsgård, lägg till en nedan</ion-item>
+        <ion-list>
+            <ion-list-header color="danger">Du har ingen ungdomsgård, lägg till en nedan</ion-list-header>
+            <ion-item>
+                <ion-label>Ungdomsgård:</ion-label>
+                <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
+                    <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
+                                       [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
+                </ion-select>
 
+            </ion-item>
+        </ion-list>
 
-        <ion-item>
-            <ion-label>Ungdomsgård:</ion-label>
-            <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
-                <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
-                                   [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
-            </ion-select>
-
-        </ion-item>
-
-
-        <ion-button (click)="addYouthCentre()">Lägg till Ungdomsgård</ion-button>
+        <ion-button (click)="addYouthCentre()" size="large" type="submit" expand="block">Lägg till ungdomsgård
+        </ion-button>
 
     </div>
-
 
 
 </ion-content>

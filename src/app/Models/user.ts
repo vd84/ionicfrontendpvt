@@ -8,15 +8,19 @@ export class User {
     private _picture: string;
     private _numberOfBadges: number;
     private _isfacebookuser: number;
+    private _avatar: number;
+    private _avatarurl: string;
 
 
-    constructor(id: number, name: string,  displayname: string,  role: string, currentyouthcentre: number, isfacebookuser: number) {
+    constructor(id: number, name: string,  displayname: string,  role: string, currentyouthcentre: number, isfacebookuser: number, avatar: number, avatarurl: string) {
         this._id = id;
         this._name = name;
         this._role = role;
         this._currentyouthcentre = currentyouthcentre;
         this._displayname = displayname;
         this._isfacebookuser = isfacebookuser;
+        this._avatar = avatar;
+        this._avatarurl = avatarurl;
 
     }
 
@@ -131,5 +135,18 @@ export class User {
 
     set role(value: string) {
         this._role = value;
+    }
+    set avatar(value: number) {
+        this._avatar = value;
+    }
+    get avatar() {
+        return this._avatar;
+    }
+
+    set avatarurl(value: string) {
+        this._avatarurl = value;
+    }
+    get avatarurl() {
+        return this._avatarurl;
     }
 }

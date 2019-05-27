@@ -74,5 +74,4 @@ export class BadgesPage implements OnInit {
             avail = true;
         }
     }
-
 }

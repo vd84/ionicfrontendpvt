@@ -25,39 +25,34 @@ export class YouthcenterService {
         if (this.userService.currentUser === undefined) {
             id = 0;
         } else {
-            id = this.userService.currentUser.currentyouthcentre;
+            id = this.userService.currentUser.id;
         }
-
         return this.http.get<Location[]>(this.url + id).subscribe(data => {
                 this.allYouthCentres = data;
-                console.log(this.allYouthCentres);
+                console.log(data);
+
 
             }, error1 => {
                 console.log(error1);
 
             }
         );
+        console.log(this.allYouthCentres);
     }
 
 
-    getTheRightId() {
+    getTheRightId(id) {
 
         let returnStatement = '';
 
-        console.log(this.userService.currentUser.currentyouthcentre);
 
         for (const youthCentre of this.allYouthCentres) {
-            console.log(youthCentre.id === this.userService.currentUser.currentyouthcentre);
-            console.log(this.userService.currentUser.currentyouthcentre);
-
-            console.log(youthCentre.id);
-            if (youthCentre.id === this.userService.currentUser.currentyouthcentre) {
+            if (youthCentre.id === id) {
                 returnStatement = youthCentre.name;
                 return returnStatement;
             } else {
                 returnStatement = 'Du har ingen ungdomsgård';
             }
-
         }
         return returnStatement;
 
