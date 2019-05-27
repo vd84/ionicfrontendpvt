@@ -455,8 +455,9 @@ export class GoogleMapsComponent implements OnInit {
 
         let d = this.calculateDistance(userlat, userlon, targetlat, targetlon);
         d = d * 1000;
-         return d < 1000000000000000;
-       // return d < 100;
+        // kommentaren under är den return vi haft under testning...
+         // return d < 1000000000000000;
+       return d < 300;
 
     }
 
