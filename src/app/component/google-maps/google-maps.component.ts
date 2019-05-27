@@ -356,7 +356,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/house-icon.png', scaledSize: {height: 30, width: 30}
+                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 30, width: 30}
                         }
 
 
@@ -369,7 +369,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 30, width: 30}
+                            url: 'assets/icon/house-icon.png', scaledSize: {height: 30, width: 30}
                         }
 
 
