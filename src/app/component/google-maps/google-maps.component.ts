@@ -346,6 +346,8 @@ export class GoogleMapsComponent implements OnInit {
                 let checkedInYouthCentre = place.checkedin === this.userservice.currentUser.id;
 
 
+                console.log(checkedInYouthCentre);
+                console.log(place.check)
                 if (!checkedInYouthCentre) {
 
                     marker = new google.maps.Marker({
