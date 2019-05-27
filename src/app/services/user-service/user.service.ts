@@ -353,10 +353,12 @@ export class UserService {
 
         this.http.get(this.avatarUrl + this.currentUser.id, httpOptions).subscribe(data => {
             console.log(data);
-            this.currentUser.picture = data[0].image
+            this.currentUser.picture = data[0].image;
         }, error1 => {
             console.log(error1);
         });
+
+        close();
 
     }
 
