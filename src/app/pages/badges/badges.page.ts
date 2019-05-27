@@ -39,6 +39,7 @@ export class BadgesPage implements OnInit {
 
     displayAllBadges() {
         this.badgeService.getAllBadges().subscribe(data => {
+            console.log('Badgepage ' + ' displayallbadges');
             this.allBadges = data;
 
         });
@@ -55,6 +56,7 @@ export class BadgesPage implements OnInit {
 
     displayAllMyBadges() {
         this.badgeService.getAllMyBadges(this.userService.currentUser.id).subscribe(data => {
+            console.log('Badgepage ' + ' displayallmybadges');
             this.allOfUsersBadges = data;
         });
     }

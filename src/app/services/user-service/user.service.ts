@@ -333,6 +333,7 @@ export class UserService {
         };
 
         this.http.get(this.avatarUrl, httpOptions).subscribe(data => {
+            console.log('userService ' + ' getAllAvatars');
             console.log(data);
         }, error1 => {
             console.log(error1);
@@ -352,6 +353,7 @@ export class UserService {
         };
 
         this.http.get(this.avatarUrl + this.currentUser.id, httpOptions).subscribe(data => {
+            console.log('userService ' + ' getMyAvatar');
             console.log(data);
             this.currentUser.picture = data[0].image;
         }, error1 => {

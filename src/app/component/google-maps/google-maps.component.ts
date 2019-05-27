@@ -62,7 +62,7 @@ export class GoogleMapsComponent implements OnInit {
         /*Map options*/
         this.mapOptions = {
             center: this.location,
-            zoom: 11,
+            zoom: 14,
             mapTypeControl: false,
             styles: [
                 {
