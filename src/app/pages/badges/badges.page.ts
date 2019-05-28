@@ -27,9 +27,10 @@ export class BadgesPage implements OnInit {
     ionViewWillEnter() {
         this.displayAllBadges();
         this.displayAllMyBadges();
-        this.displayAvailBadges();
         setTimeout(() => {
+            this.displayAvailBadges();
             this.progressValue = this.getProgressValue();
+
         }, 1000);
     }
 
@@ -63,6 +64,7 @@ export class BadgesPage implements OnInit {
     }
 
     displayAvailBadges() {
+        this.allAvailBadges = [];
         this.hasShowedAvailBadges = true;
         let avail = true;
         for (let badge of this.allBadges) {
