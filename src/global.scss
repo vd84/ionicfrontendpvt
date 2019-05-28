@@ -18,12 +18,11 @@
   width: 70%;
   height: 70%;
   margin: auto;
-  padding-bottom: 10%;
-  padding-top: 30%;
+  padding-bottom: 5%;
+  padding-top: 20%;
 }
 
 .login-page-buttons {
-  padding-top: 25%;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -51,6 +50,11 @@
 
 .register-account-list ion-item {
   padding-bottom: 20px;
+}
+
+// ***HOME PAGE***
+.map-card-content {
+  height: 500px;
 }
 
 // ***ACTIVITY PAGE***
@@ -233,6 +237,11 @@ ion-list {
   background: white;
   border-radius: 30px;
   box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
+
+  ion-card-title {
+    font-size: 18px;
+    text-align: center;
+  }
 }
 
 .clickable-cards {
@@ -262,6 +271,11 @@ ion-list {
 // ***ION-BADGE STYLING***
 ion-badge {
   background: #00c3ff;
+}
+
+// ***SEGMENT STYLING***
+ion-segment {
+  background: lightgreen;
 }
 
 //Div for cards
