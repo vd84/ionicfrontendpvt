@@ -200,13 +200,18 @@ export class ActivityServiceMock {
     adminActivities = [];
     // alla aktiviteter för en user/admin
     allActivities = [];
+    // alla aktiva aktiviteter
+    allActiveActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
     // alla mina aktiviteter som jag ska delta på
     allMyActivities = [];
-    // allMyPendingActivities = [];
+    // alla mina pågående eller kommmande aktiviteter
+    allMyActiveActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
+    // Lista för alla kategorier
+    allCategories = [];
 
     constructor() {
     }

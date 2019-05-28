@@ -11,7 +11,8 @@ export class EventPage implements OnInit {
     activity: any;
     hasSearched = false;
     searchedActivities = [];
-
+    haveChosenCategory = false;
+    selectedCategory = [];
     constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
 
@@ -27,7 +28,6 @@ export class EventPage implements OnInit {
     ionViewWillEnter() {
         console.log('WILL ENTER VIEW');
         this.activityService.getAllActivities();
-        this.activityService.getAllCategories();
     }
 
     loadEvent(activity) {
@@ -109,9 +109,9 @@ export class EventPage implements OnInit {
         this.searchedActivities = [];
         let input = ev.target.value;
         let inputReg = new RegExp(input, 'i');
-        for (let act of this.activityService.allActiveActivities) {
-            if (inputReg.exec(act.name)) {
-                this.searchedActivities.push(act);
+        for (let activity of this.activityService.allActiveActivities) {
+            if (inputReg.exec(activity.name)) {
+                this.searchedActivities.push(activity);
             }
         }
     }
@@ -136,4 +136,31 @@ export class EventPage implements OnInit {
             return 'Avslutad';
         }
     }
+
+    sortByCategory(ev: any) {
+        this.haveChosenCategory = true;
+        this.selectedCategory = [];
+        let input = ev.target.value;
+        let inputReg = new RegExp(input, 'i');
+            if (inputReg.exec('Alla')) {
+                    this.activity = 'all-activities';
+                    this.haveChosenCategory = false;
+                    this.hasSearched = false;
+                    this.shouldBeVisible();
+            }
+        for (let activity of this.activityService.allActivities) {
+            if (inputReg.exec(activity.categorytext)) {
+                this.selectedCategory.push(activity);
+            }
+        }
+    }
+    shouldBeVisible() {
+        return !this.hasSearched && !this.haveChosenCategory;
+    }
+    getSelectedCategory() {
+        for (let activity of this.selectedCategory) {
+            console.log(activity);
+        }
+    }
 }
+
