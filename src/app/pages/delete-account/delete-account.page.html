@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>Ta bort ditt konto</ion-title>
         <ion-buttons slot="start">
             <ion-back-button text="Tillbaka"></ion-back-button>
@@ -7,27 +7,18 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <form>
-        <ion-grid>
-            <ion-row color="primary" justify-content-center>
-                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-                    <div text-center>
-                        <h3>Är du säker på att du vill ta bort ditt konto?</h3>
-                    </div>
-                    <div padding>
+<ion-content style="--padding-top: 20%;">
+    <ion-card class="list-card">
+        <ion-list lines="none">
+            <ion-item>
+                <ion-text>Är du säker på att du vill ta bort ditt konto?</ion-text>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 
-
-                    </div>
-                    <div padding>
-                        <ion-button size="large" type="submit" expand="block"
-                                    (click)="deleteUser()">Ta bort kontot
-                        </ion-button>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </form>
+    <div padding>
+    <ion-button size="large" type="submit" expand="block" (click)="deleteUser()">Ta bort kontot</ion-button>
+    </div>
 </ion-content>
 
 

@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>Profil</ion-title>
         <ion-icon slot="end" (click)="goToSettings()" name="cog" size="">Settings</ion-icon>
     </ion-toolbar>
@@ -33,13 +33,18 @@
         </ion-item>
         <ion-item>
             <ion-card class="clickable-cards">
-                <ion-grid class="profile-badge-list">
-                    <ion-row>
-                        <ion-col size="4" *ngFor="let badges of allMyBadges">
-                            <img src={{badges.image}}/>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+                <ion-card-header>
+                    <ion-title>Mina badges</ion-title>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid class="profile-badge-list">
+                        <ion-row>
+                            <ion-col size="4" *ngFor="let badges of allMyBadges">
+                                <img src={{badges.image}}/>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
             </ion-card>
         </ion-item>
     </ion-list>

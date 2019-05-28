@@ -9,8 +9,6 @@
     <ion-searchbar placeholder="Sök aktivitet" (ionBlur)="hasSearched = false" (ionFocus)="hasSearched = true"
                    (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false"
                    (ionInput)="searchActivity($event)"></ion-searchbar>
-    <ion-searchbar placeholder="Sök aktivitet" (ionFocus)="hasSearched = true" (ionCancel)="hasSearched = false"
-                   (ionClear)="hasSearched = false" (ionInput)="searchActivity($event)"></ion-searchbar>
 
     <ion-item lines="none" class="category-dropdown">
         <ion-label>Kategori:</ion-label>
@@ -21,10 +19,10 @@
 
     <!-- TAB TO CHOOSE WHICH VIEW(BETWEEN ALL, MY AND CHALLENGE ACTIVITIES(LAST ONE ONLY FOR ADMIN) -->
     <div padding>
-        <ion-segment (ionChange)="segmentChanged($event)" value="all-activities">
+        <ion-segment color="light" (ionChange)="segmentChanged($event)" value="all-activities">
             <ion-segment-button value="all-activities">
                 <ion-label>Alla
-                    <ion-badge color="light" slot="end">{{activityService.allActivities.length}}</ion-badge>
+                    <ion-badge color="light" slot="end">{{activityService.allActiveActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
             <ion-segment-button *appHasRole="'user'" value="my-activities">
@@ -43,17 +41,12 @@
         <!--CARD LIST FOR ALL EVENTS-->
         <div *ngIf="!hasSearched">
             <ion-list *ngSwitchCase="'all-activities'">
-                <ion-item lines="none" *ngFor="let activity of activityService.allActivities">
+                <ion-item lines="none" *ngFor="let activity of activityService.allActiveActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-header>
                             <ion-card-title>{{activity.name}}</ion-card-title>
                             <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                         </ion-card-header>
-                        <ion-card-content>
-                            <div class="notification-container">
-                                <label>{{getActivityLabel(activity)}}</label>
-                            </div>
-                        </ion-card-content>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -65,11 +58,6 @@
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-title>{{activity.name}}</ion-card-title>
                         <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
-                        <ion-card-content>
-                            <div class="notification-container">
-                                <label>{{getActivityLabel(activity)}}</label>
-                            </div>
-                        </ion-card-content>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -82,11 +70,6 @@
                         <ion-card-title>{{activity.name}}</ion-card-title>
                         <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                     </ion-card-header>
-                    <ion-card-content>
-                        <div class="notification-container">
-                            <label>{{getActivityLabel(activity)}}</label>
-                        </div>
-                    </ion-card-content>
                 </ion-card>
             </ion-item>
         </ion-list>
@@ -98,28 +81,26 @@
                         <ion-card-title>{{activity.name}}</ion-card-title>
                         <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
                     </ion-card-header>
-                    <ion-card-content>
-                        <div class="notification-container">
-                            <label>{{getActivityLabel(activity)}}</label>
-                        </div>
-                    </ion-card-content>
                 </ion-card>
             </ion-item>
         </ion-list>
     </div>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button class="add-fab">
+        <ion-fab-button (click)="goToCreateEvent()" class="add-fab">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="start">
-            <ion-button class="create-activity-buttons" *appHasRole="'admin'" (click)="goToCreateEvent()">Skapa
-                aktivitet
-            </ion-button>
-            <ion-button class="create-activity-buttons" *appHasRole="'user'" (click)="goToCreateEvent()">Föreslå
-                aktivitet
-            </ion-button>
-        </ion-fab-list>
+
+
+        <!--   <ion-fab-list side="start">
+               <ion-button class="create-activity-buttons" *appHasRole="'admin'" (click)="goToCreateEvent()">Skapa
+                   aktivitet
+               </ion-button>
+               <ion-button class="create-activity-buttons" *appHasRole="'user'" (click)="goToCreateEvent()">Föreslå
+                   aktivitet
+               </ion-button>
+           </ion-fab-list> -->
+
     </ion-fab>
 
 </ion-content>

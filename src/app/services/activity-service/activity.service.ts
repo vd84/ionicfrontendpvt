@@ -27,13 +27,14 @@ export class ActivityService {
     adminActivities = [];
     // alla aktiviteter för en user/admin
     allActivities = [];
+    // alla aktiva aktiviteter
+    allActiveActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
     // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
-
     // Lista för alla kategorier
     allCategories = [];
 
@@ -93,6 +94,12 @@ export class ActivityService {
 
             }
         }
+        this.allActiveActivities = [];
+        for (const activity of this.allActivities) {
+            if (this.endDateHasNotPassed(activity)) {
+                this.allActiveActivities.push(activity);
+            }
+        }
 
     }
 
@@ -150,7 +157,7 @@ export class ActivityService {
         }, error1 => {
             console.log(error1);
         });
-            this.addMySuggestedActivitiesToMyActivitiesPage();
+        this.addMySuggestedActivitiesToMyActivitiesPage();
 
 
 
