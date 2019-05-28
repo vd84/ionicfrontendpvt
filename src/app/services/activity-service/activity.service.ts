@@ -408,6 +408,13 @@ export class ActivityService {
     }
 
 
+    hasStarted(activity: any) {
+        let today = new Date();
+
+        let activityStartDate = new Date(activity.startdate);
+
+        return (today >= activityStartDate);
+    }
 }
 
 
