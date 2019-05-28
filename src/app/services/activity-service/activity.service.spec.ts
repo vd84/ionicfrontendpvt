@@ -29,8 +29,8 @@ describe('ActivityService', () => {
     });
 
     it('should have a variable activityUrl set to the correct path', () => {
-        expect(service.activityUrl).toBeTruthy();
-        expect(service.activityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/activity/');
+        expect(service.postAndPutactivityUrl).toBeTruthy();
+        expect(service.postAndPutactivityUrl).toBe('https://webbapppvt15grupp2.herokuapp.com/activity/');
     });
 
     it('should have a variable participationUrl set to the correct path', () => {

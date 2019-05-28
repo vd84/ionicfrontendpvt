@@ -7,7 +7,7 @@ import {UserService} from '../../services/user-service/user.service';
     templateUrl: 'home.page.html',
 })
 export class HomePage {
-    constructor(private router: Router, private userService: UserService) {}
+    constructor(private router: Router) {}
 
     onClick() {
         console.log('Activity clicked');
@@ -16,7 +16,4 @@ export class HomePage {
         this.router.navigate(['location']);
     }
 
-    ionViewWillEnter() {
-        console.log(this.userService.currentUser);
-    }
 }
