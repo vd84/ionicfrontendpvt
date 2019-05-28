@@ -1,21 +1,28 @@
 <ion-header>
-  <ion-toolbar color = "primary">
-    <ion-title>{{badge.name}}</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar color="light">
+        <ion-title>{{badge.name}}</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button text="Tillbaka"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <div id="badge-icon"> <!--Padding behövs på något vis. Jag får det inte att se bra ut.-->
-      <ion-item>
-        <img src={{badge.image}}/>
-      </ion-item>
-    </div>
-    <ion-item><h4 class="text" id="name"> {{badge.name}}</h4></ion-item>
-    <ion-item><h4 class="text">{{badge.description}}</h4></ion-item>
-  </ion-list>
+    <ion-card class="list-card">
+        <ion-card-header>
+            <ion-card-title style="text-align: center;">{{badge.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list lines="none">
+                <ion-item>
+                    <img src={{badge.image}}/>
+                </ion-item>
+                <ion-item>
+                    <ion-text>{{badge.description}}</ion-text>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
 
 </ion-content>

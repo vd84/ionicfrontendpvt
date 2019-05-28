@@ -10,8 +10,9 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
+// ******PAGE SPECIFIC STYLING*****
 
-// LOGIN PAGE
+// ***LOGIN PAGE***
 
 .logo ion-img {
   width: 70%;
@@ -22,7 +23,7 @@
 }
 
 .login-page-buttons {
-  pdding-top: 25%;
+  padding-top: 25%;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -35,21 +36,6 @@
   width: fit-content;
 }
 
-ion-button {
-  color: rgba(0, 0, 0, 1);
-
-  border-color: rgba(255, 255, 255, 1);
-  border-style: solid;
-  border-width: 1px;
-
-  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
-  0 10px 0 0 rgba(255, 255, 255, 0.5) inset,
-  0 0 5px 2px rgba(255, 255, 255, 0.75),
-  0 0 10px 2px rgba(255, 255, 255, 0.75) inset !important;
-  --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .2) 100%); /* W3C */
-  font-size: 20px;
-}
-
 .login-fields .placeholder-text {
   --placeholder-color: white;
   --plceholder-opacity: 1;
@@ -58,9 +44,8 @@ ion-button {
   text-align: center;
 }
 
-// REGISTER ACCOUNT
+// ***REGISTER ACCOUNT***
 .register-account-list {
-  padding-top: 40%;
   padding-bottom: 10%;
 }
 
@@ -68,12 +53,7 @@ ion-button {
   padding-bottom: 20px;
 }
 
-.alert-button {
-  color: black !important;
-}
-
-// ACTIVITY PAGE
-
+// ***ACTIVITY PAGE***
 .add-fab {
   color: rgba(0, 0, 0, 1);
 
@@ -89,13 +69,154 @@ ion-button {
   --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, 0) 100%); /* W3C */
 }
 
-// CREATE ACTIVITY PAGE
+.category-dropdown {
+  --ion-background-color: transparent;
+}
+
+.notification-container {
+  margin: auto;
+  padding: 10px;
+  background: green;
+  border-radius: 20px;
+  height: fit-content;
+  width: fit-content;
+  color: white;
+  font-size: 18px;
+}
+
+// ***CREATE ACTIVITY PAGE***
 .create-activity-list {
-  padding-top: 40%;
   padding-bottom: 10%;
 }
-// LIST STYLING
 
+.create-activity-list ion-item {
+  padding-bottom: 20px;
+}
+
+.date-picker {
+  padding: 0;
+}
+
+.date-picker ion-col {
+  padding: 0;
+}
+
+.in-list-datetime {
+  --padding-bottom: 0;
+  --padding-top: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.activity-button-group {
+  margin: auto;
+
+  ion-button {
+    width: 100%;
+  }
+
+}
+
+// ***MAP PAGE STYLING***
+.map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.map-buttons {
+  position: absolute;
+  bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 25px;
+
+  button {
+    padding: 10px 10px 10px 10px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    background: white;
+    font-size: 16px;
+  }
+}
+
+// ***BADGE PAGE***
+ion-progress-bar {
+  height: 18px;
+  --buffer-background: white;
+  --progress-background: #00c3ff;
+  border-radius: 10px;
+}
+
+.progress-bar ion-list-header {
+  justify-content: center;
+  font-size: 18px;
+}
+
+.badge-icon {
+  height: 50% !important;
+  width: 50% !important;
+  margin: auto;
+}
+
+// ***PROFILE PAGE***
+.profile-pic {
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  width: 60%;
+  background: white;
+  border: solid black 1px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-page-name-item {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.profile-information-section {
+  padding-top: 20px;
+}
+
+// *****GENERAL STYLING*****
+
+// ***BUTTON STYLING***
+ion-button {
+  color: rgba(0, 0, 0, 1);
+
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 1px;
+
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.4) inset,
+  0 10px 0 0 rgba(255, 255, 255, 0.5) inset,
+  0 0 5px 2px rgba(255, 255, 255, 0.75),
+  0 0 10px 2px rgba(255, 255, 255, 0.75) inset !important;
+  --background: radial-gradient(ellipse at center, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .2) 100%); /* W3C */
+  font-size: 20px;
+}
+
+// ***DATETIME-PICKER STYLING***
+ion-datetime {
+  --placeholder-color: black;
+}
+
+.picker-button {
+  color: black !important;
+}
+
+.picker-wrapper {
+  --background: white;
+}
+
+// ***SELECTOR ALERT WINDOW STYLING***
+.alert-button {
+  color: black !important;
+}
+
+// ***LIST STYLING***
 ion-list {
   --ion-background-color: transparent;
 }
@@ -106,16 +227,41 @@ ion-list {
   // box-shadow: 14px 14px 88px -27px rgba(0, 0, 0, 0.82);
 }
 
-.list-item-white {
-  color: white;
-  --placeholder-color: white;
-  font-size: 20px;
+.list-card {
+  margin-bottom: 15px;
+  margin-top: 0;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
 }
 
 .clickable-cards {
   width: 100%;
   text-align: center;
   font-size: 25px;
+  background: white;
+  border-radius: 30px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
+
+  ion-card-title {
+    color: black;
+  }
+
+  ion-card-subtitle {
+    color: black;
+  }
+}
+
+// ***SEARCHBAR STYLING***
+.searchbar-input-container {
+  --background: transparent;
+}
+
+// ***ION-BADGE STYLING***
+ion-badge {
+  background: #00c3ff;
 }
 
 //Div for cards
@@ -126,6 +272,8 @@ ion-list {
     position: relative;
     text-align: center;
     border-radius: 40px !important;
+    --color: white !important;
+    --background: blue !important;
   }
 
   //scss for title and subtitles of cards.
@@ -151,39 +299,8 @@ ion-list {
   }
 }
 
-.map {
-  height: 80%;
-}
-
 ion-icon {
   font-size: 40px; //Preferred size here
-}
-
-.block {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #fff;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.block {
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: #fff;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.badge {
-  max-width: 100%;
-  height: 20px;
 }
 
 

@@ -10,7 +10,9 @@ import {Router} from '@angular/router';
 export class ModifyActivityPage implements OnInit {
     private name: any;
     private startdate: any;
+    private starttime: any;
     private enddate: any;
+    private endtime: any;
     private description: any;
     private activity;
 

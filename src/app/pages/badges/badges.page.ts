@@ -15,6 +15,7 @@ export class BadgesPage implements OnInit {
     allAvailBadges = [];
     hasShowedAvailBadges = false;
     progressValue = 0.0;
+    // En kommentar
 
     constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService) {
         this.badgeList = 'all-badges';
@@ -39,6 +40,7 @@ export class BadgesPage implements OnInit {
 
     displayAllBadges() {
         this.badgeService.getAllBadges().subscribe(data => {
+            console.log('Badgepage ' + ' displayallbadges');
             this.allBadges = data;
 
         });
@@ -55,6 +57,7 @@ export class BadgesPage implements OnInit {
 
     displayAllMyBadges() {
         this.badgeService.getAllMyBadges(this.userService.currentUser.id).subscribe(data => {
+            console.log('Badgepage ' + ' displayallmybadges');
             this.allOfUsersBadges = data;
         });
     }
@@ -74,5 +77,4 @@ export class BadgesPage implements OnInit {
             avail = true;
         }
     }
-
 }

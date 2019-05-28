@@ -6,6 +6,7 @@ import {Youthcentre} from '../../Models/youthcentre';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 
+
 @Component({
     selector: 'app-location',
     templateUrl: './location.page.html',
@@ -15,9 +16,19 @@ export class LocationPage implements OnInit {
     youthcentre: any;
     user: any;
     allActivitiesForYouthCentreToShow = [];
+    currentPosition = {lat: null, lng: null};
+    location = {lat: null, lng: null};
+    currentPositionString;
+
 
 
     constructor(private route: ActivatedRoute, private checkinService: CheckinService, private userService: UserService, private activityService: ActivityService, private dataService: DataService, private router: Router) {
+        this.currentPosition = this.location;
+        // getting the users position from google maps components.
+        this.currentPositionString = localStorage.getItem('orglat');
+        this.currentPosition.lat = parseFloat(this.currentPositionString);
+        this.currentPositionString = localStorage.getItem('orglng');
+        this.currentPosition.lng = parseFloat(this.currentPositionString);
     }
 
     ngOnInit() {
@@ -82,4 +93,44 @@ export class LocationPage implements OnInit {
             return true;
         }
     }
+    // method for getting distance to youthcenter from the users position
+    userPlacement(targetlat, targetlon, userlat, userlon) {
+
+        function toRad(x) {
+            return x * Math.PI / 180;
+        }
+
+            if (localStorage.getItem('tracking') === 'true') {
+                userlat = localStorage.getItem('tuserlat');
+                userlon = localStorage.getItem('tuserlon');
+
+            }
+
+            let lon1 = userlon;
+            let lat1 = userlat;
+
+            let lon2 = targetlon;
+            let lat2 = targetlat;
+
+            let R = 6371; // km
+
+            let x1 = lat2 - lat1;
+            let dLat = toRad(x1);
+            let x2 = lon2 - lon1;
+            let dLon = toRad(x2);
+            let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            let d = R * c;
+
+            if (d > 1) {
+                return Math.round(d) + ' km';
+            } else if (d <= 1) {
+                return Math.round(d * 1000) + ' meter';
+            } else {
+                return 'error';
+            }
+
+        }
 }

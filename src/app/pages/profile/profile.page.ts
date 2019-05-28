@@ -47,7 +47,7 @@ export class ProfilePage implements OnInit {
 
     getMyYouthCentre() {
 
-        this.ourId = this.youthcentreService.getTheRightId();
+        this.ourId = this.youthcentreService.getTheRightId(this.userservice.currentUser.currentyouthcentre);
     }
 
     addYouthCentre() {
@@ -56,6 +56,7 @@ export class ProfilePage implements OnInit {
 
     displayAllMyBadges() {
         this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
+            console.log('profilepage ' + ' displayallmybadges');
             this.allMyBadges = data;
         });
     }

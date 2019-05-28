@@ -6,6 +6,7 @@ import {UserService} from '../user-service/user.service';
 import {User} from '../../Models/user';
 import {ParticipationUser} from '../../Models/ParticipationUser';
 import {ToastController} from '@ionic/angular';
+import {Category} from '../../Models/Category';
 
 
 @Injectable({
@@ -13,24 +14,30 @@ import {ToastController} from '@ionic/angular';
 })
 export class ActivityService {
 
+    // Denna url är även för att hämta aktivititer för specifik user, alltså om den attendat
     postAndPutactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/';
     getactivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/allactivity/';
     participationUrl = 'https://webbapppvt15grupp2.herokuapp.com/participation/';
     youthCentreUrl = 'https://webbapppvt15grupp2.herokuapp.com/activity/youthcentre/';
     participationByActivityUrl = 'https://webbapppvt15grupp2.herokuapp.com/participationbyactivity/';
 
+    categoryUrl = 'http://webbapppvt15grupp2.herokuapp.com/category';
+
     // alla aktiviteter som ska visas på admin sidan
     adminActivities = [];
     // alla aktiviteter för en user/admin
     allActivities = [];
+    // alla aktiva aktiviteter
+    allActiveActivities = [];
     // allt från databasen
     allActivitiesFromDatabase = [];
     // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
-    // alla kategorier som finns för aktiviteter
+    // Lista för alla kategorier
     allCategories = [];
+
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
@@ -42,11 +49,12 @@ export class ActivityService {
     getAllActivities() {
         console.log('called generate all activities');
         this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+            console.log('Activity Service');
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
             this.generateAllMyActivities();
-            this.allCategories = this.getUniqueElements(this.allActivitiesFromDatabase, 'categorytext');
+            this.getAllCategories();
 
 
         }, error => {
@@ -55,23 +63,28 @@ export class ActivityService {
 
 
     }
-    getUniqueElements(arr, comp) {
-        const unique = arr
-            .map(e => e[comp])
-            .map((e, i, final) => final.indexOf(e) === i && i)
-            .filter(e => arr[e]).map(e => arr[e]);
 
-        return unique;
+    addMySuggestedActivitiesToMyActivitiesPage() {
+        for (const activity of this.allActivitiesFromDatabase) {
+            if (activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) {
+                this.allMyActivities.push(activity);
+            }
+        }
 
     }
 
-    addMySuggestedActivitiesToMyActivitiesPage() {
+    /*addMySuggestedActivitiesToMyActivitiesPage() {
         for (const activity of this.allActivitiesFromDatabase) {
             if (activity.createdby === this.userservice.currentUser.id) {
                 this.allMyActivities.push(activity);
             }
         }
-    }
+        setTimeout(() => {
+
+            console.log('Skrivs ut Andra gången');
+            console.log(this.allMyActivities);
+        }, 300);
+    }*/
 
     generateAllActvitiesPage() {
         this.allActivities = [];
@@ -79,6 +92,12 @@ export class ActivityService {
             if (!this.activityIsSuggestion(activity) && !this.activityIsPending(activity) && !this.activityIsDeclined(activity) && this.activityIsAccepted(activity)) {
                 this.allActivities.push(activity);
 
+            }
+        }
+        this.allActiveActivities = [];
+        for (const activity of this.allActivities) {
+            if (this.endDateHasNotPassed(activity)) {
+                this.allActiveActivities.push(activity);
             }
         }
 
@@ -120,11 +139,18 @@ export class ActivityService {
     isOfYourCentre(activity) {
         return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
     }
+    getAllCategories() {
+        this.http.get<Category[]>(this.categoryUrl).subscribe( data => {
+            console.log('Activity Service' + ' getAllCategories ');
+            this.allCategories = data;
+        });
+    }
 
 
     generateAllMyActivities() {
         this.allMyActivities = [];
-        this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+        this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+            console.log('Activity Service' + ' + GenerateAllMyActivites');
             for (let activity of data) {
                 this.allMyActivities.push(activity);
             }
@@ -132,6 +158,7 @@ export class ActivityService {
             console.log(error1);
         });
         this.addMySuggestedActivitiesToMyActivitiesPage();
+
 
 
     }
@@ -332,6 +359,7 @@ export class ActivityService {
 
     getAllActivityParticipants(activityId: number) {
         this.http.get<ParticipationUser[]>(this.participationByActivityUrl + activityId).subscribe(data => {
+            console.log('Activity Service' + ' + getallactivityparticipants');
             this.allActivityParticipants = data;
             console.log(data);
         }, error1 => {

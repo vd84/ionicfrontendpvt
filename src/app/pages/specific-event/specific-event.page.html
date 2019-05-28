@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="light">
         <ion-title>{{activity.name}}</ion-title>
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
@@ -7,72 +7,98 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content style="--padding-top: 20%">
     <!--LISTA FÖR: NAMN DATUM PLATS BESKRIVNING -->
-    <ion-list>
-        <ion-item>
-            <h4>Namn: {{activity.name}}</h4>
-        </ion-item>
-        <ion-item>
-            <h4>Tid: {{activity.startdate}} - {{activity.enddate}}</h4>
-        </ion-item>
-        <ion-item>
-            <h4>Utmanare: {{activity.challenger}}</h4>
-        </ion-item>
-        <ion-item>
-            <h4>Möter: {{activity.challenged}}</h4>
-        </ion-item>
-        <ion-item>
-            <h4>Plats: {{activity.location}}</h4>
-        </ion-item>
-        <ion-item >
-            <h4>Vinnare: {{getWinner()}}</h4>
-        </ion-item>
-        <ion-item>
-            <h4>Om aktiviteten: {{activity.description}}</h4>
-            <ion-textarea></ion-textarea>
-        </ion-item>
-
-        <!--Ska kunna välja i dropdown av de två som tävlar*-->
-
-        <div *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
-            <ion-radio-group>
-                <ion-item-divider>
-                    <ion-list-header>Vinnare</ion-list-header>
-                </ion-item-divider>
-
-                <ion-list *ngFor="let competitor of competitors">
-                    <ion-item>
-                        <ion-label>{{competitor.id}}</ion-label>
-                        <ion-radio value="{{competitor.id}}" (ionSelect)="radioChangeHandler($event)"></ion-radio>
-                    </ion-item>
-                </ion-list>
-            </ion-radio-group>
-        </div>
-    </ion-list>
-    <!--BOKA/AVBOKA KNAPPAR-->
-    <div *appHasRole="'user'">
-        <ion-button (click)="bookActivity()" *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity)">Boka</ion-button>
-        <ion-button (click)="removeActivity()" *ngIf="booked() && activityService.endDateHasNotPassed(activity)">Avboka</ion-button>
-        <ion-button (click)="checkInActivity()" *ngIf="!isSuggestion()" [disabled]="!userCanCheckIn()">Checka in</ion-button>
-    </div>
-    <div *appHasRole="'admin'">
-        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
-        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Avslå</ion-button>
-        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
-        <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
-        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
-        <ion-button (click)="specifyWinner()" *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">Ange vinnare</ion-button>
-
-        <ion-list *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
-            <ion-list-header>
-                <ion-label>Participation List</ion-label>
-                <ion-badge>{{activityService.allActivityParticipants.length}}</ion-badge>
-            </ion-list-header>
-            <ion-item *ngFor="let participant of activityService.allActivityParticipants">
-                <h1>{{participant.displayname}}</h1>
+    <ion-card class="list-card">
+        <ion-list padding>
+            <ion-item>
+                <h4>Namn: {{activity.name}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Tid: {{activity.startdate}} - {{activity.enddate}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Utmanare: {{youthcentreservice.getTheRightId(activity.challenger)}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Möter: {{youthcentreservice.getTheRightId(activity.challenged)}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Plats: {{activity.alternativelocation}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Vinnare: {{getWinner()}}</h4>
+            </ion-item>
+            <ion-item>
+                <h4>Om aktiviteten: {{activity.description}}</h4>
+                <ion-textarea></ion-textarea>
             </ion-item>
         </ion-list>
+    </ion-card>
+
+
+    <!--BOKA/AVBOKA KNAPPAR-->
+    <div class="activity-button-group" *appHasRole="'user'" padding>
+        <ion-button (click)="bookActivity()"
+                    *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity)">
+            Boka
+        </ion-button>
+        <ion-button (click)="removeActivity()" *ngIf="booked() && activityService.endDateHasNotPassed(activity)">
+            Avboka
+        </ion-button>
+        <ion-button (click)="checkInActivity()" *ngIf="!isSuggestion()" [disabled]="!userCanCheckIn()">Checka in
+        </ion-button>
+    </div>
+    <div *appHasRole="'admin'">
+        <!--Ska kunna välja i dropdown av de två som tävlar*-->
+        <ion-card class="list-card" *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
+            <ion-list>
+                <ion-list-header>Ange vinnare</ion-list-header>
+                <ion-item>
+                    <ion-radio-group>
+                        <ion-list *ngFor="let competitor of competitors">
+                            <ion-item>
+                                <ion-label>{{youthcentreservice.getTheRightId(competitor.id)}}</ion-label>
+                                <ion-radio value="{{competitor.id}}"
+                                           (ionSelect)="radioChangeHandler($event)"></ion-radio>
+                            </ion-item>
+                        </ion-list>
+                    </ion-radio-group>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+        <div class="activity-button-group" padding>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-button (click)="acceptSuggestion()" *ngIf="isSuggestion()">Skicka</ion-button>
+                        <ion-button (click)="acceptChallenge()" *ngIf="isChallenge()">Godkänn</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button (click)="modifySuggestion()" *ngIf="isSuggestion()">Ändra</ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button (click)="declineSuggestion()" *ngIf="isSuggestion()">Avslå</ion-button>
+                        <ion-button (click)="declineChallenge()" *ngIf="isChallenge()">Avslå</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-button (click)="specifyWinner()"
+                        *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">Ange vinnare
+            </ion-button>
+        </div>
+
+        <ion-card class="list-card">
+            <ion-list lines="none" *ngIf="isActivityOwner() && !activityService.activityIsDeclined(activity)">
+                <ion-list-header>
+                    <ion-label>Participation List</ion-label>
+                    <ion-badge>{{activityService.allActivityParticipants.length}}</ion-badge>
+                </ion-list-header>
+                <ion-item *ngFor="let participant of activityService.allActivityParticipants">
+                    <h1>{{participant.displayname}}</h1>
+                </ion-item>
+            </ion-list>
+        </ion-card>
     </div>
 
 

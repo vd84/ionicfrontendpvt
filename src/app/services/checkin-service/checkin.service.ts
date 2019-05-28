@@ -28,7 +28,8 @@ export class CheckinService {
             'youthcentreid': youthCentreId,
         });
 
-        this.http.post(this.youthUrl, body, httpOptions).subscribe(data => { // Saknar vad vi tar emot?
+        this.http.post(this.youthUrl, body, httpOptions).subscribe(data => {
+                console.log('Post i checkinpage ' + ' youthcentrecheckin');
                 console.log(data);
             },
             error => {
@@ -51,7 +52,8 @@ export class CheckinService {
             'activityid': activityID,
         });
 
-        this.http.post(this.activityUrl, body, httpOptions).subscribe(data => { // Saknar vad vi tar emot?
+        this.http.post(this.activityUrl, body, httpOptions).subscribe(data => {
+                console.log('Post i checkinpage ' + ' activitycheckin');
                 console.log(data);
             },
             error => {

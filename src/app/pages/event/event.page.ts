@@ -13,13 +13,13 @@ export class EventPage implements OnInit {
     searchedActivities = [];
     haveChoosenCategory = false;
     choosenCategory = [];
-    categoryString = '';
 
     constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
 
     ngOnInit() {
         this.activity = 'all-activities';
+
     }
 
     ionViewDidLeave() {
@@ -30,6 +30,7 @@ export class EventPage implements OnInit {
         console.log('WILL ENTER VIEW');
         this.activityService.getAllActivities();
     }
+
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
@@ -109,12 +110,26 @@ export class EventPage implements OnInit {
         this.searchedActivities = [];
         let input = ev.target.value;
         let inputReg = new RegExp(input, 'i');
-        for (let act of this.activityService.allActivities) {
+        for (let act of this.activityService.allActiveActivities) {
             if (inputReg.exec(act.name)) {
                 this.searchedActivities.push(act);
             }
         }
     }
+
+    getStartDate(activity: any) {
+        let date = new Date(activity.startdate);
+        return date.toLocaleDateString();
+    }
+
+    getActivityLabel(activity: any) {
+        if (this.activityService.activityIsSuggestion(activity)) {
+            return 'Suggestion';
+        } else {
+            return this.calculateColorForCard(activity);
+        }
+    }
+
     sortByCategory(ev: any) {
         this.choosenCategory = [];
         let input = ev.target.value;
@@ -126,6 +141,6 @@ export class EventPage implements OnInit {
         }
         console.log('haveChoosencategory ' + this.haveChoosenCategory);
         console.log('choosenCategory ' + this.choosenCategory.toString());
-
     }
 }
+
