@@ -79,7 +79,7 @@ export class UserService {
             'facebookpassword': 'pass',
             'role': role,
             'isfacebookuser': this.currentUser.isfacebookuser,
-            'image': this.currentUser.avatar
+            'avatar': this.currentUser.avatar
 
         });
 
@@ -171,7 +171,7 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'role': 1,
             'isFacebookUser': 0,
-            'image': this.currentUser.avatar
+            'avatar': this.currentUser.avatar
         });
         return this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -262,6 +262,13 @@ export class UserService {
 
         this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(
             data => {
+
+                if (data === null) {
+                    this.presentToast('Fel användarnamn eller lösenord');
+                    return;
+                }
+
+
                 this.currentUserJson = data;
                 console.log(this.currentUserJson);
 
@@ -329,23 +336,21 @@ export class UserService {
 
 
         const body = JSON.stringify({
-            'id': 1,
+            'id': this.currentUser.id,
             'username': this.currentUser.name,
             'displayname': this.currentUser.displayname,
-            'password': 'pass1',
             'active': 1,
             'points': 0,
             'fairplaypoints': 0,
             'currentyouthcentre': youthcentre,
-            'facebooklogin': 'Face1',
-            'facebookpassword': 'pass',
-            'role': 1,
-            'isfacebookuser': this.currentUser.isfacebookuser,
-            'image': this.currentUser.avatar
+            'role': role,
+            'isFacebookUser': 0,
+            'avatar': this.currentUser.avatar
         });
 
-        this.http.put(this.url, body, httpOptions).subscribe(data => {
+        this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {
                 console.log(data);
+                this.currentUser.currentyouthcentre = youthcentre;
             },
             error => {
                 console.log('Error');

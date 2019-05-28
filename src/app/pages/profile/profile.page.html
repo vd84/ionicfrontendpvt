@@ -10,7 +10,7 @@
     <ion-icon name="image" (click)="navigateToChoosePicture()"></ion-icon>
 
     <div class="profile-pic">
-        <ion-img [src]="userservice.currentUser.avatarurl"></ion-img>
+        <ion-img [src]="userservice.currentUser.avatarurl" style="width: auto;height: auto;"></ion-img>
     </div>
 
 
@@ -52,23 +52,7 @@
     </ion-list>
 
 
-    <div>
-        <ion-list>
-            <ion-list-header color="danger">Byt ungdomsgård</ion-list-header>
-            <ion-item>
-                <ion-label>Ungdomsgård:</ion-label>
-                <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
-                    <ion-select-option *ngFor="let currentyouthcentre of youthCentres"
-                                       [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
-                </ion-select>
 
-            </ion-item>
-        </ion-list>
-
-        <ion-button (click)="addYouthCentre()" size="large" type="submit" expand="block">Lägg till ungdomsgård
-        </ion-button>
-
-    </div>
 
 
 </ion-content>

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ToastController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,7 @@ export class CheckinService {
     activityUrl = 'https://webbapppvt15grupp2.herokuapp.com/checkinactivity/';
 
 
-
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private toastController: ToastController) {
     }
 
     youthcentreCheckin(userId: number, youthCentreId: number) {
@@ -28,9 +28,20 @@ export class CheckinService {
             'youthcentreid': youthCentreId,
         });
 
+
         this.http.post(this.youthUrl, body, httpOptions).subscribe(data => {
+                let testList: any = [];
                 console.log('Post i checkinpage ' + ' youthcentrecheckin');
                 console.log(data);
+
+                testList = data;
+
+
+                if (testList.length !== 0) {
+                    this.presentToast('Grattis, du har fått märket: ' + data[0].name);
+                }
+
+
             },
             error => {
                 console.log('Error');
@@ -62,6 +73,16 @@ export class CheckinService {
 
 
     }
+
+    async presentToast(toastMessage: string) {
+        const toast = await this.toastController.create({
+            message: toastMessage,
+            duration: 2000,
+            position: 'middle'
+        });
+        toast.present();
+    }
+
 
 }
 
