@@ -6,13 +6,14 @@
 
 <ion-content padding>
     <!--SEARCH-BAR-->
-    <ion-searchbar placeholder="Sök aktivitet" (ionBlur)="hasSearched = false" (ionFocus)="hasSearched = true"
+    <ion-searchbar placeholder="Sök aktivitet" (ionFocus)="hasSearched = true"
                    (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false"
                    (ionInput)="searchActivity($event)"></ion-searchbar>
     <!--SELECT CATEGORY-->
     <ion-item lines="none" class="category-dropdown">
         <ion-label>Kategori:</ion-label>
-        <ion-select class="select-box"[(ngModel)]="activity" ngDefaultControl (ionCancel)="hasSearched = false" (ionFocus)="haveChoosenCategory = true" (ionChange)="sortByCategory($event)">
+        <ion-select class="select-box" [(ngModel)]="activity" ngDefaultControl (ionCancel)="haveChosenCategory = false" (ionChange)="sortByCategory($event)">
+            <ion-select-option>Alla</ion-select-option>
             <ion-select-option *ngFor="let activity of this.activityService.allCategories"
              [value]="activity.name">{{activity.name}}</ion-select-option>
         </ion-select>
@@ -39,7 +40,7 @@
     </div>
     <div class="card-list" [ngSwitch]="activity">
         <!--CARD LIST FOR ALL EVENTS-->
-        <div *ngIf="!hasSearched || !haveChoosenCategory">
+        <div *ngIf="shouldBeVisible()">
             <ion-list *ngSwitchCase="'all-activities'">
                 <ion-item lines="none" *ngFor="let activity of activityService.allActiveActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
@@ -65,15 +66,18 @@
             </ion-list>
         </div>
 
-        <div *ngIf="haveChoosenCategory">
-            <ion-list *ngSwitchCase="'all-activities'">
-                <ion-item lines="none" *ngFor="let activity of choosenCategory">
+        <div *ngIf="haveChosenCategory">
+            <ion-list>
+                <ion-item lines="none" *ngFor="let activity of selectedCategory">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle></ion-card-subtitle>
+                        <ion-card-subtitle>{{getStartDate(activity)}}
+                            -- {{getActivityLabel(activity)}}</ion-card-subtitle>
                     </ion-card>
                 </ion-item>
+
             </ion-list>
+
         </div>
         <!--MY ACTIVITY LIST-->
         <ion-list *ngSwitchCase="'my-activities'">
