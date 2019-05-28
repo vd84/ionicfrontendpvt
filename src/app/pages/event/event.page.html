@@ -45,7 +45,8 @@
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-header>
                             <ion-card-title>{{activity.name}}</ion-card-title>
-                            <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
+                            <ion-card-subtitle>{{getStartDate(activity)}}
+                                -- {{getActivityLabel(activity)}}</ion-card-subtitle>
                         </ion-card-header>
                     </ion-card>
                 </ion-item>
@@ -57,7 +58,8 @@
                 <ion-item lines="none" *ngFor="let activity of searchedActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
+                        <ion-card-subtitle>{{getStartDate(activity)}}
+                            -- {{getActivityLabel(activity)}}</ion-card-subtitle>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -79,7 +81,8 @@
                 <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                     <ion-card-header>
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
+                        <ion-card-subtitle>{{getStartDate(activity)}}
+                            -- {{getActivityLabel(activity)}}</ion-card-subtitle>
                     </ion-card-header>
                 </ion-card>
             </ion-item>
@@ -90,7 +93,8 @@
                 <ion-card class="clickable-cards" (click)="loadEvent(activity)">
                     <ion-card-header>
                         <ion-card-title>{{activity.name}}</ion-card-title>
-                        <ion-card-subtitle>{{getStartDate(activity)}}</ion-card-subtitle>
+                        <ion-card-subtitle>{{getStartDate(activity)}}
+                            -- {{getActivityLabel(activity)}}</ion-card-subtitle>
                     </ion-card-header>
                 </ion-card>
             </ion-item>

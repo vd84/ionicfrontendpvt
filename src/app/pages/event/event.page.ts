@@ -124,9 +124,17 @@ export class EventPage implements OnInit {
 
     getActivityLabel(activity: any) {
         if (this.activityService.activityIsSuggestion(activity)) {
-            return 'Suggestion';
+            return 'Förslag';
+        } else if (!this.activityService.activityIsAccepted(activity)) {
+            if (this.activityService.isChallenger(activity)) {
+                return 'Utmaning skickad';
+            } else if (this.activityService.isChallenged(activity)) {
+                return 'Utmaning mottagen';
+            }
+        } else if (this.activityService.endDateHasNotPassed(activity)) {
+            return this.activityService.hasStarted(activity) ? 'Pågår' : 'Kommande';
         } else {
-            return this.calculateColorForCard(activity);
+            return 'Avslutad';
         }
     }
 
