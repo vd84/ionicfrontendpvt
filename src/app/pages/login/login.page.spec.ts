@@ -66,14 +66,4 @@ describe('LoginPage', () => {
         component.createProfile();
         expect(navigateSpy).toHaveBeenCalledWith(['register']);
     });
-
-    it('should have a method to log in calling the UserService');
-    {
-        userService = TestBed.get(UserService);
-        let userServiceSpy = spyOn(userService, 'login');
-        component.username = 'username';
-        component.password = 'password';
-        component.newLogin();
-        expect(userServiceSpy).toHaveBeenCalledWith(['username', 'password']);
-    }
 });

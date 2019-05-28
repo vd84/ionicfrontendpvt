@@ -148,7 +148,7 @@ export class EventPage implements OnInit {
                     this.hasSearched = false;
                     this.shouldBeVisible();
             }
-        for (let activity of this.activityService.allActivities) {
+        for (let activity of this.activityService.allActiveActivities) {
             if (inputReg.exec(activity.categorytext)) {
                 this.selectedCategory.push(activity);
             }
@@ -156,11 +156,6 @@ export class EventPage implements OnInit {
     }
     shouldBeVisible() {
         return !this.hasSearched && !this.haveChosenCategory;
-    }
-    getSelectedCategory() {
-        for (let activity of this.selectedCategory) {
-            console.log(activity);
-        }
     }
 }
 
