@@ -25,10 +25,7 @@ export class EventPage implements OnInit {
         console.log('LEFT');
     }
 
-    ionViewWillEnter() {
-        console.log('WILL ENTER VIEW');
-        this.activityService.getAllActivities();
-    }
+
 
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
@@ -117,8 +114,11 @@ export class EventPage implements OnInit {
     }
 
     getStartDate(activity: any) {
-        let date = new Date(activity.startdate);
-        return date.toLocaleDateString();
+
+        let output = activity.startdate.substr(0, 16);
+
+
+        return output;
     }
 
     getActivityLabel(activity: any) {
@@ -148,7 +148,7 @@ export class EventPage implements OnInit {
                     this.hasSearched = false;
                     this.shouldBeVisible();
             }
-        for (let activity of this.activityService.allActivities) {
+        for (let activity of this.activityService.allActiveActivities) {
             if (inputReg.exec(activity.categorytext)) {
                 this.selectedCategory.push(activity);
             }
