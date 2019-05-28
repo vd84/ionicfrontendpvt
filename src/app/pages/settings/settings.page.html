@@ -2,7 +2,7 @@
     <ion-toolbar color="light">
         <ion-title>Inställningar</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button text="Tillbaka"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -25,21 +25,17 @@
             </ion-item>
             <div>
                 <ion-list>
-                    <ion-item-divider>Byt Fritidsgård</ion-item-divider>
                     <ion-item class="list-item-white">
-                        <ion-label>Fritidsgård:</ion-label>
+                        <ion-label>Byt fritidsgård:</ion-label>
                         <ion-select [(ngModel)]="currentyouthcentre" ngDefaultControl>
                             <ion-select-option *ngFor="let currentyouthcentre of youthcenters"
                                                [value]="currentyouthcentre.id">{{currentyouthcentre.name}} </ion-select-option>
                         </ion-select>
-
                     </ion-item>
                 </ion-list>
-
                 <ion-item>
                     <ion-button color="warning" (click)="addYouthCentre()">Byt fritidsgård</ion-button>
                 </ion-item>
-
             </div>
             <ion-item-divider>Konto och säkerhet</ion-item-divider>
             <ion-item>

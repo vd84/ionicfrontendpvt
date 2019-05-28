@@ -157,10 +157,5 @@ export class EventPage implements OnInit {
     shouldBeVisible() {
         return !this.hasSearched && !this.haveChosenCategory;
     }
-    getSelectedCategory() {
-        for (let activity of this.selectedCategory) {
-            console.log(activity);
-        }
-    }
 }
 
