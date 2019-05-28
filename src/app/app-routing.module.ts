@@ -33,7 +33,8 @@ const routes: Routes = [
         path: 'specific-badge/:id',
         resolve: {badge: DataResolverService},
         loadChildren: './pages/specific-badge/specific-badge.module#SpecificBadgePageModule'
-    },  { path: 'modify-activity', loadChildren: './pages/modify-activity/modify-activity.module#ModifyActivityPageModule' }
+    },  { path: 'modify-activity', loadChildren: './pages/modify-activity/modify-activity.module#ModifyActivityPageModule' },
+  { path: 'choose-picture', loadChildren: './pages/choose-picture/choose-picture.module#ChoosePicturePageModule' }
 
 
 

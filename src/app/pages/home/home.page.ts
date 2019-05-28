@@ -23,4 +23,5 @@ export class HomePage {
     openYouthCenter() {
         this.router.navigate(['location']);
     }
+
 }

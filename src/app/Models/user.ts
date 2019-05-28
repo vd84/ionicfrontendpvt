@@ -5,7 +5,6 @@ export class User {
     private _role: string;
     private _currentyouthcentre: number;
     private _bookedActivities = [];
-    private _picture: string;
     private _numberOfBadges: number;
     private _isfacebookuser: number;
     private _avatar: number;
@@ -79,15 +78,6 @@ export class User {
 
     set name(value: string) {
         this._name = value;
-    }
-
-    set picture(value) {
-        this._picture = value;
-    }
-
-
-    get picture() {
-        return this._picture;
     }
 
 
