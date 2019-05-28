@@ -151,6 +151,10 @@ ion-progress-bar {
   border-radius: 10px;
 }
 
+.category-progress {
+  box-shadow: 1px 4px 7px rgba(0, 0, 0, .5);
+}
+
 .progress-bar ion-list-header {
   justify-content: center;
   font-size: 18px;
@@ -160,6 +164,10 @@ ion-progress-bar {
   height: 50% !important;
   width: 50% !important;
   margin: auto;
+}
+
+.available-badge {
+  filter: grayscale(100%);
 }
 
 // ***PROFILE PAGE***
