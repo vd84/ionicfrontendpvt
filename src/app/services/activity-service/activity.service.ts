@@ -157,7 +157,7 @@ export class ActivityService {
 
 
 
-        setTimeout(() => {
+
             this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
                 for (let activity of data) {
 
@@ -178,7 +178,6 @@ export class ActivityService {
 
 
 
-        }, 1000);
 
 
 
