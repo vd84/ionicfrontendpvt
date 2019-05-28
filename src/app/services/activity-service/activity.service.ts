@@ -33,6 +33,8 @@ export class ActivityService {
     allActivitiesFromDatabase = [];
     // alla mina aktiviteter som jag ska delta på +++++ samt mina förslag
     allMyActivities = [];
+    // alla mina pågående eller kommmande aktiviteter
+    allMyActiveActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
     // Lista för alla kategorier
@@ -112,6 +114,17 @@ export class ActivityService {
         }
     }
 
+    getAllMyActiveBookings() {
+        let myActiveBookings = [];
+        for (let activity of this.allMyActivities) {
+            console.log(activity);
+            if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
+                myActiveBookings.push(activity);
+            }
+        }
+        return myActiveBookings;
+    }
+
 
     activityIsSuggestion(activity) {
 
@@ -139,9 +152,9 @@ export class ActivityService {
     isOfYourCentre(activity) {
         return activity.challenged === this.userservice.currentUser.currentyouthcentre || activity.challenger === this.userservice.currentUser.currentyouthcentre;
     }
+
     getAllCategories() {
-        this.http.get<Category[]>(this.categoryUrl).subscribe( data => {
-            console.log('Activity Service' + ' getAllCategories ');
+        this.http.get<Category[]>(this.categoryUrl).subscribe(data => {
             this.allCategories = data;
         });
     }
@@ -149,18 +162,18 @@ export class ActivityService {
 
     generateAllMyActivities() {
         this.allMyActivities = [];
+        this.allMyActiveActivities = [];
         this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
-            console.log('Activity Service' + ' + GenerateAllMyActivites');
             for (let activity of data) {
                 this.allMyActivities.push(activity);
+                if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
+                    this.allMyActiveActivities.push(activity);
+                }
             }
         }, error1 => {
             console.log(error1);
         });
         this.addMySuggestedActivitiesToMyActivitiesPage();
-
-
-
     }
 
     isMyActivity(id: number): boolean {
@@ -288,8 +301,6 @@ export class ActivityService {
     }
 
 
-
-
     modifyActivity(id,
                    name,
                    description,
@@ -397,6 +408,13 @@ export class ActivityService {
     }
 
 
+    hasStarted(activity: any) {
+        let today = new Date();
+
+        let activityStartDate = new Date(activity.startdate);
+
+        return (today >= activityStartDate);
+    }
 }
 
 
