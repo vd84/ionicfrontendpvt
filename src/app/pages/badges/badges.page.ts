@@ -15,6 +15,7 @@ export class BadgesPage implements OnInit {
     allAvailBadges = [];
     hasShowedAvailBadges = false;
     progressValue = 0.0;
+
     // En kommentar
 
     constructor(private router: Router, private badgeService: BadgeService, private dataService: DataService, private userService: UserService) {
@@ -78,5 +79,49 @@ export class BadgesPage implements OnInit {
             }
             avail = true;
         }
+    }
+
+    getRows(badgeList: any): number {
+        return badgeList / 3;
+    }
+
+    getIndexedList(badgeList: any) {
+
+    }
+
+    getBadgeCategory(i: number) {
+        switch (i) {
+            case 0: {
+                return 'Incheckning';
+            }
+            case 3: {
+                return 'Aktiviteter';
+            }
+        }
+    }
+
+    getBadgeCategoryProgress(startBadge: any) {
+        let category = [];
+        category.push(startBadge);
+        category.push(this.allBadges[this.allBadges.indexOf(startBadge) + 1]);
+        category.push(this.allBadges[this.allBadges.indexOf(startBadge) + 2]);
+        let taken = [];
+        for (let item of category) {
+            for (let badge of this.allOfUsersBadges) {
+                if (item.id === badge.id) {
+                    taken.push(item);
+                }
+            }
+        }
+        return taken.length / category.length;
+    }
+
+    getBadgeClass(compBadge: any) {
+        for (let badge of this.allOfUsersBadges) {
+            if (badge.id === compBadge.id) {
+                return 'taken-badge';
+            }
+        }
+        return 'available-badge';
     }
 }
