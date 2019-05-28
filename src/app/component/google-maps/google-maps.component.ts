@@ -461,7 +461,7 @@ export class GoogleMapsComponent implements OnInit {
         d = d * 1000;
         // kommentaren under är den return vi haft under testning...
          // return d < 1000000000000000;
-       return d < 250000000000000000;
+       return d < 25;
 
     }
 

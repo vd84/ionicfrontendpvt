@@ -75,18 +75,6 @@ export class ActivityService {
 
     }
 
-    /*addMySuggestedActivitiesToMyActivitiesPage() {
-        for (const activity of this.allActivitiesFromDatabase) {
-            if (activity.createdby === this.userservice.currentUser.id) {
-                this.allMyActivities.push(activity);
-            }
-        }
-        setTimeout(() => {
-
-            console.log('Skrivs ut Andra gången');
-            console.log(this.allMyActivities);
-        }, 300);
-    }*/
 
     generateAllActvitiesPage() {
         this.allActivities = [];
@@ -112,17 +100,6 @@ export class ActivityService {
                 this.adminActivities.push(activity);
             }
         }
-    }
-
-    getAllMyActiveBookings() {
-        let myActiveBookings = [];
-        for (let activity of this.allMyActivities) {
-            console.log(activity);
-            if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
-                myActiveBookings.push(activity);
-            }
-        }
-        return myActiveBookings;
     }
 
 
@@ -204,9 +181,6 @@ export class ActivityService {
     }
 
 
-    getYouthCenterActivities(id: number) {
-        return this.http.get<Event[]>(this.youthCentreUrl + id);
-    }
 
     changeDateFormat(oldFormat) {
         return (oldFormat.slice(0, 19));
