@@ -59,13 +59,13 @@ export class CreateEventPage implements OnInit {
     createSuggestion() {
         this.correctDates();
         console.log(this.enddate);
-        /* this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
+        this.activityService.addActivity(this.userService.currentUser.id, this.name, this.description, this.userService.currentUser.id, this.alt_location, 1, this.category.id, this.userService.currentUser.currentyouthcentre, this.challenged, this.startdate, this.enddate); // skickar med suggestion = true (responsible user ska dessutom sättas till något annat.
          setTimeout(() => {
              this.activityService.generateAllMyActivities();
          }, 25);
          this.router.navigate(['tabs/home/']);
 
-         */
+
     }
 
     createActivity() {
