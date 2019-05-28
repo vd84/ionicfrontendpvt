@@ -288,7 +288,6 @@ export class UserService {
                 this.presentToast('Invalid credentials');
             }
         );
-
     }
 
     checkLogin(username: String, password: String, isfacebookuser: number): Observable<User> {
