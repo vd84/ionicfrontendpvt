@@ -246,7 +246,6 @@ export class UserService {
                 this.presentToast('Invalid credentials');
             }
         );
-
     }
 
     addYouthCentre(youthcentre) {

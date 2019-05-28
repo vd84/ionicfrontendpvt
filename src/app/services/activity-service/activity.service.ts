@@ -29,6 +29,8 @@ export class ActivityService {
     allMyActivities = [];
     // alla som deltar på en specifik aktivitet
     allActivityParticipants = [];
+    // alla kategorier som finns för aktiviteter
+    allCategories = [];
 
     constructor(private http: HttpClient, private userservice: UserService, private toastController: ToastController) {
     }
@@ -44,12 +46,22 @@ export class ActivityService {
             this.generateAllActvitiesPage();
             this.generateAdminPendingPage();
             this.generateAllMyActivities();
+            this.allCategories = this.getUniqueElements(this.allActivitiesFromDatabase, 'categorytext');
 
 
         }, error => {
             console.log(error);
         });
 
+
+    }
+    getUniqueElements(arr, comp) {
+        const unique = arr
+            .map(e => e[comp])
+            .map((e, i, final) => final.indexOf(e) === i && i)
+            .filter(e => arr[e]).map(e => arr[e]);
+
+        return unique;
 
     }
 

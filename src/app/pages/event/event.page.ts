@@ -11,13 +11,15 @@ export class EventPage implements OnInit {
     activity: any;
     hasSearched = false;
     searchedActivities = [];
+    haveChoosenCategory = false;
+    choosenCategory = [];
+    categoryString = '';
 
     constructor(private router: Router, private activityService: ActivityService, private dataService: DataService) {
     }
 
     ngOnInit() {
         this.activity = 'all-activities';
-
     }
 
     ionViewDidLeave() {
@@ -27,9 +29,7 @@ export class EventPage implements OnInit {
     ionViewWillEnter() {
         console.log('WILL ENTER VIEW');
         this.activityService.getAllActivities();
-        this.activityService.getAllCategories();
     }
-
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
@@ -115,5 +115,17 @@ export class EventPage implements OnInit {
             }
         }
     }
+    sortByCategory(ev: any) {
+        this.choosenCategory = [];
+        let input = ev.target.value;
+        let inputReg = new RegExp(input, 'i');
+        for (let act of this.activityService.allActivities) {
+            if (inputReg.exec(act.categorytext)) {
+                this.choosenCategory.push(act);
+            }
+        }
+        console.log('haveChoosencategory ' + this.haveChoosenCategory);
+        console.log('choosenCategory ' + this.choosenCategory.toString());
 
+    }
 }
