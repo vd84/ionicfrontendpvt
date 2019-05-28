@@ -59,9 +59,6 @@ export class ProfilePage implements OnInit {
         this.ourId = this.youthcentreService.getTheRightId(this.userservice.currentUser.currentyouthcentre);
     }
 
-    addYouthCentre() {
-        this.userservice.addYouthCentre(this.currentyouthcentre);
-    }
 
     displayAllMyBadges() {
         this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {

@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
 })
 export class ChangePasswordPage implements OnInit {
     private currentPassword: string;
-    private repeatedPassword: string;
+    private repeatedNewPassword: string;
     private newPassword: string;
     loginSucceded = false;
 
@@ -25,7 +25,7 @@ export class ChangePasswordPage implements OnInit {
 
         // här måste även gamla lösenordet skickas in, görs inte nu
 
-        if (this.currentPassword !== this.repeatedPassword) {
+        if (this.newPassword !== this.repeatedNewPassword) {
             this.presentToast('Lösenorden matchar inte');
             return;
         }
