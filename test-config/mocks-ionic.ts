@@ -3,6 +3,7 @@ import {Badge} from '../src/app/Models/Badge';
 import {Event} from '../src/app/Models/event';
 import {User} from '../src/app/Models/user';
 import 'rxjs-compat/add/observable/of';
+import {Avatar} from '../src/app/Models/Avatar';
 
 export class PlatformMock {
     public ready(): Promise<string> {
@@ -122,6 +123,22 @@ export class BadgeServiceMock {
     }
 }
 
+export class ChoosePicturePageMock {
+
+    allAvatars: Object = [];
+
+
+    getAllAvatars() {
+        return null;
+    }
+
+    chooseThatPicture(pictureID) {
+        return null;
+    }
+
+
+}
+
 export class UserServiceMock {
 
     currentUser: User = new User(1, 'MockUser', 'Admin',
@@ -160,6 +177,15 @@ export class UserServiceMock {
 
     login(username: String, password: String, isfacebookuser: boolean) {
         return true;
+    }
+
+    getAllAvatars() {
+        return Observable.of([new Avatar(1, 'MockResponseAvatar1', null)]);
+    }
+
+    getMyAvatar(id) {
+        return null;
+
     }
 
 
@@ -302,6 +328,10 @@ export class ActivityServiceMock {
 export class YouthCenterServiceMock {
 
     getAllLocations() {
+        return null;
+    }
+
+    getTheRightId() {
         return null;
     }
 }

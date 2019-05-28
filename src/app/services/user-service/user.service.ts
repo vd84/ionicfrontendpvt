@@ -19,6 +19,7 @@ export class UserService {
 
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
     avatarUrl = 'https://webbapppvt15grupp2.herokuapp.com/avatar/';
+    noPassWordModifyurl = 'https://webbapppvt15grupp2.herokuapp.com/user/nopassword';
 
 
     constructor(private http: HttpClient, private router: Router, private toastController: ToastController) {
@@ -78,7 +79,7 @@ export class UserService {
             'facebookpassword': 'pass',
             'role': role,
             'isfacebookuser': this.currentUser.isfacebookuser,
-            'image': this.currentUser.picture
+            'avatar': this.currentUser.avatar
 
         });
 
@@ -170,7 +171,7 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'role': 1,
             'isFacebookUser': 0,
-            'image': this.currentUser.picture
+            'avatar': this.currentUser.avatar
         });
         return this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -184,7 +185,7 @@ export class UserService {
 
     }
 
-    changeImage(picture, password) {
+    changeImage(pictureID) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -193,26 +194,47 @@ export class UserService {
             })
 
         };
+        let role;
+        if (this.currentUser.role === 'user') {
+            role = 1;
+        } else {
+            role = 11;
+
+            console.log(role);
+            console.log(this.currentUser.role);
+        }
 
         const body = JSON.stringify({
             'id': this.currentUser.id,
             'username': this.currentUser.name,
             'displayname': this.currentUser.displayname,
-            'password': password,
-            'active': 0,
+            'active': 1,
             'points': 0,
             'fairplaypoints': 0,
             'currentyouthcentre': this.currentUser.currentyouthcentre,
-            'role': 1,
+            'role': role,
             'isFacebookUser': 0,
-            'image': this.currentUser.picture
+            'avatar': pictureID
         });
-        this.http.put(this.url, body, httpOptions).subscribe(data => {
+        this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {
                 console.log(data);
+                this.currentUser.avatar = pictureID;
+
+                setTimeout(() => {
+                    this.getUsersAvatars(this.currentUser.avatar);
+
+
+                }, 2000);
+
+                this.presentToast('Profilbild ändrad');
+                this.router.navigateByUrl('tabs/home');
+
 
             },
             error => {
                 console.log('Error');
+                this.presentToast('Ett fel inträffade');
+
             });
 
     }
@@ -240,6 +262,13 @@ export class UserService {
 
         this.http.post<User>(this.url + 'login', body, httpOptions).subscribe(
             data => {
+
+                if (data === null) {
+                    this.presentToast('Fel användarnamn eller lösenord');
+                    return;
+                }
+
+
                 this.currentUserJson = data;
                 console.log(this.currentUserJson);
 
@@ -251,7 +280,6 @@ export class UserService {
                 }
                 this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl);
 
-                this.getMyAvatar();
 
                 console.log(this.currentUser);
                 this.presentToast('Välkommen ' + this.currentUser.displayname + '!');
@@ -295,24 +323,33 @@ export class UserService {
 
         };
 
+        let role;
+        if (this.currentUser.role === 'user') {
+            role = 1;
+        } else {
+            role = 11;
+
+            console.log(role);
+            console.log(this.currentUser.role);
+        }
+
+
         const body = JSON.stringify({
-            'id': 1,
+            'id': this.currentUser.id,
             'username': this.currentUser.name,
             'displayname': this.currentUser.displayname,
-            'password': 'pass1',
             'active': 1,
             'points': 0,
             'fairplaypoints': 0,
             'currentyouthcentre': youthcentre,
-            'facebooklogin': 'Face1',
-            'facebookpassword': 'pass',
-            'role': 1,
-            'isfacebookuser': this.currentUser.isfacebookuser,
-            'image': this.currentUser.picture
+            'role': role,
+            'isFacebookUser': 0,
+            'avatar': this.currentUser.avatar
         });
 
-        this.http.put(this.url, body, httpOptions).subscribe(data => {
+        this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {
                 console.log(data);
+                this.currentUser.currentyouthcentre = youthcentre;
             },
             error => {
                 console.log('Error');
@@ -331,17 +368,12 @@ export class UserService {
 
         };
 
-        this.http.get(this.avatarUrl, httpOptions).subscribe(data => {
-            console.log('userService ' + ' getAllAvatars');
-            console.log(data);
-        }, error1 => {
-            console.log(error1);
-        });
+        return this.http.get(this.avatarUrl, httpOptions);
 
     }
 
 
-    getMyAvatar() {
+    getUsersAvatars(id) {
 
         const httpOptions = {
             headers: new HttpHeaders({
@@ -351,15 +383,16 @@ export class UserService {
 
         };
 
-        this.http.get(this.avatarUrl + this.currentUser.id, httpOptions).subscribe(data => {
-            console.log('userService ' + ' getMyAvatar');
-            console.log(data);
-            this.currentUser.picture = data[0].image;
-        }, error1 => {
-            console.log(error1);
-        });
+        return this.http.get(this.avatarUrl + id, httpOptions).subscribe(content => {
+                this.currentUser.avatarurl = content[0].image;
+                console.log(content[0].image);
+                console.log(this.currentUser);
+            }
+        )
+            ;
 
     }
+
 
     async presentToast(toastMessage: string) {
         const toast = await this.toastController.create({

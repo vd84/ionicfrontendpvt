@@ -15,20 +15,28 @@ export class ProfilePage implements OnInit {
     currentyouthcentre;
     youthCentres = [];
     private allMyBadges = [];
+    image;
 
     constructor(private router: Router, private userservice: UserService, private youthcentreService: YouthcenterService, private badgeservice: BadgeService) {
     }
 
     ngOnInit() {
+
+
+    }
+
+    ionViewWillEnter() {
         console.log(this.allCentres);
+
+        this.userservice.getUsersAvatars(this.userservice.currentUser.avatar);
+
 
         this.youthcentreService.getAllLocations();
         this.youthCentres = this.youthcentreService.allYouthCentres;
         setTimeout(() => {
             this.youthcentreService.getAllLocations();
             this.youthCentres = this.youthcentreService.allYouthCentres;
-        }, 200);
-
+        }, 500);
 
         setTimeout(() => {
             this.getMyYouthCentre();
@@ -36,6 +44,7 @@ export class ProfilePage implements OnInit {
         }, 200);
 
         this.displayAllMyBadges();
+
 
     }
 
@@ -50,9 +59,6 @@ export class ProfilePage implements OnInit {
         this.ourId = this.youthcentreService.getTheRightId(this.userservice.currentUser.currentyouthcentre);
     }
 
-    addYouthCentre() {
-        this.userservice.addYouthCentre(this.currentyouthcentre);
-    }
 
     displayAllMyBadges() {
         this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
@@ -61,8 +67,11 @@ export class ProfilePage implements OnInit {
         });
     }
 
-    doesNotHaveYouthCentre() {
-        return this.userservice.currentUser.currentyouthcentre === undefined;
+
+    navigateToChoosePicture() {
+        this.router.navigateByUrl('choose-picture');
     }
+
+
 }
 

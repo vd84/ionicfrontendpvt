@@ -15,6 +15,7 @@ export class SettingsPage implements OnInit {
 
     youthcenters = [];
     chosenYouthCentre;
+    currentyouthcentre;
 
 
     constructor(private router: Router,
@@ -48,5 +49,9 @@ export class SettingsPage implements OnInit {
         this.youthcenters = this.youthCenterService.allYouthCentres;
 
     }
+    addYouthCentre() {
+        this.userService.addYouthCentre(this.currentyouthcentre);
+    }
+
 
 }
