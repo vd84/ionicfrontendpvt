@@ -72,7 +72,7 @@
                 </ion-select>
             </ion-item>
             <ion-item class="list-item-white">
-                <ion-label>Utmana:</ion-label>
+                <ion-label>Välj motståndare:</ion-label>
                 <ion-select [(ngModel)]="challenged" ngDefaultControl>
                     <ion-select-option *ngFor="let challenged of youthcenters"
                                        [value]="challenged.id">{{challenged.name}} </ion-select-option>
