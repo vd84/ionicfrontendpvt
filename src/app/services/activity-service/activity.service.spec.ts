@@ -54,5 +54,51 @@ describe('ActivityService', () => {
         expect(service.allActivitiesFromDatabase).toBeTruthy();
         expect(service.allMyActivities).toBeTruthy();
         expect(service.allActivityParticipants).toBeTruthy();
+        expect(service.allActiveActivities).toBeTruthy();
+        expect(service.allMyActiveActivities).toBeTruthy();
+        expect(service.allActivityParticipants).toBeTruthy();
+        expect(service.allCategories).toBeTruthy();
+
+
+    });
+
+    it('should convert datetime to correct format', () => {
+
+
+        expect(service.changeDateFormat('2019-05-29T11:32:13.423+02:00')).toBe('2019-05-29T11:32:13');
+    });
+
+    it('date should not have passed', () => {
+
+
+        expect(service.endDateHasNotPassed(JSON.stringify({'enddate': '2019-01-29T11:32:13'}))).toBe(true);
+
+    });
+
+    it('list should contain activities that are suggested or not accpeted or declined', () => {
+
+
+        service.addMySuggestedAndNotAcceptedOrDeclinedActivitiesToMyActivitiesPage();
+
+        let allMyActivities = service.allMyActivities;
+
+        let user = {'id': 1};
+
+        for (const activity of allMyActivities) {
+
+
+            expect((activity.issuggestion && activity.createdby === user.id) || (activity.createdby === user.id && activity.challengeaccepted === 0 && activity.challengerejected === 0)).toBe(true);
+        }
+    });
+
+    it('should be an suggestion', () => {
+
+        let activity = {'issuggestion': 1};
+        expect(service.activityIsSuggestion(activity)).toBe(true);
     });
 });
+
+
+
+
+

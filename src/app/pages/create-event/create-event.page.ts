@@ -18,7 +18,7 @@ export class CreateEventPage implements OnInit {
     private category;
     private challenged;
     private youthcenters = [];
-    private startdate: string;
+    startdate: string;
     private starttime: string;
     private enddate: string;
     private endtime: string;
@@ -51,6 +51,7 @@ export class CreateEventPage implements OnInit {
     }
 
     correctDates() {
+        console.log(this.startdate);
         this.startdate = this.startdate.slice(0, 11) + this.starttime.slice(11, 20);
         this.enddate = this.enddate.slice(0, 11) + this.endtime.slice(11, 20);
     }
