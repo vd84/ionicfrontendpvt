@@ -40,7 +40,7 @@ describe('BadgesPage', () => {
         expect(component).toBeTruthy();
     });
 
-    /* it('should set default badgeList to All', () => {
+     it('should set default badgeList to All', () => {
          expect(component.badgeList).toBe('all-badges');
      });
 
@@ -79,7 +79,7 @@ describe('BadgesPage', () => {
          }
      });
 
-     */
+
 
     it('should have a variable for current tab and be able to set it through method call', () => {
         let tab = 'testTab';
