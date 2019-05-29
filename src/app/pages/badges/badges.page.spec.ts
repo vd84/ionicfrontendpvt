@@ -89,5 +89,22 @@ describe('BadgesPage', () => {
         expect(component.badgeList).toEqual('testTab');
 
     });
+    it('should return badge category', () => {
+       let x = component.getBadgeCategory(0);
+        expect(x).toBe('Incheckning');
+       let y = component.getBadgeCategory(3);
+       expect(y).toBe('Aktiviteter');
+    });
+
+    it('should return zero', () => {
+        let x = component.getRows(3);
+        expect(x).toEqual(1);
+    });
+    it('should have method getProgressvalue that returns 50%', () => {
+       component.allOfUsersBadges = ['test'];
+       component.allBadges = ['test', 'test'];
+        let progressValue = component.getProgressValue();
+       expect(progressValue).toBe(0.5);
+    });
 
 });

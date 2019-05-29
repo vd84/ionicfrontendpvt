@@ -46,11 +46,13 @@ describe('LoginPage', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have fields for username and password', () => {
+    it('should have fields for username and password and currentyouthcentre', () => {
         component.username = 'test';
         component.password = 'test';
+        component.currentyouthcentre = 1;
         expect(component.username).toBe('test');
         expect(component.password).toBe('test');
+        expect(component.currentyouthcentre).toBe(1);
     });
 
     it('should have a method forgotPassword() that routes to reset-password', () => {

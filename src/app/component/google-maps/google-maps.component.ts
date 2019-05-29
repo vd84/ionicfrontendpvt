@@ -309,24 +309,18 @@ export class GoogleMapsComponent implements OnInit {
         let startmaker;
         setTimeout(() => {
             /*Marker Options*/
-           /* this.markerOptions.position = this.location;
-            this.markerOptions.map = this.map;
-            this.markerOptions.title = 'My Location';
-            // this.markerOptions.icon = 'assets/icon/map-person-icon.png';
-            this.markerOptions.icon = this.userservice.currentUser.avatarurl;*/
            let icon = {
                url: this.userservice.currentUser.avatarurl,
                scaledSize: new google.maps.Size(40, 40)
-           }
+           };
            startmaker = new google.maps.Marker({
                 position: this.location,
                 map: this.map,
                 title: 'My location',
-               icon: icon
+                icon: icon
             });
             this.allMarkers.push(startmaker);
         }, 5000);
-
     }
 
 
@@ -351,6 +345,7 @@ export class GoogleMapsComponent implements OnInit {
     updateMarkers() {
         this.addStartMarker();
         this.addAllMarkers();
+
     }
 
 
