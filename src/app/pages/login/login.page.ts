@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
                             })
                             .then(() => {
 
-                                this.userService.submitUser(user.email, user.name, '', this.currentyouthcentre, 1);
+                                this.userService.submitUser(user.email, user.name, 'fbpass1', this.currentyouthcentre, 1);
 
 
                                 loading.dismiss();
