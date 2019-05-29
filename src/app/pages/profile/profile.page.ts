@@ -61,10 +61,11 @@ export class ProfilePage implements OnInit {
 
 
     displayAllMyBadges() {
-        this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
-            console.log('profilepage ' + ' displayallmybadges');
-            this.allMyBadges = data;
-        });
+            this.badgeservice.getAllMyBadges(this.userservice.currentUser.id).subscribe(data => {
+                console.log('profilepage ' + ' displayallmybadges');
+                this.allMyBadges = data;
+            });
+
     }
 
 

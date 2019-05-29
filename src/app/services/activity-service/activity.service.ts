@@ -49,8 +49,20 @@ export class ActivityService {
      *
      */
     getAllActivities() {
+        this.adminActivities = [];
+        this.allActivities = [];
+        this.allActiveActivities = [];
+        this.allActivitiesFromDatabase = [];
+        this.allMyActivities = [];
+        this.allMyActiveActivities = [];
+        this.allActivityParticipants = [];
+        this.allCategories = [];
+
+
         console.log('called generate all activities');
         this.http.get<Event[]>(this.getactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+
+
             console.log('Activity Service');
             this.allActivitiesFromDatabase = data;
             this.generateAllActvitiesPage();
@@ -64,29 +76,19 @@ export class ActivityService {
         });
 
 
+
+
     }
 
     addMySuggestedActivitiesToMyActivitiesPage() {
         for (const activity of this.allActivitiesFromDatabase) {
-            if (activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) {
+            if ((activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) || (activity.createdby === this.userservice.currentUser.id && activity.challengeaccepted === 0 && activity.challengerejected === 0)) {
                 this.allMyActivities.push(activity);
             }
         }
 
     }
 
-    /*addMySuggestedActivitiesToMyActivitiesPage() {
-        for (const activity of this.allActivitiesFromDatabase) {
-            if (activity.createdby === this.userservice.currentUser.id) {
-                this.allMyActivities.push(activity);
-            }
-        }
-        setTimeout(() => {
-
-            console.log('Skrivs ut Andra gången');
-            console.log(this.allMyActivities);
-        }, 300);
-    }*/
 
     generateAllActvitiesPage() {
         this.allActivities = [];
@@ -112,17 +114,6 @@ export class ActivityService {
                 this.adminActivities.push(activity);
             }
         }
-    }
-
-    getAllMyActiveBookings() {
-        let myActiveBookings = [];
-        for (let activity of this.allMyActivities) {
-            console.log(activity);
-            if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
-                myActiveBookings.push(activity);
-            }
-        }
-        return myActiveBookings;
     }
 
 
@@ -163,17 +154,33 @@ export class ActivityService {
     generateAllMyActivities() {
         this.allMyActivities = [];
         this.allMyActiveActivities = [];
-        this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
-            for (let activity of data) {
-                this.allMyActivities.push(activity);
-                if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
-                    this.allMyActiveActivities.push(activity);
+
+
+
+
+            this.http.get<Event[]>(this.postAndPutactivityUrl + this.userservice.currentUser.id).subscribe(data => {
+                for (let activity of data) {
+
+
+                    console.log(activity);
+
+                    this.allMyActivities.push(activity);
+                    if (!this.activityIsSuggestion(activity) && this.endDateHasNotPassed(activity)) {
+                        this.allMyActiveActivities.push(activity);
+
+                    }
+
                 }
-            }
-        }, error1 => {
-            console.log(error1);
-        });
-        this.addMySuggestedActivitiesToMyActivitiesPage();
+            }, error1 => {
+                console.log(error1);
+            });
+            this.addMySuggestedActivitiesToMyActivitiesPage();
+
+
+
+
+
+
     }
 
     isMyActivity(id: number): boolean {
@@ -203,10 +210,6 @@ export class ActivityService {
         return activity.challenger === this.userservice.currentUser.currentyouthcentre;
     }
 
-
-    getYouthCenterActivities(id: number) {
-        return this.http.get<Event[]>(this.youthCentreUrl + id);
-    }
 
     changeDateFormat(oldFormat) {
         return (oldFormat.slice(0, 19));
@@ -382,9 +385,13 @@ export class ActivityService {
 
         let today = new Date();
 
-        let activityenddate = new Date(activity.enddate);
 
-        return (today <= activityenddate);
+        let fixedDate = activity.enddate.replace(' ', 'T');
+
+        let endDate = new Date(fixedDate);
+
+
+        return (today <= endDate);
 
 
     }
@@ -392,8 +399,8 @@ export class ActivityService {
     isOnGoing(activity) {
 
         let today = new Date();
-        let activitystartdate = new Date(activity.startdate);
-        let activityenddate = new Date(activity.enddate);
+        let activitystartdate = new Date(activity.startdate.replace(' ', 'T'));
+        let activityenddate = new Date(activity.enddate.replace(' ', 'T'));
         return (today >= activitystartdate) && (today <= activityenddate);
 
     }
@@ -411,7 +418,7 @@ export class ActivityService {
     hasStarted(activity: any) {
         let today = new Date();
 
-        let activityStartDate = new Date(activity.startdate);
+        let activityStartDate = new Date(activity.startdate.replace(' ', 'T'));
 
         return (today >= activityStartDate);
     }

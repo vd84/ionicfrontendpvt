@@ -12,9 +12,18 @@ export class HomePage {
     constructor(private router: Router, private userService: UserService, private activityService: ActivityService) {
     }
 
-    ionViewWillEnter() {
+    ionViewDidEnter() {
         this.activityService.getAllActivities();
     }
+
+    ionViewDidLeave() {
+
+
+
+        this.activityService.getAllActivities();
+
+    }
+
 
     onClick() {
         console.log('Activity clicked');
