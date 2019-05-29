@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, TemplateRef, ViewContainerRef} from '@angular/co
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {EventPage} from './event.page';
-import {Router} from '@angular/router';
+import {provideRoutes, Router} from '@angular/router';
 import {ActivityService} from '../../services/activity-service/activity.service';
 import {DataService} from '../../services/data.service';
 import {SharedDirectivesModule} from '../../directives/shared-directives.module';
