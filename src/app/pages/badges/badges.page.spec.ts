@@ -100,5 +100,11 @@ describe('BadgesPage', () => {
         let x = component.getRows(3);
         expect(x).toEqual(1);
     });
+    it('should have method getProgressvalue that returns 50%', () => {
+       component.allOfUsersBadges = ['test'];
+       component.allBadges = ['test', 'test'];
+        let progressValue = component.getProgressValue();
+       expect(progressValue).toBe(0.5);
+    });
 
 });
