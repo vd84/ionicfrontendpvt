@@ -24,9 +24,6 @@ export class EventPage implements OnInit {
     ionViewDidLeave() {
         console.log('LEFT');
     }
-
-
-
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
