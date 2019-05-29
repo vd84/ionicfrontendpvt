@@ -308,11 +308,21 @@ export class GoogleMapsComponent implements OnInit {
     addStartMarker() {
         setTimeout(() => {
             /*Marker Options*/
-            this.markerOptions.position = this.location;
+           /* this.markerOptions.position = this.location;
             this.markerOptions.map = this.map;
             this.markerOptions.title = 'My Location';
-            this.markerOptions.icon = 'assets/icon/map-person-icon.png';
-            this.marker = new google.maps.Marker(this.markerOptions);
+            // this.markerOptions.icon = 'assets/icon/map-person-icon.png';
+            this.markerOptions.icon = this.userservice.currentUser.avatarurl;*/
+           let icon = {
+               url: this.userservice.currentUser.avatarurl,
+               scaledSize: new google.maps.Size(40, 40)
+           }
+           this.marker = new google.maps.Marker({
+                position: this.location,
+                map: this.map,
+                title: 'My location',
+               icon: icon
+            });
 
         }, 5000);
     }
@@ -461,7 +471,7 @@ export class GoogleMapsComponent implements OnInit {
         d = d * 1000;
         // kommentaren under är den return vi haft under testning...
          // return d < 1000000000000000;
-       return d < 250000000000000000;
+       return d < 258999999999999999;
 
     }
 

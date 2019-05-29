@@ -2,12 +2,12 @@
     <ion-toolbar color="light">
         <ion-title>{{badge.name}}</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button text="Tillbaka"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding style="--padding-top: 20%">
     <ion-card class="list-card">
         <ion-card-header>
             <ion-card-title style="text-align: center;">{{badge.name}}</ion-card-title>
@@ -17,6 +17,13 @@
                 <ion-item>
                     <img src={{badge.image}}/>
                 </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="list-card">
+        <ion-card-content>
+            <ion-list lines="none">
                 <ion-item>
                     <ion-text>{{badge.description}}</ion-text>
                 </ion-item>
