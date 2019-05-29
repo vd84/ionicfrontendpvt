@@ -39,5 +39,17 @@ describe('EventPage', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+    it('should be visible', () => {
+       component.hasSearched = false;
+       component.haveChosenCategory = false;
+       let result = component.shouldBeVisible();
+        expect(result).toBeTruthy();
+    });
+    it('should have fields hasSearched, haveChoosenCategory', () => {
+        component.haveChosenCategory = false;
+        component.hasSearched = false;
+       expect(component.hasSearched).toBeFalsy();
+       expect(component.haveChosenCategory).toBeFalsy();
+    });
 
 });
