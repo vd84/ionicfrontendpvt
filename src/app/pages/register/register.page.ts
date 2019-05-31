@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
         this.youthcentreService.getAllLocations();
         this.youthCentres = this.youthcentreService.allYouthCentres;
     }
-    ionViewWillEnter() {
+    ionViewDidEnter() {
         this.youthcentreService.getAllLocations();
         this.youthCentres = this.youthcentreService.allYouthCentres;
         setTimeout(() => {

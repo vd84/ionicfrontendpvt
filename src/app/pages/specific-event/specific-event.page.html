@@ -40,10 +40,10 @@
     <!--BOKA/AVBOKA KNAPPAR-->
     <div class="activity-button-group" *appHasRole="'user'" padding>
         <ion-button (click)="bookActivity()"
-                    *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity)">
+                    *ngIf="!booked() && !isChallenge() && !isSuggestion() && activityService.endDateHasNotPassed(activity) && userIsNotCheckedIn()">
             Boka
         </ion-button>
-        <ion-button (click)="removeActivity()" *ngIf="booked() && activityService.endDateHasNotPassed(activity)">
+        <ion-button (click)="removeActivity()" *ngIf="booked() && activityService.endDateHasNotPassed(activity) && userIsNotCheckedIn()">
             Avboka
         </ion-button>
         <ion-button (click)="checkInActivity()" *ngIf="!isSuggestion()" [disabled]="!userCanCheckIn()">Checka in

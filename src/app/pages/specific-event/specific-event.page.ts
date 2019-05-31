@@ -100,7 +100,8 @@ export class SpecificEventPage implements OnInit {
 
     userCanCheckIn() {
         // return this.userIsCloseEnough() && this.booked() && this.isOnGoing() && !this.isSuggestion();
-        return this.userIsCloseEnough() && this.booked() && this.activityService.isOnGoing(this.activity) && !this.userAlreadyCheckedIn();
+        console.log(this.userIsCloseEnough() + ' ' + ' ' + this.booked() + this.activityService.isOnGoing(this.activity) + ' ' + ' ' + !this.userIsNotCheckedIn());
+        return this.userIsCloseEnough() && this.booked() && this.activityService.isOnGoing(this.activity) && this.userIsNotCheckedIn();
     }
 
     userIsCloseEnough(): boolean {
@@ -169,9 +170,11 @@ export class SpecificEventPage implements OnInit {
     }
 
 
-    private userAlreadyCheckedIn() {
-        // to do...
-        return false;
+    private userIsNotCheckedIn() {
+            if (this.activity.checkedin === 0) {
+                return true;
+            }
+            return false;
     }
 
 

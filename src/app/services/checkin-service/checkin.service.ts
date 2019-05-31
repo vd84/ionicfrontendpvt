@@ -82,7 +82,7 @@ export class CheckinService {
                 badgeList = data;
 
 
-                if (badgeList.length !== 0) {
+                if (badgeList !== null) {
                     let originalPresentString = 'Grattis, du har fått nya märken: ';
 
 
