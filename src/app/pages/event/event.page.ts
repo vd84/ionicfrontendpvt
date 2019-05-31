@@ -24,9 +24,6 @@ export class EventPage implements OnInit {
     ionViewDidLeave() {
         console.log('LEFT');
     }
-
-
-
     loadEvent(activity) {
         this.dataService.setData('activity', activity);
         this.router.navigateByUrl('/specific-event/activity');
@@ -80,11 +77,14 @@ export class EventPage implements OnInit {
         this.selectedCategory = [];
         let input = ev.target.value;
         let inputReg = new RegExp(input, 'i');
-            if (inputReg.exec('Alla')) {
-                    this.activity = 'all-activities';
+            if (inputReg.exec('Alla') || inputReg.exec('all-activities')) {
                     this.haveChosenCategory = false;
                     this.hasSearched = false;
-                    this.shouldBeVisible();
+                    this.activity = 'all-activities';
+            } else if (inputReg.exec('my-activities')) {
+                this.haveChosenCategory = false;
+                this.hasSearched = false;
+                this.activity = 'my-activities';
             }
         for (let activity of this.activityService.allActiveActivities) {
             if (inputReg.exec(activity.categorytext)) {

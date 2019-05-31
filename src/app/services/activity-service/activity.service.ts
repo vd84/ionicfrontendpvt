@@ -216,7 +216,6 @@ export class ActivityService {
     }
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number, startdate: String, enddate: String) {
-
         startdate = this.changeDateFormat(startdate);
         enddate = this.changeDateFormat(enddate);
 

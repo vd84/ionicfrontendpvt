@@ -40,7 +40,7 @@ describe('BadgesPage', () => {
         expect(component).toBeTruthy();
     });
 
-    /* it('should set default badgeList to All', () => {
+     it('should set default badgeList to All', () => {
          expect(component.badgeList).toBe('all-badges');
      });
 
@@ -79,7 +79,7 @@ describe('BadgesPage', () => {
          }
      });
 
-     */
+
 
     it('should have a variable for current tab and be able to set it through method call', () => {
         let tab = 'testTab';
@@ -88,6 +88,17 @@ describe('BadgesPage', () => {
         component.segmentChanged(event);
         expect(component.badgeList).toEqual('testTab');
 
+    });
+    it('should return badge category', () => {
+       let x = component.getBadgeCategory(0);
+        expect(x).toBe('Incheckning');
+       let y = component.getBadgeCategory(3);
+       expect(y).toBe('Aktiviteter');
+    });
+
+    it('should return zero', () => {
+        let x = component.getRows(3);
+        expect(x).toEqual(1);
     });
     it('should have method getProgressvalue that returns 50%', () => {
        component.allOfUsersBadges = ['test'];

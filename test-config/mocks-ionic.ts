@@ -274,6 +274,9 @@ export class ActivityServiceMock {
     isChallenger(activity) {
         return true;
     }
+    endDateHasNotPassed(activity) {
+        return true;
+    }
 
     addActivity(createdBy: number, name: String, description: String, responsibleUser: number, alt_location: String, isSuggestion: number, category: number, challenger: number, challengedyouthcenter: number) {
         return true;
@@ -286,7 +289,6 @@ export class ActivityServiceMock {
     removeParticipation(userId: any, activityId: number) {
         return true;
     }
-
     async presentToast(toastMessage: string) {
         return true;
 

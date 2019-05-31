@@ -26,7 +26,7 @@
                     <ion-badge color="light" slot="end">{{activityService.allActiveActivities.length}}</ion-badge>
                 </ion-label>
             </ion-segment-button>
-            <ion-segment-button *appHasRole="'user'" value="my-activities">
+            <ion-segment-button *appHasRole="'user'" value="my-activities" >
                 <ion-label>Mina
                     <ion-badge color="light" slot="end">{{activityService.allMyActivities.length}}</ion-badge>
                 </ion-label>
@@ -58,9 +58,11 @@
             <ion-list *ngSwitchCase="'all-activities'">
                 <ion-item lines="none" *ngFor="let activity of searchedActivities">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
+                        <ion-card-header>
                         <ion-card-title>{{activity.name}}</ion-card-title>
                         <ion-card-subtitle>{{getStartDate(activity)}}
                             -- {{getActivityLabel(activity)}}</ion-card-subtitle>
+                        </ion-card-header>
                     </ion-card>
                 </ion-item>
             </ion-list>
@@ -70,9 +72,11 @@
             <ion-list>
                 <ion-item lines="none" *ngFor="let activity of selectedCategory">
                     <ion-card class="clickable-cards" (click)="loadEvent(activity)">
+                        <ion-card-header>
                         <ion-card-title>{{activity.name}}</ion-card-title>
                         <ion-card-subtitle>{{getStartDate(activity)}}
                             -- {{getActivityLabel(activity)}}</ion-card-subtitle>
+                        </ion-card-header>
                     </ion-card>
                 </ion-item>
 
