@@ -364,7 +364,7 @@ export class GoogleMapsComponent implements OnInit {
 
 
                 console.log(checkedInYouthCentre);
-                console.log(place.check)
+                console.log(place.check);
                 if (!checkedInYouthCentre) {
 
                     marker = new google.maps.Marker({
@@ -492,7 +492,7 @@ export class GoogleMapsComponent implements OnInit {
                 for (const place of this.alllocations) {
 
                     if (this.calculateIfCloseEnough(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon)) {
-                        this.presentToast('Aktivitet hittad på ' + place.name + '! (' +  this.howfaraway(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon) + ')');
+                        this.presentToast('Du kan checka in på ' + place.name + '! (' +  this.howfaraway(this.currentPosition.lat, this.currentPosition.lng, place.lat, place.lon) + ')');
 
                     }
                 }

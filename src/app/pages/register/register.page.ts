@@ -26,16 +26,19 @@ export class RegisterPage implements OnInit {
 
     ngOnInit() {
 
+
+    }
+    loadallyouthcenters() {
+        this.youthcentreService.getAllLocations();
+        this.youthCentres = this.youthcentreService.allYouthCentres;
+    }
+    ionViewWillEnter() {
         this.youthcentreService.getAllLocations();
         this.youthCentres = this.youthcentreService.allYouthCentres;
         setTimeout(() => {
             this.youthcentreService.getAllLocations();
             this.youthCentres = this.youthcentreService.allYouthCentres;
         }, 2000);
-    }
-    loadallyouthcenters() {
-        this.youthcentreService.getAllLocations();
-        this.youthCentres = this.youthcentreService.allYouthCentres;
     }
 
 
