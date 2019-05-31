@@ -39,31 +39,6 @@ describe('EventPage', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    it('should return String suggestion ', () => {
-        let x = new ActivityServiceMock();
-        let result = component.isSuggestionReturnString((x.activityIsSuggestion('test')));
-        expect(result).toBe('Suggestion');
-    });
-    it('should return string rejected', () => {
-        let x = new ActivityServiceMock();
-        let result = component.isRejectedReturnString((x.activityIsDeclined('test')));
-        expect(result).toBe('Rejected');
-    });
-    it('should return string challenged', () => {
-        let x = new ActivityServiceMock();
-        let result = component.isChallengedReturnString((x.isChallenged('test')));
-        expect(result).toBe('Challenged');
-    });
-    it('should return string challenger', () => {
-        let x = new ActivityServiceMock();
-        let result = component.isChallengerReturnString((x.isChallenger('test')));
-        expect(result).toBe('Challenger');
-    });
-    it('should return active or inactive', () => {
-        let x = new ActivityServiceMock();
-        let result = component.calculateColorForCard((x.endDateHasNotPassed('test')));
-        expect(result).toBe('active');
-    });
     it('should return förslag', () => {
         let x = new ActivityServiceMock();
         let result = component.getActivityLabel((x.activityIsSuggestion('test')));
