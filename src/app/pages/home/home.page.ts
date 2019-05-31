@@ -33,4 +33,16 @@ export class HomePage {
         this.router.navigate(['location']);
     }
 
+    goToEventPage() {
+
+        this.router.navigateByUrl('tabs/event');
+
+    }
+    goToMapPage() {
+
+        this.router.navigateByUrl('tabs/map');
+
+    }
+
+
 }
