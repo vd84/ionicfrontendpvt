@@ -42,7 +42,10 @@ export class LocationPage implements OnInit {
         }
         this.user = this.userService.currentUser;
 
-        this.generateActvitiesForYouthCentreToShow();
+        setTimeout(() => {
+            this.generateActvitiesForYouthCentreToShow();
+
+        }, 400);
 
 
     }
@@ -69,7 +72,7 @@ export class LocationPage implements OnInit {
 
     generateActvitiesForYouthCentreToShow() {
 
-        for (const activity of this.activityService.allActivities) {
+        for (const activity of this.activityService.allActiveActivities) {
             console.log(activity.challenger + ' challenger');
             console.log(activity.challenged + ' challenged');
             console.log(this.youthcentre.id + ' youthcentre id');

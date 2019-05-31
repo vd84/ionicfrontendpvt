@@ -76,6 +76,25 @@ export class CheckinService {
         this.http.post(this.activityUrl, body, httpOptions).subscribe(data => {
                 console.log('Post i checkinpage ' + ' activitycheckin');
                 console.log(data);
+
+                let badgeList: any = [];
+
+                badgeList = data;
+
+
+                if (badgeList.length !== 0) {
+                    let originalPresentString = 'Grattis, du har fått nya märken: ';
+
+
+                    originalPresentString += badgeList[0].name;
+
+
+                    this.presentToast(originalPresentString);
+
+
+                }
+
+
             },
             error => {
                 console.log('Error');

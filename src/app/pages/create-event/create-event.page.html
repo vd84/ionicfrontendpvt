@@ -1,6 +1,8 @@
 <ion-header>
     <ion-toolbar color="light">
-        <ion-title>Ny aktivitet</ion-title>
+        <ion-title *ngIf="userService.hasRoles('admin')">Skapa aktivitet</ion-title>
+        <ion-title *ngIf="userService.hasRoles('user')">Föreslå aktivitet</ion-title>
+
         <ion-buttons slot="start">
             <ion-back-button text="Tillbaka"></ion-back-button>
         </ion-buttons>

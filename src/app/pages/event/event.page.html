@@ -10,7 +10,7 @@
                    (ionCancel)="hasSearched = false" (ionClear)="hasSearched = false"
                    (ionInput)="searchActivity($event)"></ion-searchbar>
     <!--SELECT CATEGORY-->
-    <ion-item lines="none" class="category-dropdown">
+    <ion-item lines="none" color="light" class="category-dropdown">
         <ion-label>Kategori:</ion-label>
         <ion-select class="select-box" [(ngModel)]="activity" ngDefaultControl (ionCancel)="haveChosenCategory = false" (ionChange)="sortByCategory($event)">
             <ion-select-option>Alla</ion-select-option>

@@ -311,7 +311,7 @@ export class GoogleMapsComponent implements OnInit {
             /*Marker Options*/
            let icon = {
                url: this.userservice.currentUser.avatarurl,
-               scaledSize: new google.maps.Size(40, 40)
+               scaledSize: new google.maps.Size(30, 30)
            };
            startmaker = new google.maps.Marker({
                 position: this.location,
@@ -372,7 +372,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 23, width: 23}
+                            url: 'assets/icon/HasTakenHouse.png', scaledSize: {height: 15, width: 15}
                         }
 
 
@@ -385,7 +385,7 @@ export class GoogleMapsComponent implements OnInit {
                         map: this.map,
                         description: place.id,
                         icon: {
-                            url: 'assets/icon/house-icon.png', scaledSize: {height: 23, width: 23}
+                            url: 'assets/icon/house-icon.png', scaledSize: {height: 15, width: 15}
                         }
 
 

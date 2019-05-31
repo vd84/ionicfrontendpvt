@@ -20,7 +20,7 @@
             </ion-item>
             <ion-item>
                 <ion-label>Nuvarande antal aktiva
-                    aktiviter: {{activityService.allActiveActivities.length}}</ion-label>
+                    aktiviter: {{allActivitiesForYouthCentreToShow.length}}</ion-label>
             </ion-item>
         </ion-list>
     </ion-card>
@@ -29,7 +29,7 @@
     <ion-card class="list-card">
         <ion-list padding>
             <ion-list-header>Kommande akviteter</ion-list-header>
-            <ion-item *ngFor="let activity of activityService.allActiveActivities">
+            <ion-item *ngFor="let activity of allActivitiesForYouthCentreToShow">
                 <ion-card-title (click)="loadEvent(activity)">{{activity.name}}</ion-card-title>
             </ion-item>
         </ion-list>

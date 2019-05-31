@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
 
 
     async doFbLogin() {
+        // create loader and show until process is done
         const loading = await this.loadingController.create({
             message: 'Please wait...'
         });
@@ -48,12 +49,11 @@ export class LoginPage implements OnInit {
             .then(response => {
                 let userId = response.authResponse.userID;
                 // Getting name and email properties
-                // Learn more about permissions in https://developers.facebook.com/docs/facebook-login/permissions
 
                 this.fb.api('/me?fields=name,email', permissions)
                     .then(user => {
                         user.picture = 'https://graph.facebook.com/' + userId + '/picture?type=large';
-                        // now we have the users info, let's save it in the NativeStorage
+                        // now we have the users info, we save it to nativestorage on the device
                         this.nativeStorage.setItem('facebook_user',
                             {
                                 name: user.name,
@@ -74,6 +74,7 @@ export class LoginPage implements OnInit {
                             });
                     });
             }, error => {
+                // cordova not available on current device
                 console.log(error);
                 if (!this.platform.is('cordova')) {
                     this.presentAlert();
