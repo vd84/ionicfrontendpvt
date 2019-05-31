@@ -19,7 +19,7 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card class="list-card">
+    <ion-card class = "list-card" (click)="goToEventPage()">
         <ion-card-header>
             <ion-card-title>Kommande aktiviteter</ion-card-title>
         </ion-card-header>
@@ -36,7 +36,7 @@
         <ion-card-header>
             <ion-card-title>Karta</ion-card-title>
         </ion-card-header>
-        <ion-card-content class="map-card-content">
+        <ion-card-content class="map-card-content" (click)="goToMapPage()">
             <app-google-maps></app-google-maps>
         </ion-card-content>
     </ion-card>
