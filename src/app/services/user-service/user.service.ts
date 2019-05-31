@@ -165,7 +165,6 @@ export class UserService {
             'id': this.currentUser.id,
             'username': this.currentUser.name,
             'displayname': 'terminated account',
-            'password': 'terminated',
             'active': 0,
             'points': 0,
             'fairplaypoints': 0,
@@ -176,7 +175,7 @@ export class UserService {
             'travelleddistance': this.currentUser.travelleddistance
 
         });
-        return this.http.put(this.url, body, httpOptions).subscribe(data => {
+        return this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {
                 console.log(data);
                 this.presentToast('Kontot avslutat');
                 this.router.navigate(['../login']);
