@@ -56,7 +56,7 @@
                     <ion-card-content>
                         <ion-grid>
                             <ion-row>
-                                <ion-col *ngFor="let badge of allOfUsersBadges"
+                                <ion-col size="4" *ngFor="let badge of allOfUsersBadges"
                                          (click)="loadBadge(badge)"><img
                                         src={{badge.image}}/>
                                 </ion-col>

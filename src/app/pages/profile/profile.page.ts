@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../services/user-service/user.service';
 import {YouthcenterService} from '../../services/youthcenter.service';
 import {BadgeService} from '../../services/badge-service/badge.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
     selector: 'app-profile',
@@ -17,7 +18,7 @@ export class ProfilePage implements OnInit {
     private allMyBadges = [];
     image;
 
-    constructor(private router: Router, private userservice: UserService, private youthcentreService: YouthcenterService, private badgeservice: BadgeService) {
+    constructor(private router: Router, private userservice: UserService, private youthcentreService: YouthcenterService, private badgeservice: BadgeService, private dataService: DataService) {
     }
 
     ngOnInit() {
@@ -71,6 +72,11 @@ export class ProfilePage implements OnInit {
 
     navigateToChoosePicture() {
         this.router.navigateByUrl('choose-picture');
+    }
+
+    loadBadge(badge) {
+        this.dataService.setData('badge', badge);
+        this.router.navigateByUrl('/specific-badge/badge');
     }
 
 

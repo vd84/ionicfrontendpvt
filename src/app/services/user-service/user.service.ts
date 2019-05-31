@@ -120,7 +120,7 @@ export class UserService {
             'displayname': displayname,
             'password': password,
             'currentyouthcentre': currentyouthcentre,
-            'isfacebookuser': loggedInWithFaceBook
+            'isFacebookuser': loggedInWithFaceBook
 
         });
         this.http.post<User>(this.url, body, httpOptions).subscribe(data => {

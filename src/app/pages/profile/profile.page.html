@@ -41,8 +41,8 @@
                 <ion-card-content>
                     <ion-grid class="profile-badge-list">
                         <ion-row>
-                            <ion-col size="4" *ngFor="let badges of allMyBadges">
-                                <img src={{badges.image}}/>
+                            <ion-col size="4" *ngFor="let badge of allMyBadges" (click)="loadBadge(badge)">
+                                <img  src={{badge.image}}/>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
