@@ -37,68 +37,6 @@ export class EventPage implements OnInit {
         this.activity = event.target.value;
     }
 
-    isChallengerReturnString(activity): String {
-
-
-        if (this.activityService.isChallenger(activity)) {
-            return 'Challenger';
-        } else {
-            return '';
-        }
-
-    }
-
-    isChallengedReturnString(activity) {
-
-
-        if (this.activityService.isChallenged(activity)) {
-            return 'Challenged';
-        } else {
-            return '';
-        }
-
-    }
-
-    isSuggestionReturnString(activity) {
-
-
-        if (this.activityService.activityIsSuggestion(activity)) {
-            return 'Suggestion';
-        } else {
-            return '';
-        }
-
-
-    }
-
-    isRejectedReturnString(activity) {
-
-
-        if (this.activityService.activityIsDeclined(activity)) {
-            return 'Rejected';
-        } else {
-            return '';
-        }
-
-
-    }
-
-    dateHasPassed(activity) {
-
-
-    }
-
-    calculateColorForCard(activity) {
-
-        if (this.activityService.endDateHasNotPassed(activity)) {
-            return 'active';
-        } else {
-            return 'inactive';
-        }
-
-
-    }
-
     searchActivity(ev: any) {
         this.searchedActivities = [];
         let input = ev.target.value;

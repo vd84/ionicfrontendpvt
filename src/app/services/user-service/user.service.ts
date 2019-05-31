@@ -79,7 +79,8 @@ export class UserService {
             'facebookpassword': 'pass',
             'role': role,
             'isfacebookuser': this.currentUser.isfacebookuser,
-            'avatar': this.currentUser.avatar
+            'avatar': this.currentUser.avatar,
+            'travelleddistance': this.currentUser.travelleddistance
 
         });
 
@@ -119,7 +120,7 @@ export class UserService {
             'displayname': displayname,
             'password': password,
             'currentyouthcentre': currentyouthcentre,
-            'isfacebookuser': loggedInWithFaceBook
+            'isFacebookuser': loggedInWithFaceBook
 
         });
         this.http.post<User>(this.url, body, httpOptions).subscribe(data => {
@@ -132,7 +133,7 @@ export class UserService {
                 } else {
                     role = 'user';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl, this.currentUserJson[0].travelleddistance);
                 console.log(this.currentUser);
                 this.presentToast('Welcome ' + this.currentUser.name + '!');
                 this.router.navigate(['../tabs/home']);
@@ -171,7 +172,9 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'role': 1,
             'isFacebookUser': 0,
-            'avatar': this.currentUser.avatar
+            'avatar': this.currentUser.avatar,
+            'travelleddistance': this.currentUser.travelleddistance
+
         });
         return this.http.put(this.url, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -214,7 +217,9 @@ export class UserService {
             'currentyouthcentre': this.currentUser.currentyouthcentre,
             'role': role,
             'isFacebookUser': 0,
-            'avatar': pictureID
+            'avatar': pictureID,
+            'travelleddistance': this.currentUser.travelleddistance
+
         });
         this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {
                 console.log(data);
@@ -278,7 +283,7 @@ export class UserService {
                 } else {
                     role = 'admin';
                 }
-                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl);
+                this.currentUser = new User(this.currentUserJson[0].id, this.currentUserJson[0].username, this.currentUserJson[0].displayname, role, this.currentUserJson[0].currentyouthcentre, this.currentUserJson[0].isfacebookuser, this.currentUserJson[0].avatar, this.currentUserJson[0].avatarurl, this.currentUserJson[0].travelleddistance);
 
 
                 console.log(this.currentUser);
@@ -344,7 +349,9 @@ export class UserService {
             'currentyouthcentre': youthcentre,
             'role': role,
             'isFacebookUser': 0,
-            'avatar': this.currentUser.avatar
+            'avatar': this.currentUser.avatar,
+            'travelleddistance': this.currentUser.travelleddistance
+
         });
 
         this.http.put(this.noPassWordModifyurl, body, httpOptions).subscribe(data => {

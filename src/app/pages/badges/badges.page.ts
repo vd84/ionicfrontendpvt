@@ -97,6 +97,9 @@ export class BadgesPage implements OnInit {
             case 3: {
                 return 'Aktiviteter';
             }
+            case 6: {
+                return 'Distans';
+            }
         }
     }
 

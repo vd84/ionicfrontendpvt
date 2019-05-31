@@ -9,9 +9,10 @@ export class User {
     private _isfacebookuser: number;
     private _avatar: number;
     private _avatarurl: string;
+    private _travelleddistance: number;
 
 
-    constructor(id: number, name: string,  displayname: string,  role: string, currentyouthcentre: number, isfacebookuser: number, avatar: number, avatarurl: string) {
+    constructor(id: number, name: string,  displayname: string,  role: string, currentyouthcentre: number, isfacebookuser: number, avatar: number, avatarurl: string, travelleddistance: number) {
         this._id = id;
         this._name = name;
         this._role = role;
@@ -20,6 +21,7 @@ export class User {
         this._isfacebookuser = isfacebookuser;
         this._avatar = avatar;
         this._avatarurl = avatarurl;
+        this._travelleddistance = travelleddistance;
 
     }
 
@@ -138,5 +140,14 @@ export class User {
     }
     get avatarurl() {
         return this._avatarurl;
+    }
+
+
+    get travelleddistance(): number {
+        return this._travelleddistance;
+    }
+
+    set travelleddistance(value: number) {
+        this._travelleddistance = value;
     }
 }

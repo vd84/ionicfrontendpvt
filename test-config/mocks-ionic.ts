@@ -141,8 +141,8 @@ export class ChoosePicturePageMock {
 
 export class UserServiceMock {
 
-    currentUser: User = new User(1, 'MockUser', 'Admin',
-        'admin', 1, 0, null, null);
+    _currentUser: User = new User(1, 'MockUser', 'Admin',
+        'admin', 1, 0, null, null, 0);
 
     currentUserJson;
 
@@ -150,17 +150,21 @@ export class UserServiceMock {
     url = 'https://webbapppvt15grupp2.herokuapp.com/user/';
 
 
+    get currentUser(): User {
+        return this._currentUser;
+    }
+
     constructor() {
     }
 
 
     logout() {
-        this.currentUser = null;
+        this._currentUser = null;
     }
 
     hasRoles(role: string): boolean {
 
-        return !(!this.currentUser || this.currentUser.role !== role);
+        return !(!this._currentUser || this._currentUser.role !== role);
 
     }
 
@@ -187,6 +191,8 @@ export class UserServiceMock {
         return null;
 
     }
+
+
 
 
 }
@@ -328,7 +334,7 @@ export class ActivityServiceMock {
     }
 
     getAllActivityParticipants(id: number) {
-        return Observable.of([new User(1, 'MockResponseUser1', 'user', 'admin', 1, 0, null, null)]);
+        return Observable.of([new User(1, 'MockResponseUser1', 'user', 'admin', 1, 0, null, null, 0)]);
     }
 }
 

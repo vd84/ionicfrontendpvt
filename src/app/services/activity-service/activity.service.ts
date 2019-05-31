@@ -80,7 +80,7 @@ export class ActivityService {
 
     }
 
-    addMySuggestedActivitiesToMyActivitiesPage() {
+    addMySuggestedAndNotAcceptedOrDeclinedActivitiesToMyActivitiesPage() {
         for (const activity of this.allActivitiesFromDatabase) {
             if ((activity.createdby === this.userservice.currentUser.id && this.activityIsSuggestion(activity)) || (activity.createdby === this.userservice.currentUser.id && activity.challengeaccepted === 0 && activity.challengerejected === 0)) {
                 this.allMyActivities.push(activity);
@@ -174,7 +174,7 @@ export class ActivityService {
             }, error1 => {
                 console.log(error1);
             });
-            this.addMySuggestedActivitiesToMyActivitiesPage();
+            this.addMySuggestedAndNotAcceptedOrDeclinedActivitiesToMyActivitiesPage();
 
 
 
