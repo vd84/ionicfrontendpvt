@@ -30,15 +30,25 @@ export class CheckinService {
 
 
         this.http.post(this.youthUrl, body, httpOptions).subscribe(data => {
-                let testList: any = [];
+                let badgeList: any = [];
                 console.log('Post i checkinpage ' + ' youthcentrecheckin');
                 console.log(data);
 
-                testList = data;
+                badgeList = data;
 
 
-                if (testList.length !== 0) {
-                    this.presentToast('Grattis, du har fått märket: ' + data[0].name);
+                if (badgeList.length !== 0) {
+                    let originalPresentString = 'Grattis, du har fått nya märken:';
+
+
+                    for (let i = 0; i < badgeList.length; i++) {
+
+                        originalPresentString += '\n' + badgeList[i].name;
+                    }
+
+                    this.presentToast(originalPresentString);
+
+
                 }
 
 
