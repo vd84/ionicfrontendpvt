@@ -97,10 +97,11 @@ export class UserService {
 
 
     /**
-     *
-     * @param username detta är användaren som ska skickas in i databasen
-     * @param password detta är password som ska in webbservern
-     * @param currentyouthcentre detta är ungdomsgården som ska in i databasen
+     * Method that is called on if a user creates an account/wants to log in through facebook.
+     * A new User is created if there is not already a corresponding user.
+     * @param username, The username the user puts into the inputfield.
+     * @param password, The password the user puts into the inputfield.
+     * @param currentyouthcentre, ID on the youth centre that the user HAS CHOSEN? Var kommer currentyouthcentre ifrån?
      */
     submitUser(username: String, displayname: String, password: String, currentyouthcentre: number, loggedInWithFaceBook: number) {
 
